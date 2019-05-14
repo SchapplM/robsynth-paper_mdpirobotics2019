@@ -155,8 +155,12 @@ Beschreibung des aktuellen Stands von PKM für 3T2R.
 	\item Bei Maschinen mit 3T3R EE-FG wie der Eclipse-Maschine \cite{HongKim2000} oder Hexapod-Maschinen mit 6UPS-Struktur \cite{MerletPerDan2000}, die für 3T2R eingesetzt werden, kann der Drehwinkel des Endeffektors um die Symmetrieachse des Werkzeugs frei gewählt werden.
 \end{itemize}
 
+Methoden zur Lösung der IK
 
-
+\begin{itemize}
+	\item Für die Maschinen mit 5 EE-FG ist die inverse Kinematik analytisch einfach zu erhalten. Die Berechnung erfolgt durch die Definition der EE-Orientierung mit zwei mitgedrehten Winkeln für die Führungskette, die 3T2R-FG aufweist. Für die restlichen Ketten wird die IK dann analytisch berechnet, da die Beinketten eine einfache Struktur aufweisen.
+	\item In \cite{MerletPerDan2000} wird die IK für eine 3T3R PKM (6UPS) in Abhängigkeit des Drehwinkels um die Werkzeugachse bestimmt. Der Drehwinkel wird dann mit einer Optimierung und Intervallanalyse gewählt. Mit dem Verfahren ist allerdings keine gradientenbasierte Optimierung der Nebenbedingungen möglich.
+\end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Reciprocal Sets of Euler Angles for Kinematics of Serial Chains}
 

@@ -1,0 +1,84 @@
+%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'comb_struct_dim_synth.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{439.37007874bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.14193548)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{comb_struct_dim_synth.pdf}}%
+    \put(0.01208292,0.1025931){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Robot Task\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{comb_struct_dim_synth.pdf}}%
+    \put(0.2212135,0.09999194){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Structural\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{comb_struct_dim_synth.pdf}}%
+    \put(0.2212135,0.0707293){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Synthesis\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{comb_struct_dim_synth.pdf}}%
+    \put(0.44894212,0.09999194){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Dimensional Synthesis\end{tabular}}}}%
+    \put(0.88254996,0.10038212){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Comparison\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{comb_struct_dim_synth.pdf}}%
+    \put(0.88254996,0.07111926){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Selection\end{tabular}}}}%
+    \put(0.01210568,0.07333045){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}DoF: $\alpha$T$\beta$R\end{tabular}}}}%
+    \put(0.01208292,0.04146632){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Trajectory $\bm{x}(t)$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{comb_struct_dim_synth.pdf}}%
+    \put(0.85284862,0.07174021){\color[rgb]{0,0,0}\rotatebox{-90.851328}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}.\end{tabular}}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{comb_struct_dim_synth.pdf}}%
+    \put(0.32708037,0.11251797){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$N_\mathrm{S}$ struc-\end{tabular}}}}%
+    \put(0.348507,0.07648805){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}tures\end{tabular}}}}%
+    \put(0.85284864,0.06272806){\color[rgb]{0,0,0}\rotatebox{-90.851328}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}.\end{tabular}}}}}%
+    \put(0.85284864,0.05371514){\color[rgb]{0,0,0}\rotatebox{-90.851328}{\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}.\end{tabular}}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{comb_struct_dim_synth.pdf}}%
+    \put(0.45876239,0.0741106){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Inverse\end{tabular}}}}%
+    \put(0.45876237,0.04667686){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Kinematics\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{comb_struct_dim_synth.pdf}}%
+    \put(0.63116828,0.0741106){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Performance\end{tabular}}}}%
+    \put(0.63116828,0.04667686){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}Criteria\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{comb_struct_dim_synth.pdf}}%
+  \end{picture}%
+\endgroup%

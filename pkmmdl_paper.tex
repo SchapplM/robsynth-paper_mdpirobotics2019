@@ -60,6 +60,8 @@
 
 %=================================================================
 % Add packages and commands here. The following packages are loaded in our class file: fontenc, calc, indentfirst, fancyhdr, graphicx, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, amsthm, hyphenat, natbib, hyperref, footmisc, geometry, caption, url, mdframed, tabto, soul, multirow, microtype, tikz
+\graphicspath{{./figures/}}
+\newcommand{\bm}[1]{\boldsymbol{#1}}
 
 %=================================================================
 %% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Hypothesis, Remark, Definition
@@ -99,7 +101,7 @@ $^{1}$ \quad Institut für mechatronische Systeme, Leibniz Universität Hannover
 \abstract{A single paragraph of about 200 words maximum. For research articles, abstracts should give a pertinent overview of the work. We strongly encourage authors to use the following style of structured abstracts, but without headings: (1) Background: Place the question addressed in a broad context and highlight the purpose of the study; (2) Methods: Describe briefly the main methods or treatments applied; (3) Results: Summarize the article's main findings; and (4) Conclusion: Indicate the main conclusions or interpretations. The abstract should be an objective representation of the article, it must not contain results which are not presented and substantiated in the main text and should not exaggerate the main conclusions.}
 
 % Keywords
-\keyword{keyword 1; keyword 2; keyword 3 (list three to ten pertinent keywords specific to the article, yet reasonably common within the subject discipline.)}
+\keyword{Parallel robot; five-DoF task; 3T2R task; functional redundancy; task redundancy; redundancy resolution; reciprocal Euler angles; inverse kinematics} % (list three to ten pertinent keywords specific to the article, yet reasonably common within the subject discipline.)
 
 % The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
 %\PACS{J0101}
@@ -132,37 +134,67 @@ $^{1}$ \quad Institut für mechatronische Systeme, Leibniz Universität Hannover
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
-The introduction should briefly place the study in a broad context and highlight why it is important. It should define the purpose of the work and its significance. The current state of the research field should be reviewed carefully and key publications cited. Please highlight controversial and diverging hypotheses when necessary. Finally, briefly mention the main aim of the work and highlight the principal conclusions. As far as possible, please keep the introduction comprehensible to scientists outside your particular field of research. Citing a journal paper \cite{ref-journal}. And now citing a book reference \cite{ref-book}. Please use the command \citep{ref-journal} for the following MDPI journals, which use author-date citation: Administrative Sciences, Arts, Econometrics, Economies, Genealogy, Humanities, IJFS, JRFM, Languages, Laws, Religions, Risks, Social Sciences.
 
 Einleitung ins Thema, Aufgabenredundanz, serielle Roboter
 \begin{itemize}
 	\item Parallele Roboter werden aufgrund ihrer hohen Steifigkeit in großem Ausmaß für Zerspanungsaufgaben verwendet, die mit 5 FG beschrieben werden können: 3T2R Task Space.
 	\item Dazu werden hauptsächlich Strukturen mit 6 EE-FG eingesetzt (3T3R Operational Space). Dadurch liegt eine Aufgabenredundanz vor, für deren gradientenbasierte Lösung es noch keine allgemeingültige Lösung für PKM gibt.
-	\item Für serielle Industrieroboter in 3T2R-Aufgaben gibt es bereits verschiedene allgemeingültige Verfahren zur Lösung der inversen Kinematik und der resultierenden Aufgabenredundanz \cite{Baron2000}
-	\cite{HuoBar2005,Zlajpah2017,LegerAng2016,ZhuQuCaoYan2013,GuoDonKe2015,MousaviGagBouRay2018,1_SchapplerTapOrt2019}
+	\item Für serielle Industrieroboter in 3T2R-Aufgaben gibt es bereits verschiedene allgemeingültige Verfahren zur Lösung der inversen Kinematik und der resultierenden Aufgabenredundanz \cite{Baron2000,HuoBar2005,Zlajpah2017,LegerAng2016,ZhuQuCaoYan2013,GuoDonKe2015,MousaviGagBouRay2018,1_SchapplerTapOrt2019}
 	\item Die gradientenbasierten Verfahren \cite{Baron2000,HuoBar2005,Zlajpah2017,LegerAng2016,1_SchapplerTapOrt2019} ermöglichen die Projektion zusätzlicher Optimierungskriterien in den Nullraum des Gradienten und somit auch die Ausnutzung der Aufgabenredundanz durch gleichzeitige Optimierung der Nebenbedingungen mit der Lösung des IK-Problems.
-	\item Die Bildung eines an 3T2R-Aufgaben angepassten Residuumsvektors und des dazu passenden Gradienten erfolgt dabei auf unterschiedliche Weise, wie bspw. \cite{Baron2000},\cite{HuoBar2005},\cite{Zlajpah2017},\cite{LegerAng2016},\cite{1_SchapplerTapOrt2019}.
+	\item Die Bildung eines an 3T2R-Aufgaben angepassten Residuumsvektors und des dazu passenden Gradienten erfolgt dabei auf unterschiedliche Weise, wie bspw. Hinzufügen einer virtuellen Achse \cite{Baron2000}, Zerlegung des Task Space \cite{HuoBar2005}, Rotation in Task Frame und weglassen einer Komponente \cite{Zlajpah2017}, Definition der Werkzeugachse durch zwei Punkte und daraus Konstruktion eines Nullraums \cite{LegerAng2016}, Definition von absoluter Orientierung und Orientierungsfehler mit reziproken Euler-Winkeln \cite{1_SchapplerTapOrt2019}.
 \end{itemize}
 
 Beschreibung des aktuellen Stands von PKM für 3T2R.
 
 \begin{itemize}
-	\item Für den Einsatz von PKM in 3T2R-Aufgaben gibt es unterschiedliche Ansätze
+	\item Für den Einsatz von PKM in 3T2R-Aufgaben gibt es unterschiedliche Ansätze \cite{Tale-MasoulehGos2011}: Asymmetrische 5FG (1), Symmetrische 5FG (2), 6FG-Mechanismen, die als 5FG redundant geregelt werden (3).
 	\item Die Nutzung einer aktiven Beinkette mit 3T2R-FG oder einer passiven Führungsstrebe mit 3T2R-FG setzt bei der Mobilität an. Dadurch hat die Plattform auch 3T2R-FG.
 	\item Dieses Konzept wird in der Literatur an verschiedenen Maschinentypen gezeigt:
-	\cite{WangGos1997} für 5UPS/US,  \cite{LiuXuYaoXu2015,WenQinZhaLam2016} für 6PUS/UPU, \cite{ZhengGaoZha2005,GaoSunZha2004} für 5UPS/PRPU, \cite{Gogu2006} mit Isoglide5-A1 (3PRRRRR-2PRRRR), \cite{SchreiberGos2003} mit 4URS-1URU, \cite{MbarekNefCor2005,LinLiYanZha2013} mit 4UPS-1UPU oder \cite{GaoPenZhaLi2006} mit 4PSU-1PU*U. Durch die kinematische Struktur hat der EE immer nur 3T2R FG und eine Aufgabenredundanz liegt nicht vor.
+	\cite{WangGos1997} für 5UPS/US,  \cite{LiuXuYaoXu2015,WenQinZhaLam2016} für 6PUS/UPU, \cite{ZhengGaoZha2005,GaoSunZha2004} für 5UPS/PRPU, \cite{Gogu2006} mit Isoglide5-A1 (3PRRRRR-2PRRRR), \cite{SchreiberGos2003} mit 4URS-1URU, \cite{MbarekNefCor2005,LinLiYanZha2013} mit 4UPS-1UPU oder \cite{GaoPenZhaLi2006} mit 4PSU-1PU*U. Durch die kinematische Struktur hat der EE immer nur 3T2R FG und eine Aufgabenredundanz liegt nicht vor. Die 5UPS-PRPU Maschine aus \cite{ChengWanZha2008} weist zusätzlich eine Antriebsredundanz auf.
 	\item In \cite{HuangLi2002} wurde mit Hilfe der Schraubentheorie am Bsp der 5UPU gezeigt, dass die Maschine nur lokale, und keine globale Mobilität aufweist, wenn die 5FG der Beinketten nicht übereinstimmen. Am Beispiel der Metrom-Maschine \cite{BaerWei2006}, der dazu ähnlichen 4SPRR-1PSPR-Maschine von \cite{AlaghebandMahMilBen2015} oder der Isoglide5 \cite{Gogu2006} wird deutlich, dass bei mehreren Beinketten mit 5FG der nicht durch die Aufgabe vorgegebene Rotations-FG um die Werkzeugachse bei allen Beinketten vorliegen muss. Das führt zu einer letzten Drehachse jeder Beinkette in der Werkzeugachse. Bei der konstruktiven Umsetzung wird das letzte Gelenk als rotierender Ring um die Werkzeugachse gewählt \cite{BaerWei2006,AlaghebandMahMilBen2015}.
-	\item Bei Maschinen mit 3T3R EE-FG wie der Eclipse-Maschine \cite{HongKim2000} oder Hexapod-Maschinen mit 6UPS-Struktur \cite{MerletPerDan2000}, die für 3T2R eingesetzt werden, kann der Drehwinkel des Endeffektors um die Symmetrieachse des Werkzeugs frei gewählt werden.
+	\item Davon abweichend werden in \cite{KongGos2005} 5FG-PKM synthetisiert, die symmetrische Beinketten aufweisen. Diese werden in \cite{Tale-MasoulehGos2011} für 5RPUR und in \cite{Tale-MasoulehSaaGosTag2010} für 5PRUR genauer analysiert.
+	\item Bei Maschinen mit 3T3R EE-FG wie der Eclipse-Maschine (3PPRS) \cite{HongKim2000} oder Hexapod-Maschinen mit 6UPS-Struktur \cite{MerletPerDan2000}, die für 3T2R eingesetzt werden, kann der Drehwinkel des Endeffektors um die Symmetrieachse des Werkzeugs frei gewählt werden.
 \end{itemize}
 
 Methoden zur Lösung der IK
 
 \begin{itemize}
-	\item Für die Maschinen mit 5 EE-FG ist die inverse Kinematik analytisch einfach zu erhalten. Die Berechnung erfolgt durch die Definition der EE-Orientierung mit zwei mitgedrehten Winkeln für die Führungskette, die 3T2R-FG aufweist. Für die restlichen Ketten wird die IK dann analytisch berechnet, da die Beinketten eine einfache Struktur aufweisen.
-	\item In \cite{MerletPerDan2000} wird die IK für eine 3T3R PKM (6UPS) in Abhängigkeit des Drehwinkels um die Werkzeugachse bestimmt. Der Drehwinkel wird dann mit einer Optimierung und Intervallanalyse gewählt. Mit dem Verfahren ist allerdings keine gradientenbasierte Optimierung der Nebenbedingungen möglich.
+	\item Für die vorgestellten Maschinen mit 5 EE-FG \cite{LiuXuYaoXu2015,WenQinZhaLam2016,ZhengGaoZha2005,GaoSunZha2004,ChengWanZha2008,AlaghebandMahMilBen2015,BaerWei2006,Tale-MasoulehSaaGosTag2010,Tale-MasoulehGos2011} ist die inverse Kinematik analytisch einfach zu erhalten. Die Berechnung erfolgt durch die Definition der EE-Orientierung mit zwei mitgedrehten Winkeln für die Führungskette, die 3T2R-FG aufweist. Für die restlichen Ketten wird die IK dann analytisch mit Standard-Verfahren berechnet, da die Beinketten eine einfache Struktur aufweisen.
+	\item In \cite{MerletPerDan2000} wird die IK für eine 3T3R PKM (6UPS) in Abhängigkeit des Drehwinkels um die Werkzeugachse bestimmt. Der Drehwinkel wird dann mit einer Optimierung und Intervallanalyse gewählt. Mit dem Verfahren ist allerdings keine gradientenbasierte Optimierung der Nebenbedingungen möglich. Da hierbei ähnlich wie in \cite{ZhuQuCaoYan2013,GuoDonKe2015} für serielle Roboter kein Gradient definiert wird, muss eine aufwändigere globale Optimierung durchgeführt werden, bei der der redundante Winkel als Parameter variiert wird.
 \end{itemize}
+
+Problembeschreibung, Ansatz des Papers
+\begin{itemize}
+	\item Die Übersicht zeigt, dass bisher keine allgemeinen Ansätze zur Redundanzauflösung von PKM für 3T2R-Aufgaben bekannt sind.
+	\item Die Arbeiten konzentrieren sich entweder auf eine allgemeine Struktursynthese dieser Maschinenstruktur basierend z.B. auf Schraubentheorie \cite{KongGos2005} oder der Theorie der linearen Transformation \cite{Gogu2006}. Für die Auswahl der Maschine für eine gegebene Aufgabe ist allerdings nicht nur die kinematische Struktursynthese, sondern auch die Maßsynthese entscheidend. Diese kombinierte Struktur- und Maßsynthese folgt dem Schema aus Bild \ref{fig:structdimsynth} und benötigt auch eine allgemeingültige Berechnung der IK, was aufgrund der Vielzahl der Systeme mit manuellen, analytischen Verfahren nicht umsetzbar ist.
+\end{itemize}
+
+
+\begin{figure}[tb]
+	\input{./figures/comb_struct_dim_synth.pdf_tex}
+	\caption{Overview of the procedure for combined structural and dimensional synthesis.}
+	\label{fig:structdimsynth}
+\end{figure} 
+
+Beitrag des Papers:
+\begin{itemize}
+	\item Aufbauend auf der Beschreibung der Kinematik mit reziproken Euler-Winkeln \cite{1_SchapplerTapOrt2019} wird ein allgemeines, gradientenbasiertes Verfahren für die IK von PKM vorgestellt
+	\item Damit ist es möglich, sowohl PKM mit strukturell 3T2R-FG und Aufgabenredundante PKM mit 3T3R-PKM zu berücksichtigen.
+	\item Durch das gradientenbasierte Verfahren, in dem die redundante task space Koordinate komplett eliminiert wird, ist eine effiziente Umsetzung gegeben, die in der Bahnplanung und für Nullraum-Bewegungen der Maschinen eingesetzt werden kann.
+\end{itemize}
+
+Rest ist gegliedert:
+
+\begin{itemize}
+	\item Vorstellung des REW-Verfahrens aus \cite{1_SchapplerTapOrt2019} zur Modellierung serieller kinematischer Ketten Kap \ref{sec:REW_seriell}
+	\item Aufstellung der vollständigen kinematischen Zwangsbedingungen für allgemeine PKM mit dem Verfahren, Kap. \ref{sec:ZB_PKM}
+	\item Lösung des IK-Problems mit Redundanzauflösung und weitere Anwendungen der Modellierung Kap. \ref{sec:ZB_Anwendung}
+	\item Darstellung der Ergebnisse an Beispielsystemen, Kap. \ref{sec:Ergebnisse}
+\end{itemize}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Reciprocal Sets of Euler Angles for Kinematics of Serial Chains}
+\label{sec:REW_seriell}
 
 \cite{Gogu2008}
 \cite{Merlet2006}
@@ -170,14 +202,16 @@ Methoden zur Lösung der IK
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Full Kinematic Constraints for Parallel Robots using Reciprocal Sets of Euler Angles}
-
+\label{sec:ZB_PKM}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Differential Kinematics for Parallel Robots}
+\label{sec:ZB_Anwendung}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
+\label{sec:Ergebnisse}
 
 This section may be divided by subheadings. It should provide a concise and precise description of the experimental results, their interpretation as well as the experimental conclusions that can be drawn.
 \begin{quote}

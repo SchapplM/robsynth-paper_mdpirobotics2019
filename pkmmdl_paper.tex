@@ -208,7 +208,7 @@ Rest ist gegliedert:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Inverse Kinematics Problem for Parallel Robots}
 \label{sec:PKM_general}
-
+\color{gray}
 \begin{itemize}
     \item Beschreibung des Systems und der Nomenklatur mit Bild (3RRR und 3RPR, eingezeichnete Vektoren)
     \item Darstellung der kinematischen Zwangsbedingungen als Vektoren und für Betrag der Beinlänge. Vektor rAB und r0E einzeichnen
@@ -220,6 +220,7 @@ Rest ist gegliedert:
     \item Skizzierung des Problems für 3T2R: Unterschiedliche Modellierung für Führungskette und Folgekette, Führungskette in Kap. \ref{sec:REW_seriell}, Folgekette und Zusammenschluss in Kap. \ref{sec:ZB_PKM}.
     \item Bis hier noch keine rotatorischen Zwangsbedingungen hinschreiben. Die kommen erst in den folgenden Kapiteln
 \end{itemize}
+\color{black}
 
 \begin{figure}[tb]
     \input{./figures/pkm_constr_def_transl.pdf_tex}
@@ -320,6 +321,7 @@ for each leg $i$, which can be assembled to the vector of constraint equations
 \begin{bmatrix}
 \Phi_1 & \Phi_2 & \cdots & \Phi_m
 \end{bmatrix}^\transp
+\label{equ:constr_qa}
 \end{equation}
 %
 of the PKM for all $m$ legs.
@@ -333,6 +335,7 @@ The differential kinematics of the PKM is calculated with the time derivative
 \bm{\Phi}_{\partial \bm{x}} \dot{\bm{x}}
 =
 \bm{0}
+\label{equ:constr_qa_diff}
 \end{equation}
 %
 where the passive joint coordinates $\bm{q}_{\mathrm{p}}$ do not occur, since they have been eliminated a the previous step.
@@ -375,7 +378,7 @@ This definition of the constraints has two drawbacks:
     \item Exploiting the reduction of endeffector coordinates for 3T2R tasks is not possible, since all endeffector coordinates are included in (\ref{equ:vec_AB}).
 \end{enumerate}
 
-An alternative kinematic model encounter this is presented in the next section.
+An alternative kinematic model to encounter this is presented in the next section.
 
 %Property
 %
@@ -396,18 +399,17 @@ An alternative kinematic model encounter this is presented in the next section.
 \section{Reciprocal Sets of Euler Angles for Kinematics of Serial Chains}
 \label{sec:REW_seriell}
 
-\cite{1_SchapplerTapOrt2019}
-
+\color{gray}
 \begin{itemize}
     \item Modellierung serieller Ketten für 3T3R und 3T2R. Anwendung direkt auf PKM-Beinkette
     \item Bild: Stilisierte PKM (Planar 3RRR) mit Hervorhebung Beinkette 1 und Plattform, restliche Beinketten nur ausgegraut. Zwei Teilbilder: Ketten geöffnet und geschlossen. Darstellung der Orientierung des Endeffektors durch Plattform-Dreieck. Darstellung beliebiger Verdrehung der Plattform durch mehrere gestrichelte Plattformen.
     \item Formeln aus WC-Paper, aber Nomenklatur anpassen an PKM Beinkette 1
 \end{itemize}
+\color{black}
+    
+The following elaborations are mainly based on ref.\,\cite{1_SchapplerTapOrt2019}, where the authors introduce the concept of reciprocal sets of Euler angles for the inverse kinematics problem of serial link robots. The method is adapted for the leading leg of a parallel robot.
 
-
-
-
-To take the rotational symmetry around the tool axis into account, a new set of 3T2R task space coordinates
+To take the rotational symmetry around the tool axis in 3T2R tasks into account, a new set of task space coordinates
 %
 \begin{equation}
 \bm{\eta}
@@ -444,23 +446,22 @@ The rotational part
 =
 \underbrace{\begin{bmatrix}
     1 & 0 & 0  \\ 
-    0 & 1 & 0    \end{bmatrix}}_{=\bm{P}_{\eta}}
+    0 & 1 & 0    \end{bmatrix}}_{=\bm{P}_{\bm{\eta}_\mathrm{r}}}
 \bm{x}_{\mathrm{r}}
 \in {\mathbb{R}}^{2}
 \label{equ:etar_def}
 \end{equation}
 %
 only contains the first two rotational coordinates of $\bm{x}$.
-The last operational space coordinate $\beta_3$, the rotation around the $z$-axis $\bm{a}_{D}$ of $\ks{D}$, is excluded from the task space by the selection matrix $\bm{P}_{\eta}$.
+The last operational space coordinate $\beta_3$, the rotation around the $z$-axis $\bm{a}_{D}$ of $\ks{D}$, is excluded from the task space by the selection matrix $\bm{P}_{\bm{\eta}_\mathrm{r}}$.
 To be able to set the rotational DoF around the tool axis in 3T2R tasks arbitrarily and use gradient-based inverse kinematics, $\beta_3$ has to be eliminated completely from the kinematics equations (\ref{equ:kinconstrAB}).
-%As already exposed in Sec.\,\ref{sec:intro}
 %
 %
 To simplify the following elaborations, the platform frame $\ks{D}$ is still identified as the desired frame of the inverse kinematics problem and the endeffector frame that results from the joint angles of leg $i$ is now termed $\ks{E}$, which again corresponds to the forward kinematics of the leg chain.
 %
 \begin{figure}[tb]
     \input{./figures/pkm_constr_def_rot_lead.pdf_tex}
-    \caption{Different cases for the kinematic constraints of the leading chain.}
+    \caption{Different cases for the kinematic constraints of the leading chain. TODO: Phi, Psi, transl, rot einzeichnen (0 oder ungleich 0)}
     \label{fig:pkm_constr_rot_lead}
 \end{figure} 
 %
@@ -503,6 +504,8 @@ have to be extended by the rotational part
 %
 of the kinematic constraints, which is needed to generate enough equations for an invertible matrix in the differential equations.
 The constraints again contain the deviation between the desired end-effector frame $\ks{D}$ expressed with $\bm{x}$ and the actual robots end-effector frame $\ks{E}$ expressed with $\bm{q}$.
+Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b-d) shows cases, where the translational constraints are met, but the rotational constraints have different values. For 3T3R tasks, only Fig.\,\ref{fig:pkm_constr_rot_lead}\,(d) represents a valid solution of the inverse kinematics. For 3T2R tasks, Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b-d) represent valid solutions.
+
 The goal of eliminating the tool rotation $\beta_3$ from the equations is not achieved yet, since all three components of the platform orientation $\bm{x}_\mathrm{r}$ affect the rotation matrix $\rotmat{0}{D}$. This can be addessed by the selection of the Euler angles:
 Similar to the definition of the rotational operational space coordinates (\ref{equ:xr_def}) the constraints 
 %
@@ -557,27 +560,105 @@ The new, reduced rotational part of the kinematic constraints
 \overbrace{\begin{bmatrix}
     0 & 1 & 0  \\ 
     0 & 0 & 1
-    \end{bmatrix}}^{=\bm{P}_{\Psi}}
+    \end{bmatrix}}^{=\bm{P}_{\bm{\Psi}_\mathrm{r}}}
 \bm{\Phi}_{\mathrm{r},i} (\bm{q}_i,\bm{x})
 \in {\mathbb{R}}^{2}.
 \label{equ:Psir_def}
 \end{equation}
 %
-does not contain the tool rotation any more.
-The condition $\bm{\Phi}=\bm{0}$ leads to a valid configuration of the parallel robot in 3T3R tasks and $\bm{\Psi}=\bm{0}$ leads to a valid position and orientation of the tool axis in 3T2R tasks.
+does not contain the tool rotation any more. The full kinematic constraints for the reduced coordinates
+%
+\begin{equation}
+\bm{\Psi}_i=\begin{bmatrix}
+\bm{\Phi}_{\mathrm{t},i}^\transp & \bm{\Psi}_{\mathrm{r},i}^\transp
+\end{bmatrix}^\transp \in {\mathbb{R}}^{5},
+\label{equ:Psi_def}
+\end{equation}
+%
+Can be used for the inverse kinematics of the leg chain $i$ in 3T2R tasks, where $\bm{\Psi}_i=\bm{0}$ leads to a valid position and orientation of the tool axis.
+The condition $\bm{\Phi}_i=\bm{0}$ leads to a valid configuration of leg $i$ of the parallel robot in 3T3R tasks.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Full Kinematic Constraints for Parallel Robots using Reciprocal Sets of Euler Angles}
 \label{sec:ZB_PKM}
-
+\color{gray}
 \begin{itemize}
     \item Kinematische Zwangsbedingungen der Folge-Ketten: Begründung für Vorgehensweise Führungskette/Folgekette (es kann nur für eine Kette die Orientierung der Plattform frei sein. Für die anderen gilt dann diese Orientierung)
     \item Bild: 3RRR mit Führungs- und Folgekette; geöffnet und geschlossen. Getrichelte Plattform für Orientierung aus Folge-Kette. KS-Definition der Plattform: y-Achse zeigt auf gegenüberliegenden Eckpunkt.
     \item Darstellung der Gradientenmatrizen aus Kettenregel
     \item Vollständige Jacobi-Matrix für 3T3R und 3T2R
 \end{itemize}
+\color{black}
+
+The definition of the full kinematic constraints (\ref{equ:Phi_def}) of a single leg chain of the parallel robot from the previous chapter can be used to write the kinematic constraints and the differential kinematics of (\ref{equ:constr_qa}) and (\ref{equ:constr_qa_diff}) in a general form.
 
 
+The full kinematic constraint equations can only be defined for 3T3R tasks without further adaptions as
+%
+\begin{equation}
+\bm{\Phi}
+=
+\begin{bmatrix}
+\bm{\Phi}_1^\transp &
+\bm{\Phi}_2^\transp &
+\cdots &
+\bm{\Phi}_m^\transp &
+\end{bmatrix}^\transp.
+\end{equation}
+%
+The constraints $\bm{\Psi}_i$ from (\ref{equ:Psi_def}) for the reduced coordinates $\bm{\eta}$ can only be defined for one leg chain:
+Fig.\ref{fig:pkm_constr_rot_follow}\,(a) shows the open loops for the second leg chain for a given first leg chain.
+By closing the 3T2R kinematic constraints for the second loop, as depicted in Fig.\ref{fig:pkm_constr_rot_follow}\,(b), the tool axis stays arbitrary and the platform pose demanded from the two legs would be different and therefore would not be a valid solution for the mechanism.
+Only if the second leg fulfils the kinematic constraints for all platform coordinates, as shown in Fig.\ref{fig:pkm_constr_rot_follow}\,(c), a valid configuration of the mechanism emerges.
+
+As already exposed in the comparison of robot-specific inverse kinematics models in Sec.\,\ref{sec:intro}, a definition ....
+
+For the first leg chain
+
+%
+%% The constraints $\bm{\Phi}$ and $\bm{\Psi}$ can be used interchangeably.
+%The differential kinematics of the PKM is calculated with the time derivative
+%%
+%\begin{equation}
+%\frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\Phi}(\bm{q},\bm{x})
+%=
+%\bm{\Phi}_{\partial \bm{q}}  \dot{\bm{q}}
+%+
+%\bm{\Phi}_{\partial \bm{x}} \dot{\bm{x}}
+%\end{equation}
+%%
+%where the diagonal elements $\bm{\Phi}_{i,\partial \bm{q}}=\partial \bm{\Phi}_i / \partial \bm{q}_i$ of the direct kinematics Jacobian
+%%
+%\begin{equation}
+%\bm{\Phi}_{\partial \bm{q}}
+%=
+%\frac{\partial \bm{\Phi}}{\partial \bm{q}}
+%=
+%\begin{bmatrix}
+%\bm{\Phi}_{1,\partial \bm{q}}  & 0 & 0 & 0\\
+%0 & \bm{\Phi}_{2,\partial \bm{q}} & \ddots & 0  \\
+%0 & \ddots & \ddots & 0  \\
+%0 & 0 & 0 &\bm{\Phi}_{m,\partial \bm{q}}
+%\end{bmatrix}
+%\label{equ:PKM_phi_grad_q}
+%\end{equation}  
+%%
+%correspond to the residual vector Jacobian (\ref{equ:grad_Phi_q}) from Sec.\,\ref{sec:RecEulAng}.
+%The calculation of the inverse kinematics Jacobian
+%%
+%\begin{equation}
+%\bm{\Phi}_{\partial \bm{x}}
+%=
+%\frac{\partial \bm{\Phi}}{\partial \bm{x}}
+%=
+%\begin{bmatrix}
+%\partial \bm{\Phi}_1/\partial \bm{x}\\
+%\partial \bm{\Phi}_2/\partial \bm{x}\\
+%\vdots \\
+%\partial \bm{\Phi}_m/\partial \bm{x}\\
+%\end{bmatrix}
+%\label{equ:PKM_phi_grad_x}
+%\end{equation}
 
 \begin{figure}[tb]
     \input{./figures/pkm_constr_def_rot_follow.pdf_tex}
@@ -588,30 +669,17 @@ The condition $\bm{\Phi}=\bm{0}$ leads to a valid configuration of the parallel 
 
 
 
-Again, only the rotational component $\bm{\Phi}_{\mathrm{r}_i,\partial \bm{x}_{\mathrm{r}}}$ of 
-%
-\begin{equation}
-\partial \bm{\Phi}_i/\partial \bm{x}
-=
-\begin{bmatrix}
-\partial\bm{\Phi}_{\mathrm{t}_i}/\partial \bm{x}_{\mathrm{t}} & \partial\bm{\Phi}_{\mathrm{t}_i}/\partial \bm{x}_{\mathrm{r}} \\
-\bm{0} & \partial\bm{\Phi}_{\mathrm{r}_i}/\partial \bm{x}_{\mathrm{r}} \\
-\end{bmatrix}
-\end{equation}
-is regarded due to the focus on rotation in this paper.
-
-Using $\bm{\Psi}_{\partial \bm{q}}$ and $\bm{\Psi}_{\partial \bm{x}}$ in (\ref{equ:PKM_phi_grad_q}) and (\ref{equ:PKM_phi_grad_x}) for 3T2R tasks promises to improve motion planning and controllers by calculating actuator forces considering the tool symmetry and allowing the incorporation of nullspace movements and forces.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Differential Kinematics for Parallel Robots}
 \label{sec:ZB_Anwendung}
-
+\color{gray}
 \begin{itemize}
     \item Gradientenbasierte Lösung der inversen Kinematik mit Nullraum (benötigt nur die geometrische Matrix der inversen Kinematik). Folge der Benennung aus \cite{Gogu2008}, dass es die geometrische Matrix und nicht die Jacobi-Matrix ist.
     \item Geschwindigkeits-Zusammenhang: Geometrische Matrix der DK ist notwendig. Zusammenhang beschreiben
     \item Gradientenbasierte Lösung der inversen Kinematik 3T3R/3T2R für serielle Roboter als Anwendung.
 \end{itemize}
+\color{black}
 
 \subsection{Constraint Gradients for the Leading Leg}
 
@@ -666,6 +734,23 @@ can be simplified similar to the process described in Sec.\,\ref{sec:RecEulAng_i
 \end{align}
 %
 where the simplicity of the single expression is demonstrated in appendix\,\ref{sec:appendix_gradient_matrix}.
+
+
+
+
+Again, only the rotational component $\bm{\Phi}_{\mathrm{r}_i,\partial \bm{x}_{\mathrm{r}}}$ of 
+%
+\begin{equation}
+\partial \bm{\Phi}_i/\partial \bm{x}
+=
+\begin{bmatrix}
+\partial\bm{\Phi}_{\mathrm{t}_i}/\partial \bm{x}_{\mathrm{t}} & \partial\bm{\Phi}_{\mathrm{t}_i}/\partial \bm{x}_{\mathrm{r}} \\
+\bm{0} & \partial\bm{\Phi}_{\mathrm{r}_i}/\partial \bm{x}_{\mathrm{r}} \\
+\end{bmatrix}
+\end{equation}
+is regarded due to the focus on rotation in this paper.
+
+Using $\bm{\Psi}_{\partial \bm{q}}$ and $\bm{\Psi}_{\partial \bm{x}}$ in (\ref{equ:PKM_phi_grad_q}) and (\ref{equ:PKM_phi_grad_x}) for 3T2R tasks promises to improve motion planning and controllers by calculating actuator forces considering the tool symmetry and allowing the incorporation of nullspace movements and forces.
 
 \subsection{Constraint Gradients for the Following Legs}
 
@@ -793,24 +878,29 @@ h_{\partial\bm{q}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Resolution of Functional Redundancy of a Serial-Link 6-DoF Robot in 3T2R tasks}
 
-
+\color{gray}
 \begin{itemize}
     \item Beispiel IK-Optimierung über Trajektorie (Industrieroboter in 3T2R-Traj., Bsp. aus \cite{HuoBar2008,HuoBar2011})
     \item Histogramm IK-Optimierung für verschiedene Roboter und zufällige Start- und End-Posen (Balken aufgegliedert nach 1., 2., ... Versuch)
 \end{itemize}
+\color{black}
 
 \subsection{Resolution of Functional Redundancy of a Parallel Robot in 3T2R tasks}
 
+\color{gray}
 \begin{itemize}
     \item Beispiel IK-Optimierung über Trajektorie (Parameter ähnlich wählen wie in \cite{MerletPerDan2000}).
 \end{itemize}
+\color{black}
 
+\subsection{Determination of the Mobility of a Parallel Robot}
 
-\subsection{Determination of Degrees of Freedom of a Parallel Robot}
-
+\color{gray}
 \begin{itemize}
     \item Beispielrechnung Delta-Roboter: Jacobi-Matrix Rang und Null-Einträge
 \end{itemize}
+\color{black}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 
@@ -843,7 +933,8 @@ This section is not mandatory, but can be added to the manuscript if the discuss
 % \supplementary{The following are available at \linksupplementary{s1}, Figure S1: title, Table S1: title, Video S1: title. A supporting video article is available at doi: link.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\authorcontributions{For research articles with several authors, a short paragraph specifying their individual contributions must be provided. The following statements should be used ``conceptualization, X.X. and Y.Y.; methodology, X.X.; software, X.X.; validation, X.X., Y.Y. and Z.Z.; formal analysis, X.X.; investigation, X.X.; resources, X.X.; data curation, X.X.; writing--original draft preparation, X.X.; writing--review and editing, X.X.; visualization, X.X.; supervision, X.X.; project administration, X.X.; funding acquisition, Y.Y.'', please turn to the  \href{http://img.mdpi.org/data/contributor-role-instruction.pdf}{CRediT taxonomy} for the term explanation. Authorship must be limited to those who have contributed substantially to the work reported.}
+\authorcontributions{conceptualization, M.S. and S.T.; methodology, M.S.; software, M.S.; validation, M.S.; formal analysis, M.S.; writing--original draft preparation, M.S.; writing--review and editing, M.S., S.T., T.O.; supervision, S.T. and T.O.; project administration, T.O.; funding acquisition, S.T. and T.O.}
+% , please turn to the  \href{http://img.mdpi.org/data/contributor-role-instruction.pdf}{CRediT taxonomy} for the term explanation. Authorship must be limited to those who have contributed substantially to the work reported.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \funding{The financial support from the Deutsche Forschungsgemeinschaft (German Research Foundation, DFG) under grant number OR 196/33-1 is gracefully acknowledged.}

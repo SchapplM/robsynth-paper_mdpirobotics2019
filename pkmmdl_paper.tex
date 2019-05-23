@@ -226,11 +226,10 @@ Rest ist gegliedert:
     \label{fig:pkm_constr_transl}
 \end{figure} 
 
-Parallel robot: $m$ legs, leg joint coordinates $\bm{q}_1$,...,$\bm{q}_m$, platform pose $\bm{x}$, end-effector attached to platform.
-
-
-In the following, the general, joint-independent, pose $\bm{x}$ of the robot end-effector is defined as the \emph{desired} (``D'') end-effector pose in the inverse kinematics problem and will be termed with ``$\bm{x}$'' without further supplements for the sake of compactness of the equations.
-This general pose
+Before addressing the specific model for parallel robots in 3T2R tasks in the next section, the standard kinematics model of kinematics of parallel robots is provided in the following, corresponding to the state of the art \cite{Merlet2006,Gogu2008,BriotKha2015}.
+The parallel robot consists of $m$ legs, which each have the joint coordinates $\bm{q}_1$,...,$\bm{q}_m$.
+All joints are considered as single-DoF and additionally to the active joints $\bm{q}_{i,\mathrm{a}}$ explicitly all passive joints at the base or at the platform $\bm{q}_{i,\mathrm{p}}$ are included in $\bm{q}_i$.
+The coordinates
 %
 \begin{equation}
 \bm{x}
@@ -242,7 +241,8 @@ This general pose
 \label{equ:x_def}
 \end{equation}
 %
-describes the desired robot end-effector frames $\ks{D}$ position 
+of the endeffector platform describes the position and orientation of the endeffector frame  $\ks{D}$ with respect to the base frame $\ks{0}$, which is marked with left subscript ``$(0)$'' for vectors and left superscript ``$0$'' for rotation matrices.
+The position 
 %
 \begin{equation}
 \bm{x}_{\mathrm{t}}
@@ -252,8 +252,7 @@ describes the desired robot end-effector frames $\ks{D}$ position
 \label{equ:xt_def}
 \end{equation}  
 %
-and orientation 
-%\vspace{-0.5em}
+is defined as the origin of the platform frame and the rotation matrix
 %
 \begin{equation}
 \rotmat{0}{D} (\bm{x}_{\mathrm{r}})
@@ -262,9 +261,7 @@ and orientation
 \label{equ:xr_def_rotmat}
 \end{equation}
 %
-with respect to the base frame $\ks{0}$, which is marked with left subscript ``$(0)$'' for vectors and left superscript ``$0$'' for rotation matrices.
-The rotation (\ref{equ:xr_def_rotmat}) is expressed without loss of generality with a set $\bm{\beta}$ of $X$-$Y$-$Z$-Euler angles
-%\footnote{Other sets of Euler angles may be used as well.}
+of the platform frame is expressed with Euler angles
 %
 \begin{equation}
 \bm{x}_{\mathrm{r}}
@@ -272,76 +269,73 @@ The rotation (\ref{equ:xr_def_rotmat}) is expressed without loss of generality w
 \begin{bmatrix}
 \beta_1  & \beta_2 & \beta_3
 \end{bmatrix}^{\mathrm{T}}
-\in {\mathbb{R}}^{3},
+\in {\mathbb{R}}^{3}
 \label{equ:xr_def}
 \end{equation} 
+%
+as a minimal representation of the orientation coordinates.
+Without loss of generality, the $X$-$Y$-$Z$-notation
 %
 \begin{equation}
 \bm{R}(\bm{\beta}) = \bm{R}_x(\beta_1) \bm{R}_y(\beta_2) \bm{R}_z(\beta_3) \in \mathrm{SO(3)}.
 \label{equ:def_rmat_xyz}
 \end{equation}
 %
-
-
-
-
-The most common kinematic constraint equation 
+is used for the Euler angles.
+%
+The relation between joint coordinates $\bm{q}$ and platform coordinates $\bm{x}$ is established with the kinematic constraint equations, for which most commonly the vector loop
 %
 \begin{equation}
 \bm{\Phi}_{\mathrm{t}_i}(\bm{q}_i,\bm{x}) = - \ortvek{0}{r}{}{A_iB_i}(\bm{x}) + \ortvek{0}{r}{}{A_iB_i}(\bm{q}_i) 
+\label{equ:kincontrAB}
 \end{equation}
 %
-for leg $i$ is derived from the position of the platform coupling point $B_i$ relative to the base coupling point $A_i$ \cite{Merlet2006}.
-The second term $\ortvek{0}{r}{}{A_iB_i}(\bm{q}_i)$ corresponds to the forward kinematics of the serial chain. 
+between the position of the platform coupling point $B_i$ relative to the base coupling point $A_i$ is used for each leg chain $i$ \cite{Merlet2006}.
+The second term $\ortvek{0}{r}{}{A_iB_i}(\bm{q}_i)$ corresponds to the forward kinematics of the serial leg chain. 
 The vector
 \begin{equation}
 \ortvek{0}{r}{}{A_iB_i}(\bm{x}) = 
 - \ortvek{0}{r}{}{0A_i}
 + \bm{x}_{\mathrm{t}} + \rotmat{0}{D}(\bm{x}_{\mathrm{r}}) \ortvek{D}{r}{}{DB_i}
+\label{equ:vec_AB}
 \end{equation}
 %
-includes the term $\rotmat{0}{D}(\bm{x}_{\mathrm{r}})$ that depends on the full  orientation $\bm{x}_{\mathrm{r}}$ of the end-effector with the rotation about the tool axis in 3T2R tasks.
+includes the term $\rotmat{0}{D}(\bm{x}_{\mathrm{r}})$ that depends on the full  orientation $\bm{x}_{\mathrm{r}}$ of the end-effector.
+% with the rotation about the tool axis in 3T2R tasks.
 
-scalar constraints for each leg
+For the bigger part of existing parallel robots, the passive joint coordinates can be eliminated analytically from the equations (\ref{equ:kincontrAB}), e.\,g. by using the Euclidian distance for U\underline{P}S or R\underline{P}R leg chains or via trigonometry for \underline{R}RR-chains. This leads to the scalar constraint equation
 
 \begin{equation}
 \Phi_{i}
 =
-\Phi_{i}(\bm{q}_{\mathrm{a},i})
-=
-||\bm{\Phi}_{\mathrm{t}_i}(\bm{q}_i,\bm{x})||
+\Phi_{i}(\bm{q}_{i,\mathrm{a}},\bm{x})
 \end{equation}
-
-by Euclidian distance for UPS,RPR leg chains or via using the trigonometry to eliminate passive joints for RRR chain.
-
-
-The set of constraints $\bm{\Phi}_{i}$ for each leg of the PKM ...
-
-The constraint equations
+%
+for each leg $i$, which can be assembled to the vector of constraint equations
 %
 \begin{equation}
-\bm{\Phi}
+\bm{\Phi}(\bm{q}_{\mathrm{a}},\bm{x})
 =
 \begin{bmatrix}
 \Phi_1 & \Phi_2 & \cdots & \Phi_m
 \end{bmatrix}^\transp
 \end{equation}
 %
-of the PKM are assembled for all $m$ legs.
-% The constraints $\bm{\Phi}$ and $\bm{\Psi}$ can be used interchangeably.
+of the PKM for all $m$ legs.
 The differential kinematics of the PKM is calculated with the time derivative
 %
 \begin{equation}
 \frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\Phi}(\bm{q}_\mathrm{a},\bm{x})
 =
-\bm{\Phi}_{\partial \bm{q}_\mathrm{a}}  \dot{\bm{q}}
+\bm{\Phi}_{\partial \bm{q}_\mathrm{a}}  \dot{\bm{q}}_\mathrm{a}
 +
 \bm{\Phi}_{\partial \bm{x}} \dot{\bm{x}}
 =
 \bm{0}
 \end{equation}
 %
-where the diagonal elements $\bm{\Phi}_{i,\partial \bm{q}_{i,\mathrm{a}}}=\partial \bm{\Phi}_i / \partial \bm{q}_{i,\mathrm{a}}$ of the inverse kinematics matrix\footnote{We follow the argumentation from \cite{Gogu2008} to avoid the term ``Jacobian'', since the matrix is not a Jacobian in the mathematical sense to project between two spaces. The name results from the inversion of this matrix in the inverse kinematics problem.}
+where the passive joint coordinates $\bm{q}_{\mathrm{p}}$ do not occur, since they have been eliminated a the previous step.
+The the inverse kinematics matrix\footnote{We follow the argumentation from \cite{Gogu2008} to avoid the term ``Jacobian'', since the matrix is not a Jacobian in the mathematical sense to project between two spaces. The name results from the inversion of this matrix in the inverse kinematics problem.}
 %
 \begin{equation}
 \bm{\Phi}_{\partial \bm{q}_{\mathrm{a}}}
@@ -356,8 +350,8 @@ where the diagonal elements $\bm{\Phi}_{i,\partial \bm{q}_{i,\mathrm{a}}}=\parti
 \end{bmatrix}
 \label{equ:PKM_phi_grad_q}
 \end{equation}  
-
-The calculation of the direct-kinematics matrix
+%
+of this model has diagonal form and the direct-kinematics matrix
 %
 \begin{equation}
 \bm{\Phi}_{\partial \bm{x}}
@@ -372,21 +366,30 @@ The calculation of the direct-kinematics matrix
 \end{bmatrix}
 \label{equ:PKM_phi_grad_x}
 \end{equation}
+%
+is fully populated.
+This definition of the constraints has two drawbacks:
+\begin{enumerate}
+    \item For parallel robots with arbitrary leg chains like those generated by a structural synthesis \cite{Gogu2008,RamirezKotOrt2015}, it is generally not possible to eliminate the passive joint coordinates. If more than three joints per leg influence the coupling point position $B_i$, the three kinematic constraints per joint in (\ref{equ:kincontrAB}) are not sufficient to generate enough equations for the matrix of (\ref{equ:PKM_phi_grad_q}) to become invertible.
+    \item Exploiting the reduction of endeffector coordinates for 3T2R tasks is not possible, since all endeffector coordinates are included in (\ref{equ:vec_AB}).
+\end{enumerate}
 
-Property
+An alternative kinematic model encounter this is presented in the next section.
 
-\begin{equation}
-\frac{\partial \bm{\Phi}_i}{\partial \bm{q}_i}
-=
-\begin{bmatrix}
-* & \cdots & * & 0 & \cdots & 0\\
-\vdots &  \cdots & \vdots & \vdots & \cdots & \vdots \\
-* & \cdots & * & 0 & \cdots & 0\\
-\end{bmatrix}
-\label{equ:PKM_phi_grad_q_form}
-\end{equation}
+%Property
+%
+%\begin{equation}
+%\frac{\partial \bm{\Phi}_i}{\partial \bm{q}_i}
+%=
+%\begin{bmatrix}
+%* & \cdots & * & 0 & \cdots & 0\\
+%\vdots &  \cdots & \vdots & \vdots & \cdots & \vdots \\
+%* & \cdots & * & 0 & \cdots & 0\\
+%\end{bmatrix}
+%\label{equ:PKM_phi_grad_q_form}
+%\end{equation}
 
-is dependent on the kinematic structure of the robot.
+%is dependent on the kinematic structure of the robot.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Reciprocal Sets of Euler Angles for Kinematics of Serial Chains}

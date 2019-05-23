@@ -372,8 +372,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="3.959798"
-     inkscape:cx="67.274369"
-     inkscape:cy="44.965216"
+     inkscape:cx="161.72363"
+     inkscape:cy="47.490597"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -510,7 +510,7 @@
          id="tspan4890"
          x="186.07144"
          y="1029.5051"
-         style="font-size:5px">$\vek{r}{}{0E}$</tspan></text>
+         style="font-size:5px">$\vek{r}{}{0D}$</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 0.71428234,976.6479 0,75"
@@ -556,7 +556,7 @@
          id="tspan4890-2"
          x="134.64287"
          y="1002.3621"
-         style="font-size:5px">$\vek{r}{}{EB_i}$</tspan></text>
+         style="font-size:5px">$\vek{r}{}{DB_i}$</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker6055)"
        d="M 7.3538692,1042.5332 C -5,1022.3622 10,1002.3622 29.47825,1004.9036"
@@ -591,6 +591,6 @@
          id="tspan4890-8"
          x="60.863293"
          y="1041.929"
-         style="font-size:5px">$\vek{r}{}{0E}(\bm{x})$</tspan></text>
+         style="font-size:5px">$\vek{r}{}{0D}(\bm{x})$</tspan></text>
   </g>
 </svg>

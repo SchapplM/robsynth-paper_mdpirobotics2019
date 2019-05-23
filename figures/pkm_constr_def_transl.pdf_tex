@@ -50,14 +50,14 @@
   \makeatother%
   \begin{picture}(1,0.14193548)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{pkm_constr_def_transl.pdf}}%
-    \put(0.33879675,0.0416179){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{0E}$}}}%
+    \put(0.33879675,0.0416179){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{0D}$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{pkm_constr_def_transl.pdf}}%
     \put(0.25816181,0.01560654){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{0A_i}$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{pkm_constr_def_transl.pdf}}%
-    \put(0.24515619,0.09103957){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{EB_i}$}}}%
+    \put(0.24515619,0.09103957){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{DB_i}$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{pkm_constr_def_transl.pdf}}%
     \put(0.02392932,0.10067295){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{A_iB_i}(\bm{q}_i)$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{pkm_constr_def_transl.pdf}}%
-    \put(0.11081919,0.01899674){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{0E}(\bm{x})$}}}%
+    \put(0.11081919,0.01899674){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{0D}(\bm{x})$}}}%
   \end{picture}%
 \endgroup%

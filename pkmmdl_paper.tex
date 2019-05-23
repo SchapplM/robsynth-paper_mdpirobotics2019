@@ -64,6 +64,7 @@
 \usepackage{calrsfs} % Für Kalligraphie-F 
 \newcommand{\bm}[1]{\boldsymbol{#1}}
 % Latex-Makros für häufig verwendete Formelzeichen
+\DeclareMathOperator{\arctantwo}{arctan2}
 \newcommand{\ortvek}[4]{{ }_{(#1)}{\boldsymbol{#2}}^{#3}_{#4} }
 \newcommand{\vek}[3]{\boldsymbol{#1}^{#2}_{#3}}
 \newcommand{\rotmat}[2]{{{ }^{#1}\boldsymbol{R}}_{#2}}
@@ -225,6 +226,73 @@ Rest ist gegliedert:
     \label{fig:pkm_constr_transl}
 \end{figure} 
 
+Parallel robot: $m$ legs, leg joint coordinates $\bm{q}_1$,...,$\bm{q}_m$, platform pose $\bm{x}$, end-effector attached to platform.
+
+
+In the following, the general, joint-independent, pose $\bm{x}$ of the robot end-effector is defined as the \emph{desired} (``D'') end-effector pose in the inverse kinematics problem and will be termed with ``$\bm{x}$'' without further supplements for the sake of compactness of the equations.
+This general pose
+%
+\begin{equation}
+\bm{x}
+=
+\begin{bmatrix}
+\bm{x}_{\mathrm{t}}^\transp & \bm{x}_{\mathrm{r}}^\transp
+\end{bmatrix}^\transp
+\in {\mathbb{R}}^{6}
+\label{equ:x_def}
+\end{equation}
+%
+describes the desired robot end-effector frames $\ks{D}$ position 
+%
+\begin{equation}
+\bm{x}_{\mathrm{t}}
+=
+\ortvek{0}{r}{}{D}
+\in {\mathbb{R}}^{3}
+\label{equ:xt_def}
+\end{equation}  
+%
+and orientation 
+%\vspace{-0.5em}
+%
+\begin{equation}
+\rotmat{0}{D} (\bm{x}_{\mathrm{r}})
+=
+\begin{bmatrix}\vek{n}{}{D} & \vek{o}{}{D} & \vek{a}{}{D}\end{bmatrix} \in \mathrm{SO(3)}
+\label{equ:xr_def_rotmat}
+\end{equation}
+%
+with respect to the base frame $\ks{0}$, which is marked with left subscript ``$(0)$'' for vectors and left superscript ``$0$'' for rotation matrices.
+The rotation (\ref{equ:xr_def_rotmat}) is expressed without loss of generality with a set $\bm{\beta}$ of $X$-$Y$-$Z$-Euler angles
+%\footnote{Other sets of Euler angles may be used as well.}
+%
+\begin{equation}
+\bm{x}_{\mathrm{r}}
+=
+\begin{bmatrix}
+\beta_1  & \beta_2 & \beta_3
+\end{bmatrix}^{\mathrm{T}}
+\in {\mathbb{R}}^{3},
+\label{equ:xr_def}
+\end{equation} 
+%
+\begin{equation}
+\bm{R}(\bm{\beta}) = \bm{R}_x(\beta_1) \bm{R}_y(\beta_2) \bm{R}_z(\beta_3) \in \mathrm{SO(3)}.
+\label{equ:def_rmat_xyz}
+\end{equation}
+%
+The deviation $\bm{\Phi}$ between the desired end-effector frame $\ks{D}$ expressed with $\bm{x}$ of (\ref{equ:x_def}) and the actual robots end-effector frame $\ks{E}$ expressed with $\bm{f}(\bm{q})$ of (\ref{equ:dirkin}) is defined as
+%\vspace{-0.5em}
+%
+\begin{equation}
+\bm{\Phi}=\begin{bmatrix}
+\bm{\Phi}_{\mathrm{t}}^\transp & \bm{\Phi}_{\mathrm{r}}^\transp
+\end{bmatrix}^\transp \in {\mathbb{R}}^{6},
+\label{equ:Phi_def}
+\end{equation}
+
+
+
 The most common kinematic constraint equation 
 %
 \begin{equation}
@@ -241,36 +309,16 @@ The vector
 \end{equation}
 %
 includes the term $\rotmat{0}{D}(\bm{x}_{\mathrm{r}})$ that depends on the full  orientation $\bm{x}_{\mathrm{r}}$ of the end-effector with the rotation about the tool axis in 3T2R tasks.
-For a formulation without the tool axis rotation a different constraint definition
-%
-\begin{equation}
-\bm{\Phi}_{\mathrm{t}_i}(\bm{q}_i,\bm{x}) = 
-\ortvek{0}{r}{}{DE}(\bm{q}_i,\bm{x}) =
-- \bm{x}_{\mathrm{t}} + \ortvek{0}{r}{}{0E}(\bm{q}_i) 
-\end{equation}
-%
-similar to (\ref{equ:Phit_def}) with the vector from the robot base frame $\ks{0}$ to the PKM end-effector $\ks{D}$ can be used where 
-only the translational part $\bm{x}_{\mathrm{t}}$ of the end-effector coordinates appears and not the rotational part $\bm{x}_{\mathrm{r}}$.
-As a drawback, all joint angles $\bm{q}_i$ of the leg $i$ and not only the coordinates of the first joints counted from the base are now included
-in the vector
-%
-\begin{equation}
-\ortvek{0}{r}{}{0E}(\bm{q}_i) = 
-\ortvek{0}{r}{}{0A_i}
-+ \ortvek{0}{r}{}{A_iB_i}(\bm{q}_i) + \rotmat{0}{B_i}(\bm{q}_i) \ortvek{B_i}{r}{}{B_iE}.
-\end{equation}
-%
-To account for the increased number of included joints, also the rotational part of the kinematic constraints is needed to generate enough equations for an invertible Jacobian.
 
-Here again the definition 
-%
-\begin{align}
-    \bm{\Phi}_{\mathrm{r}_i}(\bm{q},\bm{x})
-    =\bm{\alpha}\left(\rotmat{0}{D}^\transp (\bm{x}_{\mathrm{r}})\rotmat{0}{E}(\bm{q})\right)
-\end{align}
+\begin{equation}
+\bm{\Phi}_{i}
+=
+||\bm{\Phi}_{\mathrm{t}_i}(\bm{q}_i,\bm{x})||
+\end{equation}
+
 %
 from (\ref{equ:Phir_def}) is used.
-The set of constraints $\bm{\Phi}_{i}$ for each leg of the PKM can again be reduced to $\bm{\Psi}_{i}$ by removing the superfluous rotational component\footnote{The following steps can also be performed using $\bm{\Psi}$, but $\bm{\Phi}$ is used for simplifying the equations.} in case of a 3T2R task, as described in Sec.\,\ref{sec:RecEulAng_3T2R_app}.
+The set of constraints $\bm{\Phi}_{i}$ for each leg of the PKM ...
 
 The constraint equations
 %
@@ -340,7 +388,6 @@ The calculation of the inverse kinematics Jacobian
     \item Modellierung serieller Ketten für 3T3R und 3T2R. Anwendung direkt auf PKM-Beinkette
     \item Bild: Stilisierte PKM (Planar 3RRR) mit Hervorhebung Beinkette 1 und Plattform, restliche Beinketten nur ausgegraut. Zwei Teilbilder: Ketten geöffnet und geschlossen. Darstellung der Orientierung des Endeffektors durch Plattform-Dreieck. Darstellung beliebiger Verdrehung der Plattform durch mehrere gestrichelte Plattformen.
     \item Formeln aus WC-Paper, aber Nomenklatur anpassen an PKM Beinkette 1
-    \item Gradientenbasierte Lösung der inversen Kinematik 3T3R/3T2R für serielle Roboter als Anwendung.
 \end{itemize}
 
 \begin{figure}[tb]
@@ -355,6 +402,151 @@ The calculation of the inverse kinematics Jacobian
     \caption{Different cases for the kinematic constraints of the leading chain.}
     \label{fig:pkm_constr_rot_lead}
 \end{figure} 
+
+
+For a formulation without the tool axis rotation a different constraint definition
+%
+\begin{equation}
+\bm{\Phi}_{\mathrm{t}_i}(\bm{q}_i,\bm{x}) = 
+\ortvek{0}{r}{}{DE}(\bm{q}_i,\bm{x}) =
+- \bm{x}_{\mathrm{t}} + \ortvek{0}{r}{}{0E}(\bm{q}_i) 
+\end{equation}
+%
+similar to (\ref{equ:Phit_def}) with the vector from the robot base frame $\ks{0}$ to the PKM end-effector $\ks{D}$ can be used where 
+only the translational part $\bm{x}_{\mathrm{t}}$ of the end-effector coordinates appears and not the rotational part $\bm{x}_{\mathrm{r}}$.
+As a drawback, all joint angles $\bm{q}_i$ of the leg $i$ and not only the coordinates of the first joints counted from the base are now included
+in the vector
+%
+\begin{equation}
+\ortvek{0}{r}{}{0E}(\bm{q}_i) = 
+\ortvek{0}{r}{}{0A_i}
++ \ortvek{0}{r}{}{A_iB_i}(\bm{q}_i) + \rotmat{0}{B_i}(\bm{q}_i) \ortvek{B_i}{r}{}{B_iE}.
+\end{equation}
+%
+
+
+
+To account for the increased number of included joints, also the rotational part of the kinematic constraints is needed to generate enough equations for an invertible Jacobian.
+
+Here again the definition 
+%
+\begin{align}
+\bm{\Phi}_{\mathrm{r}_i}(\bm{q},\bm{x})
+=\bm{\alpha}\left(\rotmat{0}{D}^\transp (\bm{x}_{\mathrm{r}})\rotmat{0}{E}(\bm{q})\right)
+\end{align}
+
+\begin{align}
+\bm{\Phi}_{\mathrm{r}}(\bm{q},\bm{x}) 
+= \begin{bmatrix}
+\alpha_1  & \alpha_2 & \alpha_3
+\end{bmatrix}^\transp
+&=\bm{\alpha}\left(\rotmat{D}{E}(\bm{x}_{\mathrm{r}},\bm{q})\right)\nonumber \\
+&=\bm{\alpha}\left(\rotmat{0}{D}^\transp (\bm{x}_{\mathrm{r}})\rotmat{0}{E}(\bm{q})\right) \in {\mathbb{R}}^{3}
+\label{equ:Phir_def}
+\end{align}
+
+
+\begin{equation}
+\bm{\Phi}_{\mathrm{t}}(\bm{q},\bm{x})
+=
+- \ortvek{0}{r}{}{D} + \ortvek{0}{r}{}{E}(\bm{q})
+=
+- \bm{x}_{\mathrm{t}} + \ortvek{0}{r}{}{E}(\bm{q})
+\in {\mathbb{R}}^{3}
+\label{equ:Phit_def}
+\end{equation}
+
+\begin{equation}
+\bm{R}(\bm{\alpha}^*) := \bm{R}_x(\alpha_1^*) \bm{R}_y(\alpha_2^*) \bm{R}_z(\alpha_3^*) \in \mathrm{SO(3)}
+\label{equ:alpha_convention_xyz}
+\end{equation}
+
+\begin{equation}
+\bm{R}(\bm{\alpha}) := \bm{R}_z(\alpha_1) \bm{R}_y(\alpha_2) \bm{R}_x(\alpha_3) \in \mathrm{SO(3)}
+\label{equ:def_rmat_zyxr}
+\end{equation}
+
+
+\begin{equation}
+\bm{\eta}_{\mathrm{t}}
+=
+\bm{x}_{\mathrm{t}}
+=
+\ortvek{0}{r}{}{D}
+\in {\mathbb{R}}^{3}
+\end{equation}  
+
+
+\begin{equation}
+\bm{\eta}_{\mathrm{r}}
+=
+\begin{bmatrix}
+\beta_1  & \beta_2
+\end{bmatrix}^\transp
+=
+\underbrace{\begin{bmatrix}
+    1 & 0 & 0  \\ 
+    0 & 1 & 0
+    \end{bmatrix}}_{=\bm{P}_{\eta}}
+\bm{x}_{\mathrm{r}}
+\in {\mathbb{R}}^{2}
+\label{equ:etar_def}
+\end{equation}
+
+Herleitung siehe Anhang
+
+\begin{align}
+\begin{bmatrix}
+\alpha_1 \\
+\alpha_2 \\
+\alpha_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+\alpha_1(\bm{q},\beta_1,\beta_2,\beta_3) \\
+\alpha_2(\bm{q},\beta_1,\beta_2) \\
+\alpha_3(\bm{q},\beta_1,\beta_2)
+\end{bmatrix}
+=
+\begin{bmatrix}
+\alpha_1(\bm{q},\bm{x}) \\
+\alpha_2(\bm{q},\bm{\eta}) \\
+\alpha_3(\bm{q},\bm{\eta}) 
+\end{bmatrix}
+\label{equ:alpha_dep_beta}.
+\end{align}
+
+
+\begin{equation}
+\bm{\Psi}_{\mathrm{r}}(\bm{q},\bm{\eta}) = 
+\begin{bmatrix}
+\alpha_2  & \alpha_3
+\end{bmatrix}^\transp
+=
+\overbrace{\begin{bmatrix}
+    0 & 1 & 0  \\ 
+    0 & 0 & 1
+    \end{bmatrix}}^{=\bm{P}_{\Psi}}
+\bm{\Phi}_{\mathrm{r}} (\bm{q},\bm{x})
+\in {\mathbb{R}}^{2}.
+\label{equ:Psir_def}
+\end{equation}
+
+
+\begin{align}
+\bm{\Psi}_{\mathrm{r}}(\bm{q},\bm{\eta})
+&=
+\bm{P}_{\Psi} \bm{\alpha}\left(\rotmat{A2}{E}(\bm{q},\bm{\eta}_{\mathrm{r}},\alpha_1,\beta_3)\right) \nonumber\\
+&=
+\bm{P}_{\Psi} \bm{\alpha}\left(\rotmat{0}{A1}^\transp (\bm{\eta}_{\mathrm{r}})\rotmat{0}{E}(\bm{q})\right).
+\end{align}
+
+
+The condition $\bm{\Phi}=\bm{0}$ or $\bm{\Psi}=\bm{0}$ leads to a valid configuration of the end-effector position and the complete orientation of the end-effector (using $\bm{\Phi}$) or the orientation only of the tool-axis (using $\bm{\Psi}$).
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Full Kinematic Constraints for Parallel Robots using Reciprocal Sets of Euler Angles}
@@ -375,43 +567,7 @@ The calculation of the inverse kinematics Jacobian
     \label{fig:pkm_constr_rot_follow}
 \end{figure} 
 
-The calculation of the inverse kinematics Jacobian
-%
-\begin{equation}
-\bm{\Phi}_{\partial \bm{x}}
-=
-\frac{\partial \bm{\Phi}}{\partial \bm{x}}
-=
-\begin{bmatrix}
-\partial \bm{\Phi}_1/\partial \bm{x}\\
-\partial \bm{\Phi}_2/\partial \bm{x}\\
-\vdots \\
-\partial \bm{\Phi}_m/\partial \bm{x}\\
-\end{bmatrix}
-\label{equ:PKM_phi_grad_x}
-\end{equation}  
-%
-can be simplified similar to the process described in Sec.\,\ref{sec:RecEulAng_implement} with
-%
-\begin{align}
-    \frac{\partial}{\partial \bm{x}_{\mathrm{r}}}\bm{\Phi}_{\mathrm{r}_i}
-    &=
-    \frac{\partial}{\partial \bm{x}_{\mathrm{r}}} \bm{\alpha}\left(\left(\rotmat{0}{E}^\transp(\bm{q}_i) \rotmat{0}{D}(\bm{x}_{\mathrm{r}})\right)^\transp\right) \label{equ:grad_Phi_x} \\
-    &=
-    \frac{\partial}{\partial \bm{x}_{\mathrm{r}}} \overline{\bm{\alpha}}\left(
-    \bm{P}_{\mathrm{T}}
-    \overline{\prod}\left( \rotmato{0}{E}^\transp(\bm{q}_i), \rotmato{0}{D}(\bm{x}_{\mathrm{r}})\right)\right) \nonumber \\
-    &=
-    %underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des dritten Terms
-    \underbrace{\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
-        \frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}}_{\mathrm{I}}
-    \underbrace{\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
-        \bm{P}_{\mathrm{T}}}_{\mathrm{II}}
-    \underbrace{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}_{\mathrm{III}}
-    \underbrace{\frac{\partial \rotmato{0}{D}(\bm{x}_{\mathrm{r}})}{\partial \bm{x}_{\mathrm{r}}}}_{\mathrm{IV}} \nonumber
-\end{align}
-%
-where the simplicity of the single expression is demonstrated in appendix\,\ref{sec:appendix_gradient_matrix}.
+
 
 
 Again, only the rotational component $\bm{\Phi}_{\mathrm{r}_i,\partial \bm{x}_{\mathrm{r}}}$ of 
@@ -436,7 +592,180 @@ Using $\bm{\Psi}_{\partial \bm{q}}$ and $\bm{\Psi}_{\partial \bm{x}}$ in (\ref{e
 \begin{itemize}
     \item Gradientenbasierte Lösung der inversen Kinematik mit Nullraum (benötigt nur die geometrische Matrix der inversen Kinematik). Folge der Benennung aus \cite{Gogu2008}, dass es die geometrische Matrix und nicht die Jacobi-Matrix ist.
     \item Geschwindigkeits-Zusammenhang: Geometrische Matrix der DK ist notwendig. Zusammenhang beschreiben
+    \item Gradientenbasierte Lösung der inversen Kinematik 3T3R/3T2R für serielle Roboter als Anwendung.
 \end{itemize}
+
+\subsection{Constraint Gradients for the Leading Leg}
+
+\begin{align}
+\frac{\partial}{\partial \bm{q}}\bm{\Phi}_{\mathrm{r}}
+&=
+\frac{\partial}{\partial \bm{q}} \bm{\alpha}\left(\rotmat{0}{D}^\transp(\bm{x}) \rotmat{0}{E}(\bm{q})\right) \label{equ:grad_Phi_q}\\
+&=
+\frac{\partial}{\partial \bm{q}} \bm{\alpha}\left(\overline{\prod}\left( \rotmato{0}{D}^\transp(\bm{x}), \rotmato{0}{E}(\bm{q})\right)\right) \nonumber \\
+&=
+%underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des mittleren Terms
+\underbrace{\vphantom{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}\left(\frac{\partial \bm{\alpha}}{\partial \overline{\bm{R}}}\right)}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
+\underbrace{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
+\underbrace{\vphantom{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}\left(\frac{\partial \rotmato{0}{E}(\bm{q})}{\partial \bm{q}} \right)}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q})}}.  \nonumber
+\end{align}
+
+
+The calculation of the inverse kinematics Jacobian
+%
+\begin{equation}
+\bm{\Phi}_{\partial \bm{x}}
+=
+\frac{\partial \bm{\Phi}}{\partial \bm{x}}
+=
+\begin{bmatrix}
+\partial \bm{\Phi}_1/\partial \bm{x}\\
+\partial \bm{\Phi}_2/\partial \bm{x}\\
+\vdots \\
+\partial \bm{\Phi}_m/\partial \bm{x}\\
+\end{bmatrix}
+\label{equ:PKM_phi_grad_x_doppelt}
+\end{equation}  
+%
+can be simplified similar to the process described in Sec.\,\ref{sec:RecEulAng_implement} with
+%
+\begin{align}
+\frac{\partial}{\partial \bm{x}_{\mathrm{r}}}\bm{\Phi}_{\mathrm{r}_i}
+&=
+\frac{\partial}{\partial \bm{x}_{\mathrm{r}}} \bm{\alpha}\left(\left(\rotmat{0}{E}^\transp(\bm{q}_i) \rotmat{0}{D}(\bm{x}_{\mathrm{r}})\right)^\transp\right) \label{equ:grad_Phi_x} \\
+&=
+\frac{\partial}{\partial \bm{x}_{\mathrm{r}}} \overline{\bm{\alpha}}\left(
+\bm{P}_{\mathrm{T}}
+\overline{\prod}\left( \rotmato{0}{E}^\transp(\bm{q}_i), \rotmato{0}{D}(\bm{x}_{\mathrm{r}})\right)\right) \nonumber \\
+&=
+%underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des dritten Terms
+\underbrace{\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
+    \frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}}_{\mathrm{I}}
+\underbrace{\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
+    \bm{P}_{\mathrm{T}}}_{\mathrm{II}}
+\underbrace{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}_{\mathrm{III}}
+\underbrace{\frac{\partial \rotmato{0}{D}(\bm{x}_{\mathrm{r}})}{\partial \bm{x}_{\mathrm{r}}}}_{\mathrm{IV}} \nonumber
+\end{align}
+%
+where the simplicity of the single expression is demonstrated in appendix\,\ref{sec:appendix_gradient_matrix}.
+
+\subsection{Constraint Gradients for the Following Legs}
+
+
+\subsection{Constraint Gradients for the Parallel Robot}
+
+
+Gradient q 2
+
+\begin{equation}
+\bm{\Phi}_{\bm{q}}(\bm{q},\bm{x})
+=
+\begin{pmatrix}
+\bm{\Phi}_{1,\bm{q}_1}  & 0 & 0 & 0\\
+\bm{\Phi}_{2,\bm{q}_1} & \bm{\Phi}_{2,\bm{q}_2} & \ddots & 0  \\
+\vdots & \ddots & \ddots & 0  \\
+\bm{\Phi}_{m,\bm{q}_1} & 0 & 0 &\bm{\Phi}_{m,\bm{q}_m}
+\end{pmatrix}
+\end{equation}
+
+Gradient q 3
+
+\begin{equation}
+\bm{\Psi}_{\bm{q}}(\bm{q},\bm{\eta})
+=
+\begin{pmatrix}
+\bm{\Psi}_{1,\bm{q}_1}  & 0 & 0 & 0\\
+\bm{\Phi}_{2,\bm{q}_1} & \bm{\Phi}_{2,\bm{q}_2} & \ddots & 0  \\
+\vdots & \ddots & \ddots & 0  \\
+\bm{\Phi}_{m,\bm{q}_1} & 0 & 0 &\bm{\Phi}_{m,\bm{q}_m}
+\end{pmatrix}
+\end{equation}
+
+
+Gradient x 2
+
+\begin{equation}
+\bm{\Phi}_{\bm{x}}(\bm{q},\bm{x})
+=
+\begin{pmatrix}
+\bm{\Phi}_{1,\bm{x}} \\
+\bm{0} \\
+\vdots \\
+\bm{0}
+\end{pmatrix}
+\end{equation}
+
+
+Gradient x 3
+
+\begin{equation}
+\bm{\Phi}_{\bm{\eta}}(\bm{q},\bm{\eta})
+=
+\begin{pmatrix}
+\bm{\Phi}_{1,\bm{\eta}} \\
+\bm{0} \\
+\vdots \\
+\bm{0}
+\end{pmatrix}
+\end{equation}
+
+\subsection{Gradient-Based Solution of the Inverse Kinematics Problem}
+
+Following \cite{GoldenbergBenFen1985}, the inverse kinematics problem for serial link robots in 6-DoF tasks at the iterative step $k+1$ can be derived with the linear approximation of the Taylor series expansion of $\bm{\Phi}(\bm{q},\bm{x})$ to
+%
+\begin{equation}
+\bm{\Phi}(\bm{q}^{k+1},\bm{x}) = 
+\bm{\Phi}(\bm{q}^{k},\bm{x})
++
+\frac{\partial}{\partial \bm{q}} \bm{\Phi}(\bm{q},\bm{x}) \biggr\rvert_{\bm{q}^k} (\bm{q}^{k+1} - \bm{q}^k)
+\label{equ:taylor_phi}
+\end{equation}
+%
+where $\bm{\Phi}_{\partial\bm{q}}=(\partial \bm{\Phi} / \partial \bm{q})$ is called the ``Jacobian matrix corresponding to the residual vector'' ($\bm{\Phi}$) in \cite{GoldenbergBenFen1985} and $\bm{q}^0$ is assumed as given.
+%
+For 3T2R tasks
+%
+\begin{equation}
+\bm{\Psi}(\bm{q}^{k+1},\bm{\eta}) = 
+\bm{\Psi}(\bm{q}^{k},\bm{\eta})
++
+\frac{\partial}{\partial \bm{q}} \bm{\Psi}(\bm{q},\bm{\eta}) \biggr\rvert_{\bm{q}^k} (\bm{q}^{k+1} - \bm{q}^k)
+\label{equ:taylor_psi}
+\end{equation}
+
+can be defined in the same way with the condition
+
+\begin{equation}
+\bm{\Psi}(\bm{q}^{k+1},\bm{\eta})=\bm{0}
+\end{equation}
+
+
+
+\begin{align}
+{\Delta}\bm{q}
+&=
+{\Delta}\bm{q}_{\mathrm{T}} + {\Delta}\bm{q}_{\mathrm{N}} \nonumber \\
+&=
+\bm{\Psi}_{\partial\bm{q}}^{\dagger} (-\bm{\Psi}) +  (\bm{1}-\bm{\Psi}_{\partial\bm{q}}^{\dagger}\bm{\Psi}_{\partial\bm{q}}) h_{\partial\bm{q}}
+\label{equ:nullspace}
+\end{align}
+
+
+\begin{equation}
+h(\bm{q})
+=
+\frac{1}{2} (\bm{q}-\bar{\bm{q}})^\transp\bm{W}(\bm{q}-\bar{\bm{q}})
+\end{equation}  
+
+\begin{equation}
+h_{\partial\bm{q}}
+=
+\frac{\partial h}{\partial \bm{q}}
+=
+\bm{W}(\bm{q}-\bar{\bm{q}})
+\end{equation}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
@@ -641,10 +970,95 @@ already displayed in (\ref{equ:alpha_dep_beta}) with the consequences for the ki
 
 
 
-
-
 \subsection{Matrix Operations for Partial Derivatives}
 \label{sec:appendix_gradient_matrix}
+
+
+
+The column operator $\overline{\bm{R}}$ for rotation matrices $\bm{R}$ to stack the coordinate systems unit vectors $\bm{n},\bm{o},\bm{a} \in {\mathbb{R}}^{3}$ vertically instead of horizontally is defined as
+%
+\begin{equation}
+\overline{\bm{R}}(\bm{R})=\begin{bmatrix}
+\bm{n} \\ \bm{o} \\ \bm{a}
+\end{bmatrix} \in {\mathbb{R}}^{9}
+\quad
+\mathrm{with}
+\quad
+\bm{R}=\begin{bmatrix}
+\bm{n} & \bm{o} & \bm{a}
+\end{bmatrix}
+=
+\begin{bmatrix}
+{n_x}&{o_x}&{a_x} \\
+{n_y}&{o_y}&{a_y} \\ 
+{n_z}&{o_z}&{a_z} \\ 
+\end{bmatrix}
+\in \mathrm{SO}(3)
+\label{equ:def_rotmat}
+\end{equation}
+%
+to avoid differentiating matrices or w.r.t. matrices.
+Matrix multiplication is then expressed with the matrix product operator $\overline{\Pi}$
+%
+such that
+%
+\begin{equation}
+\rotmato{1}{3}
+=
+\overline{\prod}\left( \rotmato{1}{2}, \rotmato{2}{3}\right)
+=
+\overline{\bm{R}}(\rotmat{1}{3})
+\quad
+\mathrm{with}
+\quad
+\rotmat{1}{3}
+=
+\rotmat{1}{2}
+\rotmat{2}{3}.
+\label{equ:matprod}
+\end{equation}
+%
+The transposition operator $\bm{P}_\transp$ is a $9 \times 9$ permutation matrix such that
+%
+\begin{equation}
+\rotmato{2}{1}
+=
+\bm{P}_\transp \rotmato{1}{2}
+\in {\mathbb{R}}^{9}
+\enspace
+\mathrm{with}
+\enspace
+\rotmat{2}{1}
+=
+\rotmat{1}{2}^\transp
+\in \mathrm{SO}(3)
+\enspace
+\mathrm{and}
+\enspace
+\rotmato{1}{2}=\overline{\bm{R}}(\rotmat{1}{2})
+.
+\end{equation}
+%
+The Euler angles can be calculated from the general rotation matrix $\bm{R}$ of (\ref{equ:def_rotmat}) in the same way as before\footnote{Utilizing the sign-aware operator $\arctantwo(y,x)$ instead of $\arctan(y/x)$ allows angles to be in $(-\pi,+\pi]$, removes ambiguities and provides global differentiability.} using these operators with the notation
+%
+\begin{equation}
+\bm{\alpha}(\overline{\bm{R}})
+=
+\bm{\alpha}(\bm{R})
+=
+\begin{bmatrix}
+\arctantwo \left( {n_y} , { n_x} \right) \\ 
+\arctantwo \left( -{n_z} , \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\ 
+\arctantwo \left( {o_z} , {a_z} \right)
+\end{bmatrix}
+\label{equ:alpha_def_rotmat_zyx}
+\end{equation}
+%
+at the $Z$-$Y$-$X$ example.
+
+
+\subsection{Contents of the Partial Derivatives}
+\label{sec:appendix_content_derivatives}
 
 The single expressions derived in Sec.\,\ref{sec:RecEulAng_implement} for the serial chains and in Sec.\,\ref{sec:ParRobKinConstr} for the parallel chains can be calculated with low computational effort from the definition of the $X$-$Y$-$Z$- and $Z$-$Y$-$X$-Euler angles from (\ref{equ:def_rmat_xyz}), (\ref{equ:def_rmat_zyxr}) and (\ref{equ:alpha_xyz}).
 With $\overline{\bm{R}}=[n_x,n_y,n_z ,o_x,o_y,o_z,a_x,a_y,a_z]^\transp$ the gradient ``I'' in (\ref{equ:grad_Phi_q}) becomes
@@ -712,7 +1126,7 @@ and the inverse gradient ``I'' in (\ref{equ:grad_Phi_x}) yields
 %=====================================
 % References, variant A: internal bibliography
 %=====================================
-%\reftitle{References}
+\reftitle{References}
 %\begin{thebibliography}{999}
 %% Reference 1
 %\bibitem[Author1(year)]{ref-journal}
@@ -729,7 +1143,7 @@ and the inverse gradient ``I'' in (\ref{equ:grad_Phi_x}) yields
 %=====================================
 % References, variant B: external bibliography
 %=====================================
-%\externalbibliography{yes}
+\externalbibliography{yes}
 \bibliography{references}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

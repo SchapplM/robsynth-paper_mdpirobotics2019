@@ -150,13 +150,13 @@ Beschreibung des aktuellen Stands von PKM für 3T2R.
 	\item Für den Einsatz von PKM in 3T2R-Aufgaben gibt es unterschiedliche Ansätze \cite{Tale-MasoulehGos2011}: Asymmetrische 5FG (1), Symmetrische 5FG (2), 6FG-Mechanismen, die als 5FG redundant geregelt werden (3).
 	\item Die Nutzung einer aktiven Beinkette mit 3T2R-FG oder einer passiven Führungsstrebe mit 3T2R-FG setzt bei der Mobilität an. Dadurch hat die Plattform auch 3T2R-FG.
 	\item Dieses Konzept wird in der Literatur an verschiedenen Maschinentypen gezeigt:
-	\cite{WangGos1997} für 5UPS/US,  \cite{LiuXuYaoXu2015,WenQinZhaLam2016} für 6PUS/UPU, \cite{ZhengGaoZha2005,GaoSunZha2004} für 5UPS/PRPU, \cite{Gogu2006} mit Isoglide5-A1 (3PRRRRR-2PRRRR), \cite{SchreiberGos2003} mit 4URS-1URU, \cite{MbarekNefCor2005,LinLiYanZha2013} mit 4UPS-1UPU oder \cite{GaoPenZhaLi2006} mit 4PSU-1PU*U. Durch die kinematische Struktur hat der EE immer nur 3T2R FG und eine Aufgabenredundanz liegt nicht vor. Die 5UPS-PRPU Maschine aus \cite{ChengWanZha2008} weist zusätzlich eine Antriebsredundanz auf.
+	\cite{WangGos1997} für 5UPS/US, \cite{ZhangGos2001} für 5UPS/RUU, \cite{LiuXuYaoXu2015,WenQinZhaLam2016} für 6PUS/UPU, \cite{ZhengGaoZha2005,GaoSunZha2004} für 5UPS/PRPU, \cite{Gogu2006} mit Isoglide5-A1 (3PRRRRR-2PRRRR), \cite{SchreiberGos2003} mit 4URS-1URU, \cite{MbarekNefCor2005,LinLiYanZha2013} mit 4UPS-1UPU oder \cite{GaoPenZhaLi2006} mit 4PSU-1PU*U. Durch die kinematische Struktur hat der EE immer nur 3T2R FG und eine Aufgabenredundanz liegt nicht vor. Die 5UPS-PRPU Maschine aus \cite{ChengWanZha2008} weist zusätzlich eine Antriebsredundanz auf.
 	\item In \cite{HuangLi2002} wurde mit Hilfe der Schraubentheorie am Bsp der 5UPU gezeigt, dass die Maschine nur lokale, und keine globale Mobilität aufweist, wenn die 5FG der Beinketten nicht übereinstimmen. Am Beispiel der Metrom-Maschine \cite{BaerWei2006}, der dazu ähnlichen 4SPRR-1PSPR-Maschine von \cite{AlaghebandMahMilBen2015} oder der Isoglide5 \cite{Gogu2006} wird deutlich, dass bei mehreren Beinketten mit 5FG der nicht durch die Aufgabe vorgegebene Rotations-FG um die Werkzeugachse bei allen Beinketten vorliegen muss. Das führt zu einer letzten Drehachse jeder Beinkette in der Werkzeugachse. Bei der konstruktiven Umsetzung wird das letzte Gelenk als rotierender Ring um die Werkzeugachse gewählt \cite{BaerWei2006,AlaghebandMahMilBen2015}.
 	\item Davon abweichend werden in \cite{KongGos2005} 5FG-PKM synthetisiert, die symmetrische Beinketten aufweisen. Diese werden in \cite{Tale-MasoulehGos2011} für 5RPUR und in \cite{Tale-MasoulehSaaGosTag2010} für 5PRUR genauer analysiert.
 	\item Bei Maschinen mit 3T3R EE-FG wie der Eclipse-Maschine (3PPRS) \cite{HongKim2000} oder Hexapod-Maschinen mit 6UPS-Struktur \cite{MerletPerDan2000}, die für 3T2R eingesetzt werden, kann der Drehwinkel des Endeffektors um die Symmetrieachse des Werkzeugs frei gewählt werden.
 \end{itemize}
 
-Methoden zur Lösung der IK
+Methoden zur Lösung der IK. Methoden durchnummerieren und Tabelle mit allen Systemen machen. Dann verschiedene Paper und Roboter den nummerierten Methoden zuordnen.
 
 \begin{itemize}
 	\item Für die vorgestellten Maschinen mit 5 EE-FG \cite{LiuXuYaoXu2015,WenQinZhaLam2016,ZhengGaoZha2005,GaoSunZha2004,ChengWanZha2008,AlaghebandMahMilBen2015,BaerWei2006,Tale-MasoulehSaaGosTag2010,Tale-MasoulehGos2011} ist die inverse Kinematik analytisch einfach zu erhalten. Die Berechnung erfolgt durch die Definition der EE-Orientierung mit zwei mitgedrehten Winkeln für die Führungskette, die 3T2R-FG aufweist. Für die restlichen Ketten wird die IK dann analytisch mit Standard-Verfahren berechnet, da die Beinketten eine einfache Struktur aufweisen.
@@ -186,46 +186,94 @@ Beitrag des Papers:
 Rest ist gegliedert:
 
 \begin{itemize}
+    \item Problembeschreibung: Inverse Kinematik von PKM bzw. Kinematik-Modellierung Kap \label{ref:PKM_general}
 	\item Vorstellung des REW-Verfahrens aus \cite{1_SchapplerTapOrt2019} zur Modellierung serieller kinematischer Ketten Kap \ref{sec:REW_seriell}
 	\item Aufstellung der vollständigen kinematischen Zwangsbedingungen für allgemeine PKM mit dem Verfahren, Kap. \ref{sec:ZB_PKM}
 	\item Lösung des IK-Problems mit Redundanzauflösung und weitere Anwendungen der Modellierung Kap. \ref{sec:ZB_Anwendung}
 	\item Darstellung der Ergebnisse an Beispielsystemen, Kap. \ref{sec:Ergebnisse}
 \end{itemize}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Inverse Kinematics Problem for Parallel Robots}
+\label{sec:PKM_general}
+
+\begin{itemize}
+    \item Beschreibung des Systems und der Nomenklatur mit Bild (3RRR und 3RPR, eingezeichnete Vektoren)
+    \item Darstellung der kinematischen Zwangsbedingungen als Vektoren und für Betrag der Beinlänge. Vektor rAB und r0E einzeichnen
+    \item Eigenschaft nennen: Methode nicht allgemein, sondern Voraussetzung, dass nur die ersten Gelenkwinkel die Zwangsbedingungen beeinflussen
+    \item Hinweis Dynamik-Modellierung basiert auch auf diesen Zwangsbedingungen \cite{Merlet2006,BriotKha2015,AbdellatifHei2009,DoThanhKotHeiOrt2009b} und funktioniert auch nur für Roboter, mit diesen Eigenschaften
+    \item \cite{Gogu2008} nimmt allgemeine lineare Transformation für Position und Orientierung, aber auf Geschwindigkeitsebene. Damit die inverse Kinematik nicht direkt lösbar und nur für 3T3R.
+    \item Formeln: Kinematik der Beinkette und der Plattform, Kinematische Zwangsbedingungen in allgemeiner Form, Einfluss der Beingelenke anhand der Einträge in der Gradientenmatrix
+    \item Einschränkung schreiben: Methode nicht für allgemeine PKM anwendbar, die automatisch generiert werden, da immer analytisch die Systeme speziell gelöst werden
+    \item Skizzierung des Problems für 3T2R: Unterschiedliche Modellierung für Führungskette und Folgekette, Führungskette in Kap. \ref{sec:REW_seriell}, Folgekette und Zusammenschluss in Kap. \ref{sec:ZB_PKM}.
+    \item Bis hier noch keine rotatorischen Zwangsbedingungen hinschreiben. Die kommen erst in den folgenden Kapiteln
+\end{itemize}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Reciprocal Sets of Euler Angles for Kinematics of Serial Chains}
 \label{sec:REW_seriell}
 
-\cite{Gogu2008}
-\cite{Merlet2006}
 \cite{1_SchapplerTapOrt2019}
+
+\begin{itemize}
+    \item Modellierung serieller Ketten für 3T3R und 3T2R. Anwendung direkt auf PKM-Beinkette
+    \item Bild: Stilisierte PKM (Planar 3RRR) mit Hervorhebung Beinkette 1 und Plattform, restliche Beinketten nur ausgegraut. Zwei Teilbilder: Ketten geöffnet und geschlossen. Darstellung der Orientierung des Endeffektors durch Plattform-Dreieck. Darstellung beliebiger Verdrehung der Plattform durch mehrere gestrichelte Plattformen.
+    \item Formeln aus WC-Paper, aber Nomenklatur anpassen an PKM Beinkette 1
+    \item Gradientenbasierte Lösung der inversen Kinematik 3T3R/3T2R für serielle Roboter als Anwendung.
+\end{itemize}
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Full Kinematic Constraints for Parallel Robots using Reciprocal Sets of Euler Angles}
 \label{sec:ZB_PKM}
+
+\begin{itemize}
+    \item Kinematische Zwangsbedingungen der Folge-Ketten: Begründung für Vorgehensweise Führungskette/Folgekette (es kann nur für eine Kette die Orientierung der Plattform frei sein. Für die anderen gilt dann diese Orientierung)
+    \item Bild: 3RRR mit Führungs- und Folgekette; geöffnet und geschlossen. Getrichelte Plattform für Orientierung aus Folge-Kette. KS-Definition der Plattform: y-Achse zeigt auf gegenüberliegenden Eckpunkt.
+    \item Darstellung der Gradientenmatrizen aus Kettenregel
+    \item Vollständige Jacobi-Matrix für 3T3R und 3T2R
+\end{itemize}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Differential Kinematics for Parallel Robots}
 \label{sec:ZB_Anwendung}
 
+\begin{itemize}
+    \item Gradientenbasierte Lösung der inversen Kinematik mit Nullraum (benötigt nur die geometrische Matrix der inversen Kinematik). Folge der Benennung aus \cite{Gogu2008}, dass es die geometrische Matrix und nicht die Jacobi-Matrix ist.
+    \item Geschwindigkeits-Zusammenhang: Geometrische Matrix der DK ist notwendig. Zusammenhang beschreiben
+\end{itemize}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
 \label{sec:Ergebnisse}
 
-This section may be divided by subheadings. It should provide a concise and precise description of the experimental results, their interpretation as well as the experimental conclusions that can be drawn.
-\begin{quote}
-This section may be divided by subheadings. It should provide a concise and precise description of the experimental results, their interpretation as well as the experimental conclusions that can be drawn.
-\end{quote}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Resolution of Functional Redundancy of a 6-DoF Robot in 3T2R tasks}
+\subsection{Resolution of Functional Redundancy of a Serial-Link 6-DoF Robot in 3T2R tasks}
 
+
+\begin{itemize}
+    \item Beispiel IK-Optimierung über Trajektorie (Industrieroboter in 3T2R-Traj., Bsp. aus \cite{HuoBar2008,HuoBar2011})
+    \item Histogramm IK-Optimierung für verschiedene Roboter und zufällige Start- und End-Posen (Balken aufgegliedert nach 1., 2., ... Versuch)
+\end{itemize}
 
 \subsection{Resolution of Functional Redundancy of a Parallel Robot in 3T2R tasks}
 
+\begin{itemize}
+    \item Beispiel IK-Optimierung über Trajektorie (Parameter ähnlich wählen wie in \cite{MerletPerDan2000}).
+\end{itemize}
+
+
 \subsection{Determination of Degrees of Freedom of a Parallel Robot}
 
+\begin{itemize}
+    \item Beispielrechnung Delta-Roboter: Jacobi-Matrix Rang und Null-Einträge
+\end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 
@@ -281,10 +329,18 @@ REA & Reciprocal set of Euler angles
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% optional
 \appendixtitles{no} %Leave argument "no" if all appendix headings stay EMPTY (then no dot is printed after "Appendix A"). If the appendix sections contain a heading then change the argument to "yes".
-%\appendix
-%\section{}
+\appendix
+\section{Mathematical Symbols for Reciprocal Euler Angles}
 %\unskip
 %\subsection{}
+
+
+\begin{itemize}
+    \item Details zu den Partiellen Ableitungen in den verschiedenen Gleichungen
+    \item Genauer Inhalt der Spalten-Operatoren und der Euler-Winkel-Ableitungen
+    \item Herleitung für Zusammenhang Rotationsmatrix-Winkelgeschwindigkeit (Gradienten)
+\end{itemize}
+
 %The appendix is an optional section that can contain details and data supplemental to the main text. For example, explanations of experimental details that would disrupt the flow of the main text, but nonetheless remain crucial to understanding and reproducing the research shown; figures of replicates for experiments of which representative data is shown in the main text can be added here if brief, or as Supplementary data. Mathematical proofs of results not central to the paper can be added as an appendix.
 
 

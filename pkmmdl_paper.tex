@@ -281,15 +281,7 @@ The rotation (\ref{equ:xr_def_rotmat}) is expressed without loss of generality w
 \label{equ:def_rmat_xyz}
 \end{equation}
 %
-The deviation $\bm{\Phi}$ between the desired end-effector frame $\ks{D}$ expressed with $\bm{x}$ of (\ref{equ:x_def}) and the actual robots end-effector frame $\ks{E}$ expressed with $\bm{f}(\bm{q})$ of (\ref{equ:dirkin}) is defined as
-%\vspace{-0.5em}
-%
-\begin{equation}
-\bm{\Phi}=\begin{bmatrix}
-\bm{\Phi}_{\mathrm{t}}^\transp & \bm{\Phi}_{\mathrm{r}}^\transp
-\end{bmatrix}^\transp \in {\mathbb{R}}^{6},
-\label{equ:Phi_def}
-\end{equation}
+
 
 
 
@@ -310,14 +302,19 @@ The vector
 %
 includes the term $\rotmat{0}{D}(\bm{x}_{\mathrm{r}})$ that depends on the full  orientation $\bm{x}_{\mathrm{r}}$ of the end-effector with the rotation about the tool axis in 3T2R tasks.
 
+scalar constraints for each leg
+
 \begin{equation}
-\bm{\Phi}_{i}
+\Phi_{i}
+=
+\Phi_{i}(\bm{q}_{\mathrm{a},i})
 =
 ||\bm{\Phi}_{\mathrm{t}_i}(\bm{q}_i,\bm{x})||
 \end{equation}
 
-%
-from (\ref{equ:Phir_def}) is used.
+by Euclidian distance for UPS,RPR leg chains or via using the trigonometry to eliminate passive joints for RRR chain.
+
+
 The set of constraints $\bm{\Phi}_{i}$ for each leg of the PKM ...
 
 The constraint equations
@@ -326,11 +323,8 @@ The constraint equations
 \bm{\Phi}
 =
 \begin{bmatrix}
-\bm{\Phi}_1 \\
-\bm{\Phi}_2 \\
-\vdots \\
-\bm{\Phi}_m \\
-\end{bmatrix}
+\Phi_1 & \Phi_2 & \cdots & \Phi_m
+\end{bmatrix}^\transp
 \end{equation}
 %
 of the PKM are assembled for all $m$ legs.
@@ -338,31 +332,32 @@ of the PKM are assembled for all $m$ legs.
 The differential kinematics of the PKM is calculated with the time derivative
 %
 \begin{equation}
-\frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\Phi}(\bm{q},\bm{x})
+\frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\Phi}(\bm{q}_\mathrm{a},\bm{x})
 =
-\bm{\Phi}_{\partial \bm{q}}  \dot{\bm{q}}
+\bm{\Phi}_{\partial \bm{q}_\mathrm{a}}  \dot{\bm{q}}
 +
 \bm{\Phi}_{\partial \bm{x}} \dot{\bm{x}}
+=
+\bm{0}
 \end{equation}
 %
-where the diagonal elements $\bm{\Phi}_{i,\partial \bm{q}}=\partial \bm{\Phi}_i / \partial \bm{q}_i$ of the direct kinematics Jacobian
+where the diagonal elements $\bm{\Phi}_{i,\partial \bm{q}_{i,\mathrm{a}}}=\partial \bm{\Phi}_i / \partial \bm{q}_{i,\mathrm{a}}$ of the inverse kinematics matrix\footnote{We follow the argumentation from \cite{Gogu2008} to avoid the term ``Jacobian'', since the matrix is not a Jacobian in the mathematical sense to project between two spaces. The name results from the inversion of this matrix in the inverse kinematics problem.}
 %
 \begin{equation}
-\bm{\Phi}_{\partial \bm{q}}
+\bm{\Phi}_{\partial \bm{q}_{\mathrm{a}}}
 =
-\frac{\partial \bm{\Phi}}{\partial \bm{q}}
+\frac{\partial \bm{\Phi}}{\partial \bm{q}_{\mathrm{a}}}
 =
 \begin{bmatrix}
-\bm{\Phi}_{1,\partial \bm{q}}  & 0 & 0 & 0\\
-0 & \bm{\Phi}_{2,\partial \bm{q}} & \ddots & 0  \\
+\Phi_{1,\partial \bm{q}_{1,\mathrm{a}}}  & 0 & 0 & 0\\
+0 & \Phi_{2,\partial \bm{q}_{2,\mathrm{a}}} & \ddots & 0  \\
 0 & \ddots & \ddots & 0  \\
-0 & 0 & 0 &\bm{\Phi}_{m,\partial \bm{q}}
+0 & 0 & 0 & \Phi_{m,\partial \bm{q}_{m,\mathrm{a}}}
 \end{bmatrix}
 \label{equ:PKM_phi_grad_q}
 \end{equation}  
-%
-correspond to the residual vector Jacobian (\ref{equ:grad_Phi_q}) from Sec.\,\ref{sec:RecEulAng}.
-The calculation of the inverse kinematics Jacobian
+
+The calculation of the direct-kinematics matrix
 %
 \begin{equation}
 \bm{\Phi}_{\partial \bm{x}}
@@ -370,13 +365,28 @@ The calculation of the inverse kinematics Jacobian
 \frac{\partial \bm{\Phi}}{\partial \bm{x}}
 =
 \begin{bmatrix}
-\partial \bm{\Phi}_1/\partial \bm{x}\\
-\partial \bm{\Phi}_2/\partial \bm{x}\\
+\partial \Phi_1/\partial \bm{x}\\
+\partial \Phi_2/\partial \bm{x}\\
 \vdots \\
-\partial \bm{\Phi}_m/\partial \bm{x}\\
+\partial \Phi_m/\partial \bm{x}\\
 \end{bmatrix}
 \label{equ:PKM_phi_grad_x}
 \end{equation}
+
+Property
+
+\begin{equation}
+\frac{\partial \bm{\Phi}_i}{\partial \bm{q}_i}
+=
+\begin{bmatrix}
+* & \cdots & * & 0 & \cdots & 0\\
+\vdots &  \cdots & \vdots & \vdots & \cdots & \vdots \\
+* & \cdots & * & 0 & \cdots & 0\\
+\end{bmatrix}
+\label{equ:PKM_phi_grad_q_form}
+\end{equation}
+
+is dependent on the kinematic structure of the robot.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Reciprocal Sets of Euler Angles for Kinematics of Serial Chains}
@@ -390,6 +400,14 @@ The calculation of the inverse kinematics Jacobian
     \item Formeln aus WC-Paper, aber Nomenklatur anpassen an PKM Beinkette 1
 \end{itemize}
 
+
+\begin{figure}[tb]
+    \input{./figures/pkm_constr_def_rot_lead.pdf_tex}
+    \caption{Different cases for the kinematic constraints of the leading chain.}
+    \label{fig:pkm_constr_rot_lead}
+\end{figure} 
+
+
 \begin{figure}[tb]
     \input{./figures/frame_comparison_combined_5dof_6dof.pdf_tex}
     \caption{Overview of the different frames (a) for 6-dof tasks with standard Euler angle notation and (b) for 5-dof tasks with reciprocal Euler angle notation.}
@@ -397,11 +415,15 @@ The calculation of the inverse kinematics Jacobian
 \end{figure} 
 
 
-\begin{figure}[tb]
-    \input{./figures/pkm_constr_def_rot_lead.pdf_tex}
-    \caption{Different cases for the kinematic constraints of the leading chain.}
-    \label{fig:pkm_constr_rot_lead}
-\end{figure} 
+The deviation $\bm{\Phi}$ between the desired end-effector frame $\ks{D}$ expressed with $\bm{x}$ of (\ref{equ:x_def}) and the actual robots end-effector frame $\ks{E}$ expressed with $\bm{f}(\bm{q})$ of (\ref{equ:dirkin}) is defined as
+%\vspace{-0.5em}
+%
+\begin{equation}
+\bm{\Phi}=\begin{bmatrix}
+\bm{\Phi}_{\mathrm{t}}^\transp & \bm{\Phi}_{\mathrm{r}}^\transp
+\end{bmatrix}^\transp \in {\mathbb{R}}^{6},
+\label{equ:Phi_def}
+\end{equation}
 
 
 For a formulation without the tool axis rotation a different constraint definition

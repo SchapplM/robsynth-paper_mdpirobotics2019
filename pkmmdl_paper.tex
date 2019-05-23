@@ -61,7 +61,16 @@
 %=================================================================
 % Add packages and commands here. The following packages are loaded in our class file: fontenc, calc, indentfirst, fancyhdr, graphicx, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, amsthm, hyphenat, natbib, hyperref, footmisc, geometry, caption, url, mdframed, tabto, soul, multirow, microtype, tikz
 \graphicspath{{./figures/}}
+\usepackage{calrsfs} % Für Kalligraphie-F 
 \newcommand{\bm}[1]{\boldsymbol{#1}}
+% Latex-Makros für häufig verwendete Formelzeichen
+\newcommand{\ortvek}[4]{{ }_{(#1)}{\boldsymbol{#2}}^{#3}_{#4} }
+\newcommand{\vek}[3]{\boldsymbol{#1}^{#2}_{#3}}
+\newcommand{\rotmat}[2]{{{ }^{#1}\boldsymbol{R}}_{#2}}
+\newcommand{\rotmato}[2]{{{ }^{#1}\boldsymbol{\overline{R}}}_{#2}}
+\newcommand{\transp}[0]{{\mathrm{T}}}
+\newcommand{\ks}[1]{{\mathcal{F}}_{#1}}
+
 
 %=================================================================
 %% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Hypothesis, Remark, Definition
@@ -210,6 +219,117 @@ Rest ist gegliedert:
     \item Bis hier noch keine rotatorischen Zwangsbedingungen hinschreiben. Die kommen erst in den folgenden Kapiteln
 \end{itemize}
 
+\begin{figure}[tb]
+    \input{./figures/pkm_constr_def_transl.pdf_tex}
+    \caption{Kinematic Description of Parallel Robots.}
+    \label{fig:pkm_constr_transl}
+\end{figure} 
+
+The most common kinematic constraint equation 
+%
+\begin{equation}
+\bm{\Phi}_{\mathrm{t}_i}(\bm{q}_i,\bm{x}) = - \ortvek{0}{r}{}{A_iB_i}(\bm{x}) + \ortvek{0}{r}{}{A_iB_i}(\bm{q}_i) 
+\end{equation}
+%
+for leg $i$ is derived from the position of the platform coupling point $B_i$ relative to the base coupling point $A_i$ \cite{Merlet2006}.
+The second term $\ortvek{0}{r}{}{A_iB_i}(\bm{q}_i)$ corresponds to the forward kinematics of the serial chain. 
+The vector
+\begin{equation}
+\ortvek{0}{r}{}{A_iB_i}(\bm{x}) = 
+- \ortvek{0}{r}{}{0A_i}
++ \bm{x}_{\mathrm{t}} + \rotmat{0}{D}(\bm{x}_{\mathrm{r}}) \ortvek{D}{r}{}{DB_i}
+\end{equation}
+%
+includes the term $\rotmat{0}{D}(\bm{x}_{\mathrm{r}})$ that depends on the full  orientation $\bm{x}_{\mathrm{r}}$ of the end-effector with the rotation about the tool axis in 3T2R tasks.
+For a formulation without the tool axis rotation a different constraint definition
+%
+\begin{equation}
+\bm{\Phi}_{\mathrm{t}_i}(\bm{q}_i,\bm{x}) = 
+\ortvek{0}{r}{}{DE}(\bm{q}_i,\bm{x}) =
+- \bm{x}_{\mathrm{t}} + \ortvek{0}{r}{}{0E}(\bm{q}_i) 
+\end{equation}
+%
+similar to (\ref{equ:Phit_def}) with the vector from the robot base frame $\ks{0}$ to the PKM end-effector $\ks{D}$ can be used where 
+only the translational part $\bm{x}_{\mathrm{t}}$ of the end-effector coordinates appears and not the rotational part $\bm{x}_{\mathrm{r}}$.
+As a drawback, all joint angles $\bm{q}_i$ of the leg $i$ and not only the coordinates of the first joints counted from the base are now included
+in the vector
+%
+\begin{equation}
+\ortvek{0}{r}{}{0E}(\bm{q}_i) = 
+\ortvek{0}{r}{}{0A_i}
++ \ortvek{0}{r}{}{A_iB_i}(\bm{q}_i) + \rotmat{0}{B_i}(\bm{q}_i) \ortvek{B_i}{r}{}{B_iE}.
+\end{equation}
+%
+To account for the increased number of included joints, also the rotational part of the kinematic constraints is needed to generate enough equations for an invertible Jacobian.
+
+Here again the definition 
+%
+\begin{align}
+    \bm{\Phi}_{\mathrm{r}_i}(\bm{q},\bm{x})
+    =\bm{\alpha}\left(\rotmat{0}{D}^\transp (\bm{x}_{\mathrm{r}})\rotmat{0}{E}(\bm{q})\right)
+\end{align}
+%
+from (\ref{equ:Phir_def}) is used.
+The set of constraints $\bm{\Phi}_{i}$ for each leg of the PKM can again be reduced to $\bm{\Psi}_{i}$ by removing the superfluous rotational component\footnote{The following steps can also be performed using $\bm{\Psi}$, but $\bm{\Phi}$ is used for simplifying the equations.} in case of a 3T2R task, as described in Sec.\,\ref{sec:RecEulAng_3T2R_app}.
+
+The constraint equations
+%
+\begin{equation}
+\bm{\Phi}
+=
+\begin{bmatrix}
+\bm{\Phi}_1 \\
+\bm{\Phi}_2 \\
+\vdots \\
+\bm{\Phi}_m \\
+\end{bmatrix}
+\end{equation}
+%
+of the PKM are assembled for all $m$ legs.
+% The constraints $\bm{\Phi}$ and $\bm{\Psi}$ can be used interchangeably.
+The differential kinematics of the PKM is calculated with the time derivative
+%
+\begin{equation}
+\frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\Phi}(\bm{q},\bm{x})
+=
+\bm{\Phi}_{\partial \bm{q}}  \dot{\bm{q}}
++
+\bm{\Phi}_{\partial \bm{x}} \dot{\bm{x}}
+\end{equation}
+%
+where the diagonal elements $\bm{\Phi}_{i,\partial \bm{q}}=\partial \bm{\Phi}_i / \partial \bm{q}_i$ of the direct kinematics Jacobian
+%
+\begin{equation}
+\bm{\Phi}_{\partial \bm{q}}
+=
+\frac{\partial \bm{\Phi}}{\partial \bm{q}}
+=
+\begin{bmatrix}
+\bm{\Phi}_{1,\partial \bm{q}}  & 0 & 0 & 0\\
+0 & \bm{\Phi}_{2,\partial \bm{q}} & \ddots & 0  \\
+0 & \ddots & \ddots & 0  \\
+0 & 0 & 0 &\bm{\Phi}_{m,\partial \bm{q}}
+\end{bmatrix}
+\label{equ:PKM_phi_grad_q}
+\end{equation}  
+%
+correspond to the residual vector Jacobian (\ref{equ:grad_Phi_q}) from Sec.\,\ref{sec:RecEulAng}.
+The calculation of the inverse kinematics Jacobian
+%
+\begin{equation}
+\bm{\Phi}_{\partial \bm{x}}
+=
+\frac{\partial \bm{\Phi}}{\partial \bm{x}}
+=
+\begin{bmatrix}
+\partial \bm{\Phi}_1/\partial \bm{x}\\
+\partial \bm{\Phi}_2/\partial \bm{x}\\
+\vdots \\
+\partial \bm{\Phi}_m/\partial \bm{x}\\
+\end{bmatrix}
+\label{equ:PKM_phi_grad_x}
+\end{equation}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Reciprocal Sets of Euler Angles for Kinematics of Serial Chains}
 \label{sec:REW_seriell}
@@ -223,9 +343,18 @@ Rest ist gegliedert:
     \item Gradientenbasierte Lösung der inversen Kinematik 3T3R/3T2R für serielle Roboter als Anwendung.
 \end{itemize}
 
+\begin{figure}[tb]
+    \input{./figures/frame_comparison_combined_5dof_6dof.pdf_tex}
+    \caption{Overview of the different frames (a) for 6-dof tasks with standard Euler angle notation and (b) for 5-dof tasks with reciprocal Euler angle notation.}
+    \label{fig:frames_5dof_6dof}
+\end{figure} 
 
 
-
+\begin{figure}[tb]
+    \input{./figures/pkm_constr_def_rot_lead.pdf_tex}
+    \caption{Different cases for the kinematic constraints of the leading chain.}
+    \label{fig:pkm_constr_rot_lead}
+\end{figure} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Full Kinematic Constraints for Parallel Robots using Reciprocal Sets of Euler Angles}
@@ -237,6 +366,67 @@ Rest ist gegliedert:
     \item Darstellung der Gradientenmatrizen aus Kettenregel
     \item Vollständige Jacobi-Matrix für 3T3R und 3T2R
 \end{itemize}
+
+
+
+\begin{figure}[tb]
+    \input{./figures/pkm_constr_def_rot_follow.pdf_tex}
+    \caption{Different cases for the kinematic constraints of the following chain.}
+    \label{fig:pkm_constr_rot_follow}
+\end{figure} 
+
+The calculation of the inverse kinematics Jacobian
+%
+\begin{equation}
+\bm{\Phi}_{\partial \bm{x}}
+=
+\frac{\partial \bm{\Phi}}{\partial \bm{x}}
+=
+\begin{bmatrix}
+\partial \bm{\Phi}_1/\partial \bm{x}\\
+\partial \bm{\Phi}_2/\partial \bm{x}\\
+\vdots \\
+\partial \bm{\Phi}_m/\partial \bm{x}\\
+\end{bmatrix}
+\label{equ:PKM_phi_grad_x}
+\end{equation}  
+%
+can be simplified similar to the process described in Sec.\,\ref{sec:RecEulAng_implement} with
+%
+\begin{align}
+    \frac{\partial}{\partial \bm{x}_{\mathrm{r}}}\bm{\Phi}_{\mathrm{r}_i}
+    &=
+    \frac{\partial}{\partial \bm{x}_{\mathrm{r}}} \bm{\alpha}\left(\left(\rotmat{0}{E}^\transp(\bm{q}_i) \rotmat{0}{D}(\bm{x}_{\mathrm{r}})\right)^\transp\right) \label{equ:grad_Phi_x} \\
+    &=
+    \frac{\partial}{\partial \bm{x}_{\mathrm{r}}} \overline{\bm{\alpha}}\left(
+    \bm{P}_{\mathrm{T}}
+    \overline{\prod}\left( \rotmato{0}{E}^\transp(\bm{q}_i), \rotmato{0}{D}(\bm{x}_{\mathrm{r}})\right)\right) \nonumber \\
+    &=
+    %underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des dritten Terms
+    \underbrace{\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
+        \frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}}_{\mathrm{I}}
+    \underbrace{\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
+        \bm{P}_{\mathrm{T}}}_{\mathrm{II}}
+    \underbrace{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}_{\mathrm{III}}
+    \underbrace{\frac{\partial \rotmato{0}{D}(\bm{x}_{\mathrm{r}})}{\partial \bm{x}_{\mathrm{r}}}}_{\mathrm{IV}} \nonumber
+\end{align}
+%
+where the simplicity of the single expression is demonstrated in appendix\,\ref{sec:appendix_gradient_matrix}.
+
+
+Again, only the rotational component $\bm{\Phi}_{\mathrm{r}_i,\partial \bm{x}_{\mathrm{r}}}$ of 
+%
+\begin{equation}
+\partial \bm{\Phi}_i/\partial \bm{x}
+=
+\begin{bmatrix}
+\partial\bm{\Phi}_{\mathrm{t}_i}/\partial \bm{x}_{\mathrm{t}} & \partial\bm{\Phi}_{\mathrm{t}_i}/\partial \bm{x}_{\mathrm{r}} \\
+\bm{0} & \partial\bm{\Phi}_{\mathrm{r}_i}/\partial \bm{x}_{\mathrm{r}} \\
+\end{bmatrix}
+\end{equation}
+is regarded due to the focus on rotation in this paper.
+
+Using $\bm{\Psi}_{\partial \bm{q}}$ and $\bm{\Psi}_{\partial \bm{x}}$ in (\ref{equ:PKM_phi_grad_q}) and (\ref{equ:PKM_phi_grad_x}) for 3T2R tasks promises to improve motion planning and controllers by calculating actuator forces considering the tool symmetry and allowing the incorporation of nullspace movements and forces.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -335,14 +525,186 @@ REA & Reciprocal set of Euler angles
 %\subsection{}
 
 
+
 \begin{itemize}
     \item Details zu den Partiellen Ableitungen in den verschiedenen Gleichungen
     \item Genauer Inhalt der Spalten-Operatoren und der Euler-Winkel-Ableitungen
     \item Herleitung für Zusammenhang Rotationsmatrix-Winkelgeschwindigkeit (Gradienten)
 \end{itemize}
 
-%The appendix is an optional section that can contain details and data supplemental to the main text. For example, explanations of experimental details that would disrupt the flow of the main text, but nonetheless remain crucial to understanding and reproducing the research shown; figures of replicates for experiments of which representative data is shown in the main text can be added here if brief, or as Supplementary data. Mathematical proofs of results not central to the paper can be added as an appendix.
 
+\subsection{Proof for the Properties of Reciprocal Euler angles}
+\label{sec:appendix_eulerreciproc}
+
+
+This section derives the effect of the reciprocity of Euler-angles at the example of the kinematics description of Sec.\,\ref{sec:RecEulAng} and the frames of Fig.\,\ref{fig:frames_5dof_6dof}\,(b).
+
+An end-effector orientation $\bm{\beta}=\bm{x}_{\mathrm{r}}$ gives the rotation matrix\footnote{The matrix rotates vectors from $\ks{E}$ to $\ks{D}$} from the actual end-effector frame $\ks{E}$ to the desired end-effector frame $\ks{D}$
+%
+\begin{equation}
+\rotmat{D}{E}(\bm{\beta},\bm{q})
+= 
+\rotmat{0}{D}^\transp (\bm{\beta})\rotmat{0}{E}(\bm{q})
+\label{equ:orierr_1_rotmat}
+\end{equation}
+%
+where using the $X$-$Y$-$Z$-Euler angles yields
+%
+\begin{equation}
+\rotmat{0}{D}^\transp(\bm{\beta})
+=
+\bm{R}_z(-\beta_3) \bm{R}_y(-\beta_2) \bm{R}_x(-\beta_1)
+\end{equation}
+%
+as introduced in (\ref{equ:def_rmat_xyz}).
+With an additional rotation $-\delta$ around the $z$-axis for the desired orientation, the resulting new Euler angles are
+%
+\begin{equation}
+\beta_1'=\beta_1,  \quad \beta_2'=\beta_2,  \quad \beta_3'=\beta_3-\delta.
+\end{equation}
+%
+The additional rotation corresponds to the tool axis defined in Sec.\,\ref{sec:RecEulAng} % and does not influence 3T2R tasks.
+and leads to a new residual orientation error expressed as a rotation matrix
+%
+\begin{align}
+    \rotmat{D}{E}(\bm{\beta}',\bm{q})
+    &=
+    \rotmat{0}{D}^\transp (\bm{\beta}') \rotmat{0}{E}(\bm{q}) \nonumber\\
+    &=
+    \left(\rotmat{0}{D}(\bm{\beta})\bm{R}_z(-\delta)\right)^\transp \rotmat{0}{E}(\bm{q}) \nonumber \\
+    &=
+    \bm{R}_z(\delta) \rotmat{0}{D}^\transp (\bm{\beta}) \rotmat{0}{E}(\bm{q}) \nonumber \\
+    &=
+    \bm{R}_z(\delta) \rotmat{D}{E}(\bm{\beta},\bm{q}).
+    \label{equ:orierr_2_rotmat}
+\end{align}
+
+The first residual orientation error from (\ref{equ:orierr_1_rotmat}) corresponding to $\bm{\beta}$ is defined as a rotation matrix
+%
+% Quelle: equations/R1.txt (aus ikfr_paper_equations.mw)
+\begin{align}
+    \rotmat{D}{E}(\bm{\beta},\bm{q})
+    =
+    \begin{bmatrix}
+        {n_x}&{o_x}&{a_x} \\
+        {n_y}&{o_y}&{a_y} \\ 
+        {n_z}&{o_z}&{a_z} \\ 
+    \end{bmatrix}
+    \label{equ:orierr_1_rotmat_def}
+\end{align}
+%
+and as a $Z$-$Y$-$X$-Euler angle representation
+%
+% Quelle: equations/alpha1.txt (aus ikfr_paper_equations.mw)
+\begin{align}
+    \bm{\alpha} =
+    \begin{bmatrix}
+        \arctan \left( {n_y} / { n_x} \right) \\ 
+        \arctan \left( -{n_z} / \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\ 
+        \arctan \left( {o_z} / {a_z} \right)
+    \end{bmatrix}.
+    \label{equ:alpha_xyz}
+\end{align}
+
+The second error corresponding to $\bm{\beta}'$ only differs regarding the additional rotation $\delta$. Combining (\ref{equ:orierr_2_rotmat}) and (\ref{equ:orierr_1_rotmat_def}) leads to
+%
+% Quelle: equations/R2.txt (aus ikfr_paper_equations.mw)
+\begin{align}
+    \rotmat{D}{E}(\bm{\beta}',\bm{q})
+    = 
+    \left[ \begin {array}{ccc} { C_{\delta}}\,{n_x}-{ S_{\delta}}\,{ n_y}&{ C_{\delta}}\,{o_x}-{ S_{\delta}}\,{o_y}&{ C_{\delta}}\,{ a_x}-{ S_{\delta}}\,{a_y}\\ \noalign{\medskip}{ C_{\delta}}\,{n_y}+ { S_{\delta}}\,{n_x}&{ C_{\delta}}\,{o_y}+{ S_{\delta}}\,{o_x}&{  C_{\delta}}\,{a_y}+{ S_{\delta}}\,{a_x}\\ \noalign{\medskip}{ n_z}&{o_z}&{a_z}\end {array} \right] \nonumber
+\end{align}
+%
+where $C_{\delta}=\mathrm{cos}(\delta)$ and $S_{\delta}=\mathrm{sin}(\delta)$.
+The $Z$-$Y$-$X$-Euler angles from this rotation matrix are
+%
+% Quelle: equations/alpha2.txt (aus ikfr_paper_equations.mw)
+\begin{equation}
+\bm{\alpha}' =
+\begin{bmatrix}
+\arctan \left( ({  C_{\delta}}\,{n_y}+{ S_{\delta}}\,{n_x}) / ({ C_{\delta}}\,{n_x}-{  S_{\delta}}\,{n_y}) \right) \\
+\arctan \left( -{n_z} / \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\
+\arctan \left( {o_z} / {a_z} \right)
+\end{bmatrix}
+\end{equation}
+%
+where $\delta$  only influences the first component $\alpha_1$.
+This allows the conclusion, that $\beta_3$ only influences $\alpha_1$ and results in the dependencies
+%
+\begin{align}
+    \alpha_1'&=\alpha_1'(\bm{q},\beta_1,\beta_2,\beta_3)\\
+    \alpha_2'&=\alpha_2'(\bm{q},\beta_1,\beta_2) =\alpha_2\\
+    \alpha_3'&=\alpha_3'(\bm{q},\beta_1,\beta_2) =\alpha_3
+\end{align}
+%
+already displayed in (\ref{equ:alpha_dep_beta}) with the consequences for the kinematic modeling of robots in 3T2R tasks described in Sec.\,\ref{sec:RecEulAng_effect}.
+
+
+
+
+
+\subsection{Matrix Operations for Partial Derivatives}
+\label{sec:appendix_gradient_matrix}
+
+The single expressions derived in Sec.\,\ref{sec:RecEulAng_implement} for the serial chains and in Sec.\,\ref{sec:ParRobKinConstr} for the parallel chains can be calculated with low computational effort from the definition of the $X$-$Y$-$Z$- and $Z$-$Y$-$X$-Euler angles from (\ref{equ:def_rmat_xyz}), (\ref{equ:def_rmat_zyxr}) and (\ref{equ:alpha_xyz}).
+With $\overline{\bm{R}}=[n_x,n_y,n_z ,o_x,o_y,o_z,a_x,a_y,a_z]^\transp$ the gradient ``I'' in (\ref{equ:grad_Phi_q}) becomes
+% Quelle: equations/dalphadRb.txt (aus ikfr_paper_equations.mw)
+\begin{equation}
+\left(\frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}\right)^\transp
+=
+\left[ \begin {array}{ccc} -{\frac {{n_y}}{{{n_x}}^{2}+{{n_y }}^{2}}}&0&0\\ \noalign{\medskip}{\frac {{n_x}}{{{n_x}}^{2}+{{ n_y}}^{2}}}&0&0\\ \noalign{\medskip}0&-\sqrt {{{a_z}}^{2}+{{ o_z}}^{2}}&0\\ \noalign{\medskip}0&0&0\\ \noalign{\medskip}0&0&0 \\ \noalign{\medskip}0&{\frac {{n_z}\,{o_z}}{\sqrt {{{a_z}}^{ 2}+{{o_z}}^{2}}}}&{\frac {{a_z}}{{{a_z}}^{2}+{{o_z}}^{2}}} \\ \noalign{\medskip}0&0&0\\ \noalign{\medskip}0&0&0 \\ \noalign{\medskip}0&{\frac {{n_z}\,{a_z}}{\sqrt {a_z^{2}+{{o_z}}^{2}}}}&-{\frac {o_z}{a_z^{2}+o_z^{2}} }\end {array} \right] 
+\end{equation}
+%
+and the inverse gradient ``I'' in (\ref{equ:grad_Phi_x}) yields
+%
+% Quelle: equations/R2b_dxyz.txt (aus ikfr_paper_equations.mw)
+\begin{align}
+    \left(\frac{\partial \overline{\bm{R}}(\overline{\bm{\beta}})}{\partial \overline{\bm{\beta}}}\right)
+    =
+    \small
+    \begin{bmatrix}
+        0&-{ S_2}\,{ C_3}&-{ C_2}\,{ S_3}
+        \\ { C_1}\,{ S_2}\,{ C_3}-{ S_1}\,{ S_3}&{
+            S_1}\,{ C_2}\,{ C_3}&-{ S_1}\,{ S_2}\,{ S_3}+{ C_1}\,{
+            C_3}\\ { S_1}\,{ S_2}\,{ C_3}+{ C_1}\,{
+            S_3}&-{ C_1}\,{ C_2}\,{ C_3}&{ C_1}\,{ S_2}\,{ S_3}+{
+            S_1}\,{ C_3}\\ 0&{ S_2}\,{ S_3}&-{ C_2}\,
+        { C_3}\\ -{ C_1}\,{ S_2}\,{ S_3}-{ S_1}\,{
+            C_3}&-{ S_1}\,{ C_2}\,{ S_3}&-{ S_1}\,{ S_2}\,{ C_3}-{
+            C_1}\,{ S_3}\\ -{ S_1}\,{ S_2}\,{ S_3}+{
+            C_1}\,{ C_3}&{ C_1}\,{ C_2}\,{ S_3}&{ C_1}\,{ S_2}\,{
+            C_3}-{ S_1}\,{ S_3}\\ 0&{ C_2}&0
+        \\ -{ C_1}\,{ C_2}&{ S_1}\,{ S_2}&0
+        \\ -{ S_1}\,{ C_2}&-{ C_1}\,{ S_2}&0
+        \end {bmatrix}  \nonumber
+    \end{align}
+    %
+    with $C_i=\mathrm{cos}(\beta_i)$, $S_i=\mathrm{sin}(\beta_i)$.
+    The gradient of the matrix product (\ref{equ:matprod}) w.r.t. the second factor used in (\ref{equ:grad_Phi_x}) term ``III'' and (\ref{equ:grad_Phi_q}) term ``II'' is
+    %
+    \begin{equation}
+    \frac{\partial }{\partial \overline{\bm{R}}_2}
+    \overline{\prod}\left( \overline{\bm{R}}_1, \overline{\bm{R}}_2\right)
+    =
+    \begin{bmatrix}
+    \bm{R}_1 & \bm{0} & \bm{0} \\
+    \bm{0} & \bm{R}_1 & \bm{0} \\
+    \bm{0} & \bm{0} & \bm{R}_1  \\
+    \end{bmatrix}
+    \end{equation}
+    %
+    and the gradient w.r.t. the first factor used in (\ref{equ:ee_rotation_gradq}) term ``I'' is
+    %
+    \begin{equation}
+    \frac{\partial }{\partial \overline{\bm{R}}_1}
+    \overline{\prod}\left( \overline{\bm{R}}_1, \overline{\bm{R}}_2\right)
+    =
+    \begin{bmatrix}
+    {\mathrm{diag}}(n_x)&{\mathrm{diag}}(o_x)&{\mathrm{diag}}(a_x) \\ {\mathrm{diag}}(n_y)&{\mathrm{diag}}(o_y)&{\mathrm{diag}}(a_y)\\ {\mathrm{diag}}(n_z)&{\mathrm{diag}}(o_z)&{\mathrm{diag}}(a_z)
+    \end{bmatrix}
+    \end{equation}
+    %
+    where $n_x,n_y,...$ are the entries of $\bm{R}_2$ and the $\mathrm{diag}$-matrices are $3 \times 3$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Citations and References in Supplementary files are permitted provided that they also appear in the reference list here. 

@@ -1,3 +1,5 @@
+% !TEX encoding = UTF-8 Unicode
+% !TEX spellcheck = en_US
 %  LaTeX support: latex@mdpi.com 
 %  In case you need support, please attach all files that are necessary for compiling as well as the log file, and specify the details of your LaTeX setup (which operating system and LaTeX version / tools you are using).
 
@@ -1029,8 +1031,9 @@ The platform pose $\bm{x}$/$\bm{\eta}$ corresponds to the desired pose for the s
 
 The reasonings so far only considered the inverse kinematics of the parallel robot.
 The kinematic definitions can also be used in the differential kinematics (\ref{equ:constr_diff}) to establish the connection between joint and platform velocity.
-This corresponds to the theory of linear transformation which is the base of the works of Gogu on structural synthesis \cite{Gogu2008}.
-The derivation in this paper is based on the position, but comes to the same result as the velocity-based approach.
+This was already presented in general form in \cite{Merlet2006} and also corresponds to the theory of linear transformation which is the base of the works of Gogu on structural synthesis \cite{Gogu2008}.
+The derivation in this paper is based on the position \emph{and} orientation, but comes to the same result as the already-existing velocity-based approach.
+Further, ssing $\bm{\Psi}$/$\bm{\eta}$ as elaborated above allows for the first time to define differential kinematics specifically for 3T2R tasks in a general form.
 The differential equation of (\ref{equ:constr_diff}) is expanded to 
 \begin{equation}
 \frac{\mathrm{d}}{\mathrm{d}t} \bm{\Phi}(\bm{q}_{\mathrm{a}}, \bm{q}_{\mathrm{p}},\bm{x})
@@ -1066,7 +1069,7 @@ to distinguish active (``a'') and passive (``p'') joints. Reordering the equatio
 \label{equ:full_diff_ik}
 \end{equation}
 %
-which have been adressed in the previous sections, and the full direct differential kinematics
+which has been adressed in the previous sections, and the full direct differential kinematics
 %
 \begin{equation}
 \bm{\Phi}_{\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} 

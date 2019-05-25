@@ -200,25 +200,27 @@ Examples for the first class are hexapods\footnote{The joint structure is denote
 Any other parallel robot with full mobility (see e.\,g. \cite{Merlet2006,Gogu2008,Zhang2009}) may be used as well.
 
 The second class allows more variety, since the 6-DoF mechanism and the 5-DoF constraining leg can manifest in different kinematics:
-The U\underline{P}S structure is used for the 6-DoF mechanism by \cite{WangGos1997} with a focus on kinematic analysis of 5U\underline{P}S/US, by \cite{ZhangGos2001}  with a focus on kinetostatic modeling at the example of 5U\underline{P}S/RUU, by \cite{ZhengGaoZha2005} with focus on trajectory control of 5U\underline{P}S/PRPU, by \cite{GaoSunZha2004} for pose measurement with the passive leg of 5U\underline{P}S/PRPU and by \cite{ChengWanZha2008} with a redundantly actuated 5U\underline{P}S/\underline{P}RPU).
+The U\underline{P}S structure is used for the 6-DoF mechanism by \cite{WangGos1997} with a focus on kinematic analysis of 5U\underline{P}S/US, by \cite{ZhangGos2001}  with a focus on kinetostatic modeling at the example of 5U\underline{P}S/RUU, by \cite{ZhengGaoZha2005} with focus on trajectory control of 5U\underline{P}S/PRPU and by \cite{GaoSunZha2004} for pose measurement with the passive leg of 5U\underline{P}S/PRPU.
 Other possible general base structures are \underline{R}US \cite{WangGos1997}, \underline{P}US, which has been investigated for the control of a redundantly actuated 6\underline{P}US/UPU regarding the control of the redundant leg with inverse-dynamics control \cite{LiuXuYaoXu2015} or force control \cite{WenQinZhaLam2016}.
+The redundantly actuated 5U\underline{P}S-\underline{P}RPU from \cite{ChengWanZha2008} is based on the machine from \cite{ZhengGaoZha2005}, but does not fall in any of the classes I-IV.
 
-The most-straightforward member of the third group is the 4U\underline{P}S-U\underline{P}U, which is investigated in \cite{LinLiYanZha2013} regarding the inverse dynamics or in \cite{MbarekNefCor2005} for a simulation and feasibility study.
-A survey on possible architectures for a technical realization is also given by \cite{MbarekNefCor2005}.
+The most-straightforward member of the third group is the 4U\underline{P}S-U\underline{P}U, which is investigated in \cite{MbarekNefCor2005} for a simulation and feasibility study together with a survey on possible architectures for a technical realization of this class.
 Other possible structures are the 4U\underline{R}S-U\underline{R}U, which is analyzed kinematically in \cite{SchreiberGos2003}, the 4\underline{P}SU-\underline{P}U*U, which has a special parallelogram structure in one leg and is presented in \cite{GaoPenZhaLi2006}.
 The 5U\underline{P}U is shown in \cite{HuangLi2002} with the help of screw theory to only have local mobility and no global mobility, since the twist of the leg chains has no intersection and the twist system of the platform is empty.
-These findings can be applied to the Metrom machine tool (5S\underline{P}RR), which is analyzed in \cite{BaerWei2006} or its variant, the redundant 4S\underline{P}RR-\underline{P}S\underline{P}R from \cite{AlaghebandMahMilBen2015}, where the last joint axis of each leg is coaxial with the tool axis and is constructed as rotating ring.
-A structural synthesis based on linear transformations and evolutionary morphology \cite{Gogu2008} led to e.\,g. to the Isoglide5 mechanisms (3\underline{P}RRRRR-2\underline{P}RRRR), which are analyzed and optimized regarding the isotropy of the Jacobian in \cite{Gogu2006}.
+These findings can be applied to the Metrom machine tool (4S\underline{P}RR-S\underline{P}R), which is analyzed in \cite{BaerWei2006} or its variants, the redundant 4S\underline{P}RR-\underline{P}S\underline{P}R from \cite{AlaghebandMahMilBen2015} or the hybrid 4U\underline{P}S-U\underline{P}U\footnote{The machine is termed ``4URHU-1URHR'' by the authors, where the rotational part of the helical joints is actuated.} with an additional linear actuator at the platform \cite{LinLiYanZha2013}.
+The last joint axis of the legs of this sub-class is coaxial with the tool axis and is constructed as rotating ring.
+A structural synthesis based on linear transformations and evolutionary morphology \cite{Gogu2008} led e.\,g. to the Isoglide5 mechanisms (3\underline{P}RRRRR-2\underline{P}RRRR), which are analyzed and optimized regarding the isotropy of the Jacobian in \cite{Gogu2006}.
 
-The last group consists of symmetric machines, which have been found by systematic structural synthesis, which has been performed in \cite{KongGos2005} for 3T2R with screw theory.
+The last group (IV) consists of symmetric machines, which have been found by systematic structural synthesis, which has been performed in \cite{KongGos2005} for 3T2R with screw theory.
 The resulting 5R\underline{P}UR and 5\underline{P}RUR are analyzed in \cite{Tale-MasoulehGos2011,Tale-MasoulehSaaGosTag2010}.
 
 In a practical application with competing requirements on workspace, stiffness, costs and precision, each of the existing systems has their legitimation.
 The remainder of the paper focuses on mechanisms of the first class to allow to optimize their performance criteria using the degree of task redundancy.
-In tasks with high process forces and requirements on stiffness and precision like milling, robots from class II with a constraining leg have the drawback, that the constraining leg takes the complete reaction wrench in the blocked rotational degree of freedom, which strongly affects the mechanisms stiffness in this direction \cite{ZhangGos2001}.
+In tasks like milling with high process forces and requirements on stiffness and precision, robots from class II with a constraining leg have the drawback, that the constraining leg takes the complete reaction wrench in the blocked rotational degree of freedom, which strongly affects the mechanisms stiffness in this direction \cite{ZhangGos2001}.
 The same is argued by \cite{LinLiYanZha2013} at the example of the Metrom machine tool, but can be extended to most members of class III, where most leg chains contain six DoF and only one leg chain has five DoF.
 This leg chain also has to take the reaction moments in the blocked DoF which affects the overall stiffness.
-Therefore members of the classes I and IV can be expected to reach a higher stiffness, therefore justifying attempts of this paper.
+Therefore members of the classes I and IV can be expected to reach a higher stiffness.
+Additionally, only members of class I provide redundancy which allows to use the additional DoF for performance optimizations e.\,g. to avoid singularities.
 
 \color{gray}
 Methoden zur Lösung der IK. Methoden durchnummerieren und Tabelle mit allen Systemen machen. Dann verschiedene Paper und Roboter den nummerierten Methoden zuordnen.
@@ -235,11 +237,12 @@ Due to the geometry of the leading chain, this solution can be found algebraical
 Then the IKP is solved for the other ``following'' chains with the given orientation from the leading chain and standard methods.
 For robots of class II, the constraining leg is selected as the leading leg chain. %  \cite{WangGos1997}
 
-To the best knowledge of the authors, only one reference for the IKP of functionally redundant parallel robots of the class I is known.
-The assumed reason is that a solution of the 3T3R IKP for these robots is possible with standard methods, as used in \cite{HongKim2000}.
-It is always possible to transfer the 3T2R IK into 3T3R by adding an arbitrary value for the desired rotation around the tool axis.
+To the best knowledge of the authors, only one reference \cite{MerletPerDan2000} for the IKP of functionally redundant parallel robots of the class I is known.
+The assumed reason is that a solution of the 3T3R IKP for these robots is possible with standard methods, as used in \cite{HongKim2000} for the 3T3R Eclipse.
+It is always possible to transfer the 3T2R IKP into 3T3R by adding an arbitrary value for the desired rotation around the tool axis.
 An optimization of additional performance criteria is possible by varying the redundant rotation angle \cite{ZhuQuCaoYan2013,GuoDonKe2015}.
 This approach was chosen in \cite{MerletPerDan2000} by first defining the IKP with the redundant rotation as a parameter and then performing an optimization of this parameter using analytical computation of the dexterity and interval analysis to ensure a minimum determinant of the inverse Jacobian.
+The drawback of this method is the need for a cascaded optimization which is more complex than a gradient-based approach.
 
 \color{gray}
 Problembeschreibung, Ansatz des Papers
@@ -251,7 +254,7 @@ Problembeschreibung, Ansatz des Papers
 
 The overview over the literature shows, that no general, machine-independent, methods for the resolution of functional redundancy for 3T3R PKM in 3T2R tasks exists.
 The works either focus on a general structural synthesis of machines e.\,g. via screw theory \cite{KongGos2005} or linear transformations \cite{Gogu2006} or the description and improvement of specific, manually selected, machines.
-To select the best machine for given requirements, a kinematic structural synthesis is only the first step.
+To select the best machine for given requirements, a structural synthesis is only the first step.
 Additionally, a dimensional synthesis should be performed for all possible structures to select the most suitable mechanism.
 This combined structural and dimensional synthesis \cite{RamirezKotOrt2015} is sketched in Fig.\,\ref{fig:structdimsynth}.
 To be able to perform the dimensional synthesis for all structures, the inverse kinematics has to be implemented in a general form, to calculate the performance criteria over a given trajectory for further optimization of the structures and their comparison.

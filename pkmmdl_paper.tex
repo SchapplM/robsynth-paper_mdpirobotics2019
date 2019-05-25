@@ -110,7 +110,15 @@ $^{1}$ \quad Institut für mechatronische Systeme, Leibniz Universität Hannover
 %\conference{} % An extended version of a conference paper
 
 % Abstract (Do not insert blank lines, i.e. \\) 
-\abstract{A single paragraph of about 200 words maximum. For research articles, abstracts should give a pertinent overview of the work. We strongly encourage authors to use the following style of structured abstracts, but without headings: (1) Background: Place the question addressed in a broad context and highlight the purpose of the study; (2) Methods: Describe briefly the main methods or treatments applied; (3) Results: Summarize the article's main findings; and (4) Conclusion: Indicate the main conclusions or interpretations. The abstract should be an objective representation of the article, it must not contain results which are not presented and substantiated in the main text and should not exaggerate the main conclusions.}
+\abstract{
+Industrial manipulators and parallel robots are often used for tasks like drilling or milling, that require three translational, but only two rotational degrees of freedom (``3T2R'').
+While kinematic models for specific mechanisms for these tasks exist, a general kinematic model for parallel robots is still missing.
+This paper presents the definition of the rotational component of kinematic constraints of parallel robots based on two reciprocal sets of Euler angles for the end-effector orientation and the orientation residual.
+The method allows to completely remove the redundant coordinate in 3T2R tasks and to solve the inverse kinematics for general serial and parallel robots with the gradient-descent algorithm.
+The functional redundancy of robots with full mobility is exploited using nullspace projection.
+%By exploiting functional redundancy of robots with full mobility in the nullspace of the gradient-descent algorithm, the mathematical complexity is low.
+}
+%A single paragraph of about 200 words maximum. For research articles, abstracts should give a pertinent overview of the work. We strongly encourage authors to use the following style of structured abstracts, but without headings: (1) Background: Place the question addressed in a broad context and highlight the purpose of the study; (2) Methods: Describe briefly the main methods or treatments applied; (3) Results: Summarize the article's main findings; and (4) Conclusion: Indicate the main conclusions or interpretations. The abstract should be an objective representation of the article, it must not contain results which are not presented and substantiated in the main text and should not exaggerate the main conclusions.}
 
 % Keywords
 \keyword{Parallel robot; five-DoF task; 3T2R task; functional redundancy; task redundancy; redundancy resolution; reciprocal Euler angles; inverse kinematics} % (list three to ten pertinent keywords specific to the article, yet reasonably common within the subject discipline.)
@@ -148,6 +156,7 @@ $^{1}$ \quad Institut für mechatronische Systeme, Leibniz Universität Hannover
 \section{Introduction}
 \label{sec:intro}
 
+\color{gray}
 Einleitung ins Thema, Aufgabenredundanz, serielle Roboter
 \begin{itemize}
 	\item Parallele Roboter werden aufgrund ihrer hohen Steifigkeit in großem Ausmaß für Zerspanungsaufgaben verwendet, die mit 5 FG beschrieben werden können: 3T2R Task Space.
@@ -156,9 +165,18 @@ Einleitung ins Thema, Aufgabenredundanz, serielle Roboter
 	\item Die gradientenbasierten Verfahren \cite{Baron2000,HuoBar2005,Zlajpah2017,LegerAng2016,1_SchapplerTapOrt2019} ermöglichen die Projektion zusätzlicher Optimierungskriterien in den Nullraum des Gradienten und somit auch die Ausnutzung der Aufgabenredundanz durch gleichzeitige Optimierung der Nebenbedingungen mit der Lösung des IK-Problems.
 	\item Die Bildung eines an 3T2R-Aufgaben angepassten Residuumsvektors und des dazu passenden Gradienten erfolgt dabei auf unterschiedliche Weise, wie bspw. Hinzufügen einer virtuellen Achse \cite{Baron2000}, Zerlegung des Task Space \cite{HuoBar2005}, Rotation in Task Frame und weglassen einer Komponente \cite{Zlajpah2017}, Definition der Werkzeugachse durch zwei Punkte und daraus Konstruktion eines Nullraums \cite{LegerAng2016}, Definition von absoluter Orientierung und Orientierungsfehler mit reziproken Euler-Winkeln \cite{1_SchapplerTapOrt2019}.
 \end{itemize}
+\color{black}
 
+Industrial tasks like welding, gluing, milling or drilling represent a major part the of applications of industrial robots, which generally have full mobility, i.\,e. the operational space of their end-effector has three translational and three rotational (``3T3R'') degrees of freedom (``DoF'').
+Parallel robots like the Stewart-platform have especially been proposed for milling tasks regarding their high structural stiffness.
+The task space of the named tasks can be defined by only two rotations due to a symmetry around the tool axis (``3T2R'').
+This results in a functional or task redundancy, which is not exploited to full extend yet for \emph{parallel} robots.
+Various general gradient-based methods exist to solve the inverse kinematics for \emph{serial} robots; either by augmenting the joint space \cite{Baron2000} or by reducing the task space \cite{HuoBar2005,LegerAng2016,Zlajpah2017,ZhuQuCaoYan2013,GuoDonKe2015,1_SchapplerTapOrt2019}.
+The different approaches each define a residual vector and a gradient matrix considering the properties of 3T2R tasks, e.\,g. by adding a virtual joint axis \cite{Baron2000}, orthogonal decomposition of the task space \cite{HuoBar2005}, rotation of the residual into a task frame and removing the corresponding component \cite{Zlajpah2017}, defining the tool axis by two points for constructing a nullspace \cite{LegerAng2016} or by defining the absolute orientation and the orientation residual with two reciprocal sets of Euler angles \cite{1_SchapplerTapOrt2019}.
+The gradient matrices corresponding to the different residuals are used for an iterative Newton-Raphson algorithm \cite{Yoshikawa1984,GoldenbergBenFen1985} by exploiting the functional redundancy with a null space projection of additional performance criteria \cite{Yoshikawa1984}.
+
+\color{gray}
 Beschreibung des aktuellen Stands von PKM für 3T2R.
-
 \begin{itemize}
 	\item Für den Einsatz von PKM in 3T2R-Aufgaben gibt es unterschiedliche Ansätze \cite{Tale-MasoulehGos2011}: Asymmetrische 5FG (1), Symmetrische 5FG (2), 6FG-Mechanismen, die als 5FG redundant geregelt werden (3).
 	\item Die Nutzung einer aktiven Beinkette mit 3T2R-FG oder einer passiven Führungsstrebe mit 3T2R-FG setzt bei der Mobilität an. Dadurch hat die Plattform auch 3T2R-FG.
@@ -168,20 +186,50 @@ Beschreibung des aktuellen Stands von PKM für 3T2R.
 	\item Davon abweichend werden in \cite{KongGos2005} 5FG-PKM synthetisiert, die symmetrische Beinketten aufweisen. Diese werden in \cite{Tale-MasoulehGos2011} für 5RPUR und in \cite{Tale-MasoulehSaaGosTag2010} für 5PRUR genauer analysiert.
 	\item Bei Maschinen mit 3T3R EE-FG wie der Eclipse-Maschine (3PPRS) \cite{HongKim2000} oder Hexapod-Maschinen mit 6UPS-Struktur \cite{MerletPerDan2000}, die für 3T2R eingesetzt werden, kann der Drehwinkel des Endeffektors um die Symmetrieachse des Werkzeugs frei gewählt werden.
 \end{itemize}
+\color{black}
 
+Parallel robots in 3T2R tasks can be ordered in groups according their task redundancy and symmetry \cite{Tale-MasoulehGos2011}:
+\begin{itemize}
+	\item[I] mechanisms with full platform mobility (3T2R) that are redundantly controlled to five DoF,
+	\item[II] mechanisms with 3T2R platform mobility enforced with a passive constraining leg and five other legs with five or six DoF,
+	\item[III] mechanisms with 3T2R platform mobility resulting from the mobility of five actuated legs,
+	\item[IV] symmetric mechanisms with 3T2R platform mobility and five legs.
+\end{itemize}
+
+Examples for the first class are hexapods\footnote{The joint structure is denoted by the order of universal (``U''), prismatic (``P''), spherical (``S'') and revolute (``R'') joints in the leg chains. Different actuated legs are connected by dashes (``-''), passive constraint legs are connected by a slash (``/''). Actuated joints are underlined.} (6U\underline{P}S) \cite{MerletPerDan2000} or the Eclipse machine tool (2\underline{PPR}S-\underline{PP}RS) \cite{HongKim2000}.
+Any other parallel robot with full mobility (see e.\,g. \cite{Merlet2006,Gogu2008}) may be used as well.
+
+The second class allows more variety, since the 6-DoF mechanism and the 5-DoF constraining leg can manifest in different kinematics:
+The U\underline{P}S structure is used for the 6-DoF mechanism by \cite{WangGos1997} with a focus on kinematic analysis of 5U\underline{P}S/US, by \cite{ZhangGos2001}  with a focus on kinetostatic modeling at the example of 5U\underline{P}S/RUU, by \cite{ZhengGaoZha2005} with focus on trajectory control of 5U\underline{P}S/PRPU, by \cite{GaoSunZha2004} for pose measurement with the passive leg of 5U\underline{P}S/PRPU and by \cite{ChengWanZha2008} with a redundantly actuated 5U\underline{P}S/\underline{P}RPU).
+Other possible general base structures are \underline{P}US, which has been investigated for the control of a redundantly actuated 6\underline{P}US/UPU regarding the control of the redundant leg with inverse-dynamics control \cite{LiuXuYaoXu2015} or force control \cite{WenQinZhaLam2016}.
+
+The most-straightforward member of the third group is the 4U\underline{P}S-U\underline{P}U, which is investigated in \cite{LinLiYanZha2013} regarding the inverse dynamics or in \cite{MbarekNefCor2005} for a simulation and feasibility study.
+A survey on possible architectures for a technical realization is also given by \cite{MbarekNefCor2005}.
+Other possible structures are the 4U\underline{R}S-U\underline{R}U, which is analyzed kinematically in \cite{SchreiberGos2003}, the 4\underline{P}SU-\underline{P}U*U, which has a special parallelogram structure in one leg and is presented in \cite{GaoPenZhaLi2006}.
+The 5U\underline{P}U is shown in \cite{HuangLi2002} with the help of screw theory to only have local mobility and no global mobility, since the twist of the leg chains has no intersection and the twist system of the platform is empty.
+These findings can be applied to the Metrom maschine tool (5S\underline{P}RR), which is analyzed in \cite{BaerWei2006} or its variant, the redundant 4S\underline{P}RR-\underline{P}S\underline{P}R from \cite{AlaghebandMahMilBen2015}, where the last joint axis of each leg is coaxial with the tool axis and is constructed as rotating ring.
+A structural synthesis based on linear transformations and evolutionary morphology \cite{Gogu2008} led to e.\,g. to the Isoglide5 mechanisms (3\underline{P}RRRRR-2\underline{P}RRRR), which are analyzed and optimized regarding the isotropy of the Jacobian in \cite{Gogu2006}.
+
+The last group consists of symmetric machines, which have been found by systematic structural synthesis, which has been performed in \cite{KongGos2005} for 3T2R with screw theory.
+The resulting 5R\underline{P}UR and 5\underline{P}RUR are analyzed in \cite{Tale-MasoulehGos2011,Tale-MasoulehSaaGosTag2010}.
+
+
+
+\color{gray}
 Methoden zur Lösung der IK. Methoden durchnummerieren und Tabelle mit allen Systemen machen. Dann verschiedene Paper und Roboter den nummerierten Methoden zuordnen.
-
 \begin{itemize}
 	\item Für die vorgestellten Maschinen mit 5 EE-FG \cite{LiuXuYaoXu2015,WenQinZhaLam2016,ZhengGaoZha2005,GaoSunZha2004,ChengWanZha2008,AlaghebandMahMilBen2015,BaerWei2006,Tale-MasoulehSaaGosTag2010,Tale-MasoulehGos2011} ist die inverse Kinematik analytisch einfach zu erhalten. Die Berechnung erfolgt durch die Definition der EE-Orientierung mit zwei mitgedrehten Winkeln für die Führungskette, die 3T2R-FG aufweist. Für die restlichen Ketten wird die IK dann analytisch mit Standard-Verfahren berechnet, da die Beinketten eine einfache Struktur aufweisen.
 	\item In \cite{MerletPerDan2000} wird die IK für eine 3T3R PKM (6UPS) in Abhängigkeit des Drehwinkels um die Werkzeugachse bestimmt. Der Drehwinkel wird dann mit einer Optimierung und Intervallanalyse gewählt. Mit dem Verfahren ist allerdings keine gradientenbasierte Optimierung der Nebenbedingungen möglich. Da hierbei ähnlich wie in \cite{ZhuQuCaoYan2013,GuoDonKe2015} für serielle Roboter kein Gradient definiert wird, muss eine aufwändigere globale Optimierung durchgeführt werden, bei der der redundante Winkel als Parameter variiert wird.
 \end{itemize}
+\color{black}
 
+\color{gray}
 Problembeschreibung, Ansatz des Papers
 \begin{itemize}
 	\item Die Übersicht zeigt, dass bisher keine allgemeinen Ansätze zur Redundanzauflösung von PKM für 3T2R-Aufgaben bekannt sind.
 	\item Die Arbeiten konzentrieren sich entweder auf eine allgemeine Struktursynthese dieser Maschinenstruktur basierend z.B. auf Schraubentheorie \cite{KongGos2005} oder der Theorie der linearen Transformation \cite{Gogu2006}. Für die Auswahl der Maschine für eine gegebene Aufgabe ist allerdings nicht nur die kinematische Struktursynthese, sondern auch die Maßsynthese entscheidend. Diese kombinierte Struktur- und Maßsynthese folgt dem Schema aus Bild \ref{fig:structdimsynth} und benötigt auch eine allgemeingültige Berechnung der IK, was aufgrund der Vielzahl der Systeme mit manuellen, analytischen Verfahren nicht umsetzbar ist.
 \end{itemize}
-
+\color{black}
 
 \begin{figure}[tb]
 	\input{./figures/comb_struct_dim_synth.pdf_tex}
@@ -189,15 +237,17 @@ Problembeschreibung, Ansatz des Papers
 	\label{fig:structdimsynth}
 \end{figure} 
 
+\color{gray}
 Beitrag des Papers:
 \begin{itemize}
 	\item Aufbauend auf der Beschreibung der Kinematik mit reziproken Euler-Winkeln \cite{1_SchapplerTapOrt2019} wird ein allgemeines, gradientenbasiertes Verfahren für die IK von PKM vorgestellt
 	\item Damit ist es möglich, sowohl PKM mit strukturell 3T2R-FG und Aufgabenredundante PKM mit 3T3R-PKM zu berücksichtigen.
 	\item Durch das gradientenbasierte Verfahren, in dem die redundante task space Koordinate komplett eliminiert wird, ist eine effiziente Umsetzung gegeben, die in der Bahnplanung und für Nullraum-Bewegungen der Maschinen eingesetzt werden kann.
 \end{itemize}
+\color{black}
 
+\color{gray}
 Rest ist gegliedert:
-
 \begin{itemize}
     \item Problembeschreibung: Inverse Kinematik von PKM bzw. Kinematik-Modellierung Kap \label{ref:PKM_general}
 	\item Vorstellung des REW-Verfahrens aus \cite{1_SchapplerTapOrt2019} zur Modellierung serieller kinematischer Ketten Kap \ref{sec:REW_seriell}
@@ -205,7 +255,7 @@ Rest ist gegliedert:
 	\item Lösung des IK-Problems mit Redundanzauflösung und weitere Anwendungen der Modellierung Kap. \ref{sec:ZB_Anwendung}
 	\item Darstellung der Ergebnisse an Beispielsystemen, Kap. \ref{sec:Ergebnisse}
 \end{itemize}
-
+\color{black}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Inverse Kinematics Problem for Parallel Robots}
@@ -1033,7 +1083,7 @@ The reasonings so far only considered the inverse kinematics of the parallel rob
 The kinematic definitions can also be used in the differential kinematics (\ref{equ:constr_diff}) to establish the connection between joint and platform velocity.
 This was already presented in general form in \cite{Merlet2006} and also corresponds to the theory of linear transformation which is the base of the works of Gogu on structural synthesis \cite{Gogu2008}.
 The derivation in this paper is based on the position \emph{and} orientation, but comes to the same result as the already-existing velocity-based approach.
-Further, ssing $\bm{\Psi}$/$\bm{\eta}$ as elaborated above allows for the first time to define differential kinematics specifically for 3T2R tasks in a general form.
+Further, using $\bm{\Psi}$/$\bm{\eta}$ as elaborated above allows for the first time to define differential kinematics specifically for 3T2R tasks in a general form.
 The differential equation of (\ref{equ:constr_diff}) is expanded to 
 \begin{equation}
 \frac{\mathrm{d}}{\mathrm{d}t} \bm{\Phi}(\bm{q}_{\mathrm{a}}, \bm{q}_{\mathrm{p}},\bm{x})
@@ -1098,7 +1148,7 @@ which has been adressed in the previous sections, and the full direct differenti
 \end{equation}
 %
 By only selecting the first rows for $\dot{\bm{q}}_{\mathrm{a}}$ in (\ref{equ:full_diff_ik}) and for $\dot{\bm{x}}$ in (\ref{equ:full_diff_dk}), the well-known analytical Jacobian\footnote{This matrix is related to the time derivatives $\dot{\bm{x}}_{\mathrm{r}}$ of the platform Euler angles and is called ``design Jacobian'' in \cite{Gogu2008} and ``Euler
-angles inverse jacobian matrix'' in \cite{Merlet2006} in contrast to the Jacobian related to angular velocities of the platform.} of the parallel robot \cite{Merlet2006,Gogu2008}, relating actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$ and platform velocities $\dot{\bm{x}}$ can be obtained.
+angles inverse jacobian matrix'' in \cite{Merlet2006} in contrast to the Jacobian related to angular velocities of the platform.} of the parallel robot \cite{Merlet2006,Gogu2008}, relating actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$ and platform velocities $\dot{\bm{x}}$, can be obtained.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}

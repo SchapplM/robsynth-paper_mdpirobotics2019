@@ -197,23 +197,28 @@ Parallel robots in 3T2R tasks can be ordered in groups according their task redu
 \end{itemize}
 
 Examples for the first class are hexapods\footnote{The joint structure is denoted by the order of universal (``U''), prismatic (``P''), spherical (``S'') and revolute (``R'') joints in the leg chains. Different actuated legs are connected by dashes (``-''), passive constraint legs are connected by a slash (``/''). Actuated joints are underlined.} (6U\underline{P}S) \cite{MerletPerDan2000} or the Eclipse machine tool (2\underline{PPR}S-\underline{PP}RS) \cite{HongKim2000}.
-Any other parallel robot with full mobility (see e.\,g. \cite{Merlet2006,Gogu2008}) may be used as well.
+Any other parallel robot with full mobility (see e.\,g. \cite{Merlet2006,Gogu2008,Zhang2009}) may be used as well.
 
 The second class allows more variety, since the 6-DoF mechanism and the 5-DoF constraining leg can manifest in different kinematics:
 The U\underline{P}S structure is used for the 6-DoF mechanism by \cite{WangGos1997} with a focus on kinematic analysis of 5U\underline{P}S/US, by \cite{ZhangGos2001}  with a focus on kinetostatic modeling at the example of 5U\underline{P}S/RUU, by \cite{ZhengGaoZha2005} with focus on trajectory control of 5U\underline{P}S/PRPU, by \cite{GaoSunZha2004} for pose measurement with the passive leg of 5U\underline{P}S/PRPU and by \cite{ChengWanZha2008} with a redundantly actuated 5U\underline{P}S/\underline{P}RPU).
-Other possible general base structures are \underline{P}US, which has been investigated for the control of a redundantly actuated 6\underline{P}US/UPU regarding the control of the redundant leg with inverse-dynamics control \cite{LiuXuYaoXu2015} or force control \cite{WenQinZhaLam2016}.
+Other possible general base structures are \underline{R}US \cite{WangGos1997}, \underline{P}US, which has been investigated for the control of a redundantly actuated 6\underline{P}US/UPU regarding the control of the redundant leg with inverse-dynamics control \cite{LiuXuYaoXu2015} or force control \cite{WenQinZhaLam2016}.
 
 The most-straightforward member of the third group is the 4U\underline{P}S-U\underline{P}U, which is investigated in \cite{LinLiYanZha2013} regarding the inverse dynamics or in \cite{MbarekNefCor2005} for a simulation and feasibility study.
 A survey on possible architectures for a technical realization is also given by \cite{MbarekNefCor2005}.
 Other possible structures are the 4U\underline{R}S-U\underline{R}U, which is analyzed kinematically in \cite{SchreiberGos2003}, the 4\underline{P}SU-\underline{P}U*U, which has a special parallelogram structure in one leg and is presented in \cite{GaoPenZhaLi2006}.
 The 5U\underline{P}U is shown in \cite{HuangLi2002} with the help of screw theory to only have local mobility and no global mobility, since the twist of the leg chains has no intersection and the twist system of the platform is empty.
-These findings can be applied to the Metrom maschine tool (5S\underline{P}RR), which is analyzed in \cite{BaerWei2006} or its variant, the redundant 4S\underline{P}RR-\underline{P}S\underline{P}R from \cite{AlaghebandMahMilBen2015}, where the last joint axis of each leg is coaxial with the tool axis and is constructed as rotating ring.
+These findings can be applied to the Metrom machine tool (5S\underline{P}RR), which is analyzed in \cite{BaerWei2006} or its variant, the redundant 4S\underline{P}RR-\underline{P}S\underline{P}R from \cite{AlaghebandMahMilBen2015}, where the last joint axis of each leg is coaxial with the tool axis and is constructed as rotating ring.
 A structural synthesis based on linear transformations and evolutionary morphology \cite{Gogu2008} led to e.\,g. to the Isoglide5 mechanisms (3\underline{P}RRRRR-2\underline{P}RRRR), which are analyzed and optimized regarding the isotropy of the Jacobian in \cite{Gogu2006}.
 
 The last group consists of symmetric machines, which have been found by systematic structural synthesis, which has been performed in \cite{KongGos2005} for 3T2R with screw theory.
 The resulting 5R\underline{P}UR and 5\underline{P}RUR are analyzed in \cite{Tale-MasoulehGos2011,Tale-MasoulehSaaGosTag2010}.
 
-
+In a practical application with competing requirements on workspace, stiffness, costs and precision, each of the existing systems has their legitimation.
+The remainder of the paper focuses on mechanisms of the first class to allow to optimize their performance criteria using the degree of task redundancy.
+In tasks with high process forces and requirements on stiffness and precision like milling, robots from class II with a constraining leg have the drawback, that the constraining leg takes the complete reaction wrench in the blocked rotational degree of freedom, which strongly affects the mechanisms stiffness in this direction \cite{ZhangGos2001}.
+The same is argued by \cite{LinLiYanZha2013} at the example of the Metrom machine tool, but can be extended to most members of class III, where most leg chains contain six DoF and only one leg chain has five DoF.
+This leg chain also has to take the reaction moments in the blocked DoF which affects the overall stiffness.
+Therefore members of the classes I and IV can be expected to reach a higher stiffness, therefore justifying attempts of this paper.
 
 \color{gray}
 Methoden zur Lösung der IK. Methoden durchnummerieren und Tabelle mit allen Systemen machen. Dann verschiedene Paper und Roboter den nummerierten Methoden zuordnen.
@@ -223,6 +228,19 @@ Methoden zur Lösung der IK. Methoden durchnummerieren und Tabelle mit allen Sys
 \end{itemize}
 \color{black}
 
+The parallel robots with five DoF presented above have a kinematic structure, that allows an analytic model of the inverse kinematics.
+All references define the endeffector orientation with two consecutive elementary rotations, i.\,e. define two Euler angles to represent the tool axis orientation in minimal coordinates \cite{LiuXuYaoXu2015, WenQinZhaLam2016, ZhengGaoZha2005,GaoSunZha2004, ChengWanZha2008, AlaghebandMahMilBen2015, BaerWei2006, Tale-MasoulehSaaGosTag2010, Tale-MasoulehGos2011}, which is called ``partial pose'' in \cite{MerletPerDan2000}.
+The inverse kinematics problem (IKP) is first solved for the first chain, which is called ``leading chain'' in this paper.
+Due to the geometry of the leading chain, this solution can be found algebraically. %  \cite{WangGos1997}
+Then the IKP is solved for the other ``following'' chains with the given orientation from the leading chain and standard methods.
+For robots of class II, the constraining leg is selected as the leading leg chain. %  \cite{WangGos1997}
+
+To the best knowledge of the authors, only one reference for the IKP of functionally redundant parallel robots of the class I is known.
+The assumed reason is that a solution of the 3T3R IKP for these robots is possible with standard methods, as used in \cite{HongKim2000}.
+It is always possible to transfer the 3T2R IK into 3T3R by adding an arbitrary value for the desired rotation around the tool axis.
+An optimization of additional performance criteria is possible by varying the redundant rotation angle \cite{ZhuQuCaoYan2013,GuoDonKe2015}.
+This approach was chosen in \cite{MerletPerDan2000} by first defining the IKP with the redundant rotation as a parameter and then performing an optimization of this parameter using analytical computation of the dexterity and interval analysis to ensure a minimum determinant of the inverse Jacobian.
+
 \color{gray}
 Problembeschreibung, Ansatz des Papers
 \begin{itemize}
@@ -230,6 +248,14 @@ Problembeschreibung, Ansatz des Papers
 	\item Die Arbeiten konzentrieren sich entweder auf eine allgemeine Struktursynthese dieser Maschinenstruktur basierend z.B. auf Schraubentheorie \cite{KongGos2005} oder der Theorie der linearen Transformation \cite{Gogu2006}. Für die Auswahl der Maschine für eine gegebene Aufgabe ist allerdings nicht nur die kinematische Struktursynthese, sondern auch die Maßsynthese entscheidend. Diese kombinierte Struktur- und Maßsynthese folgt dem Schema aus Bild \ref{fig:structdimsynth} und benötigt auch eine allgemeingültige Berechnung der IK, was aufgrund der Vielzahl der Systeme mit manuellen, analytischen Verfahren nicht umsetzbar ist.
 \end{itemize}
 \color{black}
+
+The overview over the literature shows, that no general, machine-independent, methods for the resolution of functional redundancy for 3T3R PKM in 3T2R tasks exists.
+The works either focus on a general structural synthesis of machines e.\,g. via screw theory \cite{KongGos2005} or linear transformations \cite{Gogu2006} or the description and improvement of specific, manually selected, machines.
+To select the best machine for given requirements, a kinematic structural synthesis is only the first step.
+Additionally, a dimensional synthesis should be performed for all possible structures to select the most suitable mechanism.
+This combined structural and dimensional synthesis \cite{RamirezKotOrt2015} is sketched in Fig.\,\ref{fig:structdimsynth}.
+To be able to perform the dimensional synthesis for all structures, the inverse kinematics has to be implemented in a general form, to calculate the performance criteria over a given trajectory for further optimization of the structures and their comparison.
+For the generation of task redundant parallel robots, the inverse kinematics has to include an optimization of the performance criteria and the restrictions such as joint limits, to ensure a comparability of the results.
 
 \begin{figure}[tb]
 	\input{./figures/comb_struct_dim_synth.pdf_tex}
@@ -246,16 +272,27 @@ Beitrag des Papers:
 \end{itemize}
 \color{black}
 
+
+To address this, the contributions of this paper are
+\begin{itemize}
+\item a novel general kinematics model for parallel robots in 3T2R tasks using the concept of reciprocal Euler angles \cite{1_SchapplerTapOrt2019} and allowing nullspace optimization in the gradient-based inverse kinematics,
+\item a complete elimination of the redundant operational space coordinate,
+\item examples and simulations to show the performance for serial and parallel robots.
+\end{itemize}
+
 \color{gray}
 Rest ist gegliedert:
 \begin{itemize}
-    \item Problembeschreibung: Inverse Kinematik von PKM bzw. Kinematik-Modellierung Kap \label{ref:PKM_general}
+    \item Problembeschreibung: Inverse Kinematik von PKM bzw. Kinematik-Modellierung Kap \ref{sec:PKM_general}
 	\item Vorstellung des REW-Verfahrens aus \cite{1_SchapplerTapOrt2019} zur Modellierung serieller kinematischer Ketten Kap \ref{sec:REW_seriell}
 	\item Aufstellung der vollständigen kinematischen Zwangsbedingungen für allgemeine PKM mit dem Verfahren, Kap. \ref{sec:ZB_PKM}
 	\item Lösung des IK-Problems mit Redundanzauflösung und weitere Anwendungen der Modellierung Kap. \ref{sec:ZB_Anwendung}
 	\item Darstellung der Ergebnisse an Beispielsystemen, Kap. \ref{sec:Ergebnisse}
 \end{itemize}
 \color{black}
+
+The remainder of the paper is structured as follows:
+The description of the inverse kinematics problem and prior definitions are given in Sec.\,\ref{sec:PKM_general}, the concept of reciprocal Euler angles from \cite{1_SchapplerTapOrt2019} is adapted in Sec.\,\ref{sec:REW_seriell} for parallel robots, the full kinematic constraints of parallel robots in 3T2R tasks is introduced in Sec.\,\ref{sec:ZB_PKM} and applied to the differential kinematics in Sec.\,\ref{sec:ZB_Anwendung} followed by examples and simulations in Sec.\,\ref{sec:Ergebnisse}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Inverse Kinematics Problem for Parallel Robots}

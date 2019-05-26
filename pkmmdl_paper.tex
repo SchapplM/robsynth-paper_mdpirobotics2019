@@ -309,19 +309,20 @@ The description of the inverse kinematics problem and prior definitions are give
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Inverse Kinematics Problem for Parallel Robots}
 \label{sec:PKM_general}
-\color{gray}
-\begin{itemize}
-    \item Beschreibung des Systems und der Nomenklatur mit Bild (3RRR und 3RPR, eingezeichnete Vektoren)
-    \item Darstellung der kinematischen Zwangsbedingungen als Vektoren und für Betrag der Beinlänge. Vektor rAB und r0E einzeichnen
-    \item Eigenschaft nennen: Methode nicht allgemein, sondern Voraussetzung, dass nur die ersten Gelenkwinkel die Zwangsbedingungen beeinflussen
-    \item Hinweis Dynamik-Modellierung basiert auch auf diesen Zwangsbedingungen \cite{Merlet2006,BriotKha2015,AbdellatifHei2009,DoThanhKotHeiOrt2009b} und funktioniert auch nur für Roboter, mit diesen Eigenschaften
-    \item \cite{Gogu2008} nimmt allgemeine lineare Transformation für Position und Orientierung, aber auf Geschwindigkeitsebene. Damit die inverse Kinematik nicht direkt lösbar und nur für 3T3R.
-    \item Formeln: Kinematik der Beinkette und der Plattform, Kinematische Zwangsbedingungen in allgemeiner Form, Einfluss der Beingelenke anhand der Einträge in der Gradientenmatrix
-    \item Einschränkung schreiben: Methode nicht für allgemeine PKM anwendbar, die automatisch generiert werden, da immer analytisch die Systeme speziell gelöst werden
-    \item Skizzierung des Problems für 3T2R: Unterschiedliche Modellierung für Führungskette und Folgekette, Führungskette in Kap. \ref{sec:REW_seriell}, Folgekette und Zusammenschluss in Kap. \ref{sec:ZB_PKM}.
-    \item Bis hier noch keine rotatorischen Zwangsbedingungen hinschreiben. Die kommen erst in den folgenden Kapiteln
-\end{itemize}
-\color{black}
+
+%\color{gray}
+%\begin{itemize}
+%    \item Beschreibung des Systems und der Nomenklatur mit Bild (3RRR und 3RPR, eingezeichnete Vektoren)
+%    \item Darstellung der kinematischen Zwangsbedingungen als Vektoren und für Betrag der Beinlänge. Vektor rAB und r0E einzeichnen
+%    \item Eigenschaft nennen: Methode nicht allgemein, sondern Voraussetzung, dass nur die ersten Gelenkwinkel die Zwangsbedingungen beeinflussen
+%    \item Hinweis Dynamik-Modellierung basiert auch auf diesen Zwangsbedingungen \cite{Merlet2006,BriotKha2015,AbdellatifHei2009,DoThanhKotHeiOrt2009b} und funktioniert auch nur für Roboter, mit diesen Eigenschaften
+%    \item \cite{Gogu2008} nimmt allgemeine lineare Transformation für Position und Orientierung, aber auf Geschwindigkeitsebene. Damit die inverse Kinematik nicht direkt lösbar und nur für 3T3R.
+%    \item Formeln: Kinematik der Beinkette und der Plattform, Kinematische Zwangsbedingungen in allgemeiner Form, Einfluss der Beingelenke anhand der Einträge in der Gradientenmatrix
+%    \item Einschränkung schreiben: Methode nicht für allgemeine PKM anwendbar, die automatisch generiert werden, da immer analytisch die Systeme speziell gelöst werden
+%    \item Skizzierung des Problems für 3T2R: Unterschiedliche Modellierung für Führungskette und Folgekette, Führungskette in Kap. \ref{sec:REW_seriell}, Folgekette und Zusammenschluss in Kap. \ref{sec:ZB_PKM}.
+%    \item Bis hier noch keine rotatorischen Zwangsbedingungen hinschreiben. Die kommen erst in den folgenden Kapiteln
+%\end{itemize}
+%\color{black}
 
 \begin{figure}[tb]
     \input{./figures/pkm_constr_def_transl.pdf_tex}
@@ -1281,27 +1282,31 @@ REA & Reciprocal set of Euler angles
 %% optional
 \appendixtitles{no} %Leave argument "no" if all appendix headings stay EMPTY (then no dot is printed after "Appendix A"). If the appendix sections contain a heading then change the argument to "yes".
 \appendix
-\section{Mathematical Symbols for Reciprocal Euler Angles}
+\section{Mathematical Symbols for Reciprocal Euler Angles in Inverse Kinematics}
 \label{sec:appendix_proof_REW}
 %\unskip
 %\subsection{}
 
+%\color{gray}
+%\begin{itemize}
+%	\item Details zu den Partiellen Ableitungen in den verschiedenen Gleichungen
+%	\item Genauer Inhalt der Spalten-Operatoren und der Euler-Winkel-Ableitungen
+%	\item Herleitung für Zusammenhang Rotationsmatrix-Winkelgeschwindigkeit (Gradienten)
+%\end{itemize}
+%\color{black}
 
-
-\begin{itemize}
-    \item Details zu den Partiellen Ableitungen in den verschiedenen Gleichungen
-    \item Genauer Inhalt der Spalten-Operatoren und der Euler-Winkel-Ableitungen
-    \item Herleitung für Zusammenhang Rotationsmatrix-Winkelgeschwindigkeit (Gradienten)
-\end{itemize}
-
+The following appendix contains additional detailed information about the kinematic constraint formulation of this paper.
+Sec.\,\ref{sec:appendix_eulerreciproc} contains a mathematical proof for the properties of reciprocal Euler angles in inverse kinematics, which is only outlined in \cite{1_SchapplerTapOrt2019}.
+The justification for using the approach of partial derivatives instead of the geometric Jacobian is derived in Sec.\,\ref{sec:appendix_gradient_geomjacobian}.
+The matrix operations for the partial derivatives are replicated from \cite{1_SchapplerTapOrt2019} in Sec.\,\ref{sec:appendix_gradient_matrix} and the contents of the single partial derivatives are given in Sec.\,\ref{sec:appendix_content_derivatives} to facilitate the understanding and implementation by the reader.
 
 \subsection{Proof for the Properties of Reciprocal Euler angles}
 \label{sec:appendix_eulerreciproc}
 
 
-This section derives the effect of the reciprocity of Euler-angles at the example of the kinematics description of Sec.\,\ref{sec:RecEulAng} and the frames of Fig.\,\ref{fig:frames_5dof_6dof}\,(b).
+This section derives the effect of the reciprocity of Euler-angles at the example of the kinematics description of Sec.\,\ref{sec:REW_seriell} and the frames of Fig.\,\ref{fig:frames_5dof_6dof}\,(b).
 
-An end-effector orientation $\bm{\beta}=\bm{x}_{\mathrm{r}}$ gives the rotation matrix\footnote{The matrix rotates vectors from $\ks{E}$ to $\ks{D}$} from the actual end-effector frame $\ks{E}$ to the desired end-effector frame $\ks{D}$
+An end-effector orientation $\bm{\beta}=\bm{x}_{\mathrm{r}}$ gives the rotation matrix\footnote{The matrix rotates vectors from $\ks{E}$ to $\ks{D}$}
 %
 \begin{equation}
 \rotmat{D}{E}(\bm{\beta},\bm{q})
@@ -1310,7 +1315,8 @@ An end-effector orientation $\bm{\beta}=\bm{x}_{\mathrm{r}}$ gives the rotation 
 \label{equ:orierr_1_rotmat}
 \end{equation}
 %
-where using the $X$-$Y$-$Z$-Euler angles yields
+from the actual end-effector frame $\ks{E}$ to the desired or platform end-effector frame $\ks{D}$,
+where using the $X$-$Y$-$Z$-Euler angles and exploiting the properties of $\mathrm{SO(3)}$ rotation matrices yields
 %
 \begin{equation}
 \rotmat{0}{D}^\transp(\bm{\beta})
@@ -1325,7 +1331,7 @@ With an additional rotation $-\delta$ around the $z$-axis for the desired orient
 \beta_1'=\beta_1,  \quad \beta_2'=\beta_2,  \quad \beta_3'=\beta_3-\delta.
 \end{equation}
 %
-The additional rotation corresponds to the tool axis defined in Sec.\,\ref{sec:RecEulAng} % and does not influence 3T2R tasks.
+The additional rotation corresponds to the tool axis defined in Sec.\,\ref{sec:REW_seriell} % and does not influence 3T2R tasks.
 and leads to a new residual orientation error expressed as a rotation matrix
 %
 \begin{align}
@@ -1340,7 +1346,7 @@ and leads to a new residual orientation error expressed as a rotation matrix
     \bm{R}_z(\delta) \rotmat{D}{E}(\bm{\beta},\bm{q}).
     \label{equ:orierr_2_rotmat}
 \end{align}
-
+%
 The first residual orientation error from (\ref{equ:orierr_1_rotmat}) corresponding to $\bm{\beta}$ is defined as a rotation matrix
 %
 % Quelle: equations/R1.txt (aus ikfr_paper_equations.mw)
@@ -1355,11 +1361,18 @@ The first residual orientation error from (\ref{equ:orierr_1_rotmat}) correspond
     \label{equ:orierr_1_rotmat_def}
 \end{align}
 %
-and as a $Z$-$Y$-$X$-Euler angle representation
+and as a $Z$-$Y$-$X$-Euler angle representation\footnote{Utilizing the sign-aware operator $\arctantwo(y,x)$ instead of $\arctan(y/x)$ allows angles to be in $(-\pi,+\pi]$, removes ambiguities and provides global differentiability.}
 %
 % Quelle: equations/alpha1.txt (aus ikfr_paper_equations.mw)
 \begin{align}
-    \bm{\alpha} =
+    \bm{\alpha}
+	=
+	\begin{bmatrix}
+	\alpha_1 \\
+	\alpha_2 \\
+	\alpha_3
+    \end{bmatrix}
+	=
     \begin{bmatrix}
         \arctantwo \left( {n_y} , { n_x} \right) \\ 
         \arctantwo \left( -{n_z} , \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\ 
@@ -1367,8 +1380,8 @@ and as a $Z$-$Y$-$X$-Euler angle representation
     \end{bmatrix}.
     \label{equ:alpha_zyx}
 \end{align}
-
-The second error corresponding to $\bm{\beta}'$ only differs regarding the additional rotation $\delta$. Combining (\ref{equ:orierr_2_rotmat}) and (\ref{equ:orierr_1_rotmat_def}) leads to
+%
+The second residual corresponding to $\bm{\beta}'$ only differs regarding the additional rotation $\delta$. Combining (\ref{equ:orierr_2_rotmat}) and (\ref{equ:orierr_1_rotmat_def}) leads to
 %
 % Quelle: equations/R2.txt (aus ikfr_paper_equations.mw)
 \begin{align}
@@ -1380,7 +1393,7 @@ The second error corresponding to $\bm{\beta}'$ only differs regarding the addit
     {n'_z}&{o'_z}&{a'_z} \\ 
     \end{bmatrix}
     = 
-    \left[ \begin {array}{ccc} { C_{\delta}}\,{n_x}-{ S_{\delta}}\,{ n_y}&{ C_{\delta}}\,{o_x}-{ S_{\delta}}\,{o_y}&{ C_{\delta}}\,{ a_x}-{ S_{\delta}}\,{a_y}\\ \noalign{\medskip}{ C_{\delta}}\,{n_y}+ { S_{\delta}}\,{n_x}&{ C_{\delta}}\,{o_y}+{ S_{\delta}}\,{o_x}&{  C_{\delta}}\,{a_y}+{ S_{\delta}}\,{a_x}\\ \noalign{\medskip}{ n_z}&{o_z}&{a_z}\end {array} \right] \nonumber
+    \left[ \begin {array}{ccc} { C_{\delta}}\,{n_x}-{ S_{\delta}}\,{ n_y}&{ C_{\delta}}\,{o_x}-{ S_{\delta}}\,{o_y}&{ C_{\delta}}\,{ a_x}-{ S_{\delta}}\,{a_y}\\ \noalign{\medskip}{ C_{\delta}}\,{n_y}+ { S_{\delta}}\,{n_x}&{ C_{\delta}}\,{o_y}+{ S_{\delta}}\,{o_x}&{  C_{\delta}}\,{a_y}+{ S_{\delta}}\,{a_x}\\ \noalign{\medskip}{ n_z}&{o_z}&{a_z}\end {array} \right], \nonumber
 \end{align}
 %
 where $C_{\delta}=\mathrm{cos}(\delta)$ and $S_{\delta}=\mathrm{sin}(\delta)$.
@@ -1389,6 +1402,12 @@ The $Z$-$Y$-$X$-Euler angles from this rotation matrix are
 % Quelle: equations/alpha2.txt (aus ikfr_paper_equations.mw)
 \begin{equation}
 \bm{\alpha}'
+=
+\begin{bmatrix}
+\alpha_1' \\
+\alpha_2' \\
+\alpha_3'
+\end{bmatrix}
 =
 \begin{bmatrix}
 \arctantwo \left( {n'_y} , { n'_x} \right) \\ 
@@ -1400,10 +1419,10 @@ The $Z$-$Y$-$X$-Euler angles from this rotation matrix are
 \arctantwo \left( ({  C_{\delta}}\,{n_y}+{ S_{\delta}}\,{n_x}) , ({ C_{\delta}}\,{n_x}-{  S_{\delta}}\,{n_y}) \right) \\
 \arctantwo \left( -{n_z} , \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\
 \arctantwo \left( {o_z} , {a_z} \right)
-\end{bmatrix}.
+\end{bmatrix},
 \end{equation}
 %
-where $\delta$  only influences the first component $\alpha_1$.
+where $\delta$  only influences the first component $\alpha_1'$.
 This allows the conclusion, that $\beta_3$ only influences $\alpha_1$ and results in the dependencies
 %
 \begin{align}
@@ -1412,8 +1431,7 @@ This allows the conclusion, that $\beta_3$ only influences $\alpha_1$ and result
     \alpha_3'&=\alpha_3'(\bm{q},\beta_1,\beta_2) =\alpha_3
 \end{align}
 %
-already displayed in (\ref{equ:alpha_dep_beta}) with the consequences for the kinematic modeling of robots in 3T2R tasks described in Sec.\,\ref{sec:RecEulAng_effect}.
-
+with the consequences for the kinematic modeling of robots in 3T2R tasks described in Sec.\,\ref{sec:REW_seriell}.
 
 \subsection{Relation of the Gradient Matrices to the Geometric Jacobian of the Serial Chain}
 \label{sec:appendix_gradient_geomjacobian}
@@ -1429,8 +1447,7 @@ already displayed in (\ref{equ:alpha_dep_beta}) with the consequences for the ki
 \subsection{Matrix Operations for Partial Derivatives}
 \label{sec:appendix_gradient_matrix}
 
-
-
+To simplify the calculations of the gradient matrices of the residuals in Sec.\,\ref{sec:ZB_Anwendung}, operators for matrices are replaced by operators for vectors, to avoid differentiating matrices or w.r.t. matrices which would require multi-dimensional tensors.
 The column operator $\overline{\bm{R}}$ for rotation matrices $\bm{R}$ to stack the coordinate systems unit vectors $\bm{n},\bm{o},\bm{a} \in {\mathbb{R}}^{3}$ vertically instead of horizontally is defined as
 %
 \begin{equation}
@@ -1454,7 +1471,8 @@ The column operator $\overline{\bm{R}}$ for rotation matrices $\bm{R}$ to stack 
 \end{equation}
 %
 to avoid differentiating matrices or w.r.t. matrices.
-Matrix multiplication is then expressed with the matrix product operator $\overline{\Pi}$
+The special properties of the $\mathrm{SO}(3)$ group are not exploited and the operator can be used for ${\mathbb{R}}^{3\times3}$ as well.
+Matrix multiplication is expressed with the matrix product operator $\overline{\Pi}$
 %
 such that
 %
@@ -1500,38 +1518,40 @@ The transposition operator $\bm{P}_\transp$ is a $9 \times 9$ permutation matrix
 \label{equ:transposition_operator}
 \end{equation}
 %
-The Euler angles can be calculated from the general rotation matrix $\bm{R}$ of (\ref{equ:def_rotmat}) in the same way as before\footnote{Utilizing the sign-aware operator $\arctantwo(y,x)$ instead of $\arctan(y/x)$ allows angles to be in $(-\pi,+\pi]$, removes ambiguities and provides global differentiability.} using these operators with the notation
-%
-\begin{equation}
-\bm{\alpha}(\overline{\bm{R}})
-=
-\bm{\alpha}(\bm{R})
-=
-\begin{bmatrix}
-\arctantwo \left( {n_y} , { n_x} \right) \\ 
-\arctantwo \left( -{n_z} , \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\ 
-\arctantwo \left( {o_z} , {a_z} \right)
-\end{bmatrix}
-\label{equ:alpha_def_rotmat_zyx}
-\end{equation}
-%
-at the $Z$-$Y$-$X$ example.
-
+Writing $\rotmato{1}{2}^\transp$ instead of $\bm{P}_\transp \rotmato{1}{2}$ serves for the clarity of the expressions (\ref{equ:grad_Phi_1_q},\ref{equ:grad_Phi_1_x},\ref{equ:grad_Phi_j_qj},\ref{equ:grad_Phi_j_q1}) and overloads the transposition operator for ${\mathbb{R}}^{9}$ noted with the bar.
+%\color{gray}
+%The Euler angles can be calculated from the general rotation matrix $\bm{R}$ of (\ref{equ:def_rotmat}) in the same way as before using these operators with the notation
+%%
+%\begin{equation}
+%\bm{\beta}(\overline{\bm{R}})
+%=
+%\bm{\beta}(\bm{R})
+%=
+%\begin{bmatrix}
+%xxx \arctantwo \left( {n_y} , { n_x} \right) \\ 
+%xxx \arctantwo \left( -{n_z} , \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\ 
+%xxx \arctantwo \left( {o_z} , {a_z} \right)
+%\end{bmatrix}
+%\label{equ:beta_def_rotmat_xyz}
+%\end{equation}
+%%
+%at the $X$-$Y$-$Z$ example.
+%\color{black}
 
 \subsection{Contents of the Partial Derivatives}
 \label{sec:appendix_content_derivatives}
 
-The single expressions derived in Sec.\,\ref{sec:RecEulAng_implement} for the serial chains and in Sec.\,\ref{sec:ParRobKinConstr} for the parallel chains can be calculated with low computational effort from the definition of the $X$-$Y$-$Z$- and $Z$-$Y$-$X$-Euler angles from (\ref{equ:def_rmat_xyz}), (\ref{equ:def_rmat_zyxr}) and (\ref{equ:alpha_xyz}).
-With $\overline{\bm{R}}=[n_x,n_y,n_z ,o_x,o_y,o_z,a_x,a_y,a_z]^\transp$ the gradient ``I'' in (\ref{equ:grad_Phi_q}) becomes
+The single expressions derived in Sec.\,\ref{sec:ZB_Anwendung} can be calculated with low computational effort from the definition of the $X$-$Y$-$Z$- and $Z$-$Y$-$X$-Euler angles from (\ref{equ:def_rmat_xyz}), (\ref{equ:def_rmat_zyxr}) and (\ref{equ:alpha_zyx}).
+With $\overline{\bm{R}}=[n_x,n_y,n_z ,o_x,o_y,o_z,a_x,a_y,a_z]^\transp$ the gradient ``I'' in (\ref{equ:grad_Phi_1_q},\ref{equ:grad_Phi_1_x},\ref{equ:grad_Phi_j_qj},\ref{equ:grad_Phi_j_q1}) becomes
 % Quelle: equations/dalphadRb.txt (aus ikfr_paper_equations.mw)
 \begin{equation}
-\left(\frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}\right)^\transp
+\left(\frac{\partial \bm{\alpha}}{\partial \overline{\bm{R}}}\right)^\transp
 =
 \left[ \begin {array}{ccc} -{\frac {{n_y}}{{{n_x}}^{2}+{{n_y }}^{2}}}&0&0\\ \noalign{\medskip}{\frac {{n_x}}{{{n_x}}^{2}+{{ n_y}}^{2}}}&0&0\\ \noalign{\medskip}0&-\sqrt {{{a_z}}^{2}+{{ o_z}}^{2}}&0\\ \noalign{\medskip}0&0&0\\ \noalign{\medskip}0&0&0 \\ \noalign{\medskip}0&{\frac {{n_z}\,{o_z}}{\sqrt {{{a_z}}^{ 2}+{{o_z}}^{2}}}}&{\frac {{a_z}}{{{a_z}}^{2}+{{o_z}}^{2}}} \\ \noalign{\medskip}0&0&0\\ \noalign{\medskip}0&0&0 \\ \noalign{\medskip}0&{\frac {{n_z}\,{a_z}}{\sqrt {a_z^{2}+{{o_z}}^{2}}}}&-{\frac {o_z}{a_z^{2}+o_z^{2}} }\end {array} \right] 
 \label{equ:alpha_xyz_diff_R}
 \end{equation}
 %
-and the inverse gradient ``I'' in (\ref{equ:grad_Phi_x}) yields
+and the inverse gradient ``IV'' in (\ref{equ:grad_Phi_1_x}) yields
 %
 % Quelle: equations/R2b_dxyz.txt (aus ikfr_paper_equations.mw)
 \begin{align}
@@ -1557,7 +1577,17 @@ and the inverse gradient ``I'' in (\ref{equ:grad_Phi_x}) yields
 \end{align}
 %
 with $C_i=\mathrm{cos}(\beta_i)$, $S_i=\mathrm{sin}(\beta_i)$.
-The gradient of the matrix product (\ref{equ:matprod}) w.r.t. the second factor used in (\ref{equ:grad_Phi_x}) term ``III'' and (\ref{equ:grad_Phi_q}) term ``II'' is
+The property
+%
+\begin{equation}
+\left(\frac{\partial \bm{\beta}}{\partial \overline{\bm{R}}}\right)
+\left(\frac{\partial \overline{\bm{R}}(\bm{\beta})}{\partial \bm{\beta}}\right)
+=
+\bm{1} \in {\mathbb{R}}^{3 \times 3}
+\end{equation}
+%
+can be used to test the implementation, if (\ref{equ:alpha_xyz_diff_R}, \ref{equ:rotmat_diff_beta}) are defined for the same Euler-angle notation.
+The gradient of the matrix product (\ref{equ:matprod}) w.r.t. the second factor used in (\ref{equ:grad_Phi_1_q})/II, (\ref{equ:grad_Phi_1_x})/III, (\ref{equ:grad_Phi_j_qj})/II and (\ref{equ:grad_Phi_j_q1})/III is
 %
 \begin{equation}
 \frac{\partial }{\partial \overline{\bm{R}}_2}
@@ -1571,7 +1601,7 @@ The gradient of the matrix product (\ref{equ:matprod}) w.r.t. the second factor 
 \label{equ:diff_prod_mat2}
 \end{equation}
 %
-and the gradient w.r.t. the first factor used in (\ref{equ:ee_rotation_gradq}) term ``I'' is
+and to complete the enumeration the gradient w.r.t. the first factor is
 %
 \begin{equation}
 \frac{\partial }{\partial \overline{\bm{R}}_1}
@@ -1579,11 +1609,12 @@ and the gradient w.r.t. the first factor used in (\ref{equ:ee_rotation_gradq}) t
 =
 \begin{bmatrix}
 {\mathrm{diag}}(n_x)&{\mathrm{diag}}(o_x)&{\mathrm{diag}}(a_x) \\ {\mathrm{diag}}(n_y)&{\mathrm{diag}}(o_y)&{\mathrm{diag}}(a_y)\\ {\mathrm{diag}}(n_z)&{\mathrm{diag}}(o_z)&{\mathrm{diag}}(a_z)
-\end{bmatrix}
+\end{bmatrix},
 \label{equ:diff_prod_mat1}
 \end{equation}
 %
 where $n_x,n_y,...$ are the entries of $\bm{R}_2$ and the $\mathrm{diag}$-matrices are $3 \times 3$.
+By transposing the elements of the matrix product (\ref{equ:matprod}), only the first form (\ref{equ:diff_prod_mat2}) had to be used in this paper.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Citations and References in Supplementary files are permitted provided that they also appear in the reference list here. 

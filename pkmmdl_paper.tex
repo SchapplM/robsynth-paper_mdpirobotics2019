@@ -916,7 +916,7 @@ The gradients are calculated with the chain rule and a syntax for stacking matri
 The product operator $\overline{\Pi}$, the stacking operator $\overline{\bm{R}}$ and the transpose operator $\bm{P}_\transp$ are explained in appendix\, \ref{sec:appendix_gradient_matrix}.
 
 \subsection{Constraint Gradients for the Leading Leg}
-
+%
 The leading legs constraint gradient matrix w.\,r.\,t. the joint coordinates can be expanded to
 %
 \begin{equation}
@@ -927,6 +927,7 @@ The leading legs constraint gradient matrix w.\,r.\,t. the joint coordinates can
 &
 \bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}^\transp
 \end{pmatrix}^\transp,
+\label{equ:Phi_1_grad_q}
 \end{equation}
 %
 where the translational component can be calculated with the geometric Jacobian of the leg chain. % $\bm{J}_1=\begin{pmatrix}\bm{J}_{1,\mathrm{t}}^\transp & \bm{J}_{1,\mathrm{r}}^\transp\end{pmatrix}^\transp$
@@ -944,7 +945,8 @@ The rotational part is expanded with the chain rule and the stack operators to
 %underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des mittleren Terms
 \underbrace{\vphantom{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}\left(\frac{\partial \bm{\alpha}}{\partial \overline{\bm{R}}}\right)}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
 \underbrace{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
-\underbrace{\vphantom{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}\left(\frac{\partial \rotmato{0}{E}(\bm{q}_1)}{\partial \bm{q}_1} \right)}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}}.  \nonumber
+\underbrace{\vphantom{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}\left(\frac{\partial \rotmato{0}{E}(\bm{q}_1)}{\partial \bm{q}_1} \right)}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}}
+\in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_1)}.  \nonumber
 \end{align}
 %
 The two first partial derivatives ``I'' and ``II'' from (\ref{equ:grad_Phi_1_q}) are sparse matrices and can be calculated efficiently as shown in appendix \ref{sec:appendix_gradient_matrix} with (\ref{equ:alpha_xyz_diff_R}) with $\overline{\bm{R}}=\rotmato{D}{E}(\bm{x}_{\mathrm{r}},\bm{q}_1)$ and (\ref{equ:diff_prod_mat2}) with the contents of $\rotmato{0}{D}^\transp(\bm{x}_{\mathrm{r}})$.
@@ -984,14 +986,15 @@ Applying the stack-operators gives
 %underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des dritten Terms
 % Term I
 \underbrace{\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
-    \frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}}_{\mathrm{I}}
+    \frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
 % Term II
 \underbrace{\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
-    \bm{P}_{\mathrm{T}}}_{\mathrm{II}}
+    \bm{P}_{\mathrm{T}}}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
 % Term III
-\underbrace{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}_{\mathrm{III}}
+\underbrace{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}_{\mathrm{III} \in {\mathbb{R}}^{9 \times 9}}
 % Term IV
-\underbrace{\frac{\partial \rotmato{0}{D}(\bm{x}_{\mathrm{r}})}{\partial \bm{x}_{\mathrm{r}}}}_{\mathrm{IV}}. \nonumber
+\underbrace{\frac{\partial \rotmato{0}{D}(\bm{x}_{\mathrm{r}})}{\partial \bm{x}_{\mathrm{r}}}}_{\mathrm{IV} \in {\mathbb{R}}^{9 \times 3}}
+\in {\mathbb{R}}^{3 \times 3}. \nonumber
 \end{align}
 %
 where the simplicity of the single expression ``I''-``IV'' is demonstrated in appendix\,\ref{sec:appendix_gradient_matrix}.
@@ -1031,7 +1034,8 @@ The gradient w.\,r.\,t. the joint coordinates of the following leg contains agai
 % Term II
 \underbrace{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
 % Term III
-\underbrace{\vphantom{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{L}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}\left(\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j} \right)}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_j)}}, \nonumber
+\underbrace{\vphantom{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{L}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}\left(\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j} \right)}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_j)}}
+\in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_j)}, \nonumber
 \end{align}
 %
 which is similar to the expression in (\ref{equ:grad_Phi_1_q}).
@@ -1059,7 +1063,8 @@ The gradient w.\,r.\,t. the joint coordinates of the leading leg
 % Term III
 \underbrace{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{L}\right)}{\partial \rotmato{0}{L}}}_{\mathrm{III} \in {\mathbb{R}}^{9 \times 9}}
 % Term IV
-\underbrace{\frac{\partial \rotmato{0}{L}(\bm{q}_1)}{\partial \bm{q}_1}}_{\mathrm{IV} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}}. \nonumber
+\underbrace{\frac{\partial \rotmato{0}{L}(\bm{q}_1)}{\partial \bm{q}_1}}_{\mathrm{IV} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}}
+\in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_1)}. \nonumber
 \end{align}
 %
 is similar to the expression in (\ref{equ:grad_Phi_1_x}).
@@ -1122,6 +1127,7 @@ The method can be used for serial link robots as well by removing all entries fo
 The platform pose $\bm{x}$/$\bm{\eta}$ corresponds to the desired pose for the serial robots endeffector and the kinematic constraints $\bm{\Phi}$/$\bm{\Psi}$ correspond to the residual of the IKP.
 
 \subsection{Differential Kinematics for the Parallel Robot and its Applications}
+\label{sec:ZB_Anwendung_IK_grad}
 
 The reasonings so far only considered the inverse kinematics of the parallel robot.
 The kinematic definitions can also be used in the differential kinematics (\ref{equ:constr_diff}) to establish the connection between joint and platform velocity.
@@ -1135,6 +1141,7 @@ The differential equation of (\ref{equ:constr_diff}) is expanded to
 \bm{\Phi}_{\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} + \bm{\Phi}_{\bm{q}_{\mathrm{p}}} \dot{\bm{q}}_{\mathrm{p}} + \bm{\Phi}_{\bm{x}} \dot{\bm{x}} 
 =
 \bm{0}
+\label{equ:constr_diff_qap}
 \end{equation}
 to distinguish active (``a'') and passive (``p'') joints. Reordering the equation leads to the full inverse differential kinematics
 \begin{equation}
@@ -1443,6 +1450,87 @@ with the consequences for the kinematic modeling of robots in 3T2R tasks describ
 	\item Nur für den Fall, dass die ZB=0 sind, sind die Darstellungen überführbar.
 \end{itemize}
 \color{black}
+
+As introduced in Sec.\,\ref{sec:ZB_Anwendung}, the rotational part of the gradient matrices can not be derived with the commonly available Jacobian of the serial link kinematics of the legs.
+Defining the residual of the orientation for the inverse kinematics with Euler angles was first introduced in \cite{GoldenbergBenFen1985}, where the calculation of the partial derivatives was referred to the geometric Jacobian without further clarification.
+The relationship between the gradient matrices from Sec.\,\ref{sec:ZB_Anwendung} and the Jacobian can be obtained by comparing the platform or end-effector velocity 
+%
+\begin{equation}
+\dot{\bm{x}} = \bm{J}_1 \dot{\bm{q}}_1,
+\quad
+\begin{pmatrix}
+\dot{\bm{x}}_\mathrm{t}\\
+\dot{\bm{x}}_\mathrm{r}
+\end{pmatrix}
+ = 
+\begin{pmatrix}
+ \bm{J}_{\mathrm{t},1}(\bm{q}_1)\\
+ \bm{J}_{\mathrm{r},1}(\bm{q}_1) 
+\end{pmatrix}
+\dot{\bm{q}}_1
+\label{equ:diffkin1_jacobi}
+\end{equation}
+%
+obtained with the Jacobian with the velocity obtained by the gradient matrices of (\ref{equ:Phi_def}).
+Using the differential form (\ref{equ:constr_diff}) only for the first kinematic leg chain of the parallel robot gives
+%
+\begin{equation}
+\frac{\mathrm{d}}{\mathrm{d}t} \bm{\Phi}_1(\bm{q}_1,\bm{x})
+=
+\bm{\Phi}_{1,\bm{q}}(\bm{q}_1,\bm{x}) \dot{\bm{q}}_1 + \bm{\Phi}_{1,\bm{x}}(\bm{q}_1,\bm{x}) \dot{\bm{x}} 
+=
+\bm{0}
+\label{equ:constr_diff1}
+\end{equation}
+%
+and results reorganized to the form of (\ref{equ:diffkin1_jacobi}) with (\ref{equ:Phi_1_grad_q}) and (\ref{equ:Phi_1_grad_x}) to
+%
+\begin{equation}
+\begin{pmatrix}
+\dot{\bm{x}}_\mathrm{t}\\
+\dot{\bm{x}}_\mathrm{r}
+\end{pmatrix}
+=
+-
+\begin{pmatrix}
+-\bm{1} & \bm{0} \\
+\bm{0} & \bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}^{-1}
+\end{pmatrix}
+\begin{pmatrix}
+\bm{\Phi}_{\mathrm{t},1,\partial\bm{q}_1}
+&
+\bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}
+\end{pmatrix}
+\dot{\bm{q}}_1.
+\label{equ:diffkin1_gradmat}
+\end{equation}
+%
+By equating coefficients of (\ref{equ:diffkin1_jacobi}) and (\ref{equ:diffkin1_gradmat}) the relations
+%
+\begin{align}
+\bm{\Phi}_{1,\bm{q}}(\bm{q}_1)
+&=
+\bm{\Phi}_{1,\bm{x}}(\bm{q}_1,\bm{x})
+\bm{J}_1(\bm{q}_1),
+\label{equ:KoeffVgl_Phi1d1}
+\\
+\bm{\Phi}_{\mathrm{t},1,\partial\bm{q}_1}(\bm{q}_1)
+&=
+\bm{J}_{\mathrm{t},1}(\bm{q}_1)\quad\mathrm{and}
+\label{equ:KoeffVgl_Phi1td1}
+\\
+\bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}(\bm{q}_1,\bm{x})
+&=
+-\bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}(\bm{q}_1,\bm{x}) \bm{J}_{\mathrm{r},1}(\bm{q}_1)
+\label{equ:KoeffVgl_Phi1rd1}
+\end{align}
+%
+can be obtained between the gradient matrices and the analytic Jacobian of the serial leg chain.
+The dependency on $\bm{q}_1$ and $\bm{x}$ has been added to highlight the main requirement, namely the zero equality condition of (\ref{equ:constr_diff1}).
+In the inverse kinematics procedure of Sec.\,\ref{sec:ZB_Anwendung_IK_grad} the residual at step $k$ in (\ref{equ:taylor_phi}) is unequal to zero.
+For the partial derivative (\ref{equ:grad_Phi_1_x})/I a value of $\rotmato{D}{E} \ne \bm{1}$ will be inserted in (\ref{equ:alpha_xyz_diff_R}), which will break (\ref{equ:KoeffVgl_Phi1rd1}).
+The translational part is unaffected, as can be seen in (\ref{equ:KoeffVgl_Phi1td1}).
+%Since the term $\bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}$ depends on $\bm{q}_1$ \emph{and} $\bm{x}$
 
 \subsection{Matrix Operations for Partial Derivatives}
 \label{sec:appendix_gradient_matrix}

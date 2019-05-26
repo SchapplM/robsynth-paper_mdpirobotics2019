@@ -324,11 +324,11 @@ The description of the inverse kinematics problem and prior definitions are give
 %\end{itemize}
 %\color{black}
 
-\begin{figure}[tb]
-    \input{./figures/pkm_constr_def_transl.pdf_tex}
-    \caption{Kinematic Description of Parallel Robots.}
-    \label{fig:pkm_constr_transl}
-\end{figure} 
+%\begin{figure}[tb]
+%    \input{./figures/pkm_constr_def_transl.pdf_tex}
+%    \caption{Kinematic Description of Parallel Robots.}
+%    \label{fig:pkm_constr_transl}
+%\end{figure} 
 
 Before addressing the specific model for parallel robots in 3T2R tasks in the next section, the standard kinematics model of kinematics of parallel robots is provided in the following, corresponding to the state of the art \cite{Merlet2006,Gogu2008,BriotKha2015} and serving as a reference to highlight its shortcomings for 3T2R tasks.
 The regarded parallel robot consists of $m$ legs, which each have the joint coordinates $\bm{q}_i$.
@@ -715,7 +715,7 @@ The full kinematic constraint equations can only be defined for 3T3R tasks witho
 %
 The constraints $\bm{\Psi}_i$ from (\ref{equ:Psi_def}) for the reduced coordinates $\bm{\eta}$ can only be defined for one leg chain:
 Fig.\,\ref{fig:pkm_constr_rot_follow}\,(a) shows the open loops for the second leg chain for a given first leg chain.
-By also closing the \emph{3T2R} kinematic constraints for the second loop, as depicted in Fig.\ref{fig:pkm_constr_rot_follow}\,(b), the tool axis stays arbitrary and the platform pose demanded from the two legs would be different and therefore would not be a valid solution for the mechanism.
+By also closing the \emph{3T2R} kinematic constraints for the second loop, as depicted in Fig.\ref{fig:pkm_constr_rot_follow}\,(b), the tool axis stays arbitrary and the platform pose demanded from the two legs would be different and therefore would not be a valid solution for the complete mechanism.
 Only if the second leg fulfills the \emph{3T3R} kinematic constraints for all platform coordinates, as shown in Fig.\,\ref{fig:pkm_constr_rot_follow}\,(c), a valid configuration of the mechanism emerges.
 This approach has already be used for many specific robots systems, as introduced in Sec.\,\ref{sec:intro}.
 As a generalization, the first leg of the parallel robot is now termed the ``leading leg chain'' (Index ``$1$'') and the other legs are termed as ``following leg chains'' (Index ``$j$'').

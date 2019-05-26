@@ -2,10 +2,11 @@
 % Vier Bilder, jew. verschiedene kin. ZB
 % 
 % Skalierung der Bilder:
-% Breite: 155mm für vier Bilder -> 35mm für ein Bild
-% Höhe: 30mm
+% Breite: 155mm insgesamt; für vier Bilder 35mm für ein Bild; für drei
+%         Bilder mehr
+% Höhe: 30mm (oberer Teil wird in Inkscape sowieso abgeschnitten
 % Größenangaben im Matlab-Plot auch in mm. Dann übertragen der Daten in
-% Inkscape
+% Inkscape. Nutzen der Matlab-Bilder in Inkscape als Vorlage zum drüberzeichnen
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2019-05
 % (C) Institut für Mechatronische Systeme, Universität Hannover
@@ -54,10 +55,10 @@ RP.update_EE_FG(logical([1 1 0 0 0 1])); % Für IK der PKM
 RP.update_base([0;0;0], [0;0;-30]*pi/180);
 %% Startpose bestimmen
 % Mittelstellung im Arbeitsraum
-X0 = [ [7;-2;0]; [0;0;15]*pi/180 ];
+X0L = [ [7;-2;0]; [0;0;15]*pi/180 ];
 
 % Inverse Kinematik berechnen und testen
-[q0, Phi] = RP.invkin1(X0, rand(RP.NJ,1));
+[q0, Phi] = RP.invkin1(X0L, rand(RP.NJ,1));
 if any(abs(Phi) > 1e-8) || any(isnan(Phi))
   warning('Inverse Kinematik (für Gesamt-PKM) konnte in Startpose nicht berechnet werden');
 end
@@ -68,7 +69,7 @@ hold on;grid on;
 xlabel('x [m]');ylabel('y [m]');zlabel('z [m]');
 view(3);
 s_plot = struct( 'ks_legs', [], 'straight', 0);
-RP.plot( q0, X0, s_plot );
+RP.plot( q0, X0L, s_plot );
 view(0,90)
 xlim([-28,28])
 ylim([-25,28])
@@ -78,16 +79,16 @@ ylim([-25,28])
 for i = 1:4
   if i == 1
     % Plattform von 1. Beinkette aus verdreht und an falscher Position
-    Xi = X0 + [[-15; 5; 0]; [0;0;35]*pi/180];
+    Xi = X0L + [[-15; 5; 0]; [0;0;35]*pi/180];
   elseif i == 2
     % Plattform von 1. Beinkette aus verdreht und an richtiger Position
-    Xi = X0 + [[0; 0; 0]; [0;0;45]*pi/180];
+    Xi = X0L + [[0; 0; 0]; [0;0;45]*pi/180];
   elseif i == 3
     % Plattform von 1. Beinkette aus richtig orientiert aber an falscher Position
-    Xi = X0 + [[-10; 10; 0]; [0;0;0]*pi/180];
+    Xi = X0L + [[-10; 10; 0]; [0;0;0]*pi/180];
   elseif i == 4
     % Plattform von 1. Beinkette aus richtig orientiert und positioniert
-    Xi = X0;
+    Xi = X0L;
   end
   [qi, Phi] = RP.invkin1(Xi, q0);
   if any(abs(Phi) > 1e-8) || any(isnan(Phi))
@@ -99,7 +100,7 @@ for i = 1:4
   xlabel('x [m]');ylabel('y [m]');zlabel('z [m]');
   view(3);
   s_plot = struct( 'ks_legs', [], 'straight', 0);
-  RP.plot( qi, X0, s_plot );
+  RP.plot( qi, X0L, s_plot );
   view(0,90)
   xlim([-28,28])
   ylim([-25,28])
@@ -108,4 +109,54 @@ for i = 1:4
     4,4,gca,...
     0,0,0,0,0,0)
   export_fig(10+i, fullfile(respath, sprintf('pkm_3RRR_figure_gen_Fig3_%d.pdf',i)));
+end
+
+%% Roboter mit verschiedenen Ist-Posen aus der zweiten Gelenkkette erstellen
+X0F = [ [-7;-5;0]; [0;0;25]*pi/180 ];
+[q0F, Phi] = RP.invkin1(X0F, rand(RP.NJ,1));
+if any(abs(Phi) > 1e-8) || any(isnan(Phi))
+  warning('Inverse Kinematik (für Gesamt-PKM) konnte in Startpose nicht berechnet werden');
+end
+figure(20);clf;
+hold on;grid on;
+xlabel('x [m]');ylabel('y [m]');zlabel('z [m]');
+view(3);
+s_plot = struct( 'ks_legs', [], 'straight', 0);
+RP.plot( q0F, X0F, s_plot );
+view(0,90)
+xlim([-28,28])
+ylim([-25,28])
+
+
+% Für Kinematik-Schema der Zwangsbedingungen für Folgekette
+for i = 3%1:3
+  if i == 1
+    % Plattform von 2. Beinkette aus verdreht und an falscher Position
+    Xi = X0F + [[9; 10; 0]; [0;0;-100]*pi/180];
+  elseif i == 2
+    % Plattform von 2. Beinkette aus verdreht und an richtiger Position
+    Xi = X0F + [[0; 0; 0]; [0;0;45]*pi/180];
+  elseif i == 3
+    % Plattform von 1. Beinkette aus richtig orientiert und positioniert
+    Xi = X0F;
+  end
+  [qi, Phi] = RP.invkin1(Xi, q0);
+  if any(abs(Phi) > 1e-8) || any(isnan(Phi))
+    warning('Inverse Kinematik (für Gesamt-PKM) konnte nicht berechnet werden');
+  end
+  
+  figure(20+i);clf;
+  hold on;grid on;
+  xlabel('x [m]');ylabel('y [m]');zlabel('z [m]');
+  view(3);
+  s_plot = struct( 'ks_legs', [], 'straight', 0);
+  RP.plot( qi, X0F, s_plot );
+  view(0,90)
+  xlim([-28,28])
+  ylim([-25,28])
+
+  set_size_plot_subplot(20+i,...
+    4.8,6,gca,...
+    0,0,0,0,0,0)
+  export_fig(20+i, fullfile(respath, sprintf('pkm_3RRR_figure_gen_Fig4_%d.pdf',i)));
 end

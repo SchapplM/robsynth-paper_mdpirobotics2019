@@ -1,4 +1,4 @@
-%% Creator: Inkscape inkscape 0.91, www.inkscape.org
+%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'pkm_constr_def_rot_follow.pdf' (pdf, eps, ps)
 %%
@@ -35,6 +35,8 @@
     \renewcommand\transparent[1]{}%
   }%
   \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
     \setlength{\unitlength}{439.37007874bp}%
     \ifx\svgscale\undefined%
@@ -49,13 +51,19 @@
   \global\let\svgscale\undefined%
   \makeatother%
   \begin{picture}(1,0.19354839)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{pkm_constr_def_rot_follow.pdf}}%
-    \put(0.12317453,0.01899674){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{0D}=\vek{r}{}{0E}$}}}%
-    \put(0.03408594,0.01509511){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(a)}}}%
+    \put(0.01701605,0.00485317){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(a)\end{tabular}}}}%
+    \put(0.3733704,0.00485317){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(b)\end{tabular}}}}%
+    \put(0.65754349,0.00485317){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(c)\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{pkm_constr_def_rot_follow.pdf}}%
-    \put(0.39044028,0.02289859){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(b)}}}%
+    \put(0.11445942,0.12413749){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$L$\end{tabular}}}}%
+    \put(0.12670031,0.06395501){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\vek{r}{}{0L}(\bm{q}_1)$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{pkm_constr_def_rot_follow.pdf}}%
-    \put(0.67461337,0.01769627){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(c)}}}%
+    \put(0.24788715,0.02936581){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\vek{r}{}{0E}(\bm{q}_2)$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{pkm_constr_def_rot_follow.pdf}}%
+    \put(0.18213974,0.15073797){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$E$\end{tabular}}}}%
+    \put(0.19250592,0.0124515){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$O$\end{tabular}}}}%
   \end{picture}%
 \endgroup%

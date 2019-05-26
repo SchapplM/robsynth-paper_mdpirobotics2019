@@ -568,7 +568,7 @@ To simplify the following elaborations, the platform frame $\ks{D}$ is still ide
 %
 \begin{figure}[tb]
     \input{./figures/pkm_constr_def_rot_lead.pdf_tex}
-    \caption{Different cases for the kinematic constraints of the leading chain. TODO: Phi, Psi, transl, rot einzeichnen (0 oder ungleich 0)}
+    \caption{Different cases for the kinematic constraints of the leading chain for 3RRR example: (a) no constraints complied; (b) position and rotation about tool axis complied. Different orientations in 3D are assumed to be complied; (c) wrong position, but correct orientation; (d) all constraints complied.}
     \label{fig:pkm_constr_rot_lead}
 \end{figure} 
 %
@@ -584,7 +584,7 @@ For a formulation without the tool axis rotation a different constraint definiti
 \end{equation}
 %
 containing the vector loop from the robot base frame $\ks{0}$ to the platform $\ks{D}$ and the leg chain endeffector $\ks{E}$ can be used where in contrast to (\ref{equ:kinconstrAB}) only the translational part $\bm{x}_{\mathrm{t}}$ of the end-effector coordinates appears and not the rotational part $\bm{x}_{\mathrm{r}}$.
-The vector loop is depicted in Fig.\,\ref{fig:pkm_constr_rot_lead}\,(a) and (b) for a planar robot with opened and closed loops.
+The vector loop is depicted in Fig.\,\ref{fig:pkm_constr_rot_lead}\,(a) and (d) for a planar robot with opened and closed loops.
 As a drawback, all joint angles $\bm{q}_i$ of the leg $i$ and not only the coordinates of the first joints counted from the base are now included in the vector
 %
 \begin{equation}
@@ -620,7 +620,7 @@ have to be extended by the rotational part
 %
 of the kinematic constraints, which is needed to generate enough equations for an invertible matrix in the differential equations.
 The constraints again contain the deviation between the desired end-effector frame $\ks{D}$ expressed with $\bm{x}$ and the actual robots end-effector frame $\ks{E}$ expressed with $\bm{q}$.
-Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b-d) shows cases, where the translational constraints are met, but the rotational constraints have different values. For 3T3R tasks, only Fig.\,\ref{fig:pkm_constr_rot_lead}\,(d) represents a valid solution of the inverse kinematics. For 3T2R tasks, Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b-d) represent valid solutions.
+Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b) and (d) shows cases, where the translational constraints are met, but the rotational constraints have different values. For 3T3R tasks, only Fig.\,\ref{fig:pkm_constr_rot_lead}\,(d) represents a valid solution of the inverse kinematics. For 3T2R tasks, Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b) and (d) represent valid solutions.
 
 The goal of eliminating the tool rotation $\beta_3$ from the equations is not achieved yet, since all three components of the platform orientation $\bm{x}_\mathrm{r}$ affect the rotation matrix $\rotmat{0}{D}$. This can be addessed by the selection of the Euler angles:
 Similar to the definition of the rotational operational space coordinates (\ref{equ:xr_def}) the constraints $\bm{\Phi}_{\mathrm{r},i}$ are also expressed with a set of Euler angles $\bm{\alpha}$.
@@ -635,7 +635,7 @@ The intuitive approach of choosing
 %
 \begin{figure}[tb]
     \input{./figures/frame_comparison_combined_5dof_6dof.pdf_tex}
-    \caption{Overview of the different frames (a) for 6-dof tasks with standard Euler angle notation and (b) for 5-dof tasks with reciprocal Euler angle notation; taken from \cite{1_SchapplerTapOrt2019}.}
+    \caption{Overview of the different frames (a) for six-DoF tasks with standard Euler angle notation and (b) for 5ive-DoF tasks with reciprocal Euler angle notation; taken from \cite{1_SchapplerTapOrt2019}.}
     \label{fig:frames_5dof_6dof}
 \end{figure} 
 %
@@ -1237,19 +1237,19 @@ angles inverse jacobian matrix'' in \cite{Merlet2006} in contrast to the Jacobia
 
 Authors should discuss the results and how they can be interpreted in perspective of previous studies and of the working hypotheses. The findings and their implications should be discussed in the broadest context possible. Future research directions may also be highlighted.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Materials and Methods}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Materials and Methods}
+%
+%Materials and Methods should be described with sufficient details to allow others to replicate and build on published results. Please note that publication of your manuscript implicates that you must make all materials, data, computer code, and protocols associated with the publication available to readers. Please disclose at the submission stage any restrictions on the availability of materials or information. New methods and protocols should be described in detail while well-established methods can be briefly described and appropriately cited.
+%
+%Research manuscripts reporting large datasets that are deposited in a publicly available database should specify where the data have been deposited and provide the relevant accession numbers. If the accession numbers have not yet been obtained at the time of submission, please state that they will be provided during review. They must be provided prior to publication.
+%
+%Interventionary studies involving animals or humans, and other studies require ethical approval must list the authority that provided approval and the corresponding ethical approval code. 
 
-Materials and Methods should be described with sufficient details to allow others to replicate and build on published results. Please note that publication of your manuscript implicates that you must make all materials, data, computer code, and protocols associated with the publication available to readers. Please disclose at the submission stage any restrictions on the availability of materials or information. New methods and protocols should be described in detail while well-established methods can be briefly described and appropriately cited.
-
-Research manuscripts reporting large datasets that are deposited in a publicly available database should specify where the data have been deposited and provide the relevant accession numbers. If the accession numbers have not yet been obtained at the time of submission, please state that they will be provided during review. They must be provided prior to publication.
-
-Interventionary studies involving animals or humans, and other studies require ethical approval must list the authority that provided approval and the corresponding ethical approval code. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusions}
-
-This section is not mandatory, but can be added to the manuscript if the discussion is unusually long or complex.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Conclusions}
+%
+%This section is not mandatory, but can be added to the manuscript if the discussion is unusually long or complex.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1282,7 +1282,9 @@ This section is not mandatory, but can be added to the manuscript if the discuss
 
 \noindent 
 \begin{tabular}{@{}ll}
-REA & Reciprocal set of Euler angles
+IKP & Inverse Kinematics Problem \\
+DoF & degrees of freedom \\
+$x$T$y$R & $x$ translational and $y$ rotational degrees of freedom
 \end{tabular}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1443,13 +1445,13 @@ with the consequences for the kinematic modeling of robots in 3T2R tasks describ
 \subsection{Relation of the Gradient Matrices to the Geometric Jacobian of the Serial Chain}
 \label{sec:appendix_gradient_geomjacobian}
 
-\color{gray}
-\begin{itemize}
-	\item Methode mit Orientierungs-Residuum basierend auf Euler-Winkeln wurde in \cite{GoldenbergBenFen1985} eingeführt. Dort wurde der Gradient mit der geometrischen Jacobi-Matrix erklärt, ohne genauere Rechnung.
-	\item Mathematischer Beweis hier, dass das nicht möglich ist, da sich der Gradient auf den Orientierungsfehler bezieht und die Jacobi auf die absolute Orientierung
-	\item Nur für den Fall, dass die ZB=0 sind, sind die Darstellungen überführbar.
-\end{itemize}
-\color{black}
+%\color{gray}
+%\begin{itemize}
+%	\item Methode mit Orientierungs-Residuum basierend auf Euler-Winkeln wurde in \cite{GoldenbergBenFen1985} eingeführt. Dort wurde der Gradient mit der geometrischen Jacobi-Matrix erklärt, ohne genauere Rechnung.
+%	\item Mathematischer Beweis hier, dass das nicht möglich ist, da sich der Gradient auf den Orientierungsfehler bezieht und die Jacobi auf die absolute Orientierung
+%	\item Nur für den Fall, dass die ZB=0 sind, sind die Darstellungen überführbar.
+%\end{itemize}
+%\color{black}
 
 As introduced in Sec.\,\ref{sec:ZB_Anwendung}, the rotational part of the gradient matrices can not be derived with the commonly available Jacobian of the serial link kinematics of the legs.
 Defining the residual of the orientation for the inverse kinematics with Euler angles was first introduced in \cite{GoldenbergBenFen1985}, where the calculation of the partial derivatives was referred to the geometric Jacobian without further clarification.
@@ -1501,6 +1503,12 @@ and results reorganized to the form of (\ref{equ:diffkin1_jacobi}) with (\ref{eq
 &
 \bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}
 \end{pmatrix}
+\dot{\bm{q}}_1
+=
+\begin{pmatrix}
+\bm{\Phi}_{\mathrm{t},1,\partial\bm{q}_1} & \bm{0} \\
+\bm{0} & -\bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}^{-1} \bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}
+\end{pmatrix}
 \dot{\bm{q}}_1.
 \label{equ:diffkin1_gradmat}
 \end{equation}
@@ -1510,7 +1518,7 @@ By equating coefficients of (\ref{equ:diffkin1_jacobi}) and (\ref{equ:diffkin1_g
 \begin{align}
 \bm{\Phi}_{1,\bm{q}}(\bm{q}_1)
 &=
-\bm{\Phi}_{1,\bm{x}}(\bm{q}_1,\bm{x})
+-\bm{\Phi}_{1,\bm{x}}(\bm{q}_1,\bm{x})
 \bm{J}_1(\bm{q}_1),
 \label{equ:KoeffVgl_Phi1d1}
 \\

@@ -1,4 +1,4 @@
-%% Creator: Inkscape inkscape 0.91, www.inkscape.org
+%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'frame_comparison_combined_5dof_6dof.pdf' (pdf, eps, ps)
 %%
@@ -35,6 +35,8 @@
     \renewcommand\transparent[1]{}%
   }%
   \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
     \setlength{\unitlength}{439.37007874bp}%
     \ifx\svgscale\undefined%
@@ -49,29 +51,31 @@
   \global\let\svgscale\undefined%
   \makeatother%
   \begin{picture}(1,0.19354839)%
-    \put(0.45930685,0.09550331){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ks{0}$}}}%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0.45930686,0.0955033){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\ks{0}$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{frame_comparison_combined_5dof_6dof.pdf}}%
-    \put(0.95091092,0.09513201){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ks{D}$}}}%
-    \put(0.48169964,0.15837652){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{R}_x(\beta_1) \bm{R}_y(\beta_2) $}}}%
-    \put(0.56160641,0.05725908){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ks{E}$}}}%
+    \put(0.95091094,0.09513201){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\ks{D}$\end{tabular}}}}%
+    \put(0.48169965,0.15837652){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{R}_x(\beta_1) \bm{R}_y(\beta_2) $\end{tabular}}}}%
+    \put(0.55819244,0.0538451){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\ks{E}$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{frame_comparison_combined_5dof_6dof.pdf}}%
-    \put(0.48260942,0.03481773){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\rotmat{0}{E}(\bm{q})$}}}%
-    \put(0.629099,0.01304295){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{R}_y(\alpha_2) \bm{R}_x(\alpha_3)$}}}%
-    \put(0.67526933,0.15018464){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ks{A1}$}}}%
-    \put(0.75431888,0.04744389){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ks{A2}$}}}%
+    \put(0.48260943,0.03140375){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\rotmat{0}{E}(\bm{q}_1)$\end{tabular}}}}%
+    \put(0.62909901,0.01304294){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{R}_y(\alpha_2) \bm{R}_x(\alpha_3)$\end{tabular}}}}%
+    \put(0.67526934,0.15018464){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\ks{A1}$\end{tabular}}}}%
+    \put(0.75431889,0.04744389){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\ks{A2}$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{frame_comparison_combined_5dof_6dof.pdf}}%
-    \put(0.86663833,0.0248634){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{R}_z(\alpha_1)$}}}%
-    \put(0.73282788,0.10273578){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{R}_z(\beta_3+\alpha_1)$}}}%
+    \put(0.86663834,0.0248634){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{R}_z(\alpha_1)$\end{tabular}}}}%
+    \put(0.73282789,0.10273578){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{R}_z(\beta_3+\alpha_1)$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{frame_comparison_combined_5dof_6dof.pdf}}%
-    \put(0.87002319,0.16719685){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{R}_z(\beta_3)$}}}%
-    \put(0.0330203,0.10388322){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ks{0}$}}}%
-    \put(0.29605923,0.109736){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ks{D}$}}}%
-    \put(0.03529627,0.16904154){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\rotmat{0}{D}(\bm{x}_{\mathrm{r}})=\bm{R}_x(\beta_1) \bm{R}_y(\beta_2) \bm{R}_z(\beta_3)$}}}%
-    \put(0.14085319,0.05022708){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\ks{E}$}}}%
-    \put(0.00961018,0.05029976){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\rotmat{0}{E}(\bm{q})$}}}%
-    \put(0.19006336,0.01420939){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{R}_x(\alpha_1^*) \bm{R}_y(\alpha_2^*) \bm{R}_z(\alpha_3^*)$}}}%
-    \put(0.02148171,0.01310385){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(a)}}}%
-    \put(0.4606348,0.01027153){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(b)}}}%
+    \put(0.87002321,0.16719685){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{R}_z(\beta_3)$\end{tabular}}}}%
+    \put(0.04326223,0.10388322){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\ks{0}$\end{tabular}}}}%
+    \put(0.30630117,0.10973599){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\ks{D}$\end{tabular}}}}%
+    \put(0.04553821,0.16904154){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\rotmat{0}{D}(\bm{x}_{\mathrm{r}})=\bm{R}_x(\beta_1) \bm{R}_y(\beta_2) \bm{R}_z(\beta_3)$\end{tabular}}}}%
+    \put(0.15109513,0.0468131){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\ks{E}$\end{tabular}}}}%
+    \put(0.01643813,0.04688578){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\rotmat{0}{E}(\bm{q}_1)$\end{tabular}}}}%
+    \put(0.2003053,0.01762336){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{R}_x(\alpha_1^*) \bm{R}_y(\alpha_2^*) \bm{R}_z(\alpha_3^*)$\end{tabular}}}}%
+    \put(0.02148171,0.01310384){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(a)\end{tabular}}}}%
+    \put(0.46063481,0.01027153){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(b)\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=5]{frame_comparison_combined_5dof_6dof.pdf}}%
   \end{picture}%
 \endgroup%

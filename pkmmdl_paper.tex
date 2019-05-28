@@ -1031,30 +1031,33 @@ the permutation matrix for transposition from (\ref{equ:transposition_operator})
 the term ``III'' from (\ref{equ:grad_Phi_1_q}) in ``IV''.
 
 \subsection{Gradient-Based Solution of the Inverse Kinematics Problem with Redundancy Resolution}
+\label{sec:ZB_Anwendung_IK_grad}
 
 The presented kinematic constraints and their gradient matrices can be used to solve the inverse kinematics problem (IKP) of serial and parallel robots.
 Since all joint angles are involved for the case of parallel robots, solving their IKP results to solving the IKP for all leg chains.
-Based on the inverse kinematics using Euler angle based residuals in \cite{GoldenbergBenFen1985}, the Taylor series expansion of $\bm{\Phi}(\bm{q},\bm{x})$ leads to the definition of
+As first introduced in \cite{GoldenbergBenFen1985} for Euler angle residuals the IKP, the Taylor series expansion of $\bm{\Phi}(\bm{q},\bm{x})$ leads to the definition of
 %
 \begin{equation}
 \bm{\Phi}(\bm{q}^{k+1},\bm{x}) = 
 \bm{\Phi}(\bm{q}^{k},\bm{x})
 +
-\frac{\partial}{\partial \bm{q}} \bm{\Phi}(\bm{q},\bm{x}) \biggr\rvert_{\bm{q}^k} (\bm{q}^{k+1} - \bm{q}^k),
+\frac{\partial}{\partial \bm{q}} \bm{\Phi}(\bm{q},\bm{x}) \biggr\rvert_{\bm{q}^k} (\bm{q}^{k+1} - \bm{q}^k)
 \label{equ:taylor_phi}
 \end{equation}
 %
-in an iterative algorithm at the step $k+1$, which can be used to solve the IKP using a given initial value $\bm{q}^{0}$ and the condition.
+in an iterative algorithm at the step $k+1$, which can be used to solve the IKP using a given initial value $\bm{q}^{0}$ and the condition
 \begin{equation}
-\bm{\Phi}(\bm{q}^{k+1},\bm{x})=\bm{0}
+\bm{\Phi}(\bm{q}^{k+1},\bm{x})=\bm{0}.
 \end{equation}
 Using $\bm{\Psi}$ for 3T2R tasks from (\ref{equ:constr_Psi_PKM}) instead of $\bm{\Phi}$ from (\ref{equ:PhiPsi_grad_q_complete}) and the corresponding gradient matrix from (\ref{equ:PhiPsi_grad_q_complete}) allows the definition of a Nullspace in the gradient matrix $\bm{\Psi}_{\partial \bm{q}}(\bm{q},\bm{\eta})$ in the case of $\mathrm{dim}(\bm{q}_1)>\mathrm{dim}(\bm{\eta})$.
-The Nullspace can be exploited by using the Nullspace projection ${\Delta}\bm{q}_{\mathrm{N}}$ additionally to the solution ${\Delta}\bm{q}_{\mathrm{T}}$ of the IKP with the increment
+The redundancy can be exploited by using the Nullspace projection ${\Delta}\bm{q}_{\mathrm{N}}$ from \cite{Yoshikawa1984} additionally to the solution ${\Delta}\bm{q}_{\mathrm{T}}$ of the IKP with the increment
 %
 \begin{equation}
-{\Delta}\bm{q}
+{\Delta}\bm{q}^{k}
 =
-{\Delta}\bm{q}_{\mathrm{T}} + {\Delta}\bm{q}_{\mathrm{N}} \nonumber \\
+\bm{q}^{k+1} - \bm{q}^k
+=
+{\Delta}\bm{q}_{\mathrm{T}}^k + {\Delta}\bm{q}_{\mathrm{N}}^k \nonumber \\
 =
 \bm{\Psi}_{\partial\bm{q}}^{\dagger} (-\bm{\Psi}) +  (\bm{1}-\bm{\Psi}_{\partial\bm{q}}^{\dagger}\bm{\Psi}_{\partial\bm{q}}) h_{\partial\bm{q}}
 \label{equ:nullspace}
@@ -1076,40 +1079,41 @@ h_{\partial\bm{q}}
 \bm{W}(\bm{q}-\bar{\bm{q}})
 \end{equation}
 of the joint positions $\bm{q}$ from their respective reference position $\bar{\bm{q}}$ can be used.
-Minimizing $h(\bm{q})$ reduces the risk of joints reaching their technical limits.
-Other, more sophisticated criteria are for example the quadratic \cite{HuoBar2005} or hyperbolic \cite{ZhuQuCaoYan2013} distance of from joint limits, stiffness stiffness \cite{GuoDonKe2015} or singularity avoidance via Frobenius-norm condition number \cite{ZhuQuCaoYan2013} or squared condition number \cite{LegerAng2016}.
-The method can be used for serial link robots as well by removing all entries for the following legs from the formulas.
+Minimizing $h(\bm{q})$ reduces the risk of joints reaching their technical limits, but does not guarantee it.
+Other, more sophisticated criteria are for example the quadratic \cite{HuoBar2005} or hyperbolic \cite{ZhuQuCaoYan2013} distance of from joint limits, stiffness \cite{GuoDonKe2015} or singularity avoidance via Frobenius-norm condition number \cite{ZhuQuCaoYan2013} or squared condition number \cite{LegerAng2016}.
+The method can be used for serial link robots as well by removing all entries for the following legs from the formulas, as presented in \cite{1_SchapplerTapOrt2019}.
 The platform pose $\bm{x}$/$\bm{\eta}$ corresponds to the desired pose for the serial robots endeffector and the kinematic constraints $\bm{\Phi}$/$\bm{\Psi}$ correspond to the residual of the IKP.
 
 \subsection{Differential Kinematics for the Parallel Robot and its Applications}
-\label{sec:ZB_Anwendung_IK_grad}
 
 The reasonings so far only considered the inverse kinematics of the parallel robot.
 The kinematic definitions can also be used in the differential kinematics (\ref{equ:constr_diff}) to establish the connection between joint and platform velocity.
 This was already presented in general form in \cite{Merlet2006} and also corresponds to the theory of linear transformation which is the base of the works of Gogu on structural synthesis \cite{Gogu2008}.
 The derivation in this paper is based on the position \emph{and} orientation, but comes to the same result as the already-existing velocity-based approach.
-Further, using $\bm{\Psi}$/$\bm{\eta}$ as elaborated above allows for the first time to define differential kinematics specifically for 3T2R tasks in a general form.
+Further, using $\bm{\Psi}$/$\bm{\eta}$ as elaborated before allows for the first time to define differential kinematics specifically for 3T2R tasks in a general form.
 The differential equation of (\ref{equ:constr_diff}) is expanded to 
 \begin{equation}
 \frac{\mathrm{d}}{\mathrm{d}t} \bm{\Phi}(\bm{q}_{\mathrm{a}}, \bm{q}_{\mathrm{p}},\bm{x})
 =
-\bm{\Phi}_{\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} + \bm{\Phi}_{\bm{q}_{\mathrm{p}}} \dot{\bm{q}}_{\mathrm{p}} + \bm{\Phi}_{\bm{x}} \dot{\bm{x}} 
+\bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} + \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}} \dot{\bm{q}}_{\mathrm{p}} + \bm{\Phi}_{\partial\bm{x}} \dot{\bm{x}} 
 =
 \bm{0}
 \label{equ:constr_diff_qap}
 \end{equation}
-to distinguish active (``a'') and passive (``p'') joints. Reordering the equation leads to the full inverse differential kinematics
+to distinguish active (``a'') and passive (``p'') joints.
+The latter also contain the coordinates of the platform-connecting joints.
+Reordering the equation leads to the full inverse differential kinematics
 \begin{equation}
-\bm{\Phi}_{\bm{x}} \dot{\bm{x}}
+\bm{\Phi}_{\partial\bm{x}} \dot{\bm{x}}
 =
 - 
-\begin{pmatrix} \bm{\Phi}_{\bm{q}_{\mathrm{a}}} & \bm{\Phi}_{\bm{q}_{\mathrm{p}}}\end{pmatrix}
+\begin{pmatrix} \bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} & \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}}\end{pmatrix}
 \begin{pmatrix}
 \dot{\bm{q}}_{\mathrm{a}} \\
 \dot{\bm{q}}_{\mathrm{p}} \\
 \end{pmatrix}
 =
-\bm{\Phi}_{\mathrm{a}\mathrm{d}}
+\bm{\Phi}_{\partial\mathrm{ap}}
 \begin{pmatrix}
 \dot{\bm{q}}_{\mathrm{a}} \\
 \dot{\bm{q}}_{\mathrm{p}} \\
@@ -1120,7 +1124,7 @@ to distinguish active (``a'') and passive (``p'') joints. Reordering the equatio
 \dot{\bm{q}}_{\mathrm{p}} \\
 \end{pmatrix}
 =
--\bm{\Phi}_{\mathrm{a}\mathrm{d}}^{-1} \bm{\Phi}_{\bm{x}}
+-\bm{\Phi}_{\partial\mathrm{ap}}^{-1} \bm{\Phi}_{\partial\bm{x}}
 \dot{\bm{x}},
 \label{equ:full_diff_ik}
 \end{equation}
@@ -1128,16 +1132,16 @@ to distinguish active (``a'') and passive (``p'') joints. Reordering the equatio
 which has been adressed in the previous sections, and the full direct differential kinematics
 %
 \begin{equation}
-\bm{\Phi}_{\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} 
+\bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} 
 =
 - 
-\begin{pmatrix} \bm{\Phi}_{\bm{x}} & \bm{\Phi}_{\bm{q}_{\mathrm{p}}} \end{pmatrix}
+\begin{pmatrix} \bm{\Phi}_{\partial\bm{x}} & \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}} \end{pmatrix}
 \begin{pmatrix}
 \dot{\bm{x}} \\
 \dot{\bm{q}}_{\mathrm{p}}
 \end{pmatrix}
 =
-\bm{\Phi}_{\bm{x}\mathrm{d}}
+\bm{\Phi}_{\partial\bm{x}\mathrm{p}}
 \begin{pmatrix}
 \dot{\bm{x}} \\
 \dot{\bm{q}}_{\mathrm{p}}
@@ -1148,13 +1152,16 @@ which has been adressed in the previous sections, and the full direct differenti
 \dot{\bm{q}}_{\mathrm{p}}
 \end{pmatrix}
 =
--\bm{\Phi}_{\bm{x}\mathrm{d}}^{-1} \bm{\Phi}_{\bm{q}_{\mathrm{a}}}
+-\bm{\Phi}_{\partial\bm{x}\mathrm{p}}^{-1} \bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}}
 \dot{\bm{q}}_{\mathrm{a}}.
 \label{equ:full_diff_dk}
 \end{equation}
 %
-By only selecting the first rows for $\dot{\bm{q}}_{\mathrm{a}}$ in (\ref{equ:full_diff_ik}) and for $\dot{\bm{x}}$ in (\ref{equ:full_diff_dk}), the well-known analytical Jacobian\footnote{This matrix is related to the time derivatives $\dot{\bm{x}}_{\mathrm{r}}$ of the platform Euler angles and is called ``design Jacobian'' in \cite{Gogu2008} and ``Euler
-angles inverse jacobian matrix'' in \cite{Merlet2006} in contrast to the Jacobian related to angular velocities of the platform.} of the parallel robot \cite{Merlet2006,Gogu2008}, relating actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$ and platform velocities $\dot{\bm{x}}$, can be obtained.
+By only selecting the first rows for $\dot{\bm{q}}_{\mathrm{a}}$ in (\ref{equ:full_diff_ik}) and for $\dot{\bm{x}}$ in (\ref{equ:full_diff_dk}), the well-known analytic Jacobian\footnote{This matrix is related to the time derivatives $\dot{\bm{x}}_{\mathrm{r}}$ of the platform Euler angles and is called ``design Jacobian'' in \cite{Gogu2008} and ``Euler
+angles inverse jacobian matrix'' in \cite{Merlet2006} in contrast to the Jacobian related to angular velocities of the platform.} of the parallel robot \cite{Merlet2006,Gogu2008}, relating actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$ and platform velocities $\dot{\bm{x}}$, can be obtained from both equations.
+For the case of task or kinematic redundancy, the pseudo-inverse can be used for $\bm{\Phi}_{\partial\mathrm{ap}}$ in (\ref{equ:full_diff_ik}) as shown in Sec.\,\ref{sec:ZB_Anwendung_IK_grad}.
+The case of task redundancy does not affect (\ref{equ:full_diff_dk}), since the full platform velocity $\dot{\bm{x}}$ is obtained from given actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$.
+%For meaningful PKM the matrix $\bm{\Phi}_{\partial\bm{x}\mathrm{p}}$ is always square, since otherwise one or more leg chains would contain kinematic redundancy leading to uncontrollable Nullspace motion. --> ist so noch falsch/ungeprüft!
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
@@ -1237,7 +1244,8 @@ Authors should discuss the results and how they can be interpreted in perspectiv
 
 \noindent 
 \begin{tabular}{@{}ll}
-IKP & Inverse Kinematics Problem \\
+PKM & parallel kinematic machine (parallel robot) \\
+IKP & inverse kinematics problem \\
 DoF & degrees of freedom \\
 $x$T$y$R & $x$ translational and $y$ rotational degrees of freedom
 \end{tabular}}
@@ -1260,7 +1268,7 @@ $x$T$y$R & $x$ translational and $y$ rotational degrees of freedom
 %\color{black}
 
 The following appendix contains additional detailed information about the kinematic constraint formulation of this paper.
-Sec.\,\ref{sec:appendix_eulerreciproc} contains a mathematical proof for the properties of reciprocal Euler angles in inverse kinematics, which is only outlined in \cite{1_SchapplerTapOrt2019}.
+Sec.\,\ref{sec:appendix_eulerreciproc} contains a mathematical proof for the properties of reciprocal Euler angles in inverse kinematics, which is only outlined in equ.\,18 of \cite{1_SchapplerTapOrt2019}.
 The justification for using the approach of partial derivatives instead of the geometric Jacobian is derived in Sec.\,\ref{sec:appendix_gradient_geomjacobian}.
 The matrix operations for the partial derivatives are replicated from \cite{1_SchapplerTapOrt2019} in Sec.\,\ref{sec:appendix_gradient_matrix} and the contents of the single partial derivatives are given in Sec.\,\ref{sec:appendix_content_derivatives} to facilitate the understanding and implementation by the reader.
 
@@ -1268,8 +1276,8 @@ The matrix operations for the partial derivatives are replicated from \cite{1_Sc
 \label{sec:appendix_eulerreciproc}
 
 
-This section derives the effect of the reciprocity of Euler-angles at the example of the kinematics description of Sec.\,\ref{sec:REW_seriell} and the frames of Fig.\,\ref{fig:frames_5dof_6dof}\,(b).
-
+This section derives the effect of the reciprocity of Euler-angles at the example of the kinematics description of Sec.\,\ref{sec:REW_seriell} and the frames of Fig.\,\ref{fig:frames_5dof_6dof}\,(b):
+%
 An end-effector orientation $\bm{\beta}=\bm{x}_{\mathrm{r}}$ gives the rotation matrix\footnote{The matrix rotates vectors from $\ks{E}$ to $\ks{D}$}
 %
 \begin{equation}
@@ -1289,7 +1297,7 @@ where using the $X$-$Y$-$Z$-Euler angles and exploiting the properties of $\math
 \end{equation}
 %
 as introduced in (\ref{equ:def_rmat_xyz}).
-With an additional rotation $-\delta$ around the $z$-axis for the desired orientation, the resulting new Euler angles are
+With an additional rotation $-\delta$ around the $z$-axis for the desired orientation, the resulting new Euler angles $\bm{\beta}'$ are
 %
 \begin{equation}
 \beta_1'=\beta_1,  \quad \beta_2'=\beta_2,  \quad \beta_3'=\beta_3-\delta.

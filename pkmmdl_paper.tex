@@ -698,7 +698,7 @@ In the following, ``$\bm{\Phi}$'' is always used for 3T3R\footnote{By omitting t
 %\end{itemize}
 %\color{black}
 
-The definition of the full kinematic constraints (\ref{equ:Phi_def}) of a single leg chain of the parallel robot from the previous chapter can be used to write the kinematic constraints
+The definition of the full kinematic constraints (\ref{equ:Phit_def_i},\ref{equ:Phir_def_i},\ref{equ:Phi_def}) of a single leg chain of the parallel robot from the previous chapter can be used to write the kinematic constraints
 % and the differential kinematics of (\ref{equ:constr_qa}) and (\ref{equ:constr_qa_diff})
 in a general form.
 %
@@ -725,7 +725,7 @@ Fig.\,\ref{fig:pkm_constr_rot_follow}\,(a) show an open-loop second leg chain fo
     \label{fig:pkm_constr_rot_follow}
 \end{figure} 
 %
-By also closing the \emph{3T2R} kinematic constraints for the second loop, as depicted in Fig.\ref{fig:pkm_constr_rot_follow}\,(b), the tool axis stays arbitrary and the platform pose demanded from the two legs would be different and therefore would not be a valid solution for the complete mechanism.
+By also closing the \emph{3T2R} kinematic constraints $\bm{\Psi}_2$ for the second loop, as depicted in Fig.\ref{fig:pkm_constr_rot_follow}\,(b), the tool axis stays arbitrary and the platform pose demanded from the two legs would be different and therefore would not be a valid solution for the complete mechanism, i.\,e. $\bm{\Phi}_2 \ne \bm{0}$.
 Only if the second leg fulfills the \emph{3T3R} kinematic constraints for all platform coordinates, as shown in Fig.\,\ref{fig:pkm_constr_rot_follow}\,(c), a valid configuration of the mechanism emerges.
 This approach has already be used for many specific robots systems, as introduced in Sec.\,\ref{sec:intro}.
 As a generalization, the first leg of the parallel robot is now termed the ``leading leg chain'' (Index ``$1$'') and the other legs are termed as ``following leg chains'' (Index ``$j$'').
@@ -759,7 +759,7 @@ The rotational part of the kinematic constraints
 \label{equ:Phir_def_j}
 \end{equation}
 %
-for the following leg is given by the Euler angle representation of the deviation between the orientation of the platform frame $\ks{L}$ given by the leading leg and the frame $\ks{E}$ given by the respective following leg $j$.
+for the following leg is given by the Euler angle representation of the deviation between the orientation of the platform frame $\ks{L}$ given by the leading (``L'') leg and the frame $\ks{E}$ given by the respective following leg $j$.
 The choice of the Euler angle notation is arbitrary.
 The full kinematic constraints for the complete parallel robot with $m$ legs for 3T2R tasks
 %
@@ -821,9 +821,9 @@ the full geometric matrices of inverse kinematics
 =
 \begin{pmatrix}
 \bm{\Phi}_{1,\partial\bm{q}_1}  & \bm{0} & \bm{0} & \bm{0}\\
-\bm{\Phi}_{2,\partial\bm{q}_1} & \bm{\Phi}_{2,\partial\bm{q}_2} & \ddots & \bm{0}  \\
+\bm{0} & \bm{\Phi}_{2,\partial\bm{q}_2} & \ddots & \bm{0}  \\
 \vdots & \ddots & \ddots & \bm{0}  \\
-\bm{\Phi}_{m,\partial\bm{q}_1} & \bm{0} & \bm{0} &\bm{\Phi}_{m,\partial\bm{q}_m}
+\bm{0} & \bm{0} & \bm{0} &\bm{\Phi}_{m,\partial\bm{q}_m}
 \end{pmatrix}
 \quad
 \mathrm{and}
@@ -865,15 +865,22 @@ and the full geometric matrices of direct kinematics
 \end{equation}
 %
 have to be calculated for the 3T3R and the 3T2R case respectively.
-Since the 3T2R case can be inferred from the 3T3R case by the definition of reciprocal Euler angles and the selection of the corresponding entries of the coordinates in (\ref{equ:etar_def}) and the constraints in (\ref{equ:Psir_def}), only the 3T3R case is written out in the following elaborations.
+The gradient $\bm{\Phi}_{\partial \bm{q}}$ has block diagonal form, indicating that the inverse kinematics problem can be solved for each leg independently.
+The structures of the gradient $\bm{\Psi}_{\partial \bm{q}}$ results from the coupling of the leading and following joints in the rotational constraints equation.
+\color{gray}
+Since the 3T2R case can be inferred from the 3T3R case by the definition of reciprocal Euler angles and the selection of the corresponding entries of the coordinates in (\ref{equ:etar_def}) and the constraints in (\ref{equ:Psir_def}), only the 3T3R case ``$\bm{\Phi}$'' is written out in the following elaborations.
+\color{black}
 
 The gradient matrices $\bm{\Phi}_{\partial \bm{q}}$ and $\bm{\Phi}_{\partial \bm{x}}$ contain nested nonlinear functions related to the orientation error, therefore the geometric Jacobian of the leg chains can not be exploited for the rotational part, as derived in appendix\,\ref{sec:appendix_gradient_geomjacobian}.
 The gradients are calculated with the chain rule and a syntax for stacking matrix columns to avoid differentiating matrices or with respect to matrices, which was introduced in \cite{1_SchapplerTapOrt2019}.
 The product operator $\overline{\Pi}$, the stacking operator $\overline{\bm{R}}$ and the transpose operator $\bm{P}_\transp$ used for the implementation in the next section are explained in appendix\, \ref{sec:appendix_gradient_matrix}.
 
-\subsection{Constraint Gradients for the Leading Leg}
+\subsection{Constraint Gradients for the Leading Leg and the 3T3R case}
 %
-The leading legs constraint gradient matrix w.\,r.\,t. the joint coordinates can be expanded to
+The constraint definition $\bm{\Psi}_1$ for the leading leg of the 3T2R case (\ref{equ:constr_Psi_PKM}) and $\bm{\Phi}_i$ with $i=1,...,m$ for all legs of the 3T3R case (\ref{equ:constr_Phi_PKM}) are subject to the same model of (\ref{equ:Phit_def_i},\ref{equ:Phir_def_i},\ref{equ:Phi_def}).
+In the following, the 3T3R constraints are displayed.
+The form $\bm{\Psi}_1$ for the 3T2R case is obtained by removing the corresponding line of the rotational component according to (\ref{equ:Psir_def}).
+The constraint gradient matrix w.\,r.\,t. the joint coordinates can be expanded to
 %
 \begin{equation}
 \bm{\Phi}_{1,\partial\bm{q}_1}
@@ -959,10 +966,10 @@ the permutation matrix for transposition from (\ref{equ:transposition_operator})
 (\ref{equ:diff_prod_mat2}), where the contents of $\rotmato{0}{E}^\transp$ are inserted in ``III'' and
 (\ref{equ:rotmat_diff_beta}) with the elements of $\bm{x}_{\mathrm{r}}$ for $\bm{\beta}$ in ``IV''.
 
-\subsection{Constraint Gradients for the Following Leg}
+\subsection{Constraint Gradients for the Following Leg in the 3T2R Case}
 
-As explained regarding (\ref{equ:constr_Phi_PKM}), the constraints (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) and their gradients (\ref{equ:grad_Phi_1_q}) and (\ref{equ:grad_Phi_1_x}) are used for the leading leg.
-For the following legs, the gradients $\bm{\Phi}_{j,\partial\bm{q}_1}$, $\bm{\Phi}_{j,\partial\bm{q}_j}$ and $\bm{\Phi}_{j,\partial\bm{x}}$ from (\ref{equ:PhiPsi_grad_q_complete}) and (\ref{equ:PhiPsi_grad_x_complete}) have to be calculated in a similar way. 
+As explained regarding (\ref{equ:constr_Phi_PKM}), the constraints (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) and their gradients (\ref{equ:grad_Phi_1_q}) and (\ref{equ:grad_Phi_1_x}) are used for all legs in the 3T3R case and the leading leg in the 3T2R case.
+For the following legs in the 3T2R case, the gradients $\bm{\Phi}_{j,\partial\bm{q}_1}$, $\bm{\Phi}_{j,\partial\bm{q}_j}$ and $\bm{\Phi}_{j,\partial\bm{x}}$ with $j=2,...,m$ from the right part of  (\ref{equ:PhiPsi_grad_q_complete}) and (\ref{equ:PhiPsi_grad_x_complete}) have to be calculated in a similar way. 
 Due to the abscence of the platform orientation in (\ref{equ:Phir_def_j}), (\ref{equ:Phi_1_grad_x}) simplifies for the following leg to 
 %
 \begin{equation}
@@ -1049,8 +1056,8 @@ in an iterative algorithm at the step $k+1$, which can be used to solve the IKP 
 \begin{equation}
 \bm{\Phi}(\bm{q}^{k+1},\bm{x})=\bm{0}.
 \end{equation}
-Using $\bm{\Psi}$ for 3T2R tasks from (\ref{equ:constr_Psi_PKM}) instead of $\bm{\Phi}$ from (\ref{equ:PhiPsi_grad_q_complete}) and the corresponding gradient matrix from (\ref{equ:PhiPsi_grad_q_complete}) allows the definition of a Nullspace in the gradient matrix $\bm{\Psi}_{\partial \bm{q}}(\bm{q},\bm{\eta})$ in the case of $\mathrm{dim}(\bm{q}_1)>\mathrm{dim}(\bm{\eta})$.
-The redundancy can be exploited by using the Nullspace projection ${\Delta}\bm{q}_{\mathrm{N}}$ from \cite{Yoshikawa1984} additionally to the solution ${\Delta}\bm{q}_{\mathrm{T}}$ of the IKP with the increment
+Using $\bm{\Psi}$ for 3T2R tasks from (\ref{equ:constr_Psi_PKM}) instead of $\bm{\Phi}$ from (\ref{equ:constr_Phi_PKM}) and the corresponding gradient matrix from (\ref{equ:PhiPsi_grad_q_complete}) allows the definition of a Nullspace in the gradient matrix $\bm{\Psi}_{\partial \bm{q}}(\bm{q},\bm{\eta})$ in the case of $\mathrm{dim}(\bm{q}_1)>\mathrm{dim}(\bm{\eta})$.
+This redundancy can be exploited by using the Nullspace projection ${\Delta}\bm{q}_{\mathrm{N}}$ from \cite{Yoshikawa1984} additionally to the solution ${\Delta}\bm{q}_{\mathrm{T}}$ of the IKP with the increment
 %
 \begin{equation}
 {\Delta}\bm{q}^{k}

@@ -1,4 +1,4 @@
-%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% Creator: Inkscape inkscape 0.91, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'pkm_constr_def_rot_lead.pdf' (pdf, eps, ps)
 %%
@@ -35,8 +35,6 @@
     \renewcommand\transparent[1]{}%
   }%
   \providecommand\rotatebox[2]{#2}%
-  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
-  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
     \setlength{\unitlength}{439.37007874bp}%
     \ifx\svgscale\undefined%
@@ -50,34 +48,28 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.19354839)%
-    \lineheight{1}%
-    \setlength\tabcolsep{0pt}%
+  \begin{picture}(1,0.16129032)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{pkm_constr_def_rot_lead.pdf}}%
-    \put(0.16633698,0.04870635){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\vek{r}{}{0D}(\bm{x})$\end{tabular}}}}%
+    \put(0.29379219,0.03049847){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{0D}(\bm{x})$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{pkm_constr_def_rot_lead.pdf}}%
-    \put(0.00929397,0.12970721){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\vek{r}{}{0E}(\bm{q}_i)$\end{tabular}}}}%
-    \put(0.48746202,0.07194574){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\vek{r}{}{0D}=\vek{r}{}{0E}$\end{tabular}}}}%
-    \put(0.0963504,0.14328189){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$E$\end{tabular}}}}%
-    \put(0.15308747,0.0876826){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$D$\end{tabular}}}}%
-    \put(0.01912946,0.00940514){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(a)\end{tabular}}}}%
-    \put(0.31256905,0.01484395){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(b)\end{tabular}}}}%
-    \put(0.78613663,0.01070561){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(d)\end{tabular}}}}%
-    \put(0.49408949,0.01484395){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(c)\end{tabular}}}}%
+    \put(0.12644831,0.10274201){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{0E}(\bm{q}_i)$}}}%
+    \put(0.65133298,0.04645482){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{0D}=\vek{r}{}{0E}$}}}%
+    \put(0.22380559,0.12507401){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$E$}}}%
+    \put(0.28054268,0.06947472){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$D$}}}%
+    \put(0.0145352,0.00940515){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(a)}}}%
+    \put(0.4407988,0.00940515){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(b)}}}%
+    \put(0.7920968,0.00940515){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(c)}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{pkm_constr_def_rot_lead.pdf}}%
-    \put(0.18177245,0.17782436){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{t},1} \ne \bm{0}$\end{tabular}}}}%
-    \put(0.18177245,0.15490203){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{r},1} \ne \bm{0}$\end{tabular}}}}%
-    \put(0.18177245,0.13197958){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Psi}_{\mathrm{r},1} \ne \bm{0}$\end{tabular}}}}%
-    \put(0.31930701,0.17782436){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{t},1} = \bm{0}$\end{tabular}}}}%
-    \put(0.31930701,0.15490203){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{r},1} \ne \bm{0}$\end{tabular}}}}%
-    \put(0.31930701,0.13197958){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Psi}_{\mathrm{r},1} = \bm{0}$\end{tabular}}}}%
-    \put(0.84054836,0.17782436){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{t},1} = \bm{0}$\end{tabular}}}}%
-    \put(0.84054836,0.15490203){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{r},1} = \bm{0}$\end{tabular}}}}%
-    \put(0.84054836,0.13197958){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Psi}_{\mathrm{r},1} = \bm{0}$\end{tabular}}}}%
-    \put(0.57531086,0.17782436){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{t},1} \ne \bm{0}$\end{tabular}}}}%
-    \put(0.57531086,0.15490203){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{r},1} = \bm{0}$\end{tabular}}}}%
-    \put(0.57531086,0.13197958){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Psi}_{\mathrm{r},1} = \bm{0}$\end{tabular}}}}%
-    \put(0.14675361,0.02005782){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$O$\end{tabular}}}}%
+    \put(0.01512865,0.13486022){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{t},1} \ne \bm{0}$}}}%
+    \put(0.01512865,0.11193789){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{r},1} \ne \bm{0}$}}}%
+    \put(0.01512865,0.08901544){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Psi}_{\mathrm{r},1} \ne \bm{0}$}}}%
+    \put(0.44139226,0.13486022){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{t},1} = \bm{0}$}}}%
+    \put(0.44139226,0.11193789){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{r},1} \ne \bm{0}$}}}%
+    \put(0.44139226,0.08901544){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Psi}_{\mathrm{r},1} = \bm{0}$}}}%
+    \put(0.79269024,0.13486022){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{t},1} = \bm{0}$}}}%
+    \put(0.79269024,0.11193789){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{r},1} = \bm{0}$}}}%
+    \put(0.79269024,0.08901544){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Psi}_{\mathrm{r},1} = \bm{0}$}}}%
+    \put(0.27420882,0.00184994){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$O$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{pkm_constr_def_rot_lead.pdf}}%
   \end{picture}%
 \endgroup%

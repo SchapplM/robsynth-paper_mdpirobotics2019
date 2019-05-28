@@ -567,7 +567,7 @@ To simplify the following elaborations, the platform frame $\ks{D}$ is still ide
 %
 \begin{figure}[tb]
     \input{./figures/pkm_constr_def_rot_lead.pdf_tex}
-    \caption{Different cases for the kinematic constraints of the leading chain for 3RRR example: (a) no constraints complied; (b) position and rotation about tool axis complied. Different orientations in 3D are assumed to be complied; (c) wrong position, but correct orientation; (d) all constraints complied.}
+    \caption{Different cases for the kinematic constraints of the leading chain for the 3RRR example:\\(a) no constraints complied; (b) position and tool axis rotation complied; (c) all constraints complied.}
     \label{fig:pkm_constr_rot_lead}
 \end{figure} 
 %
@@ -583,7 +583,7 @@ For a formulation without the tool axis rotation, a different constraint definit
 \end{equation}
 %
 containing the vector loop from the robot base frame $\ks{0}$ to the platform $\ks{D}$ and the leg chain endeffector $\ks{E}$ can be used, where in contrast to (\ref{equ:kinconstrAB}) only the translational part $\bm{x}_{\mathrm{t}}$ of the end-effector coordinates appears and not the rotational part $\bm{x}_{\mathrm{r}}$.
-The vector loop is depicted in Fig.\,\ref{fig:pkm_constr_rot_lead}\,(a) and (d) for a planar robot with opened and closed loops.
+The vector loop is depicted in Fig.\,\ref{fig:pkm_constr_rot_lead}\,(a) and (c) for a planar robot with opened and closed loops.
 As a drawback, all joint angles $\bm{q}_i$ of the leg $i$ and not only the coordinates of the first joints counted from the base are now included in the vector
 %
 \begin{equation}
@@ -619,8 +619,8 @@ have to be extended by the rotational part
 %
 of the kinematic constraints, which is needed to generate enough equations for an invertible matrix in the differential equations.
 The constraints again contain the deviation between the desired end-effector frame $\ks{D}$ expressed with $\bm{x}$ and the actual robots end-effector frame $\ks{E}$ expressed with $\bm{q}$.
-Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b) and (d) show cases, where the translational constraints are met, but the rotational constraints have different values.
-For 3T3R tasks, only Fig.\,\ref{fig:pkm_constr_rot_lead}\,(d) represents a valid solution of the inverse kinematics. For 3T2R tasks, Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b) and (d) represent valid solutions.
+Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b) and (c) show cases, where the translational constraints are met, but the rotational constraints have different values.
+For 3T3R tasks, only Fig.\,\ref{fig:pkm_constr_rot_lead}\,(c) represents a valid solution of the inverse kinematics. For 3T2R tasks, Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b) and (c) represent valid solutions.
 
 The goal of eliminating the tool rotation $\beta_3$ from the equations is not achieved yet, since all three components of the platform orientation $\bm{x}_\mathrm{r}$ affect the rotation matrix $\rotmat{0}{D}$. This can be addessed by the selection of the Euler angles:
 Similar to the definition of the rotational operational space coordinates $\bm{x}_\mathrm{r}$ in (\ref{equ:xr_def}), the constraints $\bm{\Phi}_{\mathrm{r},i}$ are also expressed with a set of Euler angles $\bm{\alpha}$.

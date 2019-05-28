@@ -1,4 +1,4 @@
-%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% Creator: Inkscape inkscape 0.91, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'pkm_constr_def_rot_follow.pdf' (pdf, eps, ps)
 %%
@@ -35,8 +35,6 @@
     \renewcommand\transparent[1]{}%
   }%
   \providecommand\rotatebox[2]{#2}%
-  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
-  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
     \setlength{\unitlength}{439.37007874bp}%
     \ifx\svgscale\undefined%
@@ -51,19 +49,29 @@
   \global\let\svgscale\undefined%
   \makeatother%
   \begin{picture}(1,0.19354839)%
-    \lineheight{1}%
-    \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{pkm_constr_def_rot_follow.pdf}}%
-    \put(0.01701605,0.00485317){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(a)\end{tabular}}}}%
-    \put(0.3733704,0.00485317){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(b)\end{tabular}}}}%
-    \put(0.65754349,0.00485317){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(c)\end{tabular}}}}%
+    \put(0.03027333,0.00485318){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(a)}}}%
+    \put(0.36371026,0.00485318){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(b)}}}%
+    \put(0.71172428,0.00485318){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(c)}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{pkm_constr_def_rot_follow.pdf}}%
-    \put(0.11445942,0.12413749){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$L$\end{tabular}}}}%
-    \put(0.12670031,0.06395501){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\vek{r}{}{0L}(\bm{q}_1)$\end{tabular}}}}%
+    \put(0.13630887,0.1241375){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$L$}}}%
+    \put(0.14854977,0.06395501){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{0L}(\bm{q}_1)$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{pkm_constr_def_rot_follow.pdf}}%
-    \put(0.24788715,0.02936581){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\vek{r}{}{0E}(\bm{q}_2)$\end{tabular}}}}%
+    \put(0.2551703,0.02936581){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\vek{r}{}{0E}(\bm{q}_2)$}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{pkm_constr_def_rot_follow.pdf}}%
-    \put(0.18213974,0.15073797){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$E$\end{tabular}}}}%
-    \put(0.19250592,0.0124515){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$O$\end{tabular}}}}%
+    \put(0.2039892,0.15073797){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$E$}}}%
+    \put(0.21435538,0.0124515){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$O$}}}%
+    \put(0.00524961,0.17969432){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{t},2} \ne \bm{0}$}}}%
+    \put(0.00524961,0.15677198){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{r},2} \ne \bm{0}$}}}%
+    \put(0.00524961,0.13384954){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Psi}_{\mathrm{r},2} \ne \bm{0}$}}}%
+    \put(-0.01040451,0.1999616){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.09575397\unitlength}\raggedright \end{minipage}}}%
+    \put(0.34606748,0.17969432){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{t},2} = \bm{0}$}}}%
+    \put(0.34606748,0.15677198){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{r},2} \ne \bm{0}$}}}%
+    \put(0.34606748,0.13384954){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Psi}_{\mathrm{r},2} = \bm{0}$}}}%
+    \put(0.16117368,1.92904546){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.09575397\unitlength}\raggedright \end{minipage}}}%
+    \put(0.6945527,0.17969432){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{t},2} = \bm{0}$}}}%
+    \put(0.6945527,0.15677198){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{r},2} = \bm{0}$}}}%
+    \put(0.6945527,0.13384954){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Psi}_{\mathrm{r},2} = \bm{0}$}}}%
+    \put(0.5096589,1.92904546){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.09575397\unitlength}\raggedright \end{minipage}}}%
   \end{picture}%
 \endgroup%

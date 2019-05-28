@@ -208,8 +208,8 @@ Class III is mainly influenced by the systematic synthesis of \cite{Gogu2008} an
 Examples for the first class are hexapods\footnote{The joint structure is denoted by the number of the legs and the order of universal (``U''), prismatic (``P''), spherical (``S''), helical (``H'') and revolute (``R'') joints in the leg chains. Different actuated legs are connected by dashes (``-''), passive constraint legs are connected by a slash (``/''). Actuated joints are underlined.} (6U\underline{P}S) \cite{MerletPerDan2000} or the Eclipse \cite{HongKim2000} machine tool (2\underline{PPR}S-\underline{PP}RS).
 Any other parallel robot with full mobility (see e.\,g. \cite{Merlet2006,Gogu2008,Zhang2009}) may be used as well.
 
-The second class allows more variety, since the 6-DoF mechanism and the 5-DoF constraining leg can manifest in different kinematic structures:
-The U\underline{P}S structure is used for the 6-DoF mechanism by \cite{WangGos1997} with a focus on kinematic analysis of 5U\underline{P}S/US, by \cite{ZhangGos2001}  with a focus on kinetostatic modeling at the example of 5U\underline{P}S/RUU, by \cite{ZhengGaoZha2005} with focus on trajectory control of 5U\underline{P}S/PRPU and by \cite{GaoSunZha2004} for pose measurement with the passive leg of 5U\underline{P}S/PRPU.
+The second class allows more variety, since the six-DoF mechanism and the five-DoF constraining leg can manifest in different kinematic structures:
+The U\underline{P}S structure is used for the six-DoF mechanism by \cite{WangGos1997} with a focus on kinematic analysis of 5U\underline{P}S/US, by \cite{ZhangGos2001}  with a focus on kinetostatic modeling at the example of 5U\underline{P}S/RUU, by \cite{ZhengGaoZha2005} with focus on trajectory control of 5U\underline{P}S/PRPU and by \cite{GaoSunZha2004} for pose measurement with the passive leg of 5U\underline{P}S/PRPU.
 Other possible general base structures are \underline{R}US at the 5\underline{R}US/US example in \cite{WangGos1997}, \underline{P}US, which has been investigated for the control of a redundantly actuated 6\underline{P}US/UPU regarding the control of the redundant leg with inverse-dynamics control \cite{LiuXuYaoXu2015} or force control \cite{WenQinZhaLam2016}.
 The redundantly actuated 5U\underline{P}S-\underline{P}RPU from \cite{ChengWanZha2008} is based on the machine from \cite{ZhengGaoZha2005}, but does not fall in any of the classes I-IV.
 
@@ -245,7 +245,7 @@ Therefore, the remainder of the paper focuses on mechanisms of the first class t
 \subsection{Inverse Kinematics of Parallel Robots for 3T2R Tasks}
 
 The parallel robots with five DoF presented previously have a kinematic structure, that allows an analytic model of the inverse kinematics.
-All references define the endeffector orientation with two consecutive elementary rotations, i.\,e. define two Euler angles to represent the tool axis orientation in minimal coordinates \cite{LiuXuYaoXu2015, WenQinZhaLam2016, ZhengGaoZha2005,GaoSunZha2004, ChengWanZha2008, AlaghebandMahMilBen2015, Tale-MasoulehSaaGosTag2010, BaerWei2006, Tale-MasoulehGos2011}, which is called ``partial pose'' in \cite{MerletPerDan2000}.
+All references define the end-effector orientation with two consecutive elementary rotations, i.\,e. define two Euler angles to represent the tool axis orientation in minimal coordinates \cite{LiuXuYaoXu2015, WenQinZhaLam2016, ZhengGaoZha2005,GaoSunZha2004, ChengWanZha2008, AlaghebandMahMilBen2015, Tale-MasoulehSaaGosTag2010, BaerWei2006, Tale-MasoulehGos2011}, which is called ``partial pose'' in \cite{MerletPerDan2000}.
 The inverse kinematics problem (IKP) is first solved for the first chain, which is called ``leading chain'' in this paper.
 Due to the geometry of the leading chain, this solution can be found algebraically. %  \cite{WangGos1997}
 Then the IKP is solved for the other ``following'' chains with the given orientation from the leading chain and standard methods.
@@ -352,8 +352,8 @@ The coordinates
 \label{equ:x_def}
 \end{equation}
 %
-of the endeffector platform describe the position and orientation of the endeffector frame  $\ks{D}$ with respect to the base frame $\ks{0}$, which is marked with left subscript ``$(0)$'' for vectors and left superscript ``$0$'' for rotation matrices.
-The platform-related endeffector frame is the desired frame in the inverse kinematics problem and is therefore abbreviated with ``D''.
+of the end-effector platform describe the position and orientation of the end-effector frame  $\ks{D}$ with respect to the base frame $\ks{0}$, which is marked with left subscript ``$(0)$'' for vectors and left superscript ``$0$'' for rotation matrices.
+The platform-related end-effector frame is the desired frame in the inverse kinematics problem and is therefore abbreviated with ``D''.
 The position 
 %
 \begin{equation}
@@ -488,10 +488,10 @@ This definition of the constraints has the following drawbacks:
     \item For parallel robots with arbitrary leg chains like those generated by a structural synthesis \cite{KongGos2005, Gogu2008, RamirezKotOrt2015}, it is generally not possible to analytically eliminate the passive joint coordinates.
     \item If more than three joint coordinates per leg influence the coupling point position $B_i$, the three kinematic constraints per joint in (\ref{equ:kinconstrAB}) are not sufficient to generate enough equations for the matrix of (\ref{equ:PKM_phi_grad_q}) to become invertible.
     \color{gray}Projection-based methods for the derivation of the dynamics \cite{Merlet2006,BriotKha2015,AbdellatifHei2009,DoThanhKotHeiOrt2009b} underly the same restrictions.\color{black}
-    The velocity based theory of linear transformations used by \cite{Gogu2008} allows to determine the mobility of arbitrary parallel robots.
+    The velocity-based theory of linear transformations used by \cite{Gogu2008} allows to determine the mobility of arbitrary parallel robots.
     The linear transformation is generalized in \cite{HuangLiuChe2011} to  accuracy and stiffness modeling by means of screw theory resulting in the ``generalized Jacobian''.
     Both concepts do not provide a direct appliance to solve the IKP, since this requires a formulation of the orientation at position level, not velocity level.
-    \item Exploiting the reduction of endeffector coordinates for 3T2R tasks is not possible, since all endeffector coordinates are included in (\ref{equ:vec_AB}).
+    \item Exploiting the reduction of end-effector coordinates for 3T2R tasks is not possible, since all end-effector coordinates are included in (\ref{equ:vec_AB}).
 \end{enumerate}
 %
 An alternative kinematic model to encounter the combination of these points is presented in the next section, where the concept of reciprocal sets of Euler angles for the inverse kinematics problem for serial link robots \cite{1_SchapplerTapOrt2019} is transferred to the leading leg of parallel robots.
@@ -572,7 +572,7 @@ The last operational space coordinate $\beta_3$, the rotation around the $z$-axi
 To be able to set the rotational DoF around the tool axis in 3T2R tasks arbitrarily and use gradient-based inverse kinematics, $\beta_3$ has to be eliminated completely from the kinematics equations (\ref{equ:kinconstrAB}).
 %
 %
-To simplify the following elaborations, the platform frame $\ks{D}$ is still identified as the desired frame of the inverse kinematics problem and the endeffector frame that results from the joint angles of leg $i$ is now termed $\ks{E}$, which corresponds to the forward kinematics of the leg chain.
+To simplify the following elaborations, the platform frame $\ks{D}$ is still identified as the desired frame of the inverse kinematics problem and the end-effector frame that results from the joint angles of leg $i$ is now termed $\ks{E}$, which corresponds to the forward kinematics of the leg chain.
 %
 \begin{figure}[tb]
     \input{./figures/pkm_constr_def_rot_lead.pdf_tex}
@@ -591,7 +591,7 @@ For a formulation without the tool axis rotation, a different constraint definit
 \label{equ:Phit_def_i}
 \end{equation}
 %
-containing the vector loop from the robot base frame $\ks{0}$ to the platform $\ks{D}$ and the leg chain endeffector $\ks{E}$ can be used, where in contrast to (\ref{equ:kinconstrAB}) only the translational part $\bm{x}_{\mathrm{t}}$ of the end-effector coordinates appears and not the rotational part $\bm{x}_{\mathrm{r}}$.
+containing the vector loop from the robot base frame $\ks{0}$ to the platform $\ks{D}$ and the leg chain end-effector $\ks{E}$ can be used, where in contrast to (\ref{equ:kinconstrAB}) only the translational part $\bm{x}_{\mathrm{t}}$ of the end-effector coordinates appears and not the rotational part $\bm{x}_{\mathrm{r}}$.
 The vector loop is depicted in Fig.\,\ref{fig:pkm_constr_rot_lead}\,(a) and (c) for a planar robot with opened and closed loops.
 As a drawback, all joint angles $\bm{q}_i$ of the leg $i$ and not only the coordinates of the first joints counted from the base are now included in the vector
 %
@@ -750,7 +750,8 @@ The translational part of the constraints is not coupled by the platform orienta
 \label{equ:Phit_def_j}
 \end{equation}
 %
-for the follower-legs $j$. The orientation for the platform is given with the rotation matrix
+for the following legs $j$.
+The orientation for the platform is given with the rotation matrix
 %
 \begin{equation}
 \rotmat{0}{L}(\bm{q}_1)
@@ -758,7 +759,7 @@ for the follower-legs $j$. The orientation for the platform is given with the ro
 \rotmat{0}{E}(\bm{q}_1)
 \end{equation}
 %
-which gives the reference endeffector frame $\ks{L}$ resulting from the leading leg 1.
+which gives the reference end-effector frame $\ks{L}$ resulting from the leading leg 1.
 The rotational part of the kinematic constraints
 %
 \begin{equation}
@@ -828,23 +829,23 @@ the full geometric matrices of inverse kinematics
 \begin{equation}
 \bm{\Phi}_{\partial \bm{q}}(\bm{q},\bm{x})
 =
-\begin{pmatrix}
+\begin{bmatrix}
 \bm{\Phi}_{1,\partial\bm{q}_1}  & \bm{0} & \bm{0} & \bm{0}\\
 \bm{0} & \bm{\Phi}_{2,\partial\bm{q}_2} & \ddots & \bm{0}  \\
 \vdots & \ddots & \ddots & \bm{0}  \\
 \bm{0} & \bm{0} & \bm{0} &\bm{\Phi}_{m,\partial\bm{q}_m}
-\end{pmatrix}
+\end{bmatrix}
 \quad
 \mathrm{and}
 \quad
 \bm{\Psi}_{\partial \bm{q}}(\bm{q},\bm{\eta})
 =
-\begin{pmatrix}
+\begin{bmatrix}
 \bm{\Psi}_{1,\partial\bm{q}_1}  & \bm{0} & \bm{0} & \bm{0}\\
 \bm{\Phi}_{2,\partial\bm{q}_1} & \bm{\Phi}_{2,\partial\bm{q}_2} & \ddots & \bm{0}  \\
 \vdots & \ddots & \ddots & \bm{0}  \\
 \bm{\Phi}_{m,\partial\bm{q}_1} & \bm{0} & \bm{0} &\bm{\Phi}_{m,\partial\bm{q}_m}
-\end{pmatrix}
+\end{bmatrix}
 \label{equ:PhiPsi_grad_q_complete}
 \end{equation}
 %
@@ -853,23 +854,23 @@ and the full geometric matrices of direct kinematics
 \begin{equation}
 \bm{\Phi}_{\partial \bm{x}}(\bm{q},\bm{x})
 =
-\begin{pmatrix}
+\begin{bmatrix}
 \bm{\Phi}_{1,\partial\bm{x}} \\
 \bm{\Phi}_{2,\partial\bm{x}} \\
 \vdots \\
 \bm{\Phi}_{m,\partial\bm{x}}
-\end{pmatrix}
+\end{bmatrix}
 \quad
 \mathrm{and}
 \quad
 \bm{\Psi}_{\partial \bm{\eta}}(\bm{q},\bm{\eta})
 =
-\begin{pmatrix}
+\begin{bmatrix}
 \bm{\Psi}_{1,\partial\bm{\eta}} \\
 \bm{\Phi}_{2,\partial\bm{\eta}} \\
 \vdots \\
 \bm{\Phi}_{m,\partial\bm{\eta}} \\
-\end{pmatrix}
+\end{bmatrix}
 \label{equ:PhiPsi_grad_x_complete}
 \end{equation}
 %
@@ -894,15 +895,15 @@ The constraint gradient matrix w.\,r.\,t. the joint coordinates can be expanded 
 \begin{equation}
 \bm{\Phi}_{1,\partial\bm{q}_1}
 =
-\begin{pmatrix}
+\begin{bmatrix}
 \bm{\Phi}_{\mathrm{t},1,\partial\bm{q}_1}^\transp
 &
 \bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}^\transp
-\end{pmatrix}^\transp,
+\end{bmatrix}^\transp,
 \label{equ:Phi_1_grad_q}
 \end{equation}
 %
-where the translational component can be calculated with the geometric Jacobian of the leg chain, as derived in appendix\,\ref{sec:appendix_gradient_geomjacobian}. % $\bm{J}_1=\begin{pmatrix}\bm{J}_{1,\mathrm{t}}^\transp & \bm{J}_{1,\mathrm{r}}^\transp\end{pmatrix}^\transp$
+where the translational component can be calculated with the geometric Jacobian of the leg chain, as derived in appendix\,\ref{sec:appendix_gradient_geomjacobian}. % $\bm{J}_1=\begin{bmatrix}\bm{J}_{1,\mathrm{t}}^\transp & \bm{J}_{1,\mathrm{r}}^\transp\end{bmatrix}^\transp$
 The rotational part is expanded with the chain rule and the stack operators to
 
 %\ref{sec:appendix_gradient_geomjacobian}
@@ -928,17 +929,17 @@ The leading legs constraint gradient matrix w.\,r\,t. the platform coordinates c
 \begin{equation}
 \bm{\Phi}_{1,\partial\bm{x}}
 =
-\begin{pmatrix}
+\begin{bmatrix}
 \bm{\Phi}_{\mathrm{t},1,\partial\bm{x}_\mathrm{t}} & \bm{\Phi}_{\mathrm{t},1,\partial\bm{x}_\mathrm{r}} \\
 \bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{t}} &
 \bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}
-\end{pmatrix}
+\end{bmatrix}
 =
-\begin{pmatrix}
+\begin{bmatrix}
 -\bm{1} & \bm{0} \\
 \bm{0} &
 \bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}
-\end{pmatrix},
+\end{bmatrix},
 \label{equ:Phi_1_grad_x}
 \end{equation}
 %
@@ -984,13 +985,13 @@ Due to the abscence of the platform orientation in (\ref{equ:Phir_def_j}), (\ref
 \begin{equation}
 \bm{\Phi}_{j,\partial\bm{x}}
 =
-\begin{pmatrix}
+\begin{bmatrix}
 -\bm{1} & \bm{0} \\
 \bm{0} & \bm{0}
-\end{pmatrix}.
+\end{bmatrix}.
 \end{equation}
 %
-The gradient w.\,r.\,t. the joint coordinates of the following leg contains again the translational part of the legs Jacobian regarding the endeffector platform position in $\bm{\Phi}_{\mathrm{t},j,\partial\bm{q}_j}$ and has the rotational part
+The gradient w.\,r.\,t. the joint coordinates of the following leg contains again the translational part of the legs Jacobian regarding the end-effector platform position in $\bm{\Phi}_{\mathrm{t},j,\partial\bm{q}_j}$ and has the rotational part
 %
 \begin{align}
 \bm{\Phi}_{\mathrm{r},j,\partial\bm{q}_j}
@@ -1065,8 +1066,8 @@ in an iterative algorithm at the step $k+1$, which can be used to solve the IKP 
 \begin{equation}
 \bm{\Phi}(\bm{q}^{k+1},\bm{x})=\bm{0}.
 \end{equation}
-Using $\bm{\Psi}$ for 3T2R tasks from (\ref{equ:constr_Psi_PKM}) instead of $\bm{\Phi}$ from (\ref{equ:constr_Phi_PKM}) and the corresponding gradient matrix from (\ref{equ:PhiPsi_grad_q_complete}) allows the definition of a Nullspace in the gradient matrix $\bm{\Psi}_{\partial \bm{q}}(\bm{q},\bm{\eta})$ in the case of $\mathrm{dim}(\bm{q}_1)>\mathrm{dim}(\bm{\eta})$.
-This redundancy can be exploited by using the Nullspace projection ${\Delta}\bm{q}_{\mathrm{N}}$ from \cite{Yoshikawa1984} additionally to the solution ${\Delta}\bm{q}_{\mathrm{T}}$ of the IKP with the increment
+Using $\bm{\Psi}$ for 3T2R tasks from (\ref{equ:constr_Psi_PKM}) instead of $\bm{\Phi}$ from (\ref{equ:constr_Phi_PKM}) and the corresponding gradient matrix from (\ref{equ:PhiPsi_grad_q_complete}) allows the definition of a nullspace in the gradient matrix $\bm{\Psi}_{\partial \bm{q}}(\bm{q},\bm{\eta})$ in the case of $\mathrm{dim}(\bm{q}_1)>\mathrm{dim}(\bm{\eta})$.
+This redundancy can be exploited by using the nullspace projection ${\Delta}\bm{q}_{\mathrm{N}}$ from \cite{Yoshikawa1984} additionally to the solution ${\Delta}\bm{q}_{\mathrm{T}}$ of the IKP with the increment
 %
 \begin{equation}
 {\Delta}\bm{q}^{k}
@@ -1098,7 +1099,7 @@ of the joint positions $\bm{q}$ from their respective reference position $\bar{\
 Minimizing $h(\bm{q})$ reduces the risk of joints reaching their technical limits, but does not guarantee it.
 Other, more sophisticated criteria are for example the quadratic \cite{HuoBar2005} or hyperbolic \cite{ZhuQuCaoYan2013} distance of from joint limits, stiffness \cite{GuoDonKe2015} or singularity avoidance via Frobenius-norm condition number \cite{ZhuQuCaoYan2013} or squared condition number \cite{LegerAng2016}.
 The method can be used for serial link robots as well by removing all entries for the following legs from the formulas, as presented in \cite{1_SchapplerTapOrt2019}.
-The platform pose $\bm{x}$/$\bm{\eta}$ corresponds to the desired pose for the serial robots endeffector and the kinematic constraints $\bm{\Phi}$/$\bm{\Psi}$ correspond to the residual of the IKP.
+The platform pose $\bm{x}$/$\bm{\eta}$ corresponds to the desired pose for the serial robots end-effector and the kinematic constraints $\bm{\Phi}$/$\bm{\Psi}$ correspond to the residual of the IKP.
 
 \subsection{Differential Kinematics for the Parallel Robot and its Applications}
 
@@ -1123,22 +1124,22 @@ Reordering the equation leads to the full inverse differential kinematics
 \bm{\Phi}_{\partial\bm{x}} \dot{\bm{x}}
 =
 - 
-\begin{pmatrix} \bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} & \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}}\end{pmatrix}
-\begin{pmatrix}
+\begin{bmatrix} \bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} & \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}}\end{bmatrix}
+\begin{bmatrix}
 \dot{\bm{q}}_{\mathrm{a}} \\
 \dot{\bm{q}}_{\mathrm{p}} \\
-\end{pmatrix}
+\end{bmatrix}
 =
 \bm{\Phi}_{\partial\mathrm{ap}}
-\begin{pmatrix}
+\begin{bmatrix}
 \dot{\bm{q}}_{\mathrm{a}} \\
 \dot{\bm{q}}_{\mathrm{p}} \\
-\end{pmatrix},
+\end{bmatrix},
 \quad\quad
-\begin{pmatrix}
+\begin{bmatrix}
 \dot{\bm{q}}_{\mathrm{a}} \\
 \dot{\bm{q}}_{\mathrm{p}} \\
-\end{pmatrix}
+\end{bmatrix}
 =
 -\bm{\Phi}_{\partial\mathrm{ap}}^{-1} \bm{\Phi}_{\partial\bm{x}}
 \dot{\bm{x}},
@@ -1151,22 +1152,22 @@ which has been adressed in the previous sections, and the full direct differenti
 \bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} 
 =
 - 
-\begin{pmatrix} \bm{\Phi}_{\partial\bm{x}} & \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}} \end{pmatrix}
-\begin{pmatrix}
+\begin{bmatrix} \bm{\Phi}_{\partial\bm{x}} & \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}} \end{bmatrix}
+\begin{bmatrix}
 \dot{\bm{x}} \\
 \dot{\bm{q}}_{\mathrm{p}}
-\end{pmatrix}
+\end{bmatrix}
 =
 \bm{\Phi}_{\partial\bm{x}\mathrm{p}}
-\begin{pmatrix}
+\begin{bmatrix}
 \dot{\bm{x}} \\
 \dot{\bm{q}}_{\mathrm{p}}
-\end{pmatrix},
+\end{bmatrix},
 \quad\quad
-\begin{pmatrix}
+\begin{bmatrix}
 \dot{\bm{x}} \\
 \dot{\bm{q}}_{\mathrm{p}}
-\end{pmatrix}
+\end{bmatrix}
 =
 -\bm{\Phi}_{\partial\bm{x}\mathrm{p}}^{-1} \bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}}
 \dot{\bm{q}}_{\mathrm{a}}.
@@ -1177,7 +1178,7 @@ By only selecting the first rows for $\dot{\bm{q}}_{\mathrm{a}}$ in (\ref{equ:fu
 angles inverse jacobian matrix'' in \cite{Merlet2006} in contrast to the Jacobian related to angular velocities of the platform.} of the parallel robot \cite{Merlet2006,Gogu2008}, relating actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$ and platform velocities $\dot{\bm{x}}$, can be obtained from both equations.
 For the case of task or kinematic redundancy, the pseudo-inverse can be used for $\bm{\Phi}_{\partial\mathrm{ap}}$ in (\ref{equ:full_diff_ik}) as shown in Sec.\,\ref{sec:ZB_Anwendung_IK_grad}.
 The case of task redundancy does not affect (\ref{equ:full_diff_dk}), since the full platform velocity $\dot{\bm{x}}$ is obtained from given actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$.
-%For meaningful PKM the matrix $\bm{\Phi}_{\partial\bm{x}\mathrm{p}}$ is always square, since otherwise one or more leg chains would contain kinematic redundancy leading to uncontrollable Nullspace motion. --> ist so noch falsch/ungeprüft!
+%For meaningful PKM the matrix $\bm{\Phi}_{\partial\bm{x}\mathrm{p}}$ is always square, since otherwise one or more leg chains would contain kinematic redundancy leading to uncontrollable nullspace motion. --> ist so noch falsch/ungeprüft!
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
@@ -1185,7 +1186,7 @@ The case of task redundancy does not affect (\ref{equ:full_diff_dk}), since the 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Resolution of Functional Redundancy of a Serial-Link 6-DoF Robot in 3T2R tasks}
+\subsection{Resolution of Functional Redundancy of a Serial-Link Six-DoF Robot in 3T2R tasks}
 
 \color{gray}
 \begin{itemize}
@@ -1439,15 +1440,15 @@ The relationship between the gradient matrices from Sec.\,\ref{sec:ZB_Anwendung}
 \begin{equation}
 \dot{\bm{x}} = \bm{J}_1 \dot{\bm{q}}_1,
 \quad
-\begin{pmatrix}
+\begin{bmatrix}
 \dot{\bm{x}}_\mathrm{t}\\
 \dot{\bm{x}}_\mathrm{r}
-\end{pmatrix}
+\end{bmatrix}
  = 
-\begin{pmatrix}
+\begin{bmatrix}
  \bm{J}_{\mathrm{t},1}(\bm{q}_1)\\
  \bm{J}_{\mathrm{r},1}(\bm{q}_1) 
-\end{pmatrix}
+\end{bmatrix}
 \dot{\bm{q}}_1
 \label{equ:diffkin1_jacobi}
 \end{equation}
@@ -1467,27 +1468,27 @@ Using the differential form (\ref{equ:constr_diff}) only for the first kinematic
 and results reorganized to the form of (\ref{equ:diffkin1_jacobi}) with (\ref{equ:Phi_1_grad_q}) and (\ref{equ:Phi_1_grad_x}) to
 %
 \begin{equation}
-\begin{pmatrix}
+\begin{bmatrix}
 \dot{\bm{x}}_\mathrm{t}\\
 \dot{\bm{x}}_\mathrm{r}
-\end{pmatrix}
+\end{bmatrix}
 =
 -
-\begin{pmatrix}
+\begin{bmatrix}
 -\bm{1} & \bm{0} \\
 \bm{0} & \bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}^{-1}
-\end{pmatrix}
-\begin{pmatrix}
+\end{bmatrix}
+\begin{bmatrix}
 \bm{\Phi}_{\mathrm{t},1,\partial\bm{q}_1}
 &
 \bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}
-\end{pmatrix}
+\end{bmatrix}
 \dot{\bm{q}}_1
 =
-\begin{pmatrix}
+\begin{bmatrix}
 \bm{\Phi}_{\mathrm{t},1,\partial\bm{q}_1} & \bm{0} \\
 \bm{0} & -\bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}^{-1} \bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}
-\end{pmatrix}
+\end{bmatrix}
 \dot{\bm{q}}_1.
 \label{equ:diffkin1_gradmat}
 \end{equation}

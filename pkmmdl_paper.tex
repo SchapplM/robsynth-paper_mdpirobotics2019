@@ -1713,20 +1713,21 @@ Writing $\rotmato{1}{2}^\transp$ instead of $\bm{P}_\transp \rotmato{1}{2}$ serv
 \label{sec:appendix_content_derivatives}
 
 The single expressions derived in Sec.\,\ref{sec:ZB_Anwendung} can be calculated with low computational effort from the definition of the $X$-$Y$-$Z$- and $Z$-$Y$-$X$-Euler angles from (\ref{equ:def_rmat_xyz}), (\ref{equ:def_rmat_zyxr}) and (\ref{equ:alpha_zyx}).
-With $\overline{\bm{R}}=[n_x,n_y,n_z ,o_x,o_y,o_z,a_x,a_y,a_z]^\transp$ the gradient ``I'' in (\ref{equ:grad_Phi_1_q},\ref{equ:grad_Phi_1_x},\ref{equ:grad_Phi_j_qj},\ref{equ:grad_Phi_j_q1}) becomes
-% Quelle: equations/dalphadRb.txt (aus ikfr_paper_equations.mw)
+With $\overline{\bm{R}}=[n_x,n_y,n_z ,o_x,o_y,o_z,a_x,a_y,a_z]^\transp$ the gradient ``I'' in (\ref{equ:grad_Phi_1_q},\ref{equ:grad_Phi_1_x},\ref{equ:grad_Phi_j_qj},\ref{equ:grad_Phi_j_q1}) for $Z$-$Y$-$X$ angles becomes
+% Quelle: equations/dalphadRb.txt (aus ikfr_pkm_paper_equations.mw; danach equations_postprocess.sh)
+%
 \begin{equation}
-\left(\frac{\partial \bm{\alpha}}{\partial \overline{\bm{R}}}\right)^\transp
+\frac{\partial \bm{\alpha}(\overline{\bm{R}})}{\partial \overline{\bm{R}}}
 =
-\left[ \begin {array}{ccc} -{\frac {{n_y}}{{{n_x}}^{2}+{{n_y }}^{2}}}&0&0\\ \noalign{\medskip}{\frac {{n_x}}{{{n_x}}^{2}+{{ n_y}}^{2}}}&0&0\\ \noalign{\medskip}0&-\sqrt {{{a_z}}^{2}+{{ o_z}}^{2}}&0\\ \noalign{\medskip}0&0&0\\ \noalign{\medskip}0&0&0 \\ \noalign{\medskip}0&{\frac {{n_z}\,{o_z}}{\sqrt {{{a_z}}^{ 2}+{{o_z}}^{2}}}}&{\frac {{a_z}}{{{a_z}}^{2}+{{o_z}}^{2}}} \\ \noalign{\medskip}0&0&0\\ \noalign{\medskip}0&0&0 \\ \noalign{\medskip}0&{\frac {{n_z}\,{a_z}}{\sqrt {a_z^{2}+{{o_z}}^{2}}}}&-{\frac {o_z}{a_z^{2}+o_z^{2}} }\end {array} \right] 
+\left[ \begin {array}{ccccccccc} -{\frac {{n_y}}{{{n_x}}^{2}+{{ n_y}}^{2}}}&{\frac {{n_x}}{{{n_x}}^{2}+{{n_y}}^{2}}}&0&0&0 &0&0&0&0\\ \noalign{\medskip}0&0&-\sqrt {{{a_z}}^{2}+{{o_z}}^{2} }&0&0&{\frac {{n_z}\,{o_z}}{\sqrt {{{a_z}}^{2}+{{o_z}}^{2} }}}&0&0&{\frac {{n_z}\,{a_z}}{\sqrt {{{a_z}}^{2}+{{o_z}}^{ 2}}}}\\ \noalign{\medskip}0&0&0&0&0&{\frac {{a_z}}{{{a_z}}^{2}+{ {o_z}}^{2}}}&0&0&-{\frac {{o_z}}{{{a_z}}^{2}+{{o_z}}^{2}}} \end {array} \right] 
 \label{equ:alpha_xyz_diff_R}
 \end{equation}
 %
-and the inverse gradient ``IV'' in (\ref{equ:grad_Phi_1_x}) yields
+and the inverse gradient ``IV'' in (\ref{equ:grad_Phi_1_x}) for $X$-$Y$-$Z$ angles yields
 %
 % Quelle: equations/R2b_dxyz.txt (aus ikfr_paper_equations.mw)
 \begin{align}
-\left(\frac{\partial \overline{\bm{R}}(\bm{\beta})}{\partial \bm{\beta}}\right)
+\frac{\partial \overline{\bm{R}}(\bm{\beta})}{\partial \bm{\beta}}
 =
 \small
 \begin{bmatrix}

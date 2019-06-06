@@ -95,7 +95,7 @@
 
 % Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
 \address{%
-$^{1}$ \quad Institut für mechatronische Systeme, Leibniz Universität Hannover; firstname.lastname@imes.uni-hannover.de}
+$^{1}$ \quad Institut für Mechatronische Systeme, Leibniz Universität Hannover; firstname.lastname@imes.uni-hannover.de}
 
 % Contact information of the corresponding author
 \corres{Correspondence: moritz.schappler@imes.uni-hannover.de;}
@@ -169,14 +169,15 @@ The functional redundancy of robots with full mobility is exploited using nullsp
 
 Industrial tasks like welding, gluing, milling or drilling represent a major part the of applications of industrial robots, which generally have full mobility, i.\,e. the operational space of their end-effector has three translational and three rotational (``3T3R'') degrees of freedom (``DoF'').
 Parallel robots like the Stewart-platform have especially been proposed for milling tasks regarding their high structural stiffness.
-The task space of the named tasks can be defined by only two rotations due to a symmetry around the tool axis (``3T2R'').
+The task space of the named applications can be defined by three translational DoF and only two rotations due to a symmetry around the tool axis (``3T2R'').
 This results in a functional or task redundancy, which is not exploited to full extend yet for \emph{parallel} robots.
 
 \subsection{Inverse Kinematics and Resolution of Task Redundancy for Serial Robots}
 
-Various general gradient-based methods exist to solve the inverse kinematics for \emph{serial} robots; either by augmenting the joint space \cite{Baron2000} or by reducing the task space \cite{HuoBar2005,LegerAng2016,Zlajpah2017,ZhuQuCaoYan2013,GuoDonKe2015,1_SchapplerTapOrt2019}.
+Various general gradient-based methods exist to solve the inverse kinematics for \emph{serial} robots; either by augmenting the joint space \cite{Baron2000} or by reducing the task space \cite{HuoBar2005,LegerAng2016,Zlajpah2017,1_SchapplerTapOrt2019}.
 The different approaches each define a residual vector and a gradient matrix considering the properties of 3T2R tasks, e.\,g. by adding a virtual joint axis \cite{Baron2000}, orthogonal decomposition of the task space \cite{HuoBar2005}, rotation of the residual into a task frame and removing the corresponding component \cite{Zlajpah2017}, defining the tool axis by two points for constructing a nullspace \cite{LegerAng2016} or by defining the absolute orientation and the orientation residual with two reciprocal sets of Euler angles \cite{1_SchapplerTapOrt2019}.
 The gradient matrices corresponding to the different residuals are used for an iterative Newton-Raphson algorithm \cite{Yoshikawa1984,GoldenbergBenFen1985} by exploiting the functional redundancy with a null space projection of additional performance criteria \cite{Yoshikawa1984}.
+Without the definition of a proper gradient, a global optimization has to be performed outside of the inverse kinematics algorithm \cite{ZhuQuCaoYan2013,GuoDonKe2015}.
 
 %\color{gray}
 %Beschreibung des aktuellen Stands von PKM für 3T2R.
@@ -193,7 +194,7 @@ The gradient matrices corresponding to the different residuals are used for an i
 
 \subsection{Overview of Parallel Robots Structures for 3T2R tasks}
 
-Parallel robots in 3T2R tasks can be ordered in classes according their kinematic structure into
+Parallel robots in 3T2R tasks can be ordered in classes according to their kinematic structure into
 \begin{itemize}
 	\item[I] mechanisms with full platform mobility (3T3R) that are redundantly controlled to five DoF,
 	\item[II] mechanisms with 3T2R platform mobility enforced with a passive constraining leg and five other legs with five or six DoF,
@@ -208,7 +209,7 @@ Class III is mainly influenced by the systematic synthesis of \cite{Gogu2008} an
 Examples for the first class are hexapods\footnote{The joint structure is denoted by the number of the legs and the order of universal (``U''), prismatic (``P''), spherical (``S''), helical (``H'') and revolute (``R'') joints in the leg chains. Different actuated legs are connected by dashes (``-''), passive constraint legs are connected by a slash (``/''). Actuated joints are underlined.} (6U\underline{P}S) \cite{MerletPerDan2000} or the Eclipse \cite{HongKim2000} machine tool (2\underline{PPR}S-\underline{PP}RS).
 Any other parallel robot with full mobility (see e.\,g. \cite{Merlet2006,Gogu2008,Zhang2009}) may be used as well.
 
-The second class allows more variety, since the six-DoF mechanism and the five-DoF constraining leg can manifest in different kinematic structures:
+The second class allows for more variety, since the six-DoF mechanism and the five-DoF constraining leg can manifest in different kinematic structures:
 The U\underline{P}S structure is used for the six-DoF mechanism by \cite{WangGos1997} with a focus on kinematic analysis of 5U\underline{P}S/US, by \cite{ZhangGos2001}  with a focus on kinetostatic modeling at the example of 5U\underline{P}S/RUU, by \cite{ZhengGaoZha2005} with focus on trajectory control of 5U\underline{P}S/PRPU and by \cite{GaoSunZha2004} for pose measurement with the passive leg of 5U\underline{P}S/PRPU.
 Other possible general base structures are \underline{R}US at the 5\underline{R}US/US example in \cite{WangGos1997}, \underline{P}US, which has been investigated for the control of a redundantly actuated 6\underline{P}US/UPU regarding the control of the redundant leg with inverse-dynamics control \cite{LiuXuYaoXu2015} or force control \cite{WenQinZhaLam2016}.
 The redundantly actuated 5U\underline{P}S-\underline{P}RPU from \cite{ChengWanZha2008} is based on the machine from \cite{ZhengGaoZha2005}, but does not fall in any of the classes I-IV.
@@ -226,7 +227,7 @@ The resulting 5R\underline{P}UR and 5\underline{P}RUR are analyzed in \cite{Tale
 In a practical application with competing requirements on workspace, stiffness, costs and precision, each of the existing systems has its legitimation.
 Nevertheless, each of the classes has inherent disadvantages:
 In tasks like milling with high process forces and requirements on stiffness and precision, robots from class II with a constraining leg have the drawback, that the passive leg takes the complete reaction wrench in the blocked rotational degree of freedom, which strongly affects the mechanisms stiffness in this direction \cite{ZhangGos2001}.
-The same is argued by \cite{LinLiYanZha2013} at the example of the Metrom machine tool, but can be extended to the members of class III, where most leg chains have six DoF and only one leg chain has five DoF.
+The same is argued by \cite{LinLiYanZha2013} at the example of the Metrom machine tool, but can be extended to all the members of class III, where most leg chains have six DoF and only one leg chain has five DoF.
 This leg chain also has to take the reaction moments in the blocked DoF which affects the overall stiffness.
 Therefore members of the classes I and IV can be expected to reach a higher stiffness.
 Mechanisms of class III and IV may further suffer from an increased sensitivity of manufactoring tolerances, which may cause a high pretensioning of the bearings or even reduce the DoF.
@@ -244,7 +245,7 @@ Therefore, the remainder of the paper focuses on mechanisms of the first class t
 
 \subsection{Inverse Kinematics of Parallel Robots for 3T2R Tasks}
 
-The parallel robots with five DoF presented previously have a kinematic structure, that allows an analytic model of the inverse kinematics.
+The parallel robots with five DoF presented previously have a kinematic structure, that allows for an analytic model of the inverse kinematics.
 All references define the end-effector orientation with two consecutive elementary rotations, i.\,e. define two Euler angles to represent the tool axis orientation in minimal coordinates \cite{LiuXuYaoXu2015, WenQinZhaLam2016, ZhengGaoZha2005,GaoSunZha2004, ChengWanZha2008, AlaghebandMahMilBen2015, Tale-MasoulehSaaGosTag2010, BaerWei2006, Tale-MasoulehGos2011}, which is called ``partial pose'' in \cite{MerletPerDan2000}.
 The inverse kinematics problem (IKP) is first solved for the first chain, which is called ``leading chain'' in this paper.
 Due to the geometry of the leading chain, this solution can be found algebraically. %  \cite{WangGos1997}
@@ -268,9 +269,9 @@ The drawback of this method is the need for a cascaded optimization which is mor
 
 \subsection{Motivation and Summary of the State of the Art}
 
-The overview over the literature shows, that no general, machine-independent, methods for the resolution of functional redundancy for 3T3R PKM in 3T2R tasks exists.
+The overview over the literature shows, that no general, machine-independent methods for the resolution of functional redundancy for 3T3R PKM in 3T2R tasks exists.
 The works either focus on a general structural synthesis of machines e.\,g. via screw theory \cite{KongGos2005} or linear transformations \cite{Gogu2006} or the description and improvement of specific, manually selected, machines.
-To select the best machine for given requirements, a structural synthesis is only the first step.
+To choose the best machine for given requirements, a structural synthesis is only the first step.
 Additionally, a dimensional synthesis should be performed for all possible structures to select the most suitable mechanism.
 This combined structural and dimensional synthesis \cite{RamirezKotOrt2015} is sketched in Fig.\,\ref{fig:structdimsynth}.
 To be able to perform the dimensional synthesis for all structures, the inverse kinematics has to be implemented in a general form, to calculate the performance criteria over a given trajectory for further optimization of the structures and their comparison.
@@ -295,7 +296,7 @@ To address this, the contributions of this paper are
 \begin{itemize}
 \item a general kinematics model for parallel robots using the concept of reciprocal Euler angles \cite{1_SchapplerTapOrt2019},
 \item a complete elimination of the redundant operational space coordinate in this formulation for 3T2R tasks allowing a nullspace optimization in the gradient-based inverse kinematics,
-\item proofs, examples and simulations to show the performance for serial and parallel robots.
+\item proofs, examples and simulations to show the performance for single serial kinematic leg chains and complete parallel robots.
 \end{itemize}
 
 %\color{gray}
@@ -310,7 +311,9 @@ To address this, the contributions of this paper are
 %\color{black}
 
 The remainder of the paper is structured as follows:
-The description of the inverse kinematics problem and prior definitions are given in Sec.\,\ref{sec:PKM_general}, the concept of reciprocal Euler angles from \cite{1_SchapplerTapOrt2019} is adapted in Sec.\,\ref{sec:REW_seriell} for parallel robots, the full kinematic constraints of parallel robots in 3T2R tasks is introduced in Sec.\,\ref{sec:ZB_PKM} and applied to the differential kinematics in Sec.\,\ref{sec:ZB_Anwendung} followed by examples and simulations in Sec.\,\ref{sec:Ergebnisse}.
+The description of the inverse kinematics problem and prior definitions are given in Sec.\,\ref{sec:PKM_general} and the concept of reciprocal Euler angles from \cite{1_SchapplerTapOrt2019} is adapted in Sec.\,\ref{sec:REW_seriell} for parallel robots.
+This leads to the full kinematic constraints of parallel robots in 3T2R tasks, introduced in Sec.\,\ref{sec:ZB_PKM} and applied to the differential kinematics in Sec.\,\ref{sec:ZB_Anwendung}.
+The theoretical analysis is followed by examples and simulations in Sec.\,\ref{sec:Ergebnisse}.
 The appendix contains proofs and additional details on the mathematical formulation.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -337,9 +340,9 @@ The appendix contains proofs and additional details on the mathematical formulat
 %    \label{fig:pkm_constr_transl}
 %\end{figure} 
 
-Before addressing the specific model for parallel robots in 3T2R tasks in the next section \ref{sec:REW_seriell}, the standard kinematics model of kinematics of parallel kinematic machines (``PKM'') is repeated in the following, corresponding to the state of the art \cite{Merlet2006,Gogu2008,BriotKha2015} and serving as a reference to highlight its shortcomings for 3T2R tasks.
+Before addressing the specific model for parallel robots in 3T2R tasks in the next section, the standard kinematics model of kinematics of parallel kinematic machines (``PKM'') is repeated in the following, corresponding to the state of the art \cite{Merlet2006,Gogu2008,BriotKha2015} and serving as a reference to highlight its shortcomings for 3T2R tasks.
 The regarded parallel robot consists of $m$ legs, which each have the joint coordinates $\bm{q}_i$.
-All joints are considered as single-DoF and additionally to the active joints $\bm{q}_{i,\mathrm{a}}$ explicitly all passive joints at the base and at the platform $\bm{q}_{i,\mathrm{p}}$ are included in the coordinates $\bm{q}_i$ of leg $i$.
+All joints are considered as single-DoF and additionally to the active joints $\bm{q}_{i,\mathrm{a}}$ explicitly all passive joints at the base and at the platform $\bm{q}_{i,\mathrm{p}}$ are included in the coordinates $\bm{q}_i$ of leg~$i$.
 The coordinates
 %
 \begin{equation}
@@ -407,7 +410,7 @@ The second term $\ortvek{0}{r}{}{A_iB_i}(\bm{q}_i)$ corresponds to the forward k
 The vector
 \begin{equation}
 \ortvek{0}{r}{}{A_iB_i}(\bm{x}) = 
-- \ortvek{0}{r}{}{0A_i}
+- \ortvek{0}{r}{}{A_i}
 + \bm{x}_{\mathrm{t}} + \rotmat{0}{D}(\bm{x}_{\mathrm{r}}) \ortvek{D}{r}{}{DB_i}
 \label{equ:vec_AB}
 \end{equation}
@@ -587,7 +590,7 @@ For a formulation without the tool axis rotation, a different constraint definit
 = 
 - \ortvek{0}{r}{}{D} + \ortvek{0}{r}{}{E}(\bm{q}_i)
 =
-- \bm{x}_{\mathrm{t}} + \ortvek{0}{r}{}{0E}(\bm{q}_i) \in {\mathbb{R}}^{3}
+- \bm{x}_{\mathrm{t}} + \ortvek{0}{r}{}{E}(\bm{q}_i) \in {\mathbb{R}}^{3}
 \label{equ:Phit_def_i}
 \end{equation}
 %
@@ -596,8 +599,8 @@ The vector loop is depicted in Fig.\,\ref{fig:pkm_constr_rot_lead}\,(a) and (c) 
 As a drawback, all joint angles $\bm{q}_i$ of the leg $i$ and not only the coordinates of the first joints counted from the base are now included in the vector
 %
 \begin{equation}
-\ortvek{0}{r}{}{0E}(\bm{q}_i) = 
-\ortvek{0}{r}{}{0A_i}
+\ortvek{0}{r}{}{E}(\bm{q}_i) = 
+\ortvek{0}{r}{}{A_i}
 + \ortvek{0}{r}{}{A_iB_i}(\bm{q}_i) + \rotmat{0}{B_i}(\bm{q}_i) \ortvek{B_i}{r}{}{B_iE}.
 \label{equ:r_0E_i}
 \end{equation}
@@ -746,7 +749,7 @@ The translational part of the constraints is not coupled by the platform orienta
 = 
 - \ortvek{0}{r}{}{D} + \ortvek{0}{r}{}{E}(\bm{q}_j)
 =
-- \bm{x}_{\mathrm{t}} + \ortvek{0}{r}{}{0E}(\bm{q}_j) \in {\mathbb{R}}^{3}
+- \bm{x}_{\mathrm{t}} + \ortvek{0}{r}{}{E}(\bm{q}_j) \in {\mathbb{R}}^{3}
 \label{equ:Phit_def_j}
 \end{equation}
 %
@@ -828,6 +831,8 @@ the full geometric matrices of inverse kinematics
 %
 \begin{equation}
 \bm{\Phi}_{\partial \bm{q}}(\bm{q},\bm{x})
+%=
+%\frac{\partial \bm{\Phi}}{\partial \bm{q}}
 =
 \begin{bmatrix}
 \bm{\Phi}_{1,\partial\bm{q}_1}  & \bm{0} & \bm{0} & \bm{0}\\
@@ -854,6 +859,8 @@ and the full geometric matrices of direct kinematics
 \begin{equation}
 \bm{\Phi}_{\partial \bm{x}}(\bm{q},\bm{x})
 =
+\frac{\partial \bm{\Phi}}{\partial \bm{x}}
+=
 \begin{bmatrix}
 \bm{\Phi}_{1,\partial\bm{x}} \\
 \bm{\Phi}_{2,\partial\bm{x}} \\
@@ -864,6 +871,8 @@ and the full geometric matrices of direct kinematics
 \mathrm{and}
 \quad
 \bm{\Psi}_{\partial \bm{\eta}}(\bm{q},\bm{\eta})
+=
+\frac{\partial \bm{\Psi}}{\partial \bm{\eta}}
 =
 \begin{bmatrix}
 \bm{\Psi}_{1,\partial\bm{\eta}} \\
@@ -904,27 +913,46 @@ The constraint gradient matrix w.\,r.\,t. the joint coordinates can be expanded 
 \end{equation}
 %
 where the translational component can be calculated with the geometric Jacobian of the leg chain, as derived in appendix\,\ref{sec:appendix_gradient_geomjacobian}. % $\bm{J}_1=\begin{bmatrix}\bm{J}_{1,\mathrm{t}}^\transp & \bm{J}_{1,\mathrm{r}}^\transp\end{bmatrix}^\transp$
-The rotational part is expanded with the chain rule and the stack operators to
+The rotational part is written down as a function composition of the three functions $\bm{\alpha}$ (Euler angles), $\overline{\prod}$ (matrix product) and $\rotmat{0}{E}$ (rotation matrix) as% functions expanded with the chain rule and the stack operators to
 
 %\ref{sec:appendix_gradient_geomjacobian}
 
-\begin{align}
+\begin{equation}
 \bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}
-&=
+=
 \frac{\partial}{\partial \bm{q}_1} \bm{\alpha}\left(\rotmat{0}{D}^\transp(\bm{x}) \rotmat{0}{E}(\bm{q}_1)\right)
 =
-\frac{\partial}{\partial \bm{q}_1} \bm{\alpha}\left(\overline{\prod}\left( \rotmato{0}{D}^\transp(\bm{x}), \rotmato{0}{E}(\bm{q}_1)\right)\right)  \label{equ:grad_Phi_1_q}\\
-&=
-%underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des mittleren Terms
-\underbrace{\vphantom{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}\left(\frac{\partial \bm{\alpha}}{\partial \overline{\bm{R}}}\right)}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
-\underbrace{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
-\underbrace{\vphantom{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}\left(\frac{\partial \rotmato{0}{E}(\bm{q}_1)}{\partial \bm{q}_1} \right)}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}}
-\in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_1)}.  \nonumber
-\end{align}
+\frac{\partial}{\partial \bm{q}_1} \bm{\alpha}\left(\overline{\prod}\left( \rotmato{0}{D}^\transp(\bm{x}), \rotmato{0}{E}(\bm{q}_1)\right)\right), \label{equ:grad_Phi_1_q_part1}
+\end{equation}
 %
-The two first partial derivatives from (\ref{equ:grad_Phi_1_q}) are sparse matrices and can be calculated efficiently as shown in appendix \ref{sec:appendix_gradient_matrix} with (\ref{equ:alpha_xyz_diff_R}) with $\overline{\bm{R}}=\rotmato{D}{E}(\bm{x}_{\mathrm{r}},\bm{q}_1)$ in ``I'' and (\ref{equ:diff_prod_mat2}) with the contents of $\rotmato{0}{D}^\transp(\bm{x}_{\mathrm{r}})$ in ``II''.
+which is then expanded with the chain rule for differentiation and the stack operators to
+%
+\begin{equation}
+\bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}
+=
+%underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des mittleren Terms
+% Term I
+\underbrace{
+	\vphantom{\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}}
+	\frac{\partial \bm{\alpha}}{\partial \overline{\bm{R}}}
+	}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
+% Term II
+\underbrace{
+	\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}
+	}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
+% Term III
+\underbrace{
+	\vphantom{\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}}
+	\frac{\partial \rotmato{0}{E}(\bm{q}_1)}{\partial \bm{q}_1}
+	}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}}
+\in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_1)}.
+\label{equ:grad_Phi_1_q}
+\end{equation}
+%
+The two first partial derivatives from (\ref{equ:grad_Phi_1_q}) are sparse matrices and can be calculated efficiently as shown in appendix \ref{sec:appendix_gradient_matrix}.
+The factor ``I'' contains (\ref{equ:alpha_xyz_diff_R}) with $\overline{\bm{R}}=\rotmato{D}{E}(\bm{x}_{\mathrm{r}},\bm{q}_1)$  and the factor ``II'' is (\ref{equ:diff_prod_mat2}) with the contents of $\rotmato{0}{D}^\transp(\bm{x}_{\mathrm{r}})$.
 The last partial derivative ``III'' can be derived with computer algebra systems from the analytic expression of the rotation matrix $\rotmat{0}{E}(\bm{q}_1)$.
-The leading legs constraint gradient matrix w.\,r\,t. the platform coordinates can be expanded into
+The leading legs constraint gradient matrix w.\,r\,t. the platform coordinates can be expanded in the same manner into
 %
 \begin{equation}
 \bm{\Phi}_{1,\partial\bm{x}}
@@ -943,7 +971,7 @@ The leading legs constraint gradient matrix w.\,r\,t. the platform coordinates c
 \label{equ:Phi_1_grad_x}
 \end{equation}
 %
-where the definitions from (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) lead to simple terms except for the rotational part
+where the definitions from (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) only leave the rotational part
 %Applying the stack-operators gives
 %
 \begin{align}
@@ -957,15 +985,23 @@ where the definitions from (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) lea
 &=
 %underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des dritten Terms
 % Term I
-\underbrace{\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
-    \frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
+\underbrace{
+	\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
+    \frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}
+	}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
 % Term II
-\underbrace{\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
-    \bm{P}_{\mathrm{T}}}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
+\underbrace{
+	\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
+    \bm{P}_{\mathrm{T}}
+	}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
 % Term III
-\underbrace{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}_{\mathrm{III} \in {\mathbb{R}}^{9 \times 9}}
+\underbrace{
+	\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}
+	}_{\mathrm{III} \in {\mathbb{R}}^{9 \times 9}}
 % Term IV
-\underbrace{\frac{\partial \rotmato{0}{D}(\bm{x}_{\mathrm{r}})}{\partial \bm{x}_{\mathrm{r}}}}_{\mathrm{IV} \in {\mathbb{R}}^{9 \times 3}}
+\underbrace{
+	\frac{\partial \rotmato{0}{D}(\bm{x}_{\mathrm{r}})}{\partial \bm{x}_{\mathrm{r}}}
+	}_{\mathrm{IV} \in {\mathbb{R}}^{9 \times 3}}
 \in {\mathbb{R}}^{3 \times 3}, \nonumber
 \end{align}
 %
@@ -1000,13 +1036,21 @@ The gradient w.\,r.\,t. the joint coordinates of the following leg contains agai
 =
 \frac{\partial}{\partial \bm{q}_j} \bm{\alpha}\left(\overline{\prod}\left( \rotmato{0}{L}^\transp(\bm{q}_1), \rotmato{0}{E}(\bm{q}_j)\right)\right)  \label{equ:grad_Phi_j_qj}\\
 &=
-%underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des mittleren Terms
+%underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des rechten Terms
 % Term I
-\underbrace{\vphantom{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}\left(\frac{\partial \bm{\alpha}}{\partial \overline{\bm{R}}}\right)}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
+\underbrace{
+	\vphantom{\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j}}
+	\frac{\partial \bm{\alpha}}{\partial \overline{\bm{R}}}
+	}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
 % Term II
-\underbrace{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
+\underbrace{
+	\vphantom{\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j}}
+	\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}
+	}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
 % Term III
-\underbrace{\vphantom{\left(\frac{\partial \overline{\prod}\left(\rotmato{0}{L}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}\right)}\left(\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j} \right)}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_j)}}
+\underbrace{
+	\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j}
+	}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_j)}}
 \in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_j)}, \nonumber
 \end{align}
 %
@@ -1027,15 +1071,23 @@ The gradient w.\,r.\,t. the joint coordinates of the leading leg
 &=
 %underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des dritten Terms
 % Term I
-\underbrace{\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
-	\frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
+\underbrace{
+	\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
+	\frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}
+	}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
 % Term II
-\underbrace{\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
-	\bm{P}_{\mathrm{T}}}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
+\underbrace{
+	\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
+	\bm{P}_{\mathrm{T}}
+	}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
 % Term III
-\underbrace{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{L}\right)}{\partial \rotmato{0}{L}}}_{\mathrm{III} \in {\mathbb{R}}^{9 \times 9}}
+\underbrace{
+	\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{L}\right)}{\partial \rotmato{0}{L}}
+	}_{\mathrm{III} \in {\mathbb{R}}^{9 \times 9}}
 % Term IV
-\underbrace{\frac{\partial \rotmato{0}{L}(\bm{q}_1)}{\partial \bm{q}_1}}_{\mathrm{IV} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}}
+\underbrace{
+	\frac{\partial \rotmato{0}{L}(\bm{q}_1)}{\partial \bm{q}_1}
+	}_{\mathrm{IV} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}}
 \in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_1)}. \nonumber
 \end{align}
 %

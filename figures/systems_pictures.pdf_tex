@@ -76,12 +76,12 @@
     \put(0.67190941,0.13232826){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}R\end{tabular}}}}%
     \put(0.67280292,0.15443066){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\underline{P}\end{tabular}}}}%
     \put(0.6722028,0.17225669){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}S\end{tabular}}}}%
-    \put(0.00009952,0.00033076){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(a) 5U\underline{P}S/RUU\end{tabular}}}}%
-    \put(0.2746252,-0.00007821){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(b) 4U\underline{P}S-U\underline{P}U\end{tabular}}}}%
-    \put(0.82367659,-0.00007821){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(d) 5R\underline{P}UR \end{tabular}}}}%
+    \put(0.00009952,0.00033076){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(a) 5U\underline{P}S/RUU (class II)\end{tabular}}}}%
+    \put(0.26779724,-0.00007821){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(b) 4U\underline{P}S-U\underline{P}U (class III)\end{tabular}}}}%
+    \put(0.83050455,-0.00007821){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(d) 5R\underline{P}UR  (class IV)\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{systems_pictures.pdf}}%
     \put(0.15229906,0.11143442){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}U\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{systems_pictures.pdf}}%
-    \put(0.53549502,0.00033076){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(c) 4S\underline{P}RR-S\underline{P}R (Metrom)\end{tabular}}}}%
+    \put(0.5081832,0.00033076){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}(c) 4S\underline{P}RR-S\underline{P}R (Metrom, class III)\end{tabular}}}}%
   \end{picture}%
 \endgroup%

@@ -197,40 +197,51 @@ Without the definition of a proper gradient, a global optimization has to be per
 Parallel robots in 3T2R tasks can be ordered in classes according to their kinematic structure into
 \begin{itemize}
 	\item[I] mechanisms with full platform mobility (3T3R) that are redundantly controlled to five DoF,
-	\item[II] mechanisms with 3T2R platform mobility enforced with a passive constraining leg and five other legs with five or six DoF,
-	\item[III] mechanisms with 3T2R platform mobility resulting from the mobility of five actuated legs,
-	\item[IV] symmetric mechanisms with 3T2R platform mobility and five legs.
+	\item[II] mechanisms with 3T2R platform mobility enforced with a passive five-DoF constraining leg and five other legs with six DoF each,
+	\item[III] mechanisms with 3T2R platform mobility resulting from the mobility of five actuated legs with five or six DoF each,
+	\item[IV] mechanisms with 3T2R platform mobility and five legs with only five DoF each.
 \end{itemize}
 
-Other classifications are provided by \cite{HuangLiuChe2011}, where IV belongs to the first family and II to the second family.
-The explicit classes I and II were introduced in \cite{Tale-MasoulehGos2011}, where class IV is analyzed.
-Class III is mainly influenced by the systematic synthesis of \cite{Gogu2008} and several existing prototypes.
+The classes I and II were introduced in \cite{Tale-MasoulehGos2011}, where class IV is analyzed regarding leg symmetry and singularities.
+Class III is mainly influenced by the systematic synthesis of \cite{Gogu2008} and several existing prototypes and is demarcated against class II by the absence of the passive constraining leg.
+Class IV can be seen as a subclass of III, but is differentiated in this paper due to its characteristics.
+Other classifications are provided e.\,g. by \cite{HuangLiuChe2011}, where IV and II are termed ``families''.
 
 Examples for the first class are hexapods\footnote{The joint structure is denoted by the number of the legs and the order of universal (``U''), prismatic (``P''), spherical (``S''), helical (``H'') and revolute (``R'') joints in the leg chains. Different actuated legs are connected by dashes (``-''), passive constraint legs are connected by a slash (``/''). Actuated joints are underlined.} (6U\underline{P}S) \cite{MerletPerDan2000} or the Eclipse \cite{HongKim2000} machine tool (2\underline{PPR}S-\underline{PP}RS).
 Any other parallel robot with full mobility (see e.\,g. \cite{Merlet2006,Gogu2008,Zhang2009}) may be used as well.
 
 The second class allows for more variety, since the six-DoF mechanism and the five-DoF constraining leg can manifest in different kinematic structures:
-The U\underline{P}S structure is used for the six-DoF mechanism by \cite{WangGos1997} with a focus on kinematic analysis of 5U\underline{P}S/US, by \cite{ZhangGos2001}  with a focus on kinetostatic modeling at the example of 5U\underline{P}S/RUU, by \cite{ZhengGaoZha2005} with focus on trajectory control of 5U\underline{P}S/PRPU and by \cite{GaoSunZha2004} for pose measurement with the passive leg of 5U\underline{P}S/PRPU.
+The U\underline{P}S structure is used for the six-DoF part of the mechanism 
+  by \cite{WangGos1997} with a focus on kinematic analysis of 5U\underline{P}S/US, 
+  by \cite{ZhangGos2001} with a focus on kinetostatic modeling at the example of 5U\underline{P}S/RUU, 
+  by \cite{ZhengGaoZha2005} with focus on trajectory control of 5U\underline{P}S/PRPU and 
+  by \cite{GaoSunZha2004} for pose measurement with the passive leg of 5U\underline{P}S/PRPU.
 Other possible general base structures are \underline{R}US at the 5\underline{R}US/US example in \cite{WangGos1997}, \underline{P}US, which has been investigated for the control of a redundantly actuated 6\underline{P}US/UPU regarding the control of the redundant leg with inverse-dynamics control \cite{LiuXuYaoXu2015} or force control \cite{WenQinZhaLam2016}.
-The redundantly actuated 5U\underline{P}S-\underline{P}RPU from \cite{ChengWanZha2008} is based on the machine from \cite{ZhengGaoZha2005}, but does not fall in any of the classes I-IV.
+%The redundantly actuated 5U\underline{P}S-\underline{P}RPU from \cite{ChengWanZha2008} is based on the machine from \cite{ZhengGaoZha2005}, but does not fall in any of the classes I-IV.
 
 The most-straightforward member of the third class is the 4U\underline{P}S-U\underline{P}U, which is investigated in \cite{MbarekNefCor2005} for a simulation and feasibility study together with a survey on possible architectures for a technical realization of this class.
-Other possible structures are the 4U\underline{R}S-U\underline{R}U, which is analyzed kinematically in \cite{SchreiberGos2003}, the 4\underline{P}SU-\underline{P}U*U, which has a special parallelogram structure in one leg and is presented in \cite{GaoPenZhaLi2006}.
-The 5U\underline{P}U is shown in \cite{HuangLi2002} with the help of screw theory to only have local mobility and no global mobility, since the twist of the leg chains has no intersection and the twist system of the platform is empty.
-These findings can be applied to the Metrom machine tool (4S\underline{P}RR-S\underline{P}R), which is analyzed regarding inverse and forward kinematics in \cite{BaerWei2006} or its variants, the redundant 4S\underline{P}RR-\underline{P}S\underline{P}R from \cite{AlaghebandMahMilBen2015} or the hybrid 4UR\underline{H}U-UR\underline{H}R with an additional linear actuator at the platform \cite{LinLiYanZha2013}.
-The last joint axis of the legs of this sub-class \cite{BaerWei2006,LinLiYanZha2013,AlaghebandMahMilBen2015} is coaxial with the tool axis and is constructed as rotating ring.
+Other possible structures are 
+  the 4U\underline{R}S-U\underline{R}U, which is analyzed kinematically in \cite{SchreiberGos2003} and
+  the 4\underline{P}SU-\underline{P}U*U, which has a special parallelogram structure in one leg (termed ``U*'') and is presented in \cite{GaoPenZhaLi2006}.
+A sub-class of III consists of mechanisms \cite{BaerWei2006,LinLiYanZha2013,AlaghebandMahMilBen2015}, where the last joint axis of the legs is coaxial with the tool axis and is constructed as rotating ring.
+It contains the
+  Metrom machine tool (4S\underline{P}RR-S\underline{P}R), which is analyzed regarding inverse and forward kinematics in \cite{BaerWei2006} or its variants, 
+  the redundant 4S\underline{P}RR-\underline{P}S\underline{P}R from \cite{AlaghebandMahMilBen2015} or 
+  the hybrid 4UR\underline{H}U-UR\underline{H}R with an additional linear actuator at the platform \cite{LinLiYanZha2013}.
+%The last joint axis of the legs of this sub-class \cite{BaerWei2006,LinLiYanZha2013,AlaghebandMahMilBen2015} is coaxial with the tool axis and is constructed as rotating ring.
 A structural synthesis based on linear transformations and evolutionary morphology \cite{Gogu2008} led e.\,g. to the Isoglide5 mechanisms (3\underline{P}RRRRR-2\underline{P}RRRR), which are analyzed and optimized regarding the isotropy of the Jacobian in \cite{Gogu2006}.
 
-The last class (IV) consists of symmetric machines, which have been found by systematic structural synthesis with screw theory, which has been performed in \cite{KongGos2005} for 3T2R.
+The simplest member of class IV, the 5U\underline{P}U is shown in \cite{HuangLi2002} with the help of screw theory to only have local mobility and no global mobility, since the twist systems of the leg chains have no intersection and the resulting twist system of the platform is empty.
+Members of class IV have been found by systematic structural synthesis with screw theory, which has been performed in \cite{KongGos2005} for symmetric 3T2R mechanisms.
 The resulting 5R\underline{P}UR and 5\underline{P}RUR are analyzed in \cite{Tale-MasoulehGos2011,Tale-MasoulehSaaGosTag2010}.
 
-In a practical application with competing requirements on workspace, stiffness, costs and precision, each of the existing systems has its legitimation.
+In a practical application with competing requirements on workspace, stiffness, costs and precision, each of the existing systems has its legitimization.
 Nevertheless, each of the classes has inherent disadvantages:
-In tasks like milling with high process forces and requirements on stiffness and precision, robots from class II with a constraining leg have the drawback, that the passive leg takes the complete reaction wrench in the blocked rotational degree of freedom, which strongly affects the mechanisms stiffness in this direction \cite{ZhangGos2001}.
-The same is argued by \cite{LinLiYanZha2013} at the example of the Metrom machine tool, but can be extended to all the members of class III, where most leg chains have six DoF and only one leg chain has five DoF.
+In tasks like milling with high process forces and requirements on stiffness and precision, robots from class II with one constraining leg have the drawback, that the passive leg takes the complete reaction wrench in the blocked rotational degree of freedom, which strongly affects the mechanisms stiffness in this direction \cite{ZhangGos2001}.
+The same is argued by \cite{LinLiYanZha2013} at the example of the Metrom machine tool, but can be extended to all the members of class III, where most leg chains have six DoF and usually only one leg chain has five DoF.
 This leg chain also has to take the reaction moments in the blocked DoF which affects the overall stiffness.
 Therefore members of the classes I and IV can be expected to reach a higher stiffness.
-Mechanisms of class III and IV may further suffer from an increased sensitivity of manufactoring tolerances, which may cause a high pretensioning of the bearings or even reduce the DoF.
+Mechanisms of the class IV may further suffer from an increased sensitivity of manufacturing tolerances, which may cause a high pretension of the bearings or even reduce the DoF, since the five DoF of all leg chains have to coincide exactly to allow the platform to also have five DoF.
 Additionally, only members of class I provide redundancy which allows to use the additional DoF for performance optimizations e.\,g. to avoid singularities and to compensate the smaller workspace caused by the sixth leg.
 
 Therefore, the remainder of the paper focuses on mechanisms of the first class to allow an optimization of their performance criteria using the degree of task redundancy.

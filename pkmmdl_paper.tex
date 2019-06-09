@@ -721,7 +721,7 @@ The full kinematic constraints for the reduced coordinates
 %
 can be used for the inverse kinematics of the leg chain $i$ in 3T2R tasks, where $\bm{\Psi}_i=\bm{0}$ leads to a valid position and orientation of the tool axis.
 The condition $\bm{\Phi}_i=\bm{0}$ leads to a valid configuration of leg $i$ of the parallel robot in 3T3R tasks.
-In the following, ``$\bm{\Phi}$'' is always used for 3T3R\footnote{By omitting the corresponding lines in the operational space coordinates $\bm{x}$ and the constraint equations $\bm{\Phi}$, it is also possible to use the approach for systems with reduced mobility of 2T1R, 3T0R and 3T1R platform DoF.} kinematic descriptions and ``$\bm{\Psi}$'' for 3T2R.
+In the following, ``$\bm{\Phi}$'' is always used for 3T3R\footnote{By omitting the corresponding lines in the operational space coordinates $\bm{x}$ and the constraint equations $\bm{\Phi}$, it is also possible to use the 3T3R approach for systems with reduced mobility of 2T1R, 3T0R and 3T1R platform DoF.} kinematic descriptions and ``$\bm{\Psi}$'' for 3T2R.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -758,6 +758,7 @@ The constraints $\bm{\Psi}_i$ from (\ref{equ:Psi_def}) for the reduced coordinat
 Fig.\,\ref{fig:pkm_constr_rot_follow}\,(a) show an open-loop second leg chain for a given first leg chain from Fig.\,\ref{fig:pkm_constr_rot_lead}.
 %
 \begin{figure}[b]
+    % \vspace{-0.6cm} % Bild näher von unten an Fußnote heranbringen
     \input{./figures/pkm_constr_def_rot_follow.pdf_tex}
     \caption{Different cases for the kinematic constraints of the following chain: (a) wrong position and orientation; (b) correct position and wrong orientation; (c) all kinematic constraints are complied.}
     \label{fig:pkm_constr_rot_follow}
@@ -780,6 +781,7 @@ The translational part of the constraints is not coupled by the platform orienta
 \end{equation}
 %
 for the following legs $j$.
+% 
 The orientation for the platform is given with the rotation matrix
 %
 \begin{equation}
@@ -815,7 +817,7 @@ The full kinematic constraints for the complete parallel robot with $m$ legs for
 \end{equation}
 %
 are assembled from the 3T2R constraints $\bm{\Psi}_1$ from (\ref{equ:Psi_def}) for the leading leg and the 3T3R constraints $\bm{\Phi}_j$, $2\le{}j\le{}m$ from (\ref{equ:Phit_def_j},\ref{equ:Phir_def_j}) for the following legs.
-
+The index ``$j$'' is used to distinguish the following legs of the 3T2R case and all legs of the general case in Sec.\,\ref{sec:REW_seriell}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Differential Kinematics for Parallel Robots}
@@ -912,20 +914,20 @@ and the full geometric matrices of direct kinematics
 have to be calculated for the 3T3R and the 3T2R case respectively.
 The gradient $\bm{\Phi}_{\partial \bm{q}}$ has block diagonal form, indicating that the inverse kinematics problem can be solved for each leg independently.
 The structures of the gradient $\bm{\Psi}_{\partial \bm{q}}$ results from the coupling of the leading and following joints in the rotational constraints equation.
-\color{gray}
-Since the 3T2R case can be inferred from the 3T3R case by the definition of reciprocal Euler angles and the selection of the corresponding entries of the coordinates in (\ref{equ:etar_def}) and the constraints in (\ref{equ:Psir_def}), only the 3T3R case ``$\bm{\Phi}$'' is written out in the following elaborations.
-\color{black}
+%\color{gray}
+%Since the 3T2R case can be inferred from the 3T3R case by the definition of reciprocal Euler angles and the selection of the corresponding entries of the coordinates in (\ref{equ:etar_def}) and the constraints in (\ref{equ:Psir_def}), only the 3T3R case ``$\bm{\Phi}$'' is written out in the following elaborations.
+%\color{black} % Stimmt so gar nicht mehr.
 
 The gradient matrices $\bm{\Phi}_{\partial \bm{q}}$ and $\bm{\Phi}_{\partial \bm{x}}$ contain nested nonlinear functions related to the orientation error, therefore the geometric Jacobian of the leg chains can not be exploited for the rotational part, as derived in appendix\,\ref{sec:appendix_gradient_geomjacobian}.
 The gradients are calculated with the chain rule and a syntax for stacking matrix columns to avoid differentiating matrices or with respect to matrices, which was introduced in \cite{1_SchapplerTapOrt2019}.
-The product operator $\overline{\Pi}$, the stacking operator $\overline{\bm{R}}$ and the transpose operator $\bm{P}_\transp$ used for the implementation in the next section are explained in appendix\, \ref{sec:appendix_gradient_matrix}.
+The product operator $\overline{\Pi}$, the stacking operator $\overline{\bm{R}}$ and the transpose operator $\bm{P}_\transp$ used for the implementation in the next section are explained in appendix\,\ref{sec:appendix_gradient_matrix}.
 
-\subsection{Constraint Gradients for the Leading Leg and the 3T3R case}
+\subsection{Constraint Gradients for the Leading Leg of the 3T2R and all Legs of the 3T3R case}
 %
 The constraint definition $\bm{\Psi}_1$ for the leading leg of the 3T2R case (\ref{equ:constr_Psi_PKM}) and $\bm{\Phi}_i$ with $i=1,...,m$ for all legs of the 3T3R case (\ref{equ:constr_Phi_PKM}) are subject to the same model of (\ref{equ:Phit_def_i},\ref{equ:Phir_def_i},\ref{equ:Phi_def}).
 In the following, the 3T3R constraints are displayed.
-The form $\bm{\Psi}_1$ for the 3T2R case is obtained by removing the corresponding line of the rotational component according to (\ref{equ:Psir_def}).
-The constraint gradient matrix w.\,r.\,t. the joint coordinates can be expanded to
+The form $\bm{\Psi}_1$ for the 3T2R case is obtained by removing the corresponding line of the rotational component according to (\ref{equ:Psir_def}) and replacing ``$\bm{\Phi}$'' by ``$\bm{\Psi}$'' in the following equations.
+For the analysis, the constraint gradient matrix w.\,r.\,t. the joint coordinates has to be divided out to
 %
 \begin{equation}
 \bm{\Phi}_{1,\partial\bm{q}_1}
@@ -1128,9 +1130,9 @@ the term ``III'' from (\ref{equ:grad_Phi_1_q}) in ``IV''.
 \subsection{Gradient-Based Solution of the Inverse Kinematics Problem with Redundancy Resolution}
 \label{sec:ZB_Anwendung_IK_grad}
 
-The presented kinematic constraints and their gradient matrices can be used to solve the inverse kinematics problem (IKP) of serial and parallel robots.
-Since all joint angles are involved for the case of parallel robots, solving their IKP results to solving the IKP for all leg chains.
-As first introduced in \cite{GoldenbergBenFen1985} for Euler angle residuals the IKP, the Taylor series expansion of $\bm{\Phi}(\bm{q},\bm{x})$ leads to the definition of
+The presented kinematic constraints and their gradient matrices can be used to solve the inverse kinematics problem (IKP) of single leg chains and complete parallel robots.
+Since all active and passive joint angles are involved for the case of parallel robots, solving their IKP results in solving the IKP for all leg chains.
+As first introduced in \cite{GoldenbergBenFen1985} for Euler angle residuals in the IKP, the Taylor series expansion of $\bm{\Phi}(\bm{q},\bm{x})$ leads to the definition of
 %
 \begin{equation}
 \bm{\Phi}(\bm{q}^{k+1},\bm{x}) = 
@@ -1143,9 +1145,27 @@ As first introduced in \cite{GoldenbergBenFen1985} for Euler angle residuals the
 in an iterative algorithm at the step $k+1$, which can be used to solve the IKP using a given initial value $\bm{q}^{0}$ and the condition
 \begin{equation}
 \bm{\Phi}(\bm{q}^{k+1},\bm{x})=\bm{0}.
+\label{equ:taylor_phi_nextstepzero}
 \end{equation}
-Using $\bm{\Psi}$ for 3T2R tasks from (\ref{equ:constr_Psi_PKM}) instead of $\bm{\Phi}$ from (\ref{equ:constr_Phi_PKM}) and the corresponding gradient matrix from (\ref{equ:PhiPsi_grad_q_complete}) allows the definition of a nullspace in the gradient matrix $\bm{\Psi}_{\partial \bm{q}}(\bm{q},\bm{\eta})$ in the case of $\mathrm{dim}(\bm{q}_1)>\mathrm{dim}(\bm{\eta})$.
-This redundancy can be exploited by using the nullspace projection ${\Delta}\bm{q}_{\mathrm{N}}$ from \cite{Yoshikawa1984} additionally to the solution ${\Delta}\bm{q}_{\mathrm{T}}$ of the IKP with the increment
+%
+%The variable $\bm{q}$ contains all active and passive joint coordinates for all legs of the robot.
+Defining the solution of the IKP as the main task (``T''), the step-wise solution for the joint coordinates results to
+\begin{equation}
+{\Delta}\bm{q}^{k}
+=
+{\Delta}\bm{q}_{\mathrm{T}}^k
+=
+\bm{q}^{k+1} - \bm{q}^k
+=
+-\bm{\Phi}_{\partial\bm{q}}^{\dagger}(\bm{q}^k,\bm{x}) \bm{\Phi}(\bm{q}^k,\bm{x}).
+\label{equ:IKP_maintask}
+\end{equation}
+%
+Depending on the dimension, $(\cdot)^\dagger$ denotes the matrix inverse or the pseudo-inverse.
+Again, the equations (\ref{equ:taylor_phi}-\ref{equ:IKP_maintask}) can be written with ``$\bm{\Psi}$'' from (\ref{equ:constr_Psi_PKM}) instead of ``$\bm{\Phi}$'' from (\ref{equ:constr_Phi_PKM}) for the 3T2R case.
+
+In the latter case, the corresponding gradient matrix $\bm{\Psi}_{\partial \bm{q}}(\bm{q},\bm{\eta})$ from (\ref{equ:PhiPsi_grad_q_complete}) allows the definition of a nullspace in the case of $\mathrm{dim}(\bm{q}_1)>\mathrm{dim}(\bm{\eta})$.
+This redundancy can be exploited by using the nullspace (``N'') projection ${\Delta}\bm{q}_{\mathrm{N}}$ from \cite{Yoshikawa1984} additionally to the solution ${\Delta}\bm{q}_{\mathrm{T}}$ of the IKP in (\ref{equ:IKP_maintask}) with the new increment
 %
 \begin{equation}
 {\Delta}\bm{q}^{k}
@@ -1154,7 +1174,7 @@ This redundancy can be exploited by using the nullspace projection ${\Delta}\bm{
 =
 {\Delta}\bm{q}_{\mathrm{T}}^k + {\Delta}\bm{q}_{\mathrm{N}}^k
 =
-\bm{\Psi}_{\partial\bm{q}}^{\dagger} (-\bm{\Psi}) +  (\bm{1}-\bm{\Psi}_{\partial\bm{q}}^{\dagger}\bm{\Psi}_{\partial\bm{q}}) h_{\partial\bm{q}}
+-\bm{\Psi}_{\partial\bm{q}}^{\dagger} \bm{\Psi} +  (\bm{1}-\bm{\Psi}_{\partial\bm{q}}^{\dagger}\bm{\Psi}_{\partial\bm{q}}) h_{\partial\bm{q}}
 \label{equ:nullspace}
 \end{equation}
 %
@@ -1175,7 +1195,7 @@ h_{\partial\bm{q}}
 \label{equ:criterion1}
 \end{equation}
 of the joint positions $\bm{q}$ from their respective reference position $\bar{\bm{q}}$ can be used.
-Minimizing $h(\bm{q})$ reduces the risk of joints reaching their technical limits, but does not guarantee it.
+Defining $\bar{\bm{q}}$ to be in the middle of the joint limits and minimizing $h(\bm{q})$ reduces the risk of joints reaching their technical limits, but does not guarantee it.
 Other, more sophisticated criteria are for example the quadratic \cite{HuoBar2005} or hyperbolic \cite{ZhuQuCaoYan2013} distance of from joint limits, stiffness \cite{GuoDonKe2015} or singularity avoidance via Frobenius-norm condition number \cite{ZhuQuCaoYan2013} or squared condition number \cite{LegerAng2016}.
 The method can be used for serial link robots as well by removing all entries for the following legs from the formulas, as presented in \cite{1_SchapplerTapOrt2019}.
 The platform pose $\bm{x}$/$\bm{\eta}$ corresponds to the desired pose for the serial robots end-effector and the kinematic constraints $\bm{\Phi}$/$\bm{\Psi}$ correspond to the residual of the IKP.

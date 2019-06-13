@@ -21,8 +21,7 @@ I_novar = l.AdditionalInfo(:,2) == 0;
 I_ges = I&I_novar;
 II = find(I_ges);
 nRob = length(II);
-% II = II([1, 50, 80, 200, 329])
-% II = II([5, 60, 90, 250, 325, 327]);
+usr_forcerecompilecheck = true;
 % II = 85;
 fprintf('Berechne die IK-Statistik für %d Roboter\n', length(II));
 %% Alle Roboter durchgehen
@@ -34,15 +33,12 @@ t0 = tic();
 % Einträge: Anzahl versuche
 IK_hist_Anz_ges = NaN(length(II), 4);
 IK_hist_Anz_mG_ges = NaN(length(II), 3); % Zähle, bei wie vielen die Grenzen verletzt wurden
-ii1 = find(II == 508); II = II(ii1:end);
+% ii1 = find(II == 508); II = II(ii1:end);
 % Untersuche IK für alle Roboter
 for iFK = II'
   t1 = tic();
   ii = ii + 1;
-  % Statistik für inverse Kinematik
-  IKtry_ii = NaN(ntest_Par, ntest_Kon); % Anzahl der Versuche für IK
-  IKerg_ii = zeros(ntest_Par, ntest_Kon); % Status für IK: 0=kein Erfolg, 1=Erfolg, 2=Grenzen verletzt
-  
+
   Name = l.Names_Ndof{iFK};
   RS = serroblib_create_robot_class(Name);
   RS.fill_fcn_handles(use_mex, false);
@@ -56,6 +52,9 @@ for iFK = II'
       % 3: IK testen und kompilieren
       err = false;
       try 
+        if usr_forcerecompilecheck
+          error('Dummy Error to enforce rechecking');
+        end
         RS.invkin2(rand(6,1), rand(RS.NQJ,1));
         RS.invkin2_traj(rand(1,6), rand(1,6), rand(1,6), 0, rand(RS.NQJ,1));
         RS.fkine(rand(RS.NQJ,1));

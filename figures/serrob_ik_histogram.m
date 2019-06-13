@@ -1,7 +1,7 @@
 % Untersuche die Statistik des Erfolgs der inversen Kinematik für alle
 % seriellen Roboter
+% Einstellungen für die Untersuchungen:
 % 
-% Siehe auch: serroblib_gen_bitarrays.m
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2018-12
 % (C) Institut für Mechatronische Systeme, Universität Hannover
@@ -9,9 +9,11 @@
 clear
 clc
 
+respath = fileparts(which('serrob_ik_histogram.m'));
+
 %% Einstellungen
-ntest_Par = 10;
-ntest_Kon = 20;
+ntest_Par = 5;
+ntest_Kon = 10;
 sum_try = ntest_Par*ntest_Kon;
 ntryIK = 10;
 % Einstellungen für IK
@@ -24,14 +26,29 @@ ntryIK = 10;
 
 s_3T3R = struct('retry_limit', 0, 'scale_lim', 0.0, 'normalize', true, ...
   'K', 0.6*ones(6,1), 'n_max', 1e3);
+s_3T2R = struct('retry_limit', 0, 'scale_lim', 0.0, 'normalize', true, ...
+  'K', 0.6*ones(6,1), 'n_max', 1e3, 'I_EE', logical([1 1 1 1 1 0]), ...
+  'Kn', 1e-2*ones(6,1), 'wn', [1; 0]);
+usr_DoF = '3T2R'; % EE-FG für die IK-Auswertung
 use_mex = true;
 usr_debug_limits = false; % Untersuchung, warum Grenzen verletzt werden konnten.
 usr_debug_nosuccess = false; % Untersuchung, warum die IK fehlschlägt
+usr_range_q0 = 1; % Streuung der Startwerte in Prozent der Grenzen um Ist-Lage herum
 % Wiederhole versuche bei Grenzverletzung. Ziel: Nur Lösungen innerhalb der
 % Grenzen werden gewertet 
-usr_repeat_limviol = true; 
+usr_repeat_limviol = true;
+usr_debug_robot = false;
+usr_num_classes = 5; % Anzahl der Histogramm-Klassen für einzelne Versuche (3 -> 1., 2., 3., >3., wrong)
+usr_sort_numrotjoints = false;
 
 resdir = fileparts(which('serrob_ik_histogram.m'));
+
+%% Vorbereitung
+if strcmp(usr_DoF, '3T3R')
+  s_IK = s_3T3R;
+else
+  s_IK = s_3T2R;
+end
 %% Init: Datenbank laden
 N = 6;
 EE_FG = logical([1 1 1 1 1 1]);
@@ -42,10 +59,11 @@ l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo');
 I_novar = l.AdditionalInfo(:,2) == 0;
 I_ges = I&I_novar;
 II = find(I_ges);
-nRob = length(II);
-% II = II([1, 50, 80, 200, 329])
+
+II = II([1, 50, 80, 200, 329])
 % II = II([5, 60, 90, 250, 325, 327]);
 % II = 85;
+nRob = length(II);
 fprintf('Berechne die IK-Statistik für %d Roboter\n', length(II));
 %% Alle Roboter durchgehen
 % Kugelgelenke enden und kinematisch unterschiedlich sind
@@ -54,9 +72,11 @@ t0 = tic();
 % Zeilen: Laufende Nummer des Roboters
 % Spalten: Kein Erfolg; Aufsteigende Anzahl Versuche bis Erfolg
 % Einträge: Anzahl versuche
-IK_hist_Anz_ges = NaN(length(II), 4);
+IK_hist_Anz_ges = NaN(length(II), 2+usr_num_classes);
 IK_hist_Anz_mG_ges = NaN(length(II), 3); % Zähle, bei wie vielen die Grenzen verletzt wurden
+% ii1 = find(II == 455); II = II(1:244);
 
+I_RobAusw = false(length(II),1);
 % Untersuche IK für alle Roboter
 for iFK = II'
   t1 = tic();
@@ -76,6 +96,7 @@ for iFK = II'
 %     break
 %   end
 %   continue
+  RS.gen_testsettings(true, true);
   RS.fill_fcn_handles(use_mex, false);
   % Kompiliere nur die eine Funktion, die benötigt wird (falls sie
   % aktualisiert werden muss)
@@ -90,11 +111,14 @@ for iFK = II'
         RS.invkin2(rand(6,1), rand(RS.NQJ,1));
         RS.invkin2_traj(rand(1,6), rand(1,6), rand(1,6), 0, rand(RS.NQJ,1));
         RS.fkine(rand(RS.NQJ,1));
+        RS.jacobig(rand(RS.NQJ,1));
       catch
+        fprintf('%d/%d: %s; Versuch %d: Fehler beim Aufruf der kompilierten Funktionen\n', ...
+          ii, length(II), Name, mextry);
         err = true;
         if mextry ~= 2
           for fcnname = {'convert_par2_MPV_fixb', 'invkin_eulangresidual', ...
-              'fkine_fixb_rotmat_mdh_sym_varpar', 'invkin_traj'}
+              'fkine_fixb_rotmat_mdh_sym_varpar', 'invkin_traj', 'jacobig_mdh_num'}
             matlabfcn2mex({sprintf('%s_%s', Name, fcnname{1})});
             % matlabfcn2mex({sprintf('%s_%s', Name, fcnname{1})}, false, true, true);
           end
@@ -110,6 +134,37 @@ for iFK = II'
   end
   fprintf('%d/%d: %s Initialisierung i.O.\n', ii, length(II), Name);
 
+  % Rang-Prüfung. Durch Fehler sind eventuell Roboter mit Rang < 6 enthalten
+  maxrank = 0;
+  for i_rt = 1:10
+    RS.gen_testsettings(true, true);
+    J_test = RS.jacobig(rand(RS.NQJ,1));
+    rankJ = rank(J_test);
+    if rankJ > maxrank
+      maxrank = rankJ;
+    end
+  end
+  if maxrank < 6
+    fprintf('Die Jacobi-Matrix hat nur Rang %d! Ignoriere %s\n', maxrank, Name);
+    continue
+  end
+  I_RobAusw(ii) = true; % Der Roboter wird tatsächlich untersucht.
+  % Debuggen des Roboters
+  if usr_debug_robot
+    RS.fill_fcn_handles(false);
+    RS.update_EE([0.1;0.2;0.3]);
+    q_test = rand(RS.NQJ,1);
+    
+    rank(J_test)
+    s_plot = struct( 'ks', [1:RS.NJ, RS.NJ+2], 'straight', 0);
+    figure(100);clf;
+    hold on; grid on;
+    xlabel('x [m]'); ylabel('y [m]'); zlabel('z [m]');
+    view(3);
+    RS.plot( q_test, s_plot );
+    title(sprintf('%s', Name));
+  end
+  
   % Grenzen für Gelenk-Koordinaten festlegen
   RS.qlim(RS.MDH.sigma==0,:) = repmat([-pi, pi], sum(RS.MDH.sigma==0), 1);
   RS.qlim(RS.MDH.sigma==1,:) = repmat([-0.5, 0.5], sum(RS.MDH.sigma==1), 1);
@@ -117,13 +172,18 @@ for iFK = II'
   t2 = tic();
   for kkpar = 1:ntest_Par
     TSS = RS.gen_testsettings(true, true);
+    delta_qlim = (RS.qlim(:,2)-RS.qlim(:,1));
     for i = 1:ntest_Kon
       q = TSS.Q(i,:)'; 
       T_E = RS.fkineEE(q); % Ziel-Pose (erreichbar, da aus direkter Kin.)
       xE = [T_E(1:3,4); r2eul(T_E(1:3,1:3), RS.phiconv_W_E)];
       for j = 1:ntryIK
-        q0 = RS.qlim(:,1) + rand(RS.NQJ,1).*(RS.qlim(:,2)-RS.qlim(:,1));
-        [q_ik,Phi] = RS.invkin2(xE, q0, s_3T3R);
+        % Grenzen für Anfangs-Stellung für IK festlegen
+        q0_min = max(q-usr_range_q0*delta_qlim, RS.qlim(:,1));
+        q0_max = min(q+usr_range_q0*delta_qlim, RS.qlim(:,2));
+        % Gleichverteilte Zufallszahlen zwischen q0_min und q0_max
+        q0 = q0_min + rand(RS.NQJ,1).*(q0_max-q0_min);
+        [q_ik,Phi] = RS.invkin2(xE, q0, s_IK);
         if max(abs(Phi)) < 1e-7 && all(~isnan(Phi))
           % IK erfolgreich
           IKtry_ii(kkpar, i) = j;
@@ -197,16 +257,61 @@ end
 % Prozentuale Angabe für die IK-Statistik
 IK_hist_Ant_ges = IK_hist_Anz_ges / sum_try;
 IK_hist_Ant_mG_ges = IK_hist_Anz_mG_ges / sum_try;
+%% Ergebnisse speichern
+save(fullfile(respath, sprintf('serrob_ik_histogramm_%s_RLV%d.mat', usr_DoF, usr_repeat_limviol)));
+
+% Debug: Nur einen Teil der Ergebnisse nehmen
+% IK_hist_Ant_ges = IK_hist_Ant_ges(1:nRob,:);
+% IK_hist_Ant_mG_ges = IK_hist_Ant_mG_ges(1:nRob,:);
+% IK_hist_Anz_ges = IK_hist_Anz_ges(1:nRob,:);
+% IK_hist_Anz_mG_ges = IK_hist_Anz_mG_ges(1:nRob,:);
+
+%% Vor-Auswertung
+% Roboter, bei denen die IK gar nicht funktioniert.
+I_niO = IK_hist_Ant_mG_ges(:,3) > 0.99;
+Names_niO = l.Names_Ndof(II(I_niO))'
+
+% Reduziere die Ergebnis-Variablen um die nicht ausgewählten Roboter
+IK_hist_Ant_ges = IK_hist_Ant_ges(I_RobAusw,:);
+IK_hist_Ant_mG_ges = IK_hist_Ant_mG_ges(I_RobAusw,:);
+IK_hist_Anz_ges = IK_hist_Anz_ges(I_RobAusw,:);
+IK_hist_Anz_mG_ges = IK_hist_Anz_mG_ges(I_RobAusw,:);
+II = II(I_RobAusw);
+
+%% Sortiere die Roboter danach, wie viele Drehgelenke sie haben
+if usr_sort_numrotjoints
+  NrotJ_all = l.AdditionalInfo(II,5);
+  [NrotJ_sort, I_sortrotJ] = sort(NrotJ_all);
+
+  IK_hist_Ant_ges = IK_hist_Ant_ges(I_sortrotJ,:);
+  IK_hist_Ant_mG_ges = IK_hist_Ant_mG_ges(I_sortrotJ,:);
+  IK_hist_Anz_ges = IK_hist_Anz_ges(I_sortrotJ,:);
+  IK_hist_Anz_mG_ges = IK_hist_Anz_mG_ges(I_sortrotJ,:);
+  II = II(I_sortrotJ);
+end
 %% Ergebnisse plotten
 figure(1);clf;hold on;
-title('IK without regarding joint limits');
+title(sprintf('%s IK without regarding joint limits', usr_DoF));
 % IK_Hist_j = zeros(size(IK_hist_Ant_ges,1), 1);
 legbarhdl = NaN(size(IK_hist_Ant_ges,2),1);
 xticklabels = {};
 for i = 1:size(IK_hist_Ant_ges,1)
   xticklabels{i} = l.Names_Ndof{II(i)};
 end
-
+legentries = {};
+Farben = {};
+color_red = [1, 0, 0];
+color_green = [0, 1, 0];
+color_orange = [1, 0.65, 0];
+for i = 1:size(IK_hist_Ant_ges,2)-2
+  legentries{i} = sprintf('try %d', i); %#ok<SAGROW>
+  ant_gut_schlecht = (i-1) / (size(IK_hist_Ant_ges,2)-2);
+  Farben{i} = color_green*(1-ant_gut_schlecht) + color_orange*ant_gut_schlecht; %#ok<SAGROW>
+end
+legentries{size(IK_hist_Ant_ges,2)-1} = sprintf('try < %d.', ntryIK+1);
+legentries{size(IK_hist_Ant_ges,2)} = 'wrong';
+Farben{size(IK_hist_Ant_ges,2)-1} = color_orange; % x Versuche ist orange
+Farben{size(IK_hist_Ant_ges,2)} = 0.8*color_red; % Falsch ist rot
 for i = 1:size(IK_hist_Ant_ges,1)
   % Setze Startwert für Balkenhöhe auf Maximal-Zahl. Dadurch wird der
   % zuerst gezeichnete Balken immer voll
@@ -218,17 +323,22 @@ for i = 1:size(IK_hist_Ant_ges,1)
     % Plotten
     fprintf('Rob %d; Balken %d: Höhe %1.1f\n', i, j, IK_Hist_j);
     legbarhdl(j) = bar(i, 100*IK_Hist_j);
+    set(legbarhdl(j), 'EdgeColor', 'none', 'FaceColor', Farben{j});
     IK_Hist_j = IK_Hist_j - IK_hist_Ant_ges(i,j);
   end
   set(gca, 'ColorOrderIndex', 1)
 end
-ylabel('occurence in percent');
+xlabel('Number of Robot Kinematics');
+xlim([0.5, nRob+0.5]);
+ylabel('IK success state in percent');
+ylim([0, 100]);
 set(gca, 'xtick', 1:size(IK_hist_Ant_ges,1));
 set(gca, 'xticklabel', xticklabels)
-legend(legbarhdl, {'1.V.', '2.V.', '>2.V.', 'wrong'}, 'location', 'northoutside', 'orientation', 'horizontal');
+leg1hdl = legend(legbarhdl, legentries, 'location', 'northoutside', 'orientation', 'horizontal');
+saveas(1, fullfile(respath, sprintf('serrob_ik_histogramm1_%s_RLV%d.fig', usr_DoF, usr_repeat_limviol)));
 
 figure(2);clf;hold on;
-title('IK regarding joint limits');
+title(sprintf('%s IK regarding joint limits', usr_DoF));
 % IK_Hist_j = zeros(size(IK_hist_Anz_mG_ges,1), 1);
 legbarhdl = NaN(size(IK_hist_Ant_mG_ges,2),1);
 for i = 1:size(IK_hist_Ant_mG_ges,1)
@@ -242,11 +352,29 @@ for i = 1:size(IK_hist_Ant_mG_ges,1)
     % Plotten
     fprintf('Rob %d; Balken %d: Höhe %1.1f\n', i, j, IK_Hist_j);
     legbarhdl(j) = bar(i, 100*IK_Hist_j);
+    set(legbarhdl(j), 'EdgeColor', 'none');
     IK_Hist_j = IK_Hist_j - IK_hist_Ant_mG_ges(i,j);
   end
   set(gca, 'ColorOrderIndex', 1)
 end
 ylabel('occurence in percent');
+ylim([0, 100]);
 legend(legbarhdl, {'correct', 'limits violated', 'wrong'}, 'location', 'northoutside', 'orientation', 'horizontal');
 set(gca, 'xtick', 1:size(IK_hist_Ant_ges,1));
 set(gca, 'xticklabel', xticklabels)
+saveas(2, fullfile(respath, sprintf('serrob_ik_histogramm2_%s_RLV%d.fig', usr_DoF, usr_repeat_limviol)));
+
+%% Histogramme exportieren
+figure(1);
+set(gca, 'XTickMode', 'auto', 'XTickLabelMode', 'auto')
+% set(gca, 'xtick', 1:size(IK_hist_Ant_ges,1));
+% set(gca, 'xticklabel', 1:size(IK_hist_Ant_ges,1));
+set(leg1hdl, 'position', [0.1    0.9    0.8    0.05], ...
+  'orientation', 'horizontal');
+figure_format_publication()
+
+set_size_plot_subplot(1,...
+  15.5,5.5,gca,...
+  0.1,0.01,0.2,0.15,... % bl,br,hu,hd,
+  0,0) % bdx,bdy)
+export_fig(1, fullfile(respath, sprintf('serrob_ik_hist_%s_RLV%d_startoff%1.0f.pdf', usr_DoF, usr_repeat_limviol, 100*usr_range_q0)));

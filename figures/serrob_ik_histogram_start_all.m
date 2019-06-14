@@ -19,3 +19,5 @@ for start_dof = 1:2
     serrob_ik_histogram
   end
 end
+
+serrob_ik_histogram_combinedfigure

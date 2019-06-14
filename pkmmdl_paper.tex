@@ -1384,6 +1384,11 @@ The line for the criterion for $\beta_3=-15^\circ$ exceeds the limits of the plo
 This exposes the need for keeping the solution always within the limits by the measures described.
 The 3T2R IK without optimization tends to lower changes in the joint positions than the 3T3R IK, since this corresponds to the solution of the matrix pseudo-inverse in (\ref{equ:nullspace}).
 
+\begin{figure}[tb]
+    %\includegraphics{serrob_ik_hist_all.pdf}
+    \caption{Detailed Statistics of the success of the inverse kinematics algorithm for 3T2R tasks (a-b) and 3T3R tasks (c-d). The Success of the IK solver is shown in different shades of green for increasing numbers of required tries. Different initial values $\bm{q}^0$ are distinguished in (a,c) and (b,d).}
+    \label{fig:serrob_ik_hist}
+\end{figure} 
 
 \subsection{Resolution of Functional Redundancy of a Parallel Robot in 3T2R tasks}
 \label{sec:Ergebnisse_IK_Parallel}
@@ -1395,7 +1400,7 @@ The 3T2R IK without optimization tends to lower changes in the joint positions t
 \color{black}
 
 %
-\begin{figure}[h!]
+\begin{figure}[tb]
 	\includegraphics{parrob_traj_results1.pdf}
 	\caption{Results of the inverse kinematics of a 6UPS robot in a 3T2R task}
 	\label{fig:parrob_traj_3T2R}

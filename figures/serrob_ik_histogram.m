@@ -12,11 +12,11 @@ if ~exist('usr_extstart', 'var')
   clear
   clc
 end
-respath = fileparts(which('serrob_ik_histogram.m'));
+
 
 %% Einstellungen
-ntest_Par = 10;
-ntest_Kon = 20;
+ntest_Par = 50;
+ntest_Kon = 50;
 sum_try = ntest_Par*ntest_Kon;
 ntryIK = 20;
 % Einstellungen für IK
@@ -27,6 +27,15 @@ ntryIK = 20;
 % * normalize auf 1, da das Endergebnis zur Grenzbeurteilung im
 %   Normal-Bereich liegen muss
 
+% IK-Einstellungen für alte Version
+% s_3T3R = struct('retry_limit', 0, ...
+%   'K', 0.6*ones(6,1), 'n_max', 1e3, ...
+%   'I_EE', logical([1 1 1 1 1 1]));
+% s_3T2R = struct('retry_limit', 0, ...
+%   'K', 0.6*ones(6,1), 'n_max', 1e3, ...
+%   'I_EE', logical([1 1 1 1 1 0]), ...
+%   'Kn', 0.1*ones(6,1), 'wn', 1);
+% IK-Einstellungen für neue Version
 s_3T3R = struct('retry_limit', 0, 'scale_lim', 0.0, 'normalize', true, ...
   'K', 0.6*ones(6,1), 'n_max', 1e3, 'maxrelstep', 0.05, ...
   'I_EE', logical([1 1 1 1 1 1]));
@@ -35,7 +44,7 @@ s_3T2R = struct('retry_limit', 0, 'scale_lim', 0.0, 'normalize', true, ...
   'I_EE', logical([1 1 1 1 1 0]), ...
   'Kn', 0.01*ones(6,1), 'wn', [0.99;0.01]);
 if ~exist('usr_DoF', 'var')
-  usr_DoF = '3T2R'; % EE-FG für die IK-Auswertung
+  usr_DoF = '3T3R'; % EE-FG für die IK-Auswertung
 end
 use_mex = true;
 usr_debug_limits = false; % Untersuchung, warum Grenzen verletzt werden konnten.
@@ -49,10 +58,10 @@ usr_repeat_limvioluntil = ntryIK-5; % Versuche bis 5 Versuche vor Ende ohne Gren
 usr_debug_robot = false;
 usr_num_classes = 7; % Anzahl der Histogramm-Klassen für einzelne Versuche (3 -> 1., 2., 3., >3., wrong)
 usr_num_leg_classes = 3;
-usr_sort_numrotjoints = false;
+usr_sort_numrotjoints = true;
 usr_parcomp = true; % Parallele Berechnung (ca. Faktor 2 schneller)
 usr_forcerecompilecheck = true;
-resdir = fileparts(which('serrob_ik_histogram.m'));
+respath = fileparts(which('serrob_ik_histogram.m'));
 
 %% Vorbereitung
 if strcmp(usr_DoF, '3T3R')
@@ -71,7 +80,8 @@ Names_Ndof = l.Names_Ndof;
 I_novar = l.AdditionalInfo(:,2) == 0;
 I_ges = I&I_novar;
 II = find(I_ges);
-
+II_orig = II;
+% II = II([4, 50, 200, 329]);
 % II = II([1, 50, 80, 200, 329]);
 % II = II([5, 60, 90, 120, 250, 280, 325, 327]);
 % II = 90;
@@ -313,8 +323,11 @@ save(fullfile(respath, sprintf('serrob_ik_histogramm_%s_startoff%1.0f.mat', usr_
 %% Vor-Auswertung
 % Roboter, bei denen die IK gar nicht funktioniert.
 I_niO = IK_hist_Ant_mG_ges(:,3) > 0.99;
-Names_niO = l.Names_Ndof(II(I_niO))'
-
+if any(I_niO)
+  disp('Es gibt Roboter, bei denen es gar nicht funktioniert:');
+  Names_niO = l.Names_Ndof(II_orig(~I_RobAusw))';
+  disp(Names_niO);
+end
 % Reduziere die Ergebnis-Variablen um die nicht ausgewählten Roboter
 IK_hist_Ant_ges = IK_hist_Ant_ges(I_RobAusw,:);
 IK_hist_Ant_mG_ges = IK_hist_Ant_mG_ges(I_RobAusw,:);
@@ -375,7 +388,7 @@ for i = 1:size(IK_hist_Ant_ges,1)
   set(gca, 'ColorOrderIndex', 1)
 end
 xlabel('Number of Serial Link Kinematics');
-xlim([0.5, nRob+0.5]);
+xlim([0.5, length(II)+0.5]); % Die Menge der Roboter kann sich reduzieren. Daher Limits nicht mit `nRob`
 ylabel('IK success state in %');
 ylim([0, 100]);
 set(gca, 'xtick', 1:size(IK_hist_Ant_ges,1));
@@ -401,7 +414,7 @@ for i = 1:size(IK_hist_Ant_mG_ges,1)
     % Balken kleiner ist
     % Plotten
     % fprintf('Rob %d; Balken %d: Höhe %1.1f\n', i, j, IK_Hist_j);
-    legbarhdl(j) = bar(i, 100*IK_Hist_j);
+    legbarhdl(j) = bar(i, 100*IK_Hist_j, 'DisplayName', sprintf('Rob%dCl%d', i, j));
     set(legbarhdl(j), 'EdgeColor', 'none');
     IK_Hist_j = IK_Hist_j - IK_hist_Ant_mG_ges(i,j);
   end
@@ -435,5 +448,5 @@ set(gca, 'XTickMode', 'auto', 'XTickLabelMode', 'auto')
 set(leg1hdl, 'position', [0.15    0.92    0.70    0.05], ...
   'orientation', 'horizontal');
 figure_format_publication()
-
+saveas(1, fullfile(respath, sprintf('serrob_ik_hist_%s_startoff%1.0f.fig', usr_DoF, 100*usr_range_q0)));
 export_fig(1, fullfile(respath, sprintf('serrob_ik_hist_%s_startoff%1.0f.pdf', usr_DoF, 100*usr_range_q0)));

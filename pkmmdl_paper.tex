@@ -1183,19 +1183,19 @@ The optimization of additional performance criteria $h$ requires their gradient 
 As a simple example, the summed $\bm{W}$-weighted quadratic distances
 %
 \begin{equation}
-h(\bm{q})
+h_1(\bm{q})
 =
 \frac{1}{2} (\bm{q}-\bar{\bm{q}})^\transp\bm{W}(\bm{q}-\bar{\bm{q}}),
 \quad
-h_{\partial\bm{q}}
+h_{1,\partial\bm{q}}
 =
-\frac{\partial h}{\partial \bm{q}}
+\frac{\partial h_1}{\partial \bm{q}}
 =
 \bm{W}(\bm{q}-\bar{\bm{q}})
 \label{equ:criterion1}
 \end{equation}
 of the joint positions $\bm{q}$ from their respective reference position $\bar{\bm{q}}$ can be used.
-Defining $\bar{\bm{q}}$ to be in the middle of the joint limits and minimizing $h(\bm{q})$ reduces the risk of joints reaching their technical limits, but does not guarantee it.
+Defining $\bar{\bm{q}}$ to be in the middle of the joint limits and minimizing $h_1(\bm{q})$ reduces the risk of joints reaching their technical limits, but does not guarantee it.
 Other, more sophisticated criteria are for example the quadratic \cite{HuoBar2005} or hyperbolic \cite{ZhuQuCaoYan2013} distance of from joint limits, stiffness \cite{GuoDonKe2015} or singularity avoidance via Frobenius-norm condition number \cite{ZhuQuCaoYan2013} or squared condition number \cite{LegerAng2016}.
 The method can be used for serial link robots as well by removing all entries for the following legs from the formulas, as presented in \cite{1_SchapplerTapOrt2019}.
 The platform pose $\bm{x}$/$\bm{\eta}$ corresponds to the desired pose for the serial robots end-effector and the kinematic constraints $\bm{\Phi}$/$\bm{\Psi}$ correspond to the residual of the IKP.
@@ -1332,11 +1332,11 @@ The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ an
 \end{figure}
 
 For the application of the algorithm from (\ref{equ:nullspace}), further extensions were performed to address some practical issues.
-First, the simple optimization criterion from (\ref{equ:criterion1}) showed violations of the limits of one joint which were compensated by improvements for other joints.
+First, the simple optimization criterion $h_1$ from (\ref{equ:criterion1}) showed violations of the limits of one joint which were compensated by improvements for other joints.
 Therefore, it was replaced by the hyperbolic joint limit distance
 %
 \begin{equation}
-h(\bm{q})
+h_2(\bm{q})
 =
 \frac{1}{n} \sum_{i=1}^{n} \frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8}
 \left(
@@ -1349,9 +1349,9 @@ h(\bm{q})
 %
 from \cite{ZhuQuCaoYan2013} with $n=6$ in this case and the corresponding gradient written element-wise as
 \begin{equation}
-h_{\partial q_i}
+h_{2,\partial q_i}
 =
-\frac{\partial h}{\partial q_i}
+\frac{\partial h_2}{\partial q_i}
 =
 \frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8n}
 \left(
@@ -1363,7 +1363,7 @@ h_{\partial q_i}
 \end{equation}
 %
 Constant damping coefficient were introduced with 0.7 for ${\Delta}\bm{q}_{\mathrm{T}}^k$ and 0.002 for ${\Delta}\bm{q}_{\mathrm{N}}^k$ of (\ref{equ:nullspace}) to avoid overshooting of the solution for the prize of slower convergence.
-Further damping was introduced for the 3T2R case with optimization\footnote{The 3T3R case and the 3T2R case without optimization do not benefit from this damping term, since the direction of the gradient descent over the limits is unchanged without nullspace. Only the convergence rate reduces and stops at the limit.} to reduce a ${\Delta}\bm{q}^{k}$ that would lead to overshoot over the joint limits, since the new criterion (\ref{equ:criterion2}) is only meaningful defined within the joint limits for $q_{i,\mathrm{min}} < q_i < q_{i,\mathrm{max}}$.
+Further damping was introduced for the 3T2R case with optimization\footnote{The 3T3R case and the 3T2R case without optimization do not benefit from this damping term, since the direction of the gradient descent over the limits is unchanged without nullspace. Only the convergence rate reduces and stops at the limit.} to reduce a ${\Delta}\bm{q}^{k}$ that would lead to overshoot over the joint limits, since the new criterion $h_2$ from (\ref{equ:criterion2}) is only meaningful defined within the joint limits for $q_{i,\mathrm{min}} < q_i < q_{i,\mathrm{max}}$.
 The damping terms are always applied to the full vector and not to single elements.
 
 The results of the inverse kinematics for different settings are given in Fig.\,\ref{fig:serrob_traj_3T2R}, where the representative joint coordinates $q_1$, $q_2$ and $q_5$ as well as the optimization criterion (\ref{equ:criterion2}) is depicted for the trajectory from Fig.\,\ref{tab:mdh_industrialrobot}.
@@ -1379,13 +1379,27 @@ The 3T2R case with optimization is plotted as the green line with triangle marke
 \end{figure} 
 %
 It can be observed, that the optimization of the criterion leads to the best solution of the IKP.
-The 3T3R solution with $\beta_3=-150^\circ$ has a lower (i.\,e. better) value for $h$, but this represents an invalid solution, as can be seen for the values for $q_5$, where the black line exceeds the upper limit and leaves the domain of the criterion.
+The 3T3R solution with $\beta_3=-150^\circ$ has a lower (i.\,e. better) value for $h_2$, but this represents an invalid solution, as can be seen for the values for $q_5$, where the black line exceeds the upper limit and leaves the domain of the criterion.
 The line for the criterion for $\beta_3=-15^\circ$ exceeds the limits of the plot.
 This exposes the need for keeping the solution always within the limits by the measures described.
 The 3T2R IK without optimization tends to lower changes in the joint positions than the 3T3R IK, since this corresponds to the solution of the matrix pseudo-inverse in (\ref{equ:nullspace}).
 
+
+\subsection{Statistic Results for the Inverse Kinematics of Serial Link Chains}
+\label{sec:Ergebnisse_IK_Statistik}
+
+To emphasize the generality of the approach for solving the IKP, the inverse kinematics is solved for a set of 309 serial kinematic chains with six joints generated by permutations on the Denavit-Hartenberg parameters that describe the robot kinematics and is reduced with the isomorphism detection of \cite{RamirezKotOrt2015} to a minimal set.
+In contrast to the evaluation in the previous section, the inverse kinematics is solved for arbitrary reachable poses of the serial chain that are generated by the forward kinematics of 50 different joint configurations of the chains uniformly distributed between the joint limits of $\pm \pi$ for rotational joints and $\pm0.5\,\mathrm{m}$ for prismatic joints.
+Additionally the Denavit Hartenberg parameters (distances between joints and angle offsets) were set to 50 different sets of uniformly distributed parameters between $0$ and $1$ resulting to 2500 combinations for each of the 309 robots in total.
+The inital value $\bm{q}^0$ for the solution of the IKP was set to random values from a uniform distribution within the joint limits.
+The results are presented in Fig.\,\ref{fig:serrob_ik_hist} for different settings of the algorithm.
+A maximum of 15 tries with random initial values was allowed to search for a solution of the IKP within the limits.
+After that, five more tries were allowed to find a solution violating the limits, but presenting a solution of the IKP.
+Fig.\,\ref{fig:serrob_ik_hist}\,a shows the distribution of the results for 
+
+
 \begin{figure}[tb]
-    %\includegraphics{serrob_ik_hist_all.pdf}
+    \includegraphics{serrob_ik_hist_all.pdf}
     \caption{Detailed Statistics of the success of the inverse kinematics algorithm for 3T2R tasks (a-b) and 3T3R tasks (c-d). The Success of the IK solver is shown in different shades of green for increasing numbers of required tries. Different initial values $\bm{q}^0$ are distinguished in (a,c) and (b,d).}
     \label{fig:serrob_ik_hist}
 \end{figure} 

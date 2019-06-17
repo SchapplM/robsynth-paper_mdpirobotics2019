@@ -54,6 +54,19 @@ for i = 1:4
   [Y_off, Y_slope] = get_relative_position_in_axes(axhdl(i), 'y');
   set(th(i), 'HorizontalAlignment', 'Left', 'Position', [X_off+X_slope*(-0.95), Y_off+Y_slope*(1.02), 0]);
 end
+
+% Abstand zwischen den Säulen entfernen. Dieser führt zu merkwürdigen
+% Interpolationseffekten im pdf.
+for i = 1:4
+  fprintf('Subplot %d\n', i);
+  t1 = tic();
+  ch = get(axhdl(i), 'Children');
+  for j = 1:length(ch)
+    fprintf('Subplot %d: Bearbeite %d/%d. Voraussichtlich noch %1.0fs für Subplot.\n', ...
+      i, j, length(ch), toc(t1)/j*(length(ch)-j));
+    set(ch(j), 'BarWidth', 1.0);
+  end
+end
 %% Formatieren
 figure_format_publication(axhdl)
 set_size_plot_subplot(figHandle,...
@@ -65,4 +78,5 @@ set(legh, 'position', [0.15    0.955    0.70    0.04], ...
 
 saveas(figHandle, fullfile(respath, sprintf('serrob_ik_hist_all.fig')));
 export_fig(figHandle, fullfile(respath, sprintf('serrob_ik_hist_all.pdf')));
+export_fig(figHandle, fullfile(respath, sprintf('serrob_ik_hist_all.eps')));
 export_fig(figHandle, fullfile(respath, sprintf('serrob_ik_hist_all.png')));

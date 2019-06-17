@@ -7,6 +7,7 @@
 clc
 clear
 
+usr_load_data = true;
 start_dof_values = {'3T3R', '3T2R'};
 start_q0range_values = [0.2, 1.0];
 usr_extstart = true;

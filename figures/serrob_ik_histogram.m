@@ -52,6 +52,9 @@ usr_debug_nosuccess = false; % Untersuchung, warum die IK fehlschlägt
 if ~exist('usr_range_q0', 'var')
   usr_range_q0 = 1; % Streuung der Startwerte in Prozent der Grenzen um Ist-Lage herum
 end
+if ~exist('usr_load_data', 'var')
+  usr_load_data = false; % Generiere die IK-Statistik neu, ohne nur die Ergebnisse zu laden
+end
 % Wiederhole versuche bei Grenzverletzung. Ziel: Nur Lösungen innerhalb der
 % Grenzen werden gewertet
 usr_repeat_limvioluntil = ntryIK-5; % Versuche bis 5 Versuche vor Ende ohne Grenzverletzung. Dann nehme GV in Kauf
@@ -99,6 +102,9 @@ I_RobAusw = false(length(II),1);
 nbars_hist = size(IK_hist_Anz_ges,2);
 % Untersuche IK für alle Roboter
 t0 = tic();
+if usr_load_data
+  II = []; % Damit die Schleife mit der Berechnung gar nicht erst gestartet wird
+end
 parfor ii = 1:length(II)
   iFK = II(ii);
   t1 = tic();
@@ -309,8 +315,13 @@ IK_hist_Ant_ges = IK_hist_Anz_ges / sum_try;
 IK_hist_Ant_mG_ges = IK_hist_Anz_mG_ges / sum_try;
 fprintf('Insgesamt %d Roboter in %1.0fs berechnet.\n', nRob, toc(t0));
 %% Ergebnisse speichern
-save(fullfile(respath, sprintf('serrob_ik_histogramm_%s_startoff%1.0f.mat', usr_DoF, 100*usr_range_q0)));
-
+if ~usr_load_data
+  fprintf('IK-Ergebnisse gespeichert\n');
+  save(fullfile(respath, sprintf('serrob_ik_histogramm_%s_startoff%1.0f.mat', usr_DoF, 100*usr_range_q0)));
+else
+  fprintf('IK-Ergebnisse geladen\n');
+  load(fullfile(respath, sprintf('serrob_ik_histogramm_%s_startoff%1.0f.mat', usr_DoF, 100*usr_range_q0)));
+end
 % Debug: Reduziere Ergebnisse bis zum letzten, der gelaufen ist:
 % nRob = find(II == iFK);
 

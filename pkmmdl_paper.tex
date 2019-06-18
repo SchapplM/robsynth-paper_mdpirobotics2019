@@ -1285,7 +1285,7 @@ The case of task redundancy does not affect (\ref{equ:full_diff_dk}), since the 
 \label{sec:Ergebnisse}
 
 
-To evaluate the inverse kinematics algorithm presented in the previous section \ref{sec:ZB_Anwendung_IK_grad}, first the solution of the IKP is shown for the trajectory of an industrial robot and for random point-to-point movements of arbitrary robots in Sec\,\ref{sec:Ergebnisse_Seriell}.
+To evaluate the inverse kinematics algorithm presented in the previous section \ref{sec:ZB_Anwendung_IK_grad}, first the solution of the IKP is shown for the trajectory of an industrial robot  in Sec\,\ref{sec:Ergebnisse_Seriell} and for random point-to-point movements of arbitrary robots in Sec\,\ref{sec:Ergebnisse_IK_Statistik}.
 This can be regarded as the first step towards the inverse kinematics of parallel robots, which is evaluated in Sec.\,\ref{sec:Ergebnisse_IK_Parallel}.
 The application of the full Jacobians from Sec.\,\ref{sec:ZB_Anwendung_PKM_DiffKin} for the mobility of parallel robots is presented in Sec.\,\ref{sec:Ergebnisse_Mobilitaet_Delta} for the Delta robot.
 
@@ -1302,7 +1302,7 @@ The application of the full Jacobians from Sec.\,\ref{sec:ZB_Anwendung_PKM_DiffK
 
 The first evaluation of the inverse kinematics algorithm from Sec.\,\ref{sec:ZB_Anwendung_IK_grad} is performed with simulations at the basic example of a six-DoF industrial robot with a rectangular trajectory.
 The manipulator Fanuc M-710 iC/50 was taken from the example of \cite{HuoBar2008} with the tabulated kinematics parameters and a sketch of the trajectory in Fig.\,\ref{tab:mdh_industrialrobot}.
-Deviations in the parameters relative to \cite{HuoBar2008} result from the use of the \emph{modified} Denavit-Hartenberg notation for the joint transformation according to \textsc{Khalil} and the use of only positive $\alpha_i$ parameters for axis alignment for consistency with the results of the structural synthesis from \cite{RamirezKotOrt2015}.
+Deviations in the parameters relative to \cite{HuoBar2008} result from the use of the \emph{modified} Denavit-Hartenberg\footnote{The four DH parameters contain the minimal set of kinematic parameters for single joint transformations which correspond to distances and angle offsets between joint axes. The single elementary transformation steps are marked in Fig.\,\ref{tab:mdh_industrialrobot}.} notation for the joint transformation according to \textsc{Khalil} and the use of only positive $\alpha_i$ parameters for axis alignment for consistency with the results of the structural synthesis from \cite{RamirezKotOrt2015}.
 The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ and a desired alignment of the $z$-axis pointing into the ground plane.
 
 \begin{figure}[tb]
@@ -1332,13 +1332,15 @@ The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ an
 \end{figure}
 
 For the application of the algorithm from (\ref{equ:nullspace}), further extensions were performed to address some practical issues.
-First, the simple optimization criterion $h_1$ from (\ref{equ:criterion1}) showed violations of the limits of one joint which were compensated by improvements for other joints.
-Therefore, it was replaced by the hyperbolic joint limit distance
+First, the simple optimization criterion $h_1$ from (\ref{equ:criterion1}) showed the behavior that violations of the limits of one joint were compensated by improvements for other joints, leaving an invalid solution.
+Therefore, it was replaced by the $w_i$-weighted hyperbolic joint limit distance
 %
 \begin{equation}
 h_2(\bm{q})
 =
-\frac{1}{n} \sum_{i=1}^{n} \frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8}
+\frac{1}{n} \sum_{i=1}^{n}
+w_i
+\frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8}
 \left(
 \frac{1}{(q_{i}-q_{i,\mathrm{min}})^2}
 +
@@ -1353,20 +1355,33 @@ h_{2,\partial q_i}
 =
 \frac{\partial h_2}{\partial q_i}
 =
+w_i
 \frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8n}
 \left(
 \frac{-2}{(q_{i}-q_{i,\mathrm{min}})^3}
 +
 \frac{-2}{(q_{i}-q_{i,\mathrm{max}})^3}
-\right).
+\right)
 \label{equ:criterion2_grad}
 \end{equation}
 %
-Constant damping coefficient were introduced with 0.7 for ${\Delta}\bm{q}_{\mathrm{T}}^k$ and 0.002 for ${\Delta}\bm{q}_{\mathrm{N}}^k$ of (\ref{equ:nullspace}) to avoid overshooting of the solution for the prize of slower convergence.
-Further damping was introduced for the 3T2R case with optimization\footnote{The 3T3R case and the 3T2R case without optimization do not benefit from this damping term, since the direction of the gradient descent over the limits is unchanged without nullspace. Only the convergence rate reduces and stops at the limit.} to reduce a ${\Delta}\bm{q}^{k}$ that would lead to overshoot over the joint limits, since the new criterion $h_2$ from (\ref{equ:criterion2}) is only meaningful defined within the joint limits for $q_{i,\mathrm{min}} < q_i < q_{i,\mathrm{max}}$.
-The damping terms are always applied to the full vector and not to single elements.
+with weights set to $w_i=1$.
+Additional damping coefficients were introduced, replacing (\ref{equ:nullspace}) with
+%
+\begin{equation}
+{\Delta}\bm{q}^k
+=
+K_\mathrm{Lim}(\bm{q}) K_\mathrm{Rel}(\bm{q}) (K_\mathrm{T} {\Delta}\bm{q}_{\mathrm{T}}^k + K_\mathrm{N} {\Delta}\bm{q}_{\mathrm{N}}^k),
+\label{equ:IK_damping}
+\end{equation}
+%
+where constant damping coefficients $K_\mathrm{T}=0.7$ for ${\Delta}\bm{q}_{\mathrm{T}}^k$ and $K_\mathrm{N}=0.002$ for ${\Delta}\bm{q}_{\mathrm{N}}^k$ were introduced to avoid overshooting of the solution for the prize of slower convergence.
+Further damping was introduced for the 3T2R case with optimization\footnote{The 3T3R case and the 3T2R case without optimization do not benefit from this damping term, since the direction of the gradient descent over the limits is unchanged without nullspace.} to reduce a ${\Delta}\bm{q}^{k}$ that would lead to overshoot over the joint limits with $K_\mathrm{Lim}(\bm{q})$, since the new criterion $h_2$ from (\ref{equ:criterion2}) is only meaningfully defined within the joint limits for $q_{i,\mathrm{min}} < q_i < q_{i,\mathrm{max}}$.
+The value $K_\mathrm{Lim}=1$ is set if no limits would be violated by the increment ${\Delta}\bm{q}^k$.
+The maximum step size for one iteration $\Delta\bm{q}$ was ensured with $K_\mathrm{Rel}(\bm{q})$ to stay below 5\,\% of the joint limit range to prevent leaving the validity of the first-order linearization of (\ref{equ:taylor_phi}). For lower increments, $K_\mathrm{Rel}=1$ holds.
+The damping terms are always applied to the full vector and not to single elements and therefore only change the norm and not the direction of ${\Delta}\bm{q}^k$.
 
-The results of the inverse kinematics for different settings are given in Fig.\,\ref{fig:serrob_traj_3T2R}, where the representative joint coordinates $q_1$, $q_2$ and $q_5$ as well as the optimization criterion (\ref{equ:criterion2}) is depicted for the trajectory from Fig.\,\ref{tab:mdh_industrialrobot}.
+The results of the inverse kinematics for different settings are given in Fig.\,\ref{fig:serrob_traj_3T2R}, where the representative joint coordinates $q_1$, $q_2$ and $q_5$ as well as the optimization criterion (\ref{equ:criterion2}) are depicted for the trajectory from Fig.\,\ref{tab:mdh_industrialrobot}.
 The positions are normalized to the joint limits from -1 to 1.
 The first three lines represent IKP solutions with a given constant end-effector orientation of $-150^\circ$, $-15^\circ$ and $45^\circ$ and the 3T3R algorithm.
 The 3T2R algorithm without nullspace optimization is plotted with dotted lines for the same starting configurations as the 3T3R case with the same colors.
@@ -1388,14 +1403,62 @@ The 3T2R IK without optimization tends to lower changes in the joint positions t
 \subsection{Statistic Results for the Inverse Kinematics of Serial Link Chains}
 \label{sec:Ergebnisse_IK_Statistik}
 
-To emphasize the generality of the approach for solving the IKP, the inverse kinematics is solved for a set of 309 serial kinematic chains with six joints generated by permutations on the Denavit-Hartenberg parameters that describe the robot kinematics and is reduced with the isomorphism detection of \cite{RamirezKotOrt2015} to a minimal set.
-In contrast to the evaluation in the previous section, the inverse kinematics is solved for arbitrary reachable poses of the serial chain that are generated by the forward kinematics of 50 different joint configurations of the chains uniformly distributed between the joint limits of $\pm \pi$ for rotational joints and $\pm0.5\,\mathrm{m}$ for prismatic joints.
-Additionally the Denavit Hartenberg parameters (distances between joints and angle offsets) were set to 50 different sets of uniformly distributed parameters between $0$ and $1$ resulting to 2500 combinations for each of the 309 robots in total.
-The inital value $\bm{q}^0$ for the solution of the IKP was set to random values from a uniform distribution within the joint limits.
-The results are presented in Fig.\,\ref{fig:serrob_ik_hist} for different settings of the algorithm.
+To emphasize the generality of the presented approach, the inverse kinematics is solved for a set of 309 serial kinematic chains with six joints.
+This set of six-DoF kinematics is generated by permutations of their Denavit-Hartenberg parameters and is reduced with the isomorphism detection of \cite{RamirezKotOrt2015} to a minimal set, representing all possible six-DoF serial kinematics with full mobility.
+The approach is similar to the results of the evolutionary morphology of parallel robot leg chains of \cite{Gogu2008}.
+In contrast to the trajectory evaluation in the previous section focusing on nullspace optimization, the inverse kinematics is solved in this section for arbitrary reachable poses of the serial chain in its workspace.
+The poses are generated by the forward kinematics of 50 different joint configurations of the chains uniformly distributed between the joint limits of $\pm \pi$ for rotational joints and $\pm0.5\,\mathrm{m}$ for prismatic joints.
+Additionally, the Denavit Hartenberg parameters were set to 50 different sets of uniformly distributed parameters between $0$ and $1$ meters or radians resulting to 2500 combinations for each of the 309 robots in total.
+The inital value $\bm{q}^0$ for the solution of the IKP of (\ref{equ:IKP_maintask}) and
+(\ref{equ:nullspace}) was set to random values from a uniform distribution within the joint limits.
+The following modifications were performed additionally to the ones described in the previous section to increase the efficiency of the algorithm for solving without the good initial values of the trajectory case.
+The combined optimization criterion
+%
+\begin{equation}
+h_3(\bm{q})
+=
+K_{h1} h_1(\bm{q}) + K_{h2} h_2(\bm{q})
+\label{equ:criterion3}
+\end{equation}
+%
+was used with empirically determined values of $K_{h1}=0.99$ and $K_{h2}=0.01$ in (\ref{equ:criterion3}) and damping coefficients $K_{\mathrm{T}}=0.6$ and $K_{\mathrm{N}}=0.01$.
+The weights $w_i$ of (\ref{equ:criterion2}) were set to 0 in case of joint limit violations for joint $i$, therefore using $h_2$ only for joints within their limits.
+The damping term for limit violation was not used in this evaluation, resulting to $K_\mathrm{Lim}(\bm{q})=1$, since for initial values far away from the solution, intermediate steps with limit violations may be required.
+%The settings were chosen to allow temporary violations of the joint limits during the convergence to the IK solution.
+Using only $h_1$ for joints out of their limits draws their positions $q_i$ back into the allowed region.
+The term $h_2$ prevents the algorithm from approaching the limits.
+%
 A maximum of 15 tries with random initial values was allowed to search for a solution of the IKP within the limits.
-After that, five more tries were allowed to find a solution violating the limits, but presenting a solution of the IKP.
-Fig.\,\ref{fig:serrob_ik_hist}\,a shows the distribution of the results for 
+After that, five more tries were allowed to find a solution violating the limits, but presenting a solution of the IKP to be able to distinguish the two cases.
+A success of the IK is defined as a solution within the joint limits.
+
+The aggregated results are presented as histograms in Fig.\,\ref{fig:serrob_ik_hist_cdf} for different settings of the algorithm.
+The histograms show, that for the worst case in 3T2R (3T3R) tasks, the success rate is 87\,\% (69\,\%), marked by the position of the first bars in Fig.\,\ref{fig:serrob_ik_hist_cdf}\,(a) and (c).
+These results can be vastly improved by setting the initial guess $\bm{q}^0$ within 20\,\% around the pose, from which the desired end-effector pose has been calculated.
+This improves the worst success rate of all robots to 98\,\% for 3T2R (Fig.\,\ref{fig:serrob_ik_hist_cdf}\,b) and 95\,\% for 3T3R tasks (Fig.\,\ref{fig:serrob_ik_hist_cdf}\,d).
+
+
+%
+\begin{figure}[tb]
+    \includegraphics{serrob_ik_hist_cdf_all.pdf}
+    \caption{Histograms with cumulated frequency of the IK success for all robots with different settings: 3T2R tasks (a-b) vs. 3T3R tasks (c-d) and arbitrary initial value (a,c) vs. initial value near goal position.}
+    \label{fig:serrob_ik_hist_cdf}
+\end{figure} 
+%
+
+A detailed investigation on the success rates of all serial chains is performed in Fig.\,\ref{fig:serrob_ik_hist}.
+The 309 robot kinematics are sorted according to their number of rotational joints and are listed on the horizontal axis of the figure: They contain three rotational joints up to no.\,98, four R-joints up to no.\,240, and five R-joints up to no.\,301.
+The most prominent chains are the UPS-chain from Sec.\,\ref{sec:Ergebnisse_IK_Parallel} at no.\,266 and the six-DoF industrial robot from Sec.\,\ref{sec:Ergebnisse_Seriell} at no.\,309.
+The general kinematics (309) of the industrial robot has 14 instead of the six kinematics parameters in Fig.\,\ref{tab:mdh_industrialrobot}.
+Each bar represents the relative frequency of the IK result state in percent for one robot. 
+Beginning at the bottom, the number of tries necessary for the solution of the IKP is marked with colors from bright green to orange.
+Only cases with a violation of the limits (bright red) or wrong position (dark red) correspond to a failure of the algorithm highlighted in the analysis of Fig.\,\ref{fig:serrob_ik_hist_cdf}.
+% The general kinematics 266 can be transformed into the UPS chain by setting all of the 14 parameters to specific values.
+The subfigures (a)-(d) of Fig.\,\ref{fig:serrob_ik_hist} correspond to the ones in Fig.\,\ref{fig:serrob_ik_hist_cdf}.
+It can be observed, that the quality of the results is clustered according to the kinematic groups.
+Structures with at most one P-joint show a considerably better performance of the algorithm with a worst success rate of 97.16\,\% for five R-joints %(at no.\,xx) 
+and 99.36\,\% for six R-joints %(at no.\,306) 
+for the 3T2R case (a).
 
 
 \begin{figure}[tb]
@@ -1403,6 +1466,8 @@ Fig.\,\ref{fig:serrob_ik_hist}\,a shows the distribution of the results for
     \caption{Detailed Statistics of the success of the inverse kinematics algorithm for 3T2R tasks (a-b) and 3T3R tasks (c-d). The Success of the IK solver is shown in different shades of green for increasing numbers of required tries. Different initial values $\bm{q}^0$ are distinguished in (a,c) and (b,d).}
     \label{fig:serrob_ik_hist}
 \end{figure} 
+
+
 
 \subsection{Resolution of Functional Redundancy of a Parallel Robot in 3T2R tasks}
 \label{sec:Ergebnisse_IK_Parallel}

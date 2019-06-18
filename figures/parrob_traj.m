@@ -87,3 +87,24 @@ set(leg2, 'position', [0.6    0.92    0.3    0.05]);
 set(leg3, 'position', [0.1    0.50    0.3    0.05]);
 set(leg4, 'position', [0.6    0.50    0.3    0.05]);
 export_fig(20, fullfile(export_path, 'parrob_traj_results1.pdf'));
+
+%% Roboter mit Trajektorie
+serroblib_addtopath({'S6RRPRRR14V3'});
+RP = data.RP;
+figure(40);clf;
+hold on;grid on;
+xlabel('$x$ in m', 'interpreter', 'latex');
+ylabel('$y$ in m', 'interpreter', 'latex');
+zlabel('$z$ in m', 'interpreter', 'latex');
+view(3);
+s_plot = struct( 'ks_legs', [], 'straight', 0);
+RP.plot( data.q1,  data.X0,  s_plot );
+plot3(data.XL(:,1), data.XL(:,2), data.XL(:,3), 'k-', 'LineWidth', 2);
+figure_format_publication()
+set_size_plot_subplot(40,...
+  8,8,gca,...
+  0.01,0.01,0.0,0.01,... % bl,br,hu,hd,
+  0,0) % bdx,bdy)
+export_fig parrob_traj_zero_pose.png -r864
+%% Ausgabe der Trajektorien-Eckwerte
+data.XL

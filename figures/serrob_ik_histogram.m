@@ -357,6 +357,9 @@ if usr_sort_numrotjoints
   IK_hist_Anz_mG_ges = IK_hist_Anz_mG_ges(I_sortrotJ,:);
   II = II(I_sortrotJ);
 end
+if ~usr_load_data
+  save(fullfile(respath, sprintf('serrob_ik_histogramm_%s_startoff%1.0f_filt.mat', usr_DoF, 100*usr_range_q0)));
+end
 %% Ergebnisse plotten
 figure(1);clf;hold on;
 title(sprintf('%s IK without regarding joint limits', usr_DoF));

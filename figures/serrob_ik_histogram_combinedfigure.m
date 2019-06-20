@@ -141,10 +141,8 @@ axes(axhdl(2));
 xlabel('IK success in percent');
 linkaxes(axhdl, 'y')
 
-% saveas(10, fullfile(respath, sprintf('serrob_ik_hist_cdf_all.fig')));
+saveas(10, fullfile(respath, sprintf('serrob_ik_hist_cdf_all.fig')));
 export_fig(10, fullfile(respath, sprintf('serrob_ik_hist_cdf_all.pdf')));
-% export_fig(10, fullfile(respath, sprintf('serrob_ik_hist_cdf_all.eps')));
-% export_fig(10, fullfile(respath, sprintf('serrob_ik_hist_cdf_all.png')));
 
 %% Einzelauswertungen
 for i = 1:4

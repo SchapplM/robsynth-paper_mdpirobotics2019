@@ -818,7 +818,11 @@ The full kinematic constraints for the complete parallel robot with $m$ legs for
 \end{equation}
 %
 are assembled from the 3T2R constraints $\bm{\Psi}_1$ from (\ref{equ:Psi_def}) for the leading leg and the 3T3R constraints $\bm{\Phi}_j$, $2\le{}j\le{}m$ from (\ref{equ:Phit_def_j},\ref{equ:Phir_def_j}) for the following legs.
-The index ``$j$'' is used to distinguish the following legs of the 3T2R case and all legs of the general case in Sec.\,\ref{sec:REW_seriell}.
+The index ``$j$'' is used to distinguish the following legs of the 3T2R case and all legs ``$i$'' of the general case in Sec.\,\ref{sec:REW_seriell}.
+%
+The full constraints of (\ref{equ:constr_Psi_PKM}) lead to a 35-dimensional vector for the kinematic constraints for parallel robots with six legs in 3T2R tasks, which are aggregated as class I in Sec.\,\ref{sec:parrob_classification}.
+This formulation can be reduced by combining the mechanism-specific approach for the constraints from (\ref{equ:kinconstrAB}) with the principle of leading and following legs of this section.
+For the 6U\underline{P}S structure this would result in a 10-dimensional constraint vector with five entries for the leading leg and only one entry for each following leg.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Differential Kinematics for Parallel Robots}
@@ -1047,6 +1051,7 @@ As explained regarding (\ref{equ:constr_Phi_PKM}), the constraints (\ref{equ:Phi
 For the following legs in the 3T2R case, the gradients $\bm{\Phi}_{j,\partial\bm{q}_1}$, $\bm{\Phi}_{j,\partial\bm{q}_j}$ and $\bm{\Phi}_{j,\partial\bm{x}}$ with $j=2,...,m$ from the right part of  (\ref{equ:PhiPsi_grad_q_complete}) and (\ref{equ:PhiPsi_grad_x_complete}) have to be calculated in a similar way. 
 Due to the abscence of the platform orientation in (\ref{equ:Phir_def_j}), (\ref{equ:Phi_1_grad_x}) simplifies for the following leg to 
 %
+\vspace{-0.1cm}
 \begin{equation}
 \bm{\Phi}_{j,\partial\bm{x}}
 =
@@ -1449,8 +1454,9 @@ This improves the worst success rate of all robots to 98\,\% for 3T2R (Fig.\,\re
 
 A detailed investigation on the success rates of all serial chains is performed in Fig.\,\ref{fig:serrob_ik_hist}.
 The 309 robot kinematics are sorted according to their number of rotational joints and are listed on the horizontal axis of the figure: They contain three rotational joints up to no.\,98, four R-joints up to no.\,240, and five R-joints up to no.\,301.
+The first 240 kinematic chains with more than one prismatic joint can be seen as a rather academic example and are listed for the sake of completeness.
 The most prominent chains are the UPS-chain from Sec.\,\ref{sec:Ergebnisse_IK_Parallel} at no.\,266 and the six-DoF industrial robot from Sec.\,\ref{sec:Ergebnisse_Seriell} at no.\,309.
-The general kinematics (309) of the industrial robot has 14 instead of the six kinematics parameters in Fig.\,\ref{tab:mdh_industrialrobot}.
+%The general kinematics of the industrial robot has 14 instead of the six kinematics parameters in Fig.\,\ref{tab:mdh_industrialrobot}.
 Each bar represents the relative frequency of the IK result state in percent for one robot. 
 Beginning at the bottom, the number of tries necessary for the solution of the IKP is marked with colors from bright green to orange.
 Only cases with a violation of the limits (bright red) or wrong position (dark red) correspond to a failure of the algorithm highlighted in the analysis of Fig.\,\ref{fig:serrob_ik_hist_cdf}.
@@ -1535,7 +1541,20 @@ The second approach only shows peaks at $t=1.5\,\mathrm{s}$ in Fig.\,\ref{fig:pa
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 
-Authors should discuss the results and how they can be interpreted in perspective of previous studies and of the working hypotheses. The findings and their implications should be discussed in the broadest context possible. Future research directions may also be highlighted.
+%Authors should discuss the results and how they can be interpreted in perspective of previous studies and of the working hypotheses. The findings and their implications should be discussed in the broadest context possible. Future research directions may also be highlighted.
+
+A general kinematics model for parallel robots is introduced to solve the inverse kinematics problem for any kind of parallel robot in tasks with one redundant rotational DoF (3T2R).
+The prize of the generality of the approach is the increased size of the geometric matrices, which is $10 \times 11$ for robots with a simple structure instead of $6\times6$ for the non-redundant kinematics and grow up to $35 \times 36$ for general task redundant parallel robots with full mobility.
+This makes symbolic calculations of the kinematic matrices impossible, allowing only studies on mobility, singularities and other properties of the Jacobian matrix based on numeric calculations.
+The application of the method can therefore be seen mainly to find optimal trajectories for task redundant parallel robots in milling or drilling scenarios regarding stiffness, dexterity or joint limits.
+%This allows to exploit the performance of the mechanisms to full extend.
+%
+%The complete formulation on the other hand allows a gradient-based analysis of the joint limits of active and passive joints.
+%It is 
+%The method can be applied to find optimal trajectories for task redundant parallel robots in milling or drilling scenarios regarding stiffness, dexterity or joint limits.
+%This allows to exploit the performance of the mechanisms to full extend.
+Due to the performance of the method demonstrated at exemplary cases, an online implementation is possible but has to be proved in future works to converge in real-time conditions for specific machines.
+The generality of the approach allows to use it in a combined structural and dimensional synthesis sketched in Fig.\,\ref{fig:structdimsynth}, extending the purely structural synthesis of parallel robot kinematics from \cite{Gogu2008,KongGos2005} to a dimensional synthesis of all structures as shown in \cite{RamirezKotOrt2015} for serial robots.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{Materials and Methods}

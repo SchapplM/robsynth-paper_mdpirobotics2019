@@ -20,7 +20,7 @@
 %%   \import{<path to file>}{<filename>.pdf_tex}
 %% Alternatively, one can specify
 %%   \graphicspath{{<path to file>/}}
-%% 
+%%
 %% For more information, please see info/svg-inkscape on CTAN:
 %%   http://tug.ctan.org/tex-archive/info/svg-inkscape
 %%
@@ -61,17 +61,17 @@
     \put(0,0){\includegraphics[width=\unitlength,page=4]{pkm_constr_def_rot_follow.pdf}}%
     \put(0.2039892,0.15073797){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$E$}}}%
     \put(0.21435538,0.0124515){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$O$}}}%
-    \put(0.00524961,0.17969432){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{t},2} \ne \bm{0}$}}}%
-    \put(0.00524961,0.15677198){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{r},2} \ne \bm{0}$}}}%
-    \put(0.00524961,0.13384954){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Psi}_{\mathrm{r},2} \ne \bm{0}$}}}%
+    \put(0.00524961,0.17969432){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\varPhi}_{\mathrm{t},2} \ne \bm{0}$}}}%
+    \put(0.00524961,0.15677198){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\varPhi}_{\mathrm{r},2} \ne \bm{0}$}}}%
+    \put(0.00524961,0.13384954){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\varPsi}_{\mathrm{r},2} \ne \bm{0}$}}}%
     \put(-0.01040451,0.1999616){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.09575397\unitlength}\raggedright \end{minipage}}}%
-    \put(0.34606748,0.17969432){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{t},2} = \bm{0}$}}}%
-    \put(0.34606748,0.15677198){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{r},2} \ne \bm{0}$}}}%
-    \put(0.34606748,0.13384954){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Psi}_{\mathrm{r},2} = \bm{0}$}}}%
+    \put(0.34606748,0.17969432){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\varPhi}_{\mathrm{t},2} = \bm{0}$}}}%
+    \put(0.34606748,0.15677198){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\varPhi}_{\mathrm{r},2} \ne \bm{0}$}}}%
+    \put(0.34606748,0.13384954){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\varPsi}_{\mathrm{r},2} = \bm{0}$}}}%
     \put(0.16117368,1.92904546){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.09575397\unitlength}\raggedright \end{minipage}}}%
-    \put(0.6945527,0.17969432){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{t},2} = \bm{0}$}}}%
-    \put(0.6945527,0.15677198){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Phi}_{\mathrm{r},2} = \bm{0}$}}}%
-    \put(0.6945527,0.13384954){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\Psi}_{\mathrm{r},2} = \bm{0}$}}}%
+    \put(0.6945527,0.17969432){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\varPhi}_{\mathrm{t},2} = \bm{0}$}}}%
+    \put(0.6945527,0.15677198){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\varPhi}_{\mathrm{r},2} = \bm{0}$}}}%
+    \put(0.6945527,0.13384954){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\bm{\varPsi}_{\mathrm{r},2} = \bm{0}$}}}%
     \put(0.5096589,1.92904546){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.09575397\unitlength}\raggedright \end{minipage}}}%
   \end{picture}%
 \endgroup%

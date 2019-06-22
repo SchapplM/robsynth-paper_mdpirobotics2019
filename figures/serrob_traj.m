@@ -21,8 +21,8 @@ SName='S6RRRRRR10V2';
 RName='S6RRRRRR10V2_FANUC6';
 
 RS = serroblib_create_robot_class(SName, RName);
-% RS.fill_fcn_handles(false);
-RS.fill_fcn_handles(true, true);
+RS.fill_fcn_handles(false);
+RS.fill_fcn_handles(true, false);
 % RS.mex_dep(true);
 % matlabfcn2mex({'S6RRRRRR10V2_invkin_traj', 'S6RRRRRR10V2_invkin_eulangresidual'});
 
@@ -43,6 +43,7 @@ RS.update_EE([-0.200; 0;-0.100], [pi/2;-pi/2;0]);
 % Würfel-Trajektorie erstellen
 % Startpunkt selbst festlegen (so dass es gut passt)
 T_E = RS.fkineEE(q0);
+x0Ref = NaN(6,1);
 x0Ref(1:3) = T_part(1:3,4) + [-0.200;0;0.400];
 x0Ref(4:6) = [pi;0;0];
 x0 = x0Ref;
@@ -118,6 +119,9 @@ h_opt_ges = NaN(length(T), N_axori);
 h_nopt_ges = NaN(length(T), N_axori);
 phiE_opt_ges = NaN(length(T), N_axori);
 phiE_nopt_ges = NaN(length(T), N_axori);
+x_ges = NaN(length(T), 6, N_axori);
+x_opt_ges = NaN(length(T), 6, N_axori);
+x_nopt_ges = NaN(length(T), 6, N_axori);
 fprintf('Starte Berechnung der IK\n');
 for ii = 1:N_axori
   q0_ik = q0_ik_fix;
@@ -137,6 +141,7 @@ for ii = 1:N_axori
   
   X_ii = X;
   X_ii(:,6) = value_axori(ii);
+  x_ges(:,:,ii) = X_ii;
   fprintf('Starte IK-Berechnung %d/%d mit phiz=%1.1f deg\n', ii, N_axori, 180/pi*value_axori(ii));
   %% 3T3R IK
   tic();
@@ -203,8 +208,10 @@ for ii = 1:N_axori
 
     % Direkte Kinematik berechnen für EE-Winkel
     x_E_opt_kk = RS.t2x(RS.fkineEE(Q_opt_ii(kk,:)'));
+    x_opt_ges(kk,:,ii) = x_E_opt_kk;
     phiE_opt_ges(kk,ii) = x_E_opt_kk(6);
     x_E_nopt_kk = RS.t2x(RS.fkineEE(Q_nopt_ii(kk,:)'));
+    x_nopt_ges(kk,:,ii) = x_E_nopt_kk;
     phiE_nopt_ges(kk,ii) = x_E_nopt_kk(6);
     % Testen
     % x_E_kk = RS.t2x(RS.fkineEE(Q_ii(kk,:)'));
@@ -315,11 +322,31 @@ plot(T, 180/pi*phi_worst, 'r--');
 ylabel('phi_z in deg');
 linkxaxes
 
-figure(20);clf;hold on;
+figure(8);clf;hold on;
 stairs(sum(n_viol,2));
 stairs(sum(n_viol_opt,2));
 stairs(sum(n_viol_nopt,2));
 legend({'3T3R', 'opt', 'no opt'});
+
+figure(9);clf;
+for i = 1:6
+  subplot(2,3,i); hold on;
+  ylabel(sprintf('x %d', i));
+  for ii = 1:N_axori
+    plot(T, x_opt_ges(:,i, ii));
+    plot(T, x_nopt_ges(:,i, ii), ':');
+  end  
+end
+
+figure(10);clf;
+for ii = 1:N_axori
+  subplot(5,5,ii); hold on;
+  title(sprintf('Nr. %d, phi3=%1.0f deg', ii, 180/pi*value_axori(ii)));
+  plot(T, 180/pi*x_opt_ges(:,6, ii));
+  plot(T, 180/pi*x_nopt_ges(:,6, ii), ':');
+  ylabel('phiz_E in deg');
+end  
+
 
 % % Animation
 % Q = Q_opt_ges(:,:,4);
@@ -337,6 +364,7 @@ legend({'3T3R', 'opt', 'no opt'});
 
 %% Ergebnisse speichern
 respath = fileparts(which('serrob_traj.m'));
+save(fullfile(respath, 'serrob_traj_data_all.mat'));
 save(fullfile(respath, 'serrob_traj_data.mat'), 'T', 'Q_ges', 'Q_opt_ges', 'Q_nopt_ges', ...
   'h_ges', 'h_opt_ges', 'h_nopt_ges', 'hminmax');
 
@@ -350,7 +378,7 @@ save(fullfile(respath, 'serrob_traj_data.mat'), 'T', 'Q_ges', 'Q_opt_ges', 'Q_no
 % und die MDH-Tabelle)
 figure(20);clf;
 axhdl = NaN(1,4);
-RobAx = [1;2;5];
+RobAx = [1;5];
 ii_Ausw = [3, 12,16];
 value_axori(ii_Ausw)*180/pi;
 format = {'k', 'd', '-', 2; ...
@@ -363,7 +391,7 @@ format = {'k', 'd', '-', 2; ...
 %         ...
 %           'r', '',  '--', 0; ...
 %           'r', '',  '--', 0};
-for i = 1:3
+for i = 1:2
   axhdl(1,i) = subplot(1,4,i);hold on;
   k = RobAx(i);
   linhdl = NaN(7,1);
@@ -393,6 +421,24 @@ leghdl = legend(leglinhdl([1:3,4,7]), ...
    sprintf('$\\beta_3=%1.0f^\\circ$', 180/pi*value_axori(ii_Ausw(2))), ...
    sprintf('$\\beta_3=%1.0f^\\circ$', 180/pi*value_axori(ii_Ausw(3))), ...
   '$\mathrm{3T2R, no\\ opt}$', '$\mathrm{3T2R, opt}$'}, 'interpreter', 'latex');
+% Verlauf der EE-Winkel
+axhdl(1,3) = subplot(1,4,3);hold on;
+linhdl = NaN(7,1);
+for ii = 1:length(ii_Ausw)
+  jj = ii_Ausw(ii);
+  linhdl(ii) = plot(T, 180/pi*x_ges(:,6,jj));
+end
+for ii = 1:length(ii_Ausw)
+  jj = ii_Ausw(ii);
+  linhdl(3+ii) = plot(T, 180/pi*x_nopt_ges(:,6,jj));
+end
+linhdl(7) = plot(T, 180/pi*x_opt_ges(:,6,1));
+line_format_publication(linhdl, format);
+grid on
+title('$\beta_3$ in deg', 'interpreter', 'latex');
+xlabel('');
+xticklabels([]);
+
 axhdl(1,4) = subplot(1,4,4);hold on;
 linhdl = NaN(7,1);
 for ii = 1:length(ii_Ausw)
@@ -404,24 +450,27 @@ for ii = 1:length(ii_Ausw)
   linhdl(3+ii) = plot(T, h_nopt_ges(:,jj));
 end
 % for ii = ii_Ausw
-  linhdl(7) = plot(T, h_opt_ges(:,ii));
+  linhdl(7) = plot(T, h_opt_ges(:,1));
 % end
 % linhdl(10) = plot(T, hminmax(:,1), 'r--');
 % linhdl(11) = plot(T, hminmax(:,2), 'r--');
-ylim([0,4])
+ylim([0.5,7])
 grid on;
-leglinhdl = line_format_publication(linhdl, format);
-figure_format_publication(axhdl)
+line_format_publication(linhdl, format);
 title('$\mathrm{optimization\ criterion}$', 'interpreter', 'latex');
 xlabel('');
 xticklabels([]);
+
+figure_format_publication(axhdl)
+
 set_size_plot_subplot(20,...
   15.5,6,axhdl,...
-  0.05,0.05,0.18,0.05,... % bl,br,hu,hd,
+  0.05,0.01,0.18,0.05,... % bl,br,hu,hd,
   0.05,0) % bdx,bdy)
-set(leghdl, 'position', [0.1    0.9    0.8    0.05], 'orientation', 'horizontal', 'interpreter', 'latex');
+set(leghdl, 'position', [0.1    0.92    0.8    0.05], 'orientation', 'horizontal', 'interpreter', 'latex');
 export_fig(20, fullfile(respath, 'serrob_traj_nullspace_optim.pdf'));
 
+%% 3D-Bild des Roboters
 figure(21);clf;
 s_plot = struct( 'ks', [], 'straight', 0);
 hold on;
@@ -439,3 +488,39 @@ set_size_plot_subplot(21,...
   0,0) % bdx,bdy)
 % export_fig(21, fullfile(respath, 'serrob_traj_zero_pose.pdf'));
 export_fig serrob_traj_zero_pose.png -r864
+
+%% Verlauf des EE-Winkels für Präsentation
+% X_opt_ges = NaN(length(T), 6);
+% Q_opt_ii = Q_opt_ges(:,:,1); % Gleiche Auswahl wie für Bild im Paper
+% for kk = 1:length(T)
+%   % Direkte Kinematik berechnen für EE-Winkel
+%   x_E_opt_kk = RS.t2x(RS.fkineEE(Q_opt_ii(kk,:)'));
+% %   phiE_opt_ges(kk,ii) = x_E_opt_kk(6);
+% %   x_E_nopt_kk = RS.t2x(RS.fkineEE(Q_nopt_ii(kk,:)'));
+% %   phiE_nopt_ges(kk,ii) = x_E_nopt_kk(6);
+%   
+%   X_opt_ges(kk,:) = x_E_opt_kk;
+% end
+% 
+
+figure(30);clf;
+plot(T, 180/pi*x_opt_ges(:,6, 1));
+
+%% GIF-Animation für Präsentation
+Q_anim = Q_opt_ges(:,:,1);
+figure(200);clf;
+s_plot = struct( 'ks', RS.NJ+2, 'straight', 0);
+s_anim = struct( 'gif_name', fullfile(respath, 'serrob_traj_anim_opt3T2R.gif'));
+hold on;
+grid on;
+xlabel('$x$ in m', 'interpreter', 'latex');
+ylabel('$y$ in m', 'interpreter', 'latex');
+zlabel('$z$ in m', 'interpreter', 'latex');
+view(3);
+plot3(X(:,1), X(:,2), X(:,3), 'k-', 'LineWidth', 2);
+figure_format_publication()
+set_size_plot_subplot(21,...
+  8,8,axhdl,...
+  0.01,0.01,0.0,0.01,... % bl,br,hu,hd,
+  0,0) % bdx,bdy)
+RS.anim( Q_anim(1:100:end,:), s_anim, s_plot);

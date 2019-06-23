@@ -470,6 +470,8 @@ set_size_plot_subplot(20,...
 set(leghdl, 'position', [0.1    0.92    0.8    0.05], 'orientation', 'horizontal', 'interpreter', 'latex');
 export_fig(20, fullfile(respath, 'serrob_traj_nullspace_optim.pdf'));
 
+
+
 %% 3D-Bild des Roboters
 figure(21);clf;
 s_plot = struct( 'ks', [], 'straight', 0);
@@ -483,7 +485,7 @@ RS.plot( q0_ik_fix, s_plot );
 plot3(X(:,1), X(:,2), X(:,3), 'k-', 'LineWidth', 2);
 figure_format_publication()
 set_size_plot_subplot(21,...
-  8,8,axhdl,...
+  8,8,gca,...
   0.01,0.01,0.0,0.01,... % bl,br,hu,hd,
   0,0) % bdx,bdy)
 % export_fig(21, fullfile(respath, 'serrob_traj_zero_pose.pdf'));
@@ -506,11 +508,46 @@ export_fig serrob_traj_zero_pose.png -r864
 figure(30);clf;
 plot(T, 180/pi*x_opt_ges(:,6, 1));
 
-%% GIF-Animation für Präsentation
+%% Bild der Achsverläufe für Powerpoint neu formatieren
+axhdl2 = reshape(axhdl, 2, 2);
+% for i = 1:length(axhdl2(:))
+%   axes(axhdl2(i)); %#ok<LAXES>
+%   thdl = get(axhdl2(i), 'title');
+%   ylabel(get(thdl, 'String'), 'interpreter', 'latex');
+% end
+for i = 1:length(axhdl2(:))
+  axes(axhdl2(i)); %#ok<LAXES>
+  ylabel('');
+end
+set_size_plot_subplot(20,...
+  13,13,axhdl2,...
+  0.05,0.01,0.12,0.05,... % bl,br,hu,hd,
+  0.07,0.09) % bdx,bdy)
+for i = 1:length(axhdl2(:))
+  axes(axhdl2(i)); %#ok<LAXES>
+  % Ticklabels formatieren
+  set(gca, 'FontSize', 8);
+  thdl = get(axhdl2(i), 'title');
+  set(thdl, 'FontSize', 14);
+  % Achsenbeschriftung formatieren
+  for label = {'XLABEL', 'YLABEL', 'ZLABEL'}
+    h = get(gca, cell2str(label));
+    set(h, 'FontSize', 14);
+  end
+end
+set(leghdl, 'FontSize', 8);
+set(leghdl, 'position', [0.1    0.94    0.8    0.05]);
+export_fig(20, fullfile(respath, 'serrob_traj_nullspace_optim_powerpoint.pdf'));
+export_fig serrob_traj_nullspace_optim_powerpoint.png -r864
+%% Animation für Präsentation
+% Benutze AVI-Video, da bei GIF das gesamte Video vorab gespeichert werden
+% muss
 Q_anim = Q_opt_ges(:,:,1);
 figure(200);clf;
 s_plot = struct( 'ks', RS.NJ+2, 'straight', 0);
-s_anim = struct( 'gif_name', fullfile(respath, 'serrob_traj_anim_opt3T2R.gif'));
+% s_anim = struct( 'gif_name', fullfile(respath, 'serrob_traj_anim_opt3T2R.gif'), ...
+%                  'avi_name', fullfile(respath, 'serrob_traj_anim_opt3T2R.avi'));
+s_anim = struct( 'avi_name', fullfile(respath, 'serrob_traj_anim_opt3T2R.avi'));
 hold on;
 grid on;
 xlabel('$x$ in m', 'interpreter', 'latex');
@@ -519,8 +556,5 @@ zlabel('$z$ in m', 'interpreter', 'latex');
 view(3);
 plot3(X(:,1), X(:,2), X(:,3), 'k-', 'LineWidth', 2);
 figure_format_publication()
-set_size_plot_subplot(21,...
-  8,8,axhdl,...
-  0.01,0.01,0.0,0.01,... % bl,br,hu,hd,
-  0,0) % bdx,bdy)
-RS.anim( Q_anim(1:100:end,:), s_anim, s_plot);
+set(200, 'units','normalized','outerposition',[0 0 1 1])
+RS.anim( Q_anim(1:5:end,:), s_anim, s_plot);

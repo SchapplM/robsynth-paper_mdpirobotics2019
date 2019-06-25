@@ -1193,27 +1193,25 @@ One criterion is the summed $\bm{W}_1$-weighted quadratic distance
 \begin{equation}
 h_1(\bm{q})
 =
-\frac{1}{2} (\bm{q}-\bar{\bm{q}})^\transp\bm{W}(\bm{q}-\bar{\bm{q}}),
+\frac{1}{2} (\bm{q}-\bar{\bm{q}})^\transp\bm{W}_1(\bm{q}-\bar{\bm{q}}),
 \quad
 h_{1,\partial\bm{q}}
 =
 \frac{\partial h_1}{\partial \bm{q}}
 =
-\bm{W}(\bm{q}-\bar{\bm{q}})
+\bm{W}_1(\bm{q}-\bar{\bm{q}})
 \label{equ:criterion1}
 \end{equation}
 %
-of the joint positions $\bm{q}$ from their respective reference position $\bar{\bm{q}}$, e.\,g. used in \cite{HuoBar2008}.
-Defining $\bar{\bm{q}}$ to be in the middle of the joint limits and minimizing $h_1(\bm{q})$ reduces the risk of joints reaching their technical limits, but does not guarantee it.
-
-First, the simple optimization criterion $h_1$ from (\ref{equ:criterion1}) showed the behavior that violations of the limits of one joint were compensated by improvements for other joints, leaving an invalid solution.
-Therefore, it was replaced by the $w_i$-weighted hyperbolic joint limit distance
+of the joint positions $\bm{q}$ from their respective reference position $\bar{\bm{q}}$, e.\,g. used in \cite{HuoBar2005,HuoBar2008}.
+Defining $\bar{\bm{q}}$ to be in the middle of the joint limits and minimizing $h_1(\bm{q})$ reduces the risk of joints reaching their technical limits, but does not guarantee it, since exceeding the limit for one joint can be compensated by improving other joints.
+The $\bm{W}_{2}$-weighted hyperbolic joint limit distance
 %
 \begin{equation}
 h_2(\bm{q})
 =
 \frac{1}{n} \sum_{i=1}^{n}
-w_i
+w_{2,i}
 \frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8}
 \left(
 \frac{1}{(q_{i}-q_{i,\mathrm{min}})^2}
@@ -1223,29 +1221,44 @@ w_i
 \label{equ:criterion2}
 \end{equation}
 %
-from \cite{ZhuQuCaoYan2013} with $n=6$ in this case and the corresponding gradient written element-wise as
+from \cite{ZhuQuCaoYan2013} (written element-wise for $n=\mathrm{dim}(\bm{q})$) circumvents this problem by generating infinitely high values when reaching the limits.
+The criterion is only defined for joints within their limits with $q_{i,\mathrm{min}} < q_i < q_{i,\mathrm{max}}$, which is ensured by setting $w_{2,i}=0$ for joints exceeding their limits and $w_{2,i}=1$ otherwise.
+To combine the effect of drawing joint positions to their middle with $h_1$ of (\ref{equ:criterion1}) and of strongly rejecting joints directly near their limits with $h_2$ of (\ref{equ:criterion2}), their weighted sum
+%
 \begin{equation}
-h_{2,\partial q_i}
+h_3(\bm{q})
 =
-\frac{\partial h_2}{\partial q_i}
-=
-w_i
-\frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8n}
-\left(
-\frac{-2}{(q_{i}-q_{i,\mathrm{min}})^3}
-+
-\frac{-2}{(q_{i}-q_{i,\mathrm{max}})^3}
-\right)
-\label{equ:criterion2_grad}
+K_{h1} h_1(\bm{q}) + K_{h2} h_2(\bm{q})
+\label{equ:criterion3}
 \end{equation}
 %
-with weights set to $w_i=1$.
-
-
-
-Other, more sophisticated criteria are for example the quadratic \cite{HuoBar2005} or hyperbolic \cite{ZhuQuCaoYan2013} distance of from joint limits, stiffness \cite{GuoDonKe2015} or singularity avoidance via Frobenius-norm condition number \cite{ZhuQuCaoYan2013} or squared condition number \cite{LegerAng2016}.
+is used in the simulation studies of Sec.\,\ref{sec:Ergebnisse}.
+%
+Other criteria not related to the joint limits are for example stiffness \cite{GuoDonKe2015} or singularity avoidance via Frobenius-norm condition number \cite{ZhuQuCaoYan2013} or squared condition number \cite{LegerAng2016}.
 The method can be used for serial link robots as well by removing all entries for the following legs from the formulas, as presented in \cite{1_SchapplerTapOrt2019}.
 The platform pose $\bm{x}$/$\bm{\eta}$ corresponds to the desired pose for the serial robots end-effector and the kinematic constraints $\bm{\Phi}$/$\bm{\Psi}$ correspond to the residual of the IKP.
+
+In the practical implementation, it has proven to be useful to extend the basic principle of (\ref{equ:nullspace}) to
+%Equ. 
+%Since the method presented above is based on the linear approximation (\ref{equ:taylor_phi}), high step sizes have to be omitted to stay within the validity of the approximation.
+%Therefore, (\ref{equ:nullspace}) is extended in the practical implementation by additional damping coefficients, leading to
+%
+\begin{equation}
+{\Delta}\bm{q}^k
+=
+K_\mathrm{Lim}(\bm{q}) K_\mathrm{Rel}(\bm{q}) (K_\mathrm{T} {\Delta}\bm{q}_{\mathrm{T}}^k + K_\mathrm{N} {\Delta}\bm{q}_{\mathrm{N}}^k),
+\label{equ:IK_damping}
+\end{equation}
+%
+where the constant damping coefficients $K_\mathrm{T}$ for ${\Delta}\bm{q}_{\mathrm{T}}^k$ and $K_\mathrm{N}$ for ${\Delta}\bm{q}_{\mathrm{N}}^k$ were introduced to avoid overshooting of the solution for the prize of slower convergence.
+The damping term $K_\mathrm{N}$ has to be chosen according to the optimization criterion.
+Further damping was introduced for the 3T2R case with task redundancy to reduce a ${\Delta}\bm{q}^{k}$ that would lead to overshoot over the joint limits with $K_\mathrm{Lim}(\bm{q})$. %, since the criterion $h_2$ from (\ref{equ:criterion2}) is only meaningfully defined within the joint limits for $q_{i,\mathrm{min}} < q_i < q_{i,\mathrm{max}}$.
+The value $K_\mathrm{Lim}=1$ is set if no limits would be violated by the increment ${\Delta}\bm{q}^k$.
+The maximum step size for one iteration $\Delta\bm{q}$ was ensured with $K_\mathrm{Rel}(\bm{q})$ to stay below 5\,\% of the joint limit range to prevent leaving the validity of the first-order linearization of (\ref{equ:taylor_phi}).
+For lower increments, $K_\mathrm{Rel}=1$ holds.
+The damping terms are always applied to the full vector and not to single elements and therefore only change the norm and not the direction of ${\Delta}\bm{q}^k$.
+
+
 
 \subsection{Differential Kinematics for the Parallel Robot and its Applications}
 \label{sec:ZB_Anwendung_PKM_DiffKin}
@@ -1417,9 +1430,9 @@ Additional damping coefficients were introduced, replacing (\ref{equ:nullspace})
 %
 \begin{equation}
 {\Delta}\bm{q}^k
-=
-K_\mathrm{Lim}(\bm{q}) K_\mathrm{Rel}(\bm{q}) (K_\mathrm{T} {\Delta}\bm{q}_{\mathrm{T}}^k + K_\mathrm{N} {\Delta}\bm{q}_{\mathrm{N}}^k),
-\label{equ:IK_damping}
+%=
+%K_\mathrm{Lim}(\bm{q}) K_\mathrm{Rel}(\bm{q}) (K_\mathrm{T} {\Delta}\bm{q}_{\mathrm{T}}^k + K_\mathrm{N} {\Delta}\bm{q}_{\mathrm{N}}^k),
+%\label{equ:IK_damping}
 \end{equation}
 %
 where constant damping coefficients $K_\mathrm{T}=0.7$ for ${\Delta}\bm{q}_{\mathrm{T}}^k$ and $K_\mathrm{N}=0.002$ for ${\Delta}\bm{q}_{\mathrm{N}}^k$ were introduced to avoid overshooting of the solution for the prize of slower convergence.
@@ -1463,9 +1476,9 @@ The combined optimization criterion
 %
 \begin{equation}
 h_3(\bm{q})
-=
-K_{h1} h_1(\bm{q}) + K_{h2} h_2(\bm{q})
-\label{equ:criterion3}
+%=
+%K_{h1} h_1(\bm{q}) + K_{h2} h_2(\bm{q})
+%\label{equ:criterion3}
 \end{equation}
 %
 was used with empirically determined values of $K_{h1}=0.99$ and $K_{h2}=0.01$ in (\ref{equ:criterion3}) and damping coefficients $K_{\mathrm{T}}=0.6$ and $K_{\mathrm{N}}=0.01$.

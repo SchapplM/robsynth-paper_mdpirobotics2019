@@ -2209,7 +2209,7 @@
            y="957.24347"
            x="99.831718"
            id="tspan4890-8-9-5"
-           sodipodi:role="line">$\bm{\varPhi}_{\mathrm{t},1} \ne \bm{0}$</tspan></text>
+           sodipodi:role="line">$\bm{\Phi}_{\mathrm{t},1} \ne \bm{0}$</tspan></text>
       <text
          id="text4888-22-5-5-4"
          y="969.8327"
@@ -2220,7 +2220,7 @@
            y="969.8327"
            x="99.831718"
            id="tspan4890-8-9-5-7"
-           sodipodi:role="line">$\bm{\varPhi}_{\mathrm{r},1} \ne \bm{0}$</tspan></text>
+           sodipodi:role="line">$\bm{\Phi}_{\mathrm{r},1} \ne \bm{0}$</tspan></text>
       <text
          id="text4888-22-5-5-4-6"
          y="982.422"
@@ -2231,7 +2231,7 @@
            y="982.422"
            x="99.831718"
            id="tspan4890-8-9-5-7-5"
-           sodipodi:role="line">$\bm{\varPsi}_{\mathrm{r},1} \ne \bm{0}$</tspan></text>
+           sodipodi:role="line">$\bm{\Psi}_{\mathrm{r},1} \ne \bm{0}$</tspan></text>
     </g>
     <g
        transform="translate(142.58647,21.051804)"
@@ -2246,7 +2246,7 @@
            y="957.24347"
            x="99.831718"
            id="tspan4890-8-9-5-4"
-           sodipodi:role="line">$\bm{\varPhi}_{\mathrm{t},1} = \bm{0}$</tspan></text>
+           sodipodi:role="line">$\bm{\Phi}_{\mathrm{t},1} = \bm{0}$</tspan></text>
       <text
          id="text4888-22-5-5-4-7"
          y="969.8327"
@@ -2257,7 +2257,7 @@
            y="969.8327"
            x="99.831718"
            id="tspan4890-8-9-5-7-4"
-           sodipodi:role="line">$\bm{\varPhi}_{\mathrm{r},1} \ne \bm{0}$</tspan></text>
+           sodipodi:role="line">$\bm{\Phi}_{\mathrm{r},1} \ne \bm{0}$</tspan></text>
       <text
          id="text4888-22-5-5-4-6-4"
          y="982.422"
@@ -2268,7 +2268,7 @@
            y="982.422"
            x="99.831718"
            id="tspan4890-8-9-5-7-5-3"
-           sodipodi:role="line">$\bm{\varPsi}_{\mathrm{r},1} = \bm{0}$</tspan></text>
+           sodipodi:role="line">$\bm{\Psi}_{\mathrm{r},1} = \bm{0}$</tspan></text>
     </g>
     <g
        transform="translate(335.52375,21.051804)"
@@ -2283,7 +2283,7 @@
            y="957.24347"
            x="99.831718"
            id="tspan4890-8-9-5-4-8"
-           sodipodi:role="line">$\bm{\varPhi}_{\mathrm{t},1} = \bm{0}$</tspan></text>
+           sodipodi:role="line">$\bm{\Phi}_{\mathrm{t},1} = \bm{0}$</tspan></text>
       <text
          id="text4888-22-5-5-4-7-6"
          y="969.8327"
@@ -2294,7 +2294,7 @@
            y="969.8327"
            x="99.831718"
            id="tspan4890-8-9-5-7-4-8"
-           sodipodi:role="line">$\bm{\varPhi}_{\mathrm{r},1} = \bm{0}$</tspan></text>
+           sodipodi:role="line">$\bm{\Phi}_{\mathrm{r},1} = \bm{0}$</tspan></text>
       <text
          id="text4888-22-5-5-4-6-4-8"
          y="982.422"
@@ -2305,7 +2305,7 @@
            y="982.422"
            x="99.831718"
            id="tspan4890-8-9-5-7-5-3-4"
-           sodipodi:role="line">$\bm{\varPsi}_{\mathrm{r},1} = \bm{0}$</tspan></text>
+           sodipodi:role="line">$\bm{\Psi}_{\mathrm{r},1} = \bm{0}$</tspan></text>
     </g>
     <text
        xml:space="preserve"

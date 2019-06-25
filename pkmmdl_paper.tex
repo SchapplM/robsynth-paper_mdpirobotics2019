@@ -425,7 +425,7 @@ is used for the Euler angles without loss of generality.
 The relation between joint coordinates $\bm{q}$ and platform coordinates $\bm{x}$ is established with the kinematic constraint equations, for which most commonly the vector loop
 %
 \begin{equation}
-\bm{\varPhi}_{\mathrm{t},i}(\bm{q}_i,\bm{x}) = - \ortvek{0}{r}{}{A_iB_i}(\bm{x}) + \ortvek{0}{r}{}{A_iB_i}(\bm{q}_i) 
+\bm{\Phi}_{\mathrm{t},i}(\bm{q}_i,\bm{x}) = - \ortvek{0}{r}{}{A_iB_i}(\bm{x}) + \ortvek{0}{r}{}{A_iB_i}(\bm{q}_i) 
 \label{equ:kinconstrAB}
 \end{equation}
 %
@@ -446,18 +446,18 @@ For the bigger part of existing parallel robots, the passive joint coordinates c
 This is termed ``minimal kinematics set'' in \cite{Merlet2006} and leads to the scalar constraint equation
 %
 \begin{equation}
-\varPhi_{i}
+\Phi_{i}
 =
-\varPhi_{i}(\bm{q}_{i,\mathrm{a}},\bm{x})
+\Phi_{i}(\bm{q}_{i,\mathrm{a}},\bm{x})
 \end{equation}
 %
 for each leg $i$, which can be assembled to the vector of constraint equations
 %
 \begin{equation}
-\bm{\varPhi}(\bm{q}_{\mathrm{a}},\bm{x})
+\bm{\Phi}(\bm{q}_{\mathrm{a}},\bm{x})
 =
 \begin{bmatrix}
-\varPhi_1 & \varPhi_2 & \cdots & \varPhi_m
+\Phi_1 & \Phi_2 & \cdots & \Phi_m
 \end{bmatrix}^\transp
 \label{equ:constr_qa}
 \end{equation}
@@ -466,11 +466,11 @@ for all $m$ legs of the PKM .
 The differential kinematics of the PKM is calculated with the time derivative
 %
 \begin{equation}
-\frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\varPhi}(\bm{q}_\mathrm{a},\bm{x})
+\frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\Phi}(\bm{q}_\mathrm{a},\bm{x})
 =
-\bm{\varPhi}_{\partial \bm{q}_\mathrm{a}}  \dot{\bm{q}}_\mathrm{a}
+\bm{\Phi}_{\partial \bm{q}_\mathrm{a}}  \dot{\bm{q}}_\mathrm{a}
 +
-\bm{\varPhi}_{\partial \bm{x}} \dot{\bm{x}}
+\bm{\Phi}_{\partial \bm{x}} \dot{\bm{x}}
 =
 \bm{0}
 \label{equ:constr_qa_diff}
@@ -480,15 +480,15 @@ where the passive joint coordinates $\bm{q}_{\mathrm{p}}$ do not occur, since th
 The inverse-kinematics matrix\footnote{We follow the argumentation from \cite{Gogu2008} to avoid the term ``Jacobian'', since the matrix is not a Jacobian in the mathematical sense to project between two spaces. The name results from the inversion of this matrix in the inverse kinematics problem.}
 %
 \begin{equation}
-\bm{\varPhi}_{\partial \bm{q}_{\mathrm{a}}}
+\bm{\Phi}_{\partial \bm{q}_{\mathrm{a}}}
 =
-\frac{\partial \bm{\varPhi}}{\partial \bm{q}_{\mathrm{a}}}
+\frac{\partial \bm{\Phi}}{\partial \bm{q}_{\mathrm{a}}}
 =
 \begin{bmatrix}
-\varPhi_{1,\partial \bm{q}_{1,\mathrm{a}}}  & 0 & 0 & 0\\
-0 & \varPhi_{2,\partial \bm{q}_{2,\mathrm{a}}} & \ddots & 0  \\
+\Phi_{1,\partial \bm{q}_{1,\mathrm{a}}}  & 0 & 0 & 0\\
+0 & \Phi_{2,\partial \bm{q}_{2,\mathrm{a}}} & \ddots & 0  \\
 0 & \ddots & \ddots & 0  \\
-0 & 0 & 0 & \varPhi_{m,\partial \bm{q}_{m,\mathrm{a}}}
+0 & 0 & 0 & \Phi_{m,\partial \bm{q}_{m,\mathrm{a}}}
 \end{bmatrix}
 \label{equ:PKM_phi_grad_q}
 \end{equation}  
@@ -496,15 +496,15 @@ The inverse-kinematics matrix\footnote{We follow the argumentation from \cite{Go
 of this model has diagonal form and the direct-kinematics matrix
 %
 \begin{equation}
-\bm{\varPhi}_{\partial \bm{x}}
+\bm{\Phi}_{\partial \bm{x}}
 =
-\frac{\partial \bm{\varPhi}}{\partial \bm{x}}
+\frac{\partial \bm{\Phi}}{\partial \bm{x}}
 =
 \begin{bmatrix}
-\partial \varPhi_1/\partial \bm{x}\\
-\partial \varPhi_2/\partial \bm{x}\\
+\partial \Phi_1/\partial \bm{x}\\
+\partial \Phi_2/\partial \bm{x}\\
 \vdots \\
-\partial \varPhi_m/\partial \bm{x}\\
+\partial \Phi_m/\partial \bm{x}\\
 \end{bmatrix}
 \label{equ:PKM_phi_grad_x}
 \end{equation}
@@ -526,7 +526,7 @@ An alternative kinematic model to encounter the combination of these points is p
 %Property
 %
 %\begin{equation}
-%\frac{\partial \bm{\varPhi}_i}{\partial \bm{q}_i}
+%\frac{\partial \bm{\Phi}_i}{\partial \bm{q}_i}
 %=
 %\begin{bmatrix}
 %* & \cdots & * & 0 & \cdots & 0\\
@@ -604,7 +604,7 @@ To simplify the following elaborations, the platform frame $\ks{D}$ is still ide
 For a formulation without the tool axis rotation, a different constraint definition
 %
 \begin{equation}
-\bm{\varPhi}_{\mathrm{t},i}(\bm{q}_i,\bm{x})
+\bm{\Phi}_{\mathrm{t},i}(\bm{q}_i,\bm{x})
 = 
 - \ortvek{0}{r}{}{D} + \ortvek{0}{r}{}{E}(\bm{q}_i)
 =
@@ -635,8 +635,8 @@ This implies, that the platform is now part of the last link of the considered l
 To account for the increased number of included joints in (\ref{equ:r_0E_i}), the full kinematic constraints
 %
 \begin{equation}
-\bm{\varPhi}_i=\begin{bmatrix}
-\bm{\varPhi}_{\mathrm{t},i}^\transp & \bm{\varPhi}_{\mathrm{r},i}^\transp
+\bm{\Phi}_i=\begin{bmatrix}
+\bm{\Phi}_{\mathrm{t},i}^\transp & \bm{\Phi}_{\mathrm{r},i}^\transp
 \end{bmatrix}^\transp \in {\mathbb{R}}^{6},
 \label{equ:Phi_def}
 \end{equation}
@@ -644,7 +644,7 @@ To account for the increased number of included joints in (\ref{equ:r_0E_i}), th
 have to be considered, including the rotational part
 %
 \begin{align}
-\bm{\varPhi}_{\mathrm{r},i}(\bm{q}_i,\bm{x})
+\bm{\Phi}_{\mathrm{r},i}(\bm{q}_i,\bm{x})
 =
 \begin{bmatrix}
 \alpha_1  & \alpha_2 & \alpha_3
@@ -662,7 +662,7 @@ Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b) and (c) show cases, where the translati
 For 3T3R tasks, only Fig.\,\ref{fig:pkm_constr_rot_lead}\,(c) represents a valid solution of the inverse kinematics. For 3T2R tasks, Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b) and (c) represent valid solutions.
 
 The goal of eliminating the tool rotation $\beta_3$ from the equations is not achieved yet, since all three components of the platform orientation $\bm{x}_\mathrm{r}$ affect the rotation matrix $\rotmat{0}{D}$. This can be addessed by the selection of the Euler angles:
-Similar to the definition of the rotational operational space coordinates $\bm{x}_\mathrm{r}$ in (\ref{equ:xr_def}), the constraints $\bm{\varPhi}_{\mathrm{r},i}$ are also expressed with a set of Euler angles $\bm{\alpha}$.
+Similar to the definition of the rotational operational space coordinates $\bm{x}_\mathrm{r}$ in (\ref{equ:xr_def}), the constraints $\bm{\Phi}_{\mathrm{r},i}$ are also expressed with a set of Euler angles $\bm{\alpha}$.
 In the following, ``$\bm{\alpha}$'' will always refer to the rotation error/residual and ``$\bm{\beta}$'' to an orientation relative to the base frame.
 The Euler angle convention of $\bm{\alpha}$ can be chosen independently of the choice for the orientation representation in  $\bm{\beta}$.
 The intuitive approach of choosing
@@ -696,7 +696,7 @@ The mathematical proof is given in appendix\,\ref{sec:appendix_eulerreciproc} an
 The new, reduced rotational part of the kinematic constraints
 %
 \begin{equation}
-\bm{\varPsi}_{\mathrm{r},i}(\bm{q}_i,\bm{\eta}) = 
+\bm{\Psi}_{\mathrm{r},i}(\bm{q}_i,\bm{\eta}) = 
 \begin{bmatrix}
 \alpha_2  & \alpha_3
 \end{bmatrix}^\transp
@@ -704,8 +704,8 @@ The new, reduced rotational part of the kinematic constraints
 \overbrace{\begin{bmatrix}
     0 & 1 & 0  \\ 
     0 & 0 & 1
-    \end{bmatrix}}^{=\bm{P}_{\bm{\varPsi}_\mathrm{r}}}
-\bm{\varPhi}_{\mathrm{r},i} (\bm{q}_i,\bm{x})
+    \end{bmatrix}}^{=\bm{P}_{\bm{\Psi}_\mathrm{r}}}
+\bm{\Phi}_{\mathrm{r},i} (\bm{q}_i,\bm{x})
 \in {\mathbb{R}}^{2}
 \label{equ:Psir_def}
 \end{equation}
@@ -714,15 +714,15 @@ does not contain the tool rotation any more.
 The full kinematic constraints for the reduced coordinates
 %
 \begin{equation}
-\bm{\varPsi}_i=\begin{bmatrix}
-\bm{\varPhi}_{\mathrm{t},i}^\transp & \bm{\varPsi}_{\mathrm{r},i}^\transp
+\bm{\Psi}_i=\begin{bmatrix}
+\bm{\Phi}_{\mathrm{t},i}^\transp & \bm{\Psi}_{\mathrm{r},i}^\transp
 \end{bmatrix}^\transp \in {\mathbb{R}}^{5}
 \label{equ:Psi_def}
 \end{equation}
 %
-can be used for the inverse kinematics of the leg chain $i$ in 3T2R tasks, where $\bm{\varPsi}_i=\bm{0}$ leads to a valid position and orientation of the tool axis.
-The condition $\bm{\varPhi}_i=\bm{0}$ leads to a valid configuration of leg $i$ of the parallel robot in 3T3R tasks.
-In the following, ``$\bm{\varPhi}$'' is always used for 3T3R\footnote{By omitting the corresponding lines in the operational space coordinates $\bm{x}$ and the constraint equations $\bm{\varPhi}$, it is also possible to use the 3T3R approach for systems with reduced mobility of 2T1R, 3T0R and 3T1R platform DoF.} kinematic descriptions and ``$\bm{\varPsi}$'' for 3T2R.
+can be used for the inverse kinematics of the leg chain $i$ in 3T2R tasks, where $\bm{\Psi}_i=\bm{0}$ leads to a valid position and orientation of the tool axis.
+The condition $\bm{\Phi}_i=\bm{0}$ leads to a valid configuration of leg $i$ of the parallel robot in 3T3R tasks.
+In the following, ``$\bm{\Phi}$'' is always used for 3T3R\footnote{By omitting the corresponding lines in the operational space coordinates $\bm{x}$ and the constraint equations $\bm{\Phi}$, it is also possible to use the 3T3R approach for systems with reduced mobility of 2T1R, 3T0R and 3T1R platform DoF.} kinematic descriptions and ``$\bm{\Psi}$'' for 3T2R.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -744,18 +744,18 @@ in a general form.
 The full kinematic constraint equations can only be defined for 3T3R tasks without further adaptions as
 %
 \begin{equation}
-\bm{\varPhi}
+\bm{\Phi}
 =
 \begin{bmatrix}
-\bm{\varPhi}_1^\transp &
-\bm{\varPhi}_2^\transp &
+\bm{\Phi}_1^\transp &
+\bm{\Phi}_2^\transp &
 \cdots &
-\bm{\varPhi}_m^\transp &
+\bm{\Phi}_m^\transp &
 \end{bmatrix}^\transp.
 \label{equ:constr_Phi_PKM}
 \end{equation}
 %
-The constraints $\bm{\varPsi}_i$ from (\ref{equ:Psi_def}) for the reduced coordinates $\bm{\eta}$ can only be defined for one leg chain:
+The constraints $\bm{\Psi}_i$ from (\ref{equ:Psi_def}) for the reduced coordinates $\bm{\eta}$ can only be defined for one leg chain:
 Fig.\,\ref{fig:pkm_constr_rot_follow}\,(a) show an open-loop second leg chain for a given first leg chain from Fig.\,\ref{fig:pkm_constr_rot_lead}.
 %
 \begin{figure}[b]
@@ -765,7 +765,7 @@ Fig.\,\ref{fig:pkm_constr_rot_follow}\,(a) show an open-loop second leg chain fo
     \label{fig:pkm_constr_rot_follow}
 \end{figure} 
 %
-By also closing the \emph{3T2R} kinematic constraints $\bm{\varPsi}_2$ for the second loop, as depicted in Fig.\,\ref{fig:pkm_constr_rot_follow}\,(b), the tool axis stays arbitrary and the platform pose demanded from the two legs would be different and therefore would not be a valid solution for the complete mechanism, i.\,e. $\bm{\varPhi}_2 \ne \bm{0}$.
+By also closing the \emph{3T2R} kinematic constraints $\bm{\Psi}_2$ for the second loop, as depicted in Fig.\,\ref{fig:pkm_constr_rot_follow}\,(b), the tool axis stays arbitrary and the platform pose demanded from the two legs would be different and therefore would not be a valid solution for the complete mechanism, i.\,e. $\bm{\Phi}_2 \ne \bm{0}$.
 Only if the second leg fulfills the \emph{3T3R} kinematic constraints for all platform coordinates, as shown in Fig.\,\ref{fig:pkm_constr_rot_follow}\,(c), a valid configuration of the mechanism emerges.
 This approach has already be used for many specific robots systems, as introduced in Sec.\,\ref{sec:intro}.
 As a generalization, the first leg of the parallel robot is now termed the ``leading leg chain'' (Index ``$1$'') and the other legs are termed as ``following leg chains'' (Index ``$j$'').
@@ -773,7 +773,7 @@ As a generalization, the first leg of the parallel robot is now termed the ``lea
 The translational part of the constraints is not coupled by the platform orientation and therefore left unchanged relative to (\ref{equ:Phit_def_i}) with
 %
 \begin{equation}
-\bm{\varPhi}_{\mathrm{t},j}(\bm{q}_j,\bm{x})
+\bm{\Phi}_{\mathrm{t},j}(\bm{q}_j,\bm{x})
 = 
 - \ortvek{0}{r}{}{D} + \ortvek{0}{r}{}{E}(\bm{q}_j)
 =
@@ -795,7 +795,7 @@ which gives the reference end-effector frame $\ks{L}$ resulting from the leading
 The rotational part of the kinematic constraints
 %
 \begin{equation}
-\bm{\varPhi}_{\mathrm{r},j}(\bm{q}_j,\bm{q}_1)
+\bm{\Phi}_{\mathrm{r},j}(\bm{q}_j,\bm{q}_1)
 =
 \bm{\alpha}(\rotmat{0}{L}^\mathrm{T}(\bm{q}_1)\rotmat{0}{E}(\bm{q}_j))
 \label{equ:Phir_def_j}
@@ -806,18 +806,18 @@ The choice of the Euler angle notation is arbitrary.
 The full kinematic constraints for the complete parallel robot with $m$ legs for 3T2R tasks
 %
 \begin{equation}
-\bm{\varPsi}
+\bm{\Psi}
 =
 \begin{bmatrix}
-\bm{\varPsi}_1^\transp &
-\bm{\varPhi}_2^\transp &
+\bm{\Psi}_1^\transp &
+\bm{\Phi}_2^\transp &
 \cdots &
-\bm{\varPhi}_m^\transp &
+\bm{\Phi}_m^\transp &
 \end{bmatrix}^\transp
 \label{equ:constr_Psi_PKM}
 \end{equation}
 %
-are assembled from the 3T2R constraints $\bm{\varPsi}_1$ from (\ref{equ:Psi_def}) for the leading leg and the 3T3R constraints $\bm{\varPhi}_j$, $2\le{}j\le{}m$ from (\ref{equ:Phit_def_j},\ref{equ:Phir_def_j}) for the following legs.
+are assembled from the 3T2R constraints $\bm{\Psi}_1$ from (\ref{equ:Psi_def}) for the leading leg and the 3T3R constraints $\bm{\Phi}_j$, $2\le{}j\le{}m$ from (\ref{equ:Phit_def_j},\ref{equ:Phir_def_j}) for the following legs.
 The index ``$j$'' is used to distinguish the following legs of the 3T2R case and all legs ``$i$'' of the general case in Sec.\,\ref{sec:REW_seriell}.
 %
 The full constraints of (\ref{equ:constr_Psi_PKM}) lead to a 35-dimensional vector for the kinematic constraints for parallel robots with six legs in 3T2R tasks, which are aggregated as class I in Sec.\,\ref{sec:parrob_classification}.
@@ -837,24 +837,24 @@ For the 6U\underline{P}S structure this would result in a 10-dimensional constra
 %\color{black}
 
 
-To be able to compute the differential kinematics of the constraints $\bm{\varPhi}$ (\ref{equ:constr_Phi_PKM}) and  $\bm{\varPsi}$ (\ref{equ:constr_Psi_PKM}) to
+To be able to compute the differential kinematics of the constraints $\bm{\Phi}$ (\ref{equ:constr_Phi_PKM}) and  $\bm{\Psi}$ (\ref{equ:constr_Psi_PKM}) to
 %
 \begin{equation}
-\frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\varPhi}(\bm{q},\bm{x})
+\frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\Phi}(\bm{q},\bm{x})
 =
-\bm{\varPhi}_{\partial \bm{q}}  \dot{\bm{q}}
+\bm{\Phi}_{\partial \bm{q}}  \dot{\bm{q}}
 +
-\bm{\varPhi}_{\partial \bm{x}} \dot{\bm{x}}
+\bm{\Phi}_{\partial \bm{x}} \dot{\bm{x}}
 =
 \bm{0}
 \quad
 \mathrm{and}
 \quad
-\frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\varPsi}(\bm{q},\bm{\eta})
+\frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\Psi}(\bm{q},\bm{\eta})
 =
-\bm{\varPsi}_{\partial \bm{q}}  \dot{\bm{q}}
+\bm{\Psi}_{\partial \bm{q}}  \dot{\bm{q}}
 +
-\bm{\varPsi}_{\partial \bm{\eta}} \dot{\bm{\eta}}
+\bm{\Psi}_{\partial \bm{\eta}} \dot{\bm{\eta}}
 =
 \bm{0},
 \label{equ:constr_diff}
@@ -863,26 +863,26 @@ To be able to compute the differential kinematics of the constraints $\bm{\varPh
 the full geometric matrices of inverse kinematics
 %
 \begin{equation}
-\bm{\varPhi}_{\partial \bm{q}}(\bm{q},\bm{x})
+\bm{\Phi}_{\partial \bm{q}}(\bm{q},\bm{x})
 %=
-%\frac{\partial \bm{\varPhi}}{\partial \bm{q}}
+%\frac{\partial \bm{\Phi}}{\partial \bm{q}}
 =
 \begin{bmatrix}
-\bm{\varPhi}_{1,\partial\bm{q}_1}  & \bm{0} & \bm{0} & \bm{0}\\
-\bm{0} & \bm{\varPhi}_{2,\partial\bm{q}_2} & \ddots & \bm{0}  \\
+\bm{\Phi}_{1,\partial\bm{q}_1}  & \bm{0} & \bm{0} & \bm{0}\\
+\bm{0} & \bm{\Phi}_{2,\partial\bm{q}_2} & \ddots & \bm{0}  \\
 \vdots & \ddots & \ddots & \bm{0}  \\
-\bm{0} & \bm{0} & \bm{0} &\bm{\varPhi}_{m,\partial\bm{q}_m}
+\bm{0} & \bm{0} & \bm{0} &\bm{\Phi}_{m,\partial\bm{q}_m}
 \end{bmatrix}
 \quad
 \mathrm{and}
 \quad
-\bm{\varPsi}_{\partial \bm{q}}(\bm{q},\bm{\eta})
+\bm{\Psi}_{\partial \bm{q}}(\bm{q},\bm{\eta})
 =
 \begin{bmatrix}
-\bm{\varPsi}_{1,\partial\bm{q}_1}  & \bm{0} & \bm{0} & \bm{0}\\
-\bm{\varPhi}_{2,\partial\bm{q}_1} & \bm{\varPhi}_{2,\partial\bm{q}_2} & \ddots & \bm{0}  \\
+\bm{\Psi}_{1,\partial\bm{q}_1}  & \bm{0} & \bm{0} & \bm{0}\\
+\bm{\Phi}_{2,\partial\bm{q}_1} & \bm{\Phi}_{2,\partial\bm{q}_2} & \ddots & \bm{0}  \\
 \vdots & \ddots & \ddots & \bm{0}  \\
-\bm{\varPhi}_{m,\partial\bm{q}_1} & \bm{0} & \bm{0} &\bm{\varPhi}_{m,\partial\bm{q}_m}
+\bm{\Phi}_{m,\partial\bm{q}_1} & \bm{0} & \bm{0} &\bm{\Phi}_{m,\partial\bm{q}_m}
 \end{bmatrix}
 \label{equ:PhiPsi_grad_q_complete}
 \end{equation}
@@ -890,57 +890,57 @@ the full geometric matrices of inverse kinematics
 and the full geometric matrices of direct kinematics
 %
 \begin{equation}
-\bm{\varPhi}_{\partial \bm{x}}(\bm{q},\bm{x})
+\bm{\Phi}_{\partial \bm{x}}(\bm{q},\bm{x})
 =
-\frac{\partial \bm{\varPhi}}{\partial \bm{x}}
+\frac{\partial \bm{\Phi}}{\partial \bm{x}}
 =
 \begin{bmatrix}
-\bm{\varPhi}_{1,\partial\bm{x}} \\
-\bm{\varPhi}_{2,\partial\bm{x}} \\
+\bm{\Phi}_{1,\partial\bm{x}} \\
+\bm{\Phi}_{2,\partial\bm{x}} \\
 \vdots \\
-\bm{\varPhi}_{m,\partial\bm{x}}
+\bm{\Phi}_{m,\partial\bm{x}}
 \end{bmatrix}
 \quad
 \mathrm{and}
 \quad
-\bm{\varPsi}_{\partial \bm{\eta}}(\bm{q},\bm{\eta})
+\bm{\Psi}_{\partial \bm{\eta}}(\bm{q},\bm{\eta})
 =
-\frac{\partial \bm{\varPsi}}{\partial \bm{\eta}}
+\frac{\partial \bm{\Psi}}{\partial \bm{\eta}}
 =
 \begin{bmatrix}
-\bm{\varPsi}_{1,\partial\bm{\eta}} \\
-\bm{\varPhi}_{2,\partial\bm{\eta}} \\
+\bm{\Psi}_{1,\partial\bm{\eta}} \\
+\bm{\Phi}_{2,\partial\bm{\eta}} \\
 \vdots \\
-\bm{\varPhi}_{m,\partial\bm{\eta}} \\
+\bm{\Phi}_{m,\partial\bm{\eta}} \\
 \end{bmatrix}
 \label{equ:PhiPsi_grad_x_complete}
 \end{equation}
 %
 have to be calculated for the 3T3R and the 3T2R case respectively.
-The gradient $\bm{\varPhi}_{\partial \bm{q}}$ has block diagonal form, indicating that the inverse kinematics problem can be solved for each leg independently.
-The structures of the gradient $\bm{\varPsi}_{\partial \bm{q}}$ results from the coupling of the leading and following joints in the rotational constraints equation.
+The gradient $\bm{\Phi}_{\partial \bm{q}}$ has block diagonal form, indicating that the inverse kinematics problem can be solved for each leg independently.
+The structures of the gradient $\bm{\Psi}_{\partial \bm{q}}$ results from the coupling of the leading and following joints in the rotational constraints equation.
 %\color{gray}
-%Since the 3T2R case can be inferred from the 3T3R case by the definition of reciprocal Euler angles and the selection of the corresponding entries of the coordinates in (\ref{equ:etar_def}) and the constraints in (\ref{equ:Psir_def}), only the 3T3R case ``$\bm{\varPhi}$'' is written out in the following elaborations.
+%Since the 3T2R case can be inferred from the 3T3R case by the definition of reciprocal Euler angles and the selection of the corresponding entries of the coordinates in (\ref{equ:etar_def}) and the constraints in (\ref{equ:Psir_def}), only the 3T3R case ``$\bm{\Phi}$'' is written out in the following elaborations.
 %\color{black} % Stimmt so gar nicht mehr.
 
-The gradient matrices $\bm{\varPhi}_{\partial \bm{q}}$ and $\bm{\varPhi}_{\partial \bm{x}}$ contain nested nonlinear functions related to the orientation error, therefore the geometric Jacobian of the leg chains can not be exploited for the rotational part, as derived in appendix\,\ref{sec:appendix_gradient_geomjacobian}.
+The gradient matrices $\bm{\Phi}_{\partial \bm{q}}$ and $\bm{\Phi}_{\partial \bm{x}}$ contain nested nonlinear functions related to the orientation error, therefore the geometric Jacobian of the leg chains can not be exploited for the rotational part, as derived in appendix\,\ref{sec:appendix_gradient_geomjacobian}.
 The gradients are calculated with the chain rule and a syntax for stacking matrix columns to avoid differentiating matrices or with respect to matrices, which was introduced in \cite{1_SchapplerTapOrt2019}.
 The product operator $\overline{\Pi}$, the stacking operator $\overline{\bm{R}}$ and the transpose operator $\bm{P}_\transp$ used for the implementation in the next section are explained in appendix\,\ref{sec:appendix_gradient_matrix}.
 
 \subsection{Constraint Gradients for the Leading Leg of the 3T2R and all Legs of the 3T3R case}
 %
-The constraint definition $\bm{\varPsi}_1$ for the leading leg of the 3T2R case (\ref{equ:constr_Psi_PKM}) and $\bm{\varPhi}_i$ with $i=1,...,m$ for all legs of the 3T3R case (\ref{equ:constr_Phi_PKM}) are subject to the same model of (\ref{equ:Phit_def_i},\ref{equ:Phir_def_i},\ref{equ:Phi_def}).
+The constraint definition $\bm{\Psi}_1$ for the leading leg of the 3T2R case (\ref{equ:constr_Psi_PKM}) and $\bm{\Phi}_i$ with $i=1,...,m$ for all legs of the 3T3R case (\ref{equ:constr_Phi_PKM}) are subject to the same model of (\ref{equ:Phit_def_i},\ref{equ:Phir_def_i},\ref{equ:Phi_def}).
 In the following, the 3T3R constraints are displayed.
-The form $\bm{\varPsi}_1$ for the 3T2R case is obtained by removing the corresponding line of the rotational component according to (\ref{equ:Psir_def}) and replacing ``$\bm{\varPhi}$'' by ``$\bm{\varPsi}$'' in the following equations.
+The form $\bm{\Psi}_1$ for the 3T2R case is obtained by removing the corresponding line of the rotational component according to (\ref{equ:Psir_def}) and replacing ``$\bm{\Phi}$'' by ``$\bm{\Psi}$'' in the following equations.
 For the analysis, the constraint gradient matrix w.\,r.\,t. the joint coordinates has to be divided out to
 %
 \begin{equation}
-\bm{\varPhi}_{1,\partial\bm{q}_1}
+\bm{\Phi}_{1,\partial\bm{q}_1}
 =
 \begin{bmatrix}
-\bm{\varPhi}_{\mathrm{t},1,\partial\bm{q}_1}^\transp
+\bm{\Phi}_{\mathrm{t},1,\partial\bm{q}_1}^\transp
 &
-\bm{\varPhi}_{\mathrm{r},1,\partial\bm{q}_1}^\transp
+\bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}^\transp
 \end{bmatrix}^\transp,
 \label{equ:Phi_1_grad_q}
 \end{equation}
@@ -951,7 +951,7 @@ The rotational part is written down as a function composition of the three funct
 %\ref{sec:appendix_gradient_geomjacobian}
 
 \begin{equation}
-\bm{\varPhi}_{\mathrm{r},1,\partial\bm{q}_1}
+\bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}
 =
 \frac{\partial}{\partial \bm{q}_1} \bm{\alpha}\left(\rotmat{0}{D}^\transp(\bm{x}) \rotmat{0}{E}(\bm{q}_1)\right)
 =
@@ -961,7 +961,7 @@ The rotational part is written down as a function composition of the three funct
 which is then expanded with the chain rule for differentiation and the stack operators to
 %
 \begin{equation}
-\bm{\varPhi}_{\mathrm{r},1,\partial\bm{q}_1}
+\bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}
 =
 %underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des mittleren Terms
 % Term I
@@ -988,18 +988,18 @@ The last partial derivative ``III'' can be derived with computer algebra systems
 The leading legs constraint gradient matrix w.\,r\,t. the platform coordinates can be expanded in the same manner into
 %
 \begin{equation}
-\bm{\varPhi}_{1,\partial\bm{x}}
+\bm{\Phi}_{1,\partial\bm{x}}
 =
 \begin{bmatrix}
-\bm{\varPhi}_{\mathrm{t},1,\partial\bm{x}_\mathrm{t}} & \bm{\varPhi}_{\mathrm{t},1,\partial\bm{x}_\mathrm{r}} \\
-\bm{\varPhi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{t}} &
-\bm{\varPhi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}
+\bm{\Phi}_{\mathrm{t},1,\partial\bm{x}_\mathrm{t}} & \bm{\Phi}_{\mathrm{t},1,\partial\bm{x}_\mathrm{r}} \\
+\bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{t}} &
+\bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}
 \end{bmatrix}
 =
 \begin{bmatrix}
 -\bm{1} & \bm{0} \\
 \bm{0} &
-\bm{\varPhi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}
+\bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}
 \end{bmatrix},
 \label{equ:Phi_1_grad_x}
 \end{equation}
@@ -1008,7 +1008,7 @@ where the definitions from (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) onl
 %Applying the stack-operators gives
 %
 \begin{align}
-\bm{\varPhi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}
+\bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}
 &=
 \frac{\partial}{\partial \bm{x}_{\mathrm{r}}} \bm{\alpha}\left(\left(\rotmat{0}{E}^\transp(\bm{q}_1) \rotmat{0}{D}(\bm{x}_{\mathrm{r}})\right)^\transp\right) \label{equ:grad_Phi_1_x} 
 =
@@ -1048,12 +1048,12 @@ the permutation matrix for transposition from (\ref{equ:transposition_operator})
 \subsection{Constraint Gradients for the Following Leg in the 3T2R Case}
 
 As explained regarding (\ref{equ:constr_Phi_PKM}), the constraints (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) and their gradients (\ref{equ:grad_Phi_1_q}) and (\ref{equ:grad_Phi_1_x}) are used for all legs in the 3T3R case and the leading leg in the 3T2R case.
-For the following legs in the 3T2R case, the gradients $\bm{\varPhi}_{j,\partial\bm{q}_1}$, $\bm{\varPhi}_{j,\partial\bm{q}_j}$ and $\bm{\varPhi}_{j,\partial\bm{x}}$ with $j=2,...,m$ from the right part of  (\ref{equ:PhiPsi_grad_q_complete}) and (\ref{equ:PhiPsi_grad_x_complete}) have to be calculated in a similar way. 
+For the following legs in the 3T2R case, the gradients $\bm{\Phi}_{j,\partial\bm{q}_1}$, $\bm{\Phi}_{j,\partial\bm{q}_j}$ and $\bm{\Phi}_{j,\partial\bm{x}}$ with $j=2,...,m$ from the right part of  (\ref{equ:PhiPsi_grad_q_complete}) and (\ref{equ:PhiPsi_grad_x_complete}) have to be calculated in a similar way. 
 Due to the abscence of the platform orientation in (\ref{equ:Phir_def_j}), (\ref{equ:Phi_1_grad_x}) simplifies for the following leg to 
 %
 \vspace{-0.1cm}
 \begin{equation}
-\bm{\varPhi}_{j,\partial\bm{x}}
+\bm{\Phi}_{j,\partial\bm{x}}
 =
 \begin{bmatrix}
 -\bm{1} & \bm{0} \\
@@ -1061,10 +1061,10 @@ Due to the abscence of the platform orientation in (\ref{equ:Phir_def_j}), (\ref
 \end{bmatrix}.
 \end{equation}
 %
-The gradient w.\,r.\,t. the joint coordinates of the following leg contains again the translational part of the legs Jacobian regarding the end-effector platform position in $\bm{\varPhi}_{\mathrm{t},j,\partial\bm{q}_j}$ and has the rotational part
+The gradient w.\,r.\,t. the joint coordinates of the following leg contains again the translational part of the legs Jacobian regarding the end-effector platform position in $\bm{\Phi}_{\mathrm{t},j,\partial\bm{q}_j}$ and has the rotational part
 %
 \begin{align}
-\bm{\varPhi}_{\mathrm{r},j,\partial\bm{q}_j}
+\bm{\Phi}_{\mathrm{r},j,\partial\bm{q}_j}
 &=
 \frac{\partial}{\partial \bm{q}_j} \bm{\alpha}\left(\rotmat{0}{L}^\transp(\bm{q}_1) \rotmat{0}{E}(\bm{q}_j)\right)
 =
@@ -1097,7 +1097,7 @@ the partial derivative of the platform orientation calculated from leg $j$ w.\,r
 The gradient w.\,r.\,t. the joint coordinates of the leading leg
 %
 \begin{align}
-\bm{\varPhi}_{\mathrm{r},j,\partial\bm{q}_1}
+\bm{\Phi}_{\mathrm{r},j,\partial\bm{q}_1}
 &=
 \frac{\partial}{\partial \bm{q}_1} \bm{\alpha}\left(\left(\rotmat{0}{E}^\transp(\bm{q}_j) \rotmat{0}{L}(\bm{q}_1) \right)^\transp \right)
 =
@@ -1138,19 +1138,19 @@ the term ``III'' from (\ref{equ:grad_Phi_1_q}) in ``IV''.
 
 The presented kinematic constraints and their gradient matrices can be used to solve the inverse kinematics problem (IKP) of single leg chains and complete parallel robots.
 Since all active and passive joint angles are involved for the case of parallel robots, solving their IKP results in solving the IKP for all leg chains.
-As first introduced in \cite{GoldenbergBenFen1985} for Euler angle residuals in the IKP, the Taylor series expansion of $\bm{\varPhi}(\bm{q},\bm{x})$ leads to the definition of
+As first introduced in \cite{GoldenbergBenFen1985} for Euler angle residuals in the IKP, the Taylor series expansion of $\bm{\Phi}(\bm{q},\bm{x})$ leads to the definition of
 %
 \begin{equation}
-\bm{\varPhi}(\bm{q}^{k+1},\bm{x}) = 
-\bm{\varPhi}(\bm{q}^{k},\bm{x})
+\bm{\Phi}(\bm{q}^{k+1},\bm{x}) = 
+\bm{\Phi}(\bm{q}^{k},\bm{x})
 +
-\frac{\partial}{\partial \bm{q}} \bm{\varPhi}(\bm{q},\bm{x}) \biggr\rvert_{\bm{q}^k} (\bm{q}^{k+1} - \bm{q}^k)
+\frac{\partial}{\partial \bm{q}} \bm{\Phi}(\bm{q},\bm{x}) \biggr\rvert_{\bm{q}^k} (\bm{q}^{k+1} - \bm{q}^k)
 \label{equ:taylor_phi}
 \end{equation}
 %
 in an iterative algorithm at the step $k+1$, which can be used to solve the IKP using a given initial value $\bm{q}^{0}$ and the condition
 \begin{equation}
-\bm{\varPhi}(\bm{q}^{k+1},\bm{x})=\bm{0}.
+\bm{\Phi}(\bm{q}^{k+1},\bm{x})=\bm{0}.
 \label{equ:taylor_phi_nextstepzero}
 \end{equation}
 %
@@ -1163,14 +1163,14 @@ Defining the solution of the IKP as the main task (``T''), the step-wise solutio
 =
 \bm{q}^{k+1} - \bm{q}^k
 =
--\bm{\varPhi}_{\partial\bm{q}}^{\dagger}(\bm{q}^k,\bm{x}) \bm{\varPhi}(\bm{q}^k,\bm{x}).
+-\bm{\Phi}_{\partial\bm{q}}^{\dagger}(\bm{q}^k,\bm{x}) \bm{\Phi}(\bm{q}^k,\bm{x}).
 \label{equ:IKP_maintask}
 \end{equation}
 %
 Depending on the dimension, $(\cdot)^\dagger$ denotes the matrix inverse or the pseudo-inverse.
-Again, the equations (\ref{equ:taylor_phi}-\ref{equ:IKP_maintask}) can be written with ``$\bm{\varPsi}$'' from (\ref{equ:constr_Psi_PKM}) instead of ``$\bm{\varPhi}$'' from (\ref{equ:constr_Phi_PKM}) for the 3T2R case.
+Again, the equations (\ref{equ:taylor_phi}-\ref{equ:IKP_maintask}) can be written with ``$\bm{\Psi}$'' from (\ref{equ:constr_Psi_PKM}) instead of ``$\bm{\Phi}$'' from (\ref{equ:constr_Phi_PKM}) for the 3T2R case.
 
-In the latter case, the corresponding gradient matrix $\bm{\varPsi}_{\partial \bm{q}}(\bm{q},\bm{\eta})$ from (\ref{equ:PhiPsi_grad_q_complete}) allows the definition of a nullspace in the case of $\mathrm{dim}(\bm{q}_1)>\mathrm{dim}(\bm{\eta})$.
+In the latter case, the corresponding gradient matrix $\bm{\Psi}_{\partial \bm{q}}(\bm{q},\bm{\eta})$ from (\ref{equ:PhiPsi_grad_q_complete}) allows the definition of a nullspace in the case of $\mathrm{dim}(\bm{q}_1)>\mathrm{dim}(\bm{\eta})$.
 This redundancy can be exploited by using the nullspace (``N'') projection ${\Delta}\bm{q}_{\mathrm{N}}$ from \cite{Yoshikawa1984} additionally to the solution ${\Delta}\bm{q}_{\mathrm{T}}$ of the IKP in (\ref{equ:IKP_maintask}) with the new increment
 %
 \begin{equation}
@@ -1180,7 +1180,7 @@ This redundancy can be exploited by using the nullspace (``N'') projection ${\De
 =
 {\Delta}\bm{q}_{\mathrm{T}}^k + {\Delta}\bm{q}_{\mathrm{N}}^k
 =
--\bm{\varPsi}_{\partial\bm{q}}^{\dagger} \bm{\varPsi} +  (\bm{1}-\bm{\varPsi}_{\partial\bm{q}}^{\dagger}\bm{\varPsi}_{\partial\bm{q}}) h_{\partial\bm{q}}
+-\bm{\Psi}_{\partial\bm{q}}^{\dagger} \bm{\Psi} +  (\bm{1}-\bm{\Psi}_{\partial\bm{q}}^{\dagger}\bm{\Psi}_{\partial\bm{q}}) h_{\partial\bm{q}}
 \label{equ:nullspace}
 \end{equation}
 %
@@ -1204,7 +1204,7 @@ of the joint positions $\bm{q}$ from their respective reference position $\bar{\
 Defining $\bar{\bm{q}}$ to be in the middle of the joint limits and minimizing $h_1(\bm{q})$ reduces the risk of joints reaching their technical limits, but does not guarantee it.
 Other, more sophisticated criteria are for example the quadratic \cite{HuoBar2005} or hyperbolic \cite{ZhuQuCaoYan2013} distance of from joint limits, stiffness \cite{GuoDonKe2015} or singularity avoidance via Frobenius-norm condition number \cite{ZhuQuCaoYan2013} or squared condition number \cite{LegerAng2016}.
 The method can be used for serial link robots as well by removing all entries for the following legs from the formulas, as presented in \cite{1_SchapplerTapOrt2019}.
-The platform pose $\bm{x}$/$\bm{\eta}$ corresponds to the desired pose for the serial robots end-effector and the kinematic constraints $\bm{\varPhi}$/$\bm{\varPsi}$ correspond to the residual of the IKP.
+The platform pose $\bm{x}$/$\bm{\eta}$ corresponds to the desired pose for the serial robots end-effector and the kinematic constraints $\bm{\Phi}$/$\bm{\Psi}$ correspond to the residual of the IKP.
 
 \subsection{Differential Kinematics for the Parallel Robot and its Applications}
 \label{sec:ZB_Anwendung_PKM_DiffKin}
@@ -1213,12 +1213,12 @@ The reasonings so far only considered the inverse kinematics of the parallel rob
 The kinematic definitions can also be used in the differential kinematics (\ref{equ:constr_diff}) to establish the connection between joint and platform velocity.
 This was already presented in general form in \cite{Merlet2006} and also corresponds to the theory of linear transformation which is the base of the works of Gogu on structural synthesis \cite{Gogu2008}.
 The derivation in this paper is based on the position \emph{and} orientation, but comes to the same result as the already-existing velocity-based approach.
-Further, using $\bm{\varPsi}$/$\bm{\eta}$ as elaborated before allows for the first time to define differential kinematics specifically for 3T2R tasks in a general form.
+Further, using $\bm{\Psi}$/$\bm{\eta}$ as elaborated before allows for the first time to define differential kinematics specifically for 3T2R tasks in a general form.
 The differential equation of (\ref{equ:constr_diff}) is expanded to 
 \begin{equation}
-\frac{\mathrm{d}}{\mathrm{d}t} \bm{\varPhi}(\bm{q}_{\mathrm{a}}, \bm{q}_{\mathrm{p}},\bm{x})
+\frac{\mathrm{d}}{\mathrm{d}t} \bm{\Phi}(\bm{q}_{\mathrm{a}}, \bm{q}_{\mathrm{p}},\bm{x})
 =
-\bm{\varPhi}_{\partial\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} + \bm{\varPhi}_{\partial\bm{q}_{\mathrm{p}}} \dot{\bm{q}}_{\mathrm{p}} + \bm{\varPhi}_{\partial\bm{x}} \dot{\bm{x}} 
+\bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} + \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}} \dot{\bm{q}}_{\mathrm{p}} + \bm{\Phi}_{\partial\bm{x}} \dot{\bm{x}} 
 =
 \bm{0}
 \label{equ:constr_diff_qap}
@@ -1227,16 +1227,16 @@ to distinguish active (``a'') and passive (``p'') joints.
 The latter also contain the coordinates of the platform-connecting joints.
 Reordering the equation leads to the full inverse differential kinematics
 \begin{equation}
-\bm{\varPhi}_{\partial\bm{x}} \dot{\bm{x}}
+\bm{\Phi}_{\partial\bm{x}} \dot{\bm{x}}
 =
 - 
-\begin{bmatrix} \bm{\varPhi}_{\partial\bm{q}_{\mathrm{a}}} & \bm{\varPhi}_{\partial\bm{q}_{\mathrm{p}}}\end{bmatrix}
+\begin{bmatrix} \bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} & \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}}\end{bmatrix}
 \begin{bmatrix}
 \dot{\bm{q}}_{\mathrm{a}} \\
 \dot{\bm{q}}_{\mathrm{p}} \\
 \end{bmatrix}
 =
-\bm{\varPhi}_{\partial\mathrm{ap}}
+\bm{\Phi}_{\partial\mathrm{ap}}
 \begin{bmatrix}
 \dot{\bm{q}}_{\mathrm{a}} \\
 \dot{\bm{q}}_{\mathrm{p}} \\
@@ -1247,7 +1247,7 @@ Reordering the equation leads to the full inverse differential kinematics
 \dot{\bm{q}}_{\mathrm{p}} \\
 \end{bmatrix}
 =
--\bm{\varPhi}_{\partial\mathrm{ap}}^{-1} \bm{\varPhi}_{\partial\bm{x}}
+-\bm{\Phi}_{\partial\mathrm{ap}}^{-1} \bm{\Phi}_{\partial\bm{x}}
 \dot{\bm{x}},
 \label{equ:full_diff_ik}
 \end{equation}
@@ -1255,16 +1255,16 @@ Reordering the equation leads to the full inverse differential kinematics
 which has been adressed in the previous sections, and the full direct differential kinematics
 %
 \begin{equation}
-\bm{\varPhi}_{\partial\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} 
+\bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} 
 =
 - 
-\begin{bmatrix} \bm{\varPhi}_{\partial\bm{x}} & \bm{\varPhi}_{\partial\bm{q}_{\mathrm{p}}} \end{bmatrix}
+\begin{bmatrix} \bm{\Phi}_{\partial\bm{x}} & \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}} \end{bmatrix}
 \begin{bmatrix}
 \dot{\bm{x}} \\
 \dot{\bm{q}}_{\mathrm{p}}
 \end{bmatrix}
 =
-\bm{\varPhi}_{\partial\bm{x}\mathrm{p}}
+\bm{\Phi}_{\partial\bm{x}\mathrm{p}}
 \begin{bmatrix}
 \dot{\bm{x}} \\
 \dot{\bm{q}}_{\mathrm{p}}
@@ -1275,16 +1275,16 @@ which has been adressed in the previous sections, and the full direct differenti
 \dot{\bm{q}}_{\mathrm{p}}
 \end{bmatrix}
 =
--\bm{\varPhi}_{\partial\bm{x}\mathrm{p}}^{-1} \bm{\varPhi}_{\partial\bm{q}_{\mathrm{a}}}
+-\bm{\Phi}_{\partial\bm{x}\mathrm{p}}^{-1} \bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}}
 \dot{\bm{q}}_{\mathrm{a}}.
 \label{equ:full_diff_dk}
 \end{equation}
 %
 By only selecting the first rows for $\dot{\bm{q}}_{\mathrm{a}}$ in (\ref{equ:full_diff_ik}) and for $\dot{\bm{x}}$ in (\ref{equ:full_diff_dk}), the well-known analytic Jacobian\footnote{This matrix is related to the time derivatives $\dot{\bm{x}}_{\mathrm{r}}$ of the platform Euler angles and is called ``design Jacobian'' in \cite{Gogu2008} and ``Euler
 angles inverse jacobian matrix'' in \cite{Merlet2006} in contrast to the Jacobian related to angular velocities of the platform.} of the parallel robot \cite{Merlet2006,Gogu2008}, relating actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$ and platform velocities $\dot{\bm{x}}$, can be obtained from both equations.
-For the case of task or kinematic redundancy, the pseudo-inverse can be used for $\bm{\varPhi}_{\partial\mathrm{ap}}$ in (\ref{equ:full_diff_ik}) as shown in Sec.\,\ref{sec:ZB_Anwendung_IK_grad}.
+For the case of task or kinematic redundancy, the pseudo-inverse can be used for $\bm{\Phi}_{\partial\mathrm{ap}}$ in (\ref{equ:full_diff_ik}) as shown in Sec.\,\ref{sec:ZB_Anwendung_IK_grad}.
 The case of task redundancy does not affect (\ref{equ:full_diff_dk}), since the full platform velocity $\dot{\bm{x}}$ is obtained from given actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$.
-%For meaningful PKM the matrix $\bm{\varPhi}_{\partial\bm{x}\mathrm{p}}$ is always square, since otherwise one or more leg chains would contain kinematic redundancy leading to uncontrollable nullspace motion. --> ist so noch falsch/ungeprüft!
+%For meaningful PKM the matrix $\bm{\Phi}_{\partial\bm{x}\mathrm{p}}$ is always square, since otherwise one or more leg chains would contain kinematic redundancy leading to uncontrollable nullspace motion. --> ist so noch falsch/ungeprüft!
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
@@ -1797,9 +1797,9 @@ obtained with the Jacobian with the velocity obtained by the gradient matrices o
 Using the differential form (\ref{equ:constr_diff}) only for the first kinematic leg chain of the parallel robot gives
 %
 \begin{equation}
-\frac{\mathrm{d}}{\mathrm{d}t} \bm{\varPhi}_1(\bm{q}_1,\bm{x})
+\frac{\mathrm{d}}{\mathrm{d}t} \bm{\Phi}_1(\bm{q}_1,\bm{x})
 =
-\bm{\varPhi}_{1,\bm{q}}(\bm{q}_1,\bm{x}) \dot{\bm{q}}_1 + \bm{\varPhi}_{1,\bm{x}}(\bm{q}_1,\bm{x}) \dot{\bm{x}} 
+\bm{\Phi}_{1,\bm{q}}(\bm{q}_1,\bm{x}) \dot{\bm{q}}_1 + \bm{\Phi}_{1,\bm{x}}(\bm{q}_1,\bm{x}) \dot{\bm{x}} 
 =
 \bm{0}
 \label{equ:constr_diff1}
@@ -1816,18 +1816,18 @@ and results reorganized to the form of (\ref{equ:diffkin1_jacobi}) with (\ref{eq
 -
 \begin{bmatrix}
 -\bm{1} & \bm{0} \\
-\bm{0} & \bm{\varPhi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}^{-1}
+\bm{0} & \bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}^{-1}
 \end{bmatrix}
 \begin{bmatrix}
-\bm{\varPhi}_{\mathrm{t},1,\partial\bm{q}_1}
+\bm{\Phi}_{\mathrm{t},1,\partial\bm{q}_1}
 &
-\bm{\varPhi}_{\mathrm{r},1,\partial\bm{q}_1}
+\bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}
 \end{bmatrix}
 \dot{\bm{q}}_1
 =
 \begin{bmatrix}
-\bm{\varPhi}_{\mathrm{t},1,\partial\bm{q}_1} & \bm{0} \\
-\bm{0} & -\bm{\varPhi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}^{-1} \bm{\varPhi}_{\mathrm{r},1,\partial\bm{q}_1}
+\bm{\Phi}_{\mathrm{t},1,\partial\bm{q}_1} & \bm{0} \\
+\bm{0} & -\bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}^{-1} \bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}
 \end{bmatrix}
 \dot{\bm{q}}_1.
 \label{equ:diffkin1_gradmat}
@@ -1836,20 +1836,20 @@ and results reorganized to the form of (\ref{equ:diffkin1_jacobi}) with (\ref{eq
 By equating coefficients of (\ref{equ:diffkin1_jacobi}) and (\ref{equ:diffkin1_gradmat}) the relations
 %
 \begin{align}
-\bm{\varPhi}_{1,\bm{q}}(\bm{q}_1)
+\bm{\Phi}_{1,\bm{q}}(\bm{q}_1)
 &=
--\bm{\varPhi}_{1,\bm{x}}(\bm{q}_1,\bm{x})
+-\bm{\Phi}_{1,\bm{x}}(\bm{q}_1,\bm{x})
 \bm{J}_1(\bm{q}_1),
 \label{equ:KoeffVgl_Phi1d1}
 \\
-\bm{\varPhi}_{\mathrm{t},1,\partial\bm{q}_1}(\bm{q}_1)
+\bm{\Phi}_{\mathrm{t},1,\partial\bm{q}_1}(\bm{q}_1)
 &=
 \bm{J}_{\mathrm{t},1}(\bm{q}_1)\quad\mathrm{and}
 \label{equ:KoeffVgl_Phi1td1}
 \\
-\bm{\varPhi}_{\mathrm{r},1,\partial\bm{q}_1}(\bm{q}_1,\bm{x})
+\bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}(\bm{q}_1,\bm{x})
 &=
--\bm{\varPhi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}(\bm{q}_1,\bm{x}) \bm{J}_{\mathrm{r},1}(\bm{q}_1)
+-\bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}(\bm{q}_1,\bm{x}) \bm{J}_{\mathrm{r},1}(\bm{q}_1)
 \label{equ:KoeffVgl_Phi1rd1}
 \end{align}
 %
@@ -1858,7 +1858,7 @@ The dependency on $\bm{q}_1$ and $\bm{x}$ has been added to highlight the main r
 In the inverse kinematics procedure of Sec.\,\ref{sec:ZB_Anwendung_IK_grad} the residual at step $k$ in (\ref{equ:taylor_phi}) is unequal to zero.
 For the partial derivative (\ref{equ:grad_Phi_1_x})/I a value of $\rotmato{D}{E} \ne \bm{1}$ will be inserted in (\ref{equ:alpha_xyz_diff_R}), which will break (\ref{equ:KoeffVgl_Phi1rd1}).
 The translational part is unaffected, as can be seen in (\ref{equ:KoeffVgl_Phi1td1}).
-%Since the term $\bm{\varPhi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}$ depends on $\bm{q}_1$ \emph{and} $\bm{x}$
+%Since the term $\bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}$ depends on $\bm{q}_1$ \emph{and} $\bm{x}$
 
 \subsection{Matrix Operations for Partial Derivatives}
 \label{sec:appendix_gradient_matrix}

@@ -20,7 +20,7 @@
 %%   \import{<path to file>}{<filename>.pdf_tex}
 %% Alternatively, one can specify
 %%   \graphicspath{{<path to file>/}}
-%%
+%% 
 %% For more information, please see info/svg-inkscape on CTAN:
 %%   http://tug.ctan.org/tex-archive/info/svg-inkscape
 %%
@@ -64,15 +64,15 @@
     \put(0.44079881,0.00940515){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(b)\end{tabular}}}}%
     \put(0.79209682,0.00940515){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}(c)\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=3]{pkm_constr_def_rot_lead.pdf}}%
-    \put(0.01512865,0.13486022){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\varPhi}_{\mathrm{t},1} \ne \bm{0}$\end{tabular}}}}%
-    \put(0.01512865,0.11193789){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\varPhi}_{\mathrm{r},1} \ne \bm{0}$\end{tabular}}}}%
-    \put(0.01512865,0.08901545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\varPsi}_{\mathrm{r},1} \ne \bm{0}$\end{tabular}}}}%
-    \put(0.44139227,0.13486022){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\varPhi}_{\mathrm{t},1} = \bm{0}$\end{tabular}}}}%
-    \put(0.44139227,0.11193789){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\varPhi}_{\mathrm{r},1} \ne \bm{0}$\end{tabular}}}}%
-    \put(0.44139227,0.08901545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\varPsi}_{\mathrm{r},1} = \bm{0}$\end{tabular}}}}%
-    \put(0.79269026,0.13486022){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\varPhi}_{\mathrm{t},1} = \bm{0}$\end{tabular}}}}%
-    \put(0.79269026,0.11193789){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\varPhi}_{\mathrm{r},1} = \bm{0}$\end{tabular}}}}%
-    \put(0.79269026,0.08901545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\varPsi}_{\mathrm{r},1} = \bm{0}$\end{tabular}}}}%
+    \put(0.01512865,0.13486022){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{t},1} \ne \bm{0}$\end{tabular}}}}%
+    \put(0.01512865,0.11193789){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{r},1} \ne \bm{0}$\end{tabular}}}}%
+    \put(0.01512865,0.08901545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Psi}_{\mathrm{r},1} \ne \bm{0}$\end{tabular}}}}%
+    \put(0.44139227,0.13486022){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{t},1} = \bm{0}$\end{tabular}}}}%
+    \put(0.44139227,0.11193789){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{r},1} \ne \bm{0}$\end{tabular}}}}%
+    \put(0.44139227,0.08901545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Psi}_{\mathrm{r},1} = \bm{0}$\end{tabular}}}}%
+    \put(0.79269026,0.13486022){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{t},1} = \bm{0}$\end{tabular}}}}%
+    \put(0.79269026,0.11193789){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Phi}_{\mathrm{r},1} = \bm{0}$\end{tabular}}}}%
+    \put(0.79269026,0.08901545){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$\bm{\Psi}_{\mathrm{r},1} = \bm{0}$\end{tabular}}}}%
     \put(0.28196826,0.005083){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$O$\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=4]{pkm_constr_def_rot_lead.pdf}}%
     \put(0.12970167,0.02566178){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{0}\smash{\begin{tabular}[t]{l}$A_i$\end{tabular}}}}%

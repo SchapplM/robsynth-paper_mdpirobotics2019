@@ -1053,7 +1053,7 @@
                y="957.24347"
                x="99.831718"
                id="tspan4890-8-9-5-4-8"
-               sodipodi:role="line">$\bm{\varPhi}_{\mathrm{t},2} \ne \bm{0}$</tspan></text>
+               sodipodi:role="line">$\bm{\Phi}_{\mathrm{t},2} \ne \bm{0}$</tspan></text>
           <text
              id="text4888-22-5-5-4-7-6"
              y="969.8327"
@@ -1065,7 +1065,7 @@
                y="969.8327"
                x="99.831718"
                id="tspan4890-8-9-5-7-4-8"
-               sodipodi:role="line">$\bm{\varPhi}_{\mathrm{r},2} \ne \bm{0}$</tspan></text>
+               sodipodi:role="line">$\bm{\Phi}_{\mathrm{r},2} \ne \bm{0}$</tspan></text>
           <text
              id="text4888-22-5-5-4-6-4-8"
              y="982.422"
@@ -1077,7 +1077,7 @@
                y="982.422"
                x="99.831718"
                id="tspan4890-8-9-5-7-5-3-4"
-               sodipodi:role="line">$\bm{\varPsi}_{\mathrm{r},2} \ne \bm{0}$</tspan></text>
+               sodipodi:role="line">$\bm{\Psi}_{\mathrm{r},2} \ne \bm{0}$</tspan></text>
         </g>
       </g>
       <flowRoot
@@ -1112,7 +1112,7 @@
                y="957.24347"
                x="99.831718"
                id="tspan4890-8-9-5-4-8-5"
-               sodipodi:role="line">$\bm{\varPhi}_{\mathrm{t},2} = \bm{0}$</tspan></text>
+               sodipodi:role="line">$\bm{\Phi}_{\mathrm{t},2} = \bm{0}$</tspan></text>
           <text
              id="text4888-22-5-5-4-7-6-3"
              y="969.8327"
@@ -1124,7 +1124,7 @@
                y="969.8327"
                x="99.831718"
                id="tspan4890-8-9-5-7-4-8-5"
-               sodipodi:role="line">$\bm{\varPhi}_{\mathrm{r},2} \ne \bm{0}$</tspan></text>
+               sodipodi:role="line">$\bm{\Phi}_{\mathrm{r},2} \ne \bm{0}$</tspan></text>
           <text
              id="text4888-22-5-5-4-6-4-8-6"
              y="982.422"
@@ -1136,7 +1136,7 @@
                y="982.422"
                x="99.831718"
                id="tspan4890-8-9-5-7-5-3-4-2"
-               sodipodi:role="line">$\bm{\varPsi}_{\mathrm{r},2} = \bm{0}$</tspan></text>
+               sodipodi:role="line">$\bm{\Psi}_{\mathrm{r},2} = \bm{0}$</tspan></text>
         </g>
         <flowRoot
            style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1170,7 +1170,7 @@
                y="957.24347"
                x="99.831718"
                id="tspan4890-8-9-5-4-8-6"
-               sodipodi:role="line">$\bm{\varPhi}_{\mathrm{t},2} = \bm{0}$</tspan></text>
+               sodipodi:role="line">$\bm{\Phi}_{\mathrm{t},2} = \bm{0}$</tspan></text>
           <text
              id="text4888-22-5-5-4-7-6-0"
              y="969.8327"
@@ -1182,7 +1182,7 @@
                y="969.8327"
                x="99.831718"
                id="tspan4890-8-9-5-7-4-8-6"
-               sodipodi:role="line">$\bm{\varPhi}_{\mathrm{r},2} = \bm{0}$</tspan></text>
+               sodipodi:role="line">$\bm{\Phi}_{\mathrm{r},2} = \bm{0}$</tspan></text>
           <text
              id="text4888-22-5-5-4-6-4-8-2"
              y="982.422"
@@ -1194,7 +1194,7 @@
                y="982.422"
                x="99.831718"
                id="tspan4890-8-9-5-7-5-3-4-6"
-               sodipodi:role="line">$\bm{\varPsi}_{\mathrm{r},2} = \bm{0}$</tspan></text>
+               sodipodi:role="line">$\bm{\Psi}_{\mathrm{r},2} = \bm{0}$</tspan></text>
         </g>
         <flowRoot
            style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"

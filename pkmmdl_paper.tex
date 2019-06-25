@@ -1188,7 +1188,7 @@ This redundancy can be exploited by using the nullspace (``N'') projection ${\De
 %
 in the iterative algorithm.
 The optimization of additional performance criteria $h$ requires their gradient $h_{\partial\bm{q}}$ w.\,r\,.t the joint positions.
-As a simple example, the summed $\bm{W}$-weighted quadratic distances
+One criterion is the summed $\bm{W}_1$-weighted quadratic distance
 %
 \begin{equation}
 h_1(\bm{q})
@@ -1202,8 +1202,47 @@ h_{1,\partial\bm{q}}
 \bm{W}(\bm{q}-\bar{\bm{q}})
 \label{equ:criterion1}
 \end{equation}
-of the joint positions $\bm{q}$ from their respective reference position $\bar{\bm{q}}$ can be used.
+%
+of the joint positions $\bm{q}$ from their respective reference position $\bar{\bm{q}}$, e.\,g. used in \cite{HuoBar2008}.
 Defining $\bar{\bm{q}}$ to be in the middle of the joint limits and minimizing $h_1(\bm{q})$ reduces the risk of joints reaching their technical limits, but does not guarantee it.
+
+First, the simple optimization criterion $h_1$ from (\ref{equ:criterion1}) showed the behavior that violations of the limits of one joint were compensated by improvements for other joints, leaving an invalid solution.
+Therefore, it was replaced by the $w_i$-weighted hyperbolic joint limit distance
+%
+\begin{equation}
+h_2(\bm{q})
+=
+\frac{1}{n} \sum_{i=1}^{n}
+w_i
+\frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8}
+\left(
+\frac{1}{(q_{i}-q_{i,\mathrm{min}})^2}
++
+\frac{1}{(q_{i}-q_{i,\mathrm{max}})^2}
+\right)
+\label{equ:criterion2}
+\end{equation}
+%
+from \cite{ZhuQuCaoYan2013} with $n=6$ in this case and the corresponding gradient written element-wise as
+\begin{equation}
+h_{2,\partial q_i}
+=
+\frac{\partial h_2}{\partial q_i}
+=
+w_i
+\frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8n}
+\left(
+\frac{-2}{(q_{i}-q_{i,\mathrm{min}})^3}
++
+\frac{-2}{(q_{i}-q_{i,\mathrm{max}})^3}
+\right)
+\label{equ:criterion2_grad}
+\end{equation}
+%
+with weights set to $w_i=1$.
+
+
+
 Other, more sophisticated criteria are for example the quadratic \cite{HuoBar2005} or hyperbolic \cite{ZhuQuCaoYan2013} distance of from joint limits, stiffness \cite{GuoDonKe2015} or singularity avoidance via Frobenius-norm condition number \cite{ZhuQuCaoYan2013} or squared condition number \cite{LegerAng2016}.
 The method can be used for serial link robots as well by removing all entries for the following legs from the formulas, as presented in \cite{1_SchapplerTapOrt2019}.
 The platform pose $\bm{x}$/$\bm{\eta}$ corresponds to the desired pose for the serial robots end-effector and the kinematic constraints $\bm{\Phi}$/$\bm{\Psi}$ correspond to the residual of the IKP.
@@ -1341,37 +1380,37 @@ The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ an
 
 For the application of the algorithm from (\ref{equ:nullspace}), further extensions were performed to address some practical issues.
 First, the simple optimization criterion $h_1$ from (\ref{equ:criterion1}) showed the behavior that violations of the limits of one joint were compensated by improvements for other joints, leaving an invalid solution.
-Therefore, it was replaced by the $w_i$-weighted hyperbolic joint limit distance
+Therefore, it was replaced by the $w_i$-weighted hyperbolic joint limit distance xxx
 %
-\begin{equation}
-h_2(\bm{q})
-=
-\frac{1}{n} \sum_{i=1}^{n}
-w_i
-\frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8}
-\left(
-\frac{1}{(q_{i}-q_{i,\mathrm{min}})^2}
-+
-\frac{1}{(q_{i}-q_{i,\mathrm{max}})^2}
-\right)
-\label{equ:criterion2}
-\end{equation}
+%\begin{equation}
+%h_2(\bm{q})
+%=
+%\frac{1}{n} \sum_{i=1}^{n}
+%w_i
+%\frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8}
+%\left(
+%\frac{1}{(q_{i}-q_{i,\mathrm{min}})^2}
+%+
+%\frac{1}{(q_{i}-q_{i,\mathrm{max}})^2}
+%\right)
+%\label{equ:criterion2}
+%\end{equation}
 %
-from \cite{ZhuQuCaoYan2013} with $n=6$ in this case and the corresponding gradient written element-wise as
-\begin{equation}
-h_{2,\partial q_i}
-=
-\frac{\partial h_2}{\partial q_i}
-=
-w_i
-\frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8n}
-\left(
-\frac{-2}{(q_{i}-q_{i,\mathrm{min}})^3}
-+
-\frac{-2}{(q_{i}-q_{i,\mathrm{max}})^3}
-\right)
-\label{equ:criterion2_grad}
-\end{equation}
+from \cite{ZhuQuCaoYan2013} with $n=6$ in this case and the corresponding gradient written element-wise as xxx
+%\begin{equation}
+%h_{2,\partial q_i}
+%=
+%\frac{\partial h_2}{\partial q_i}
+%=
+%w_i
+%\frac{(q_{i,\mathrm{max}}-q_{i,\mathrm{min}})}{8n}
+%\left(
+%\frac{-2}{(q_{i}-q_{i,\mathrm{min}})^3}
+%+
+%\frac{-2}{(q_{i}-q_{i,\mathrm{max}})^3}
+%\right)
+%\label{equ:criterion2_grad}
+%\end{equation}
 %
 with weights set to $w_i=1$.
 Additional damping coefficients were introduced, replacing (\ref{equ:nullspace}) with

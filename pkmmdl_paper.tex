@@ -1391,19 +1391,21 @@ The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ an
 \end{figure}
 
 % Einstellungen für diesen Versuch, siehe figures/serrob_traj.m
-The IKP is solved with two settings: Setting the tool axis rotation to different constant values $\beta_3$ with the 3T3R algorithm and solving the IKP only for  desired pointing direction with the 3T2R algorithm.
-The algorithm from (\ref{equ:nullspace}) was used in the extended version of (\ref{equ:IK_damping}) for both cases with different settings caused by the nature of the cases.
+The IKP is solved with two settings: Setting the tool axis rotation to different constant values $\beta_3$ with the 3T3R algorithm and solving the IKP only for the  desired pointing direction with the 3T2R algorithm.
+The algorithm from (\ref{equ:nullspace}) was used in the extended version of (\ref{equ:IK_damping}) for both cases with different settings caused by their nature.
 For the 3T3R case, $K_\mathrm{T}=0.7$ was set.
 The terms $K_\mathrm{N}$ and $K_\mathrm{Lim}$ have no effect, since no nullspace movement is possible.
 For the 3T2R case, with $K_{h_1}=0$ and $K_{h_2}=1$ only the hyperbolic limit rejection criterion from (\ref{equ:criterion2}) was used.
 The high values of the gradient of the criterion were reduced with $K_\mathrm{N}=0.002$ to decrease the nullspace movement near the limits.
-The first criterion was not used, since in the trajectory example a temporary exceeding of the limits can not and must not occur.
+The first criterion was not used, since in the trajectory example the limits are not even temporarily exceeded by principle.
+All IKP algorithms had the same initial value from Fig.\,\ref{tab:mdh_industrialrobot}.
 
 The results of the inverse kinematics for different settings are given in Fig.\,\ref{fig:serrob_traj_3T2R}, where the representative joint coordinates $q_1$ and $q_5$, the redundant coordinate of the end-effector orientation $\beta_3$, as well as the optimization criterion (\ref{equ:criterion2}) are depicted over time for the trajectory from Fig.\,\ref{tab:mdh_industrialrobot}.
 The positions are normalized to the joint limits from -1 to 1 and the time values are not shown since the results focus on the inverse kinematics only.
 The first three lines represent IKP solutions with a given constant end-effector orientation of $-150^\circ$, $-15^\circ$ and $45^\circ$ and the 3T3R algorithm.
-The 3T2R algorithm without nullspace optimization is plotted with dotted lines for the same starting configurations as the 3T3R case with the same colors.
-The 3T2R case with optimization is plotted as the green line with triangle markers.
+The 3T2R algorithm without nullspace optimization is plotted with dotted lines for each of the 3T3R cases with the same colors.
+Using these initial values for a 3T2R IK with optimization leads to strong nullspace movements quickly converging to a local minimum.
+Therefore the 3T2R case with optimization, plotted as the green line with triangle markers, is shown only for the initial condition from Fig.\,\ref{tab:mdh_industrialrobot}.
 %
 \begin{figure}[tb]
 	\includegraphics{serrob_traj_nullspace_optim.pdf}

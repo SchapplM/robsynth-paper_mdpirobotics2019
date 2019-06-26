@@ -1228,7 +1228,7 @@ To combine the effect of drawing joint positions to their middle with $h_1$ of (
 \begin{equation}
 h_3(\bm{q})
 =
-K_{h1} h_1(\bm{q}) + K_{h2} h_2(\bm{q})
+K_{h_1} h_1(\bm{q}) + K_{h_2} h_2(\bm{q})
 \label{equ:criterion3}
 \end{equation}
 %
@@ -1246,16 +1246,17 @@ In the practical implementation, it has proven to be useful to extend the basic 
 \begin{equation}
 {\Delta}\bm{q}^k
 =
-K_\mathrm{Lim}(\bm{q}) K_\mathrm{Rel}(\bm{q}) (K_\mathrm{T} {\Delta}\bm{q}_{\mathrm{T}}^k + K_\mathrm{N} {\Delta}\bm{q}_{\mathrm{N}}^k),
+K_\mathrm{Lim}(\bm{q}^k) K_\mathrm{Rel}(\bm{q}^k) (K_\mathrm{T} {\Delta}\bm{q}_{\mathrm{T}}^k + K_\mathrm{N} {\Delta}\bm{q}_{\mathrm{N}}^k),
 \label{equ:IK_damping}
 \end{equation}
 %
 where the constant damping coefficients $K_\mathrm{T}$ for ${\Delta}\bm{q}_{\mathrm{T}}^k$ and $K_\mathrm{N}$ for ${\Delta}\bm{q}_{\mathrm{N}}^k$ were introduced to avoid overshooting of the solution for the prize of slower convergence.
 The damping term $K_\mathrm{N}$ has to be chosen according to the optimization criterion.
-Further damping was introduced for the 3T2R case with task redundancy to reduce a ${\Delta}\bm{q}^{k}$ that would lead to overshoot over the joint limits with $K_\mathrm{Lim}(\bm{q})$. %, since the criterion $h_2$ from (\ref{equ:criterion2}) is only meaningfully defined within the joint limits for $q_{i,\mathrm{min}} < q_i < q_{i,\mathrm{max}}$.
+Further damping was introduced for the 3T2R case with task redundancy to reduce a ${\Delta}\bm{q}^{k}$ that would lead to overshoot over the joint limits with $K_\mathrm{Lim}(\bm{q}^k)$. %, since the criterion $h_2$ from (\ref{equ:criterion2}) is only meaningfully defined within the joint limits for $q_{i,\mathrm{min}} < q_i < q_{i,\mathrm{max}}$.
 The value $K_\mathrm{Lim}=1$ is set if no limits would be violated by the increment ${\Delta}\bm{q}^k$.
-The maximum step size for one iteration $\Delta\bm{q}$ was ensured with $K_\mathrm{Rel}(\bm{q})$ to stay below 5\,\% of the joint limit range to prevent leaving the validity of the first-order linearization of (\ref{equ:taylor_phi}).
-For lower increments, $K_\mathrm{Rel}=1$ holds.
+For the 3T3R case, $K_\mathrm{Lim}:=1$ is set permanently, since slowing down when approaching the limits does not change the direction of the increment and violating the limits is inevitable.
+The maximum step size for one iteration $\Delta\bm{q}^k$ was ensured with $K_\mathrm{Rel}(\bm{q}^k)$ to stay below 5\,\% of the joint limit range to prevent leaving the validity of the first-order linearization of (\ref{equ:taylor_phi}).
+For smaller increments, $K_\mathrm{Rel}=1$ holds.
 The damping terms are always applied to the full vector and not to single elements and therefore only change the norm and not the direction of ${\Delta}\bm{q}^k$.
 
 
@@ -1389,30 +1390,32 @@ The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ an
 \label{tab:mdh_industrialrobot}
 \end{figure}
 
-The algorithm from (\ref{equ:nullspace}) was used in the extended version of (\ref{equ:IK_damping}) for both.
+% Einstellungen für diesen Versuch, siehe figures/serrob_traj.m
+The IKP is solved with two settings: Setting the tool axis rotation to different constant values $\beta_3$ with the 3T3R algorithm and solving the IKP only for  desired pointing direction with the 3T2R algorithm.
+The algorithm from (\ref{equ:nullspace}) was used in the extended version of (\ref{equ:IK_damping}) for both cases with different settings caused by the nature of the cases.
+For the 3T3R case, $K_\mathrm{T}=0.7$ was set.
+The terms $K_\mathrm{N}$ and $K_\mathrm{Lim}$ have no effect, since no nullspace movement is possible.
+For the 3T2R case, with $K_{h_1}=0$ and $K_{h_2}=1$ only the hyperbolic limit rejection criterion from (\ref{equ:criterion2}) was used.
+The high values of the gradient of the criterion were reduced with $K_\mathrm{N}=0.002$ to decrease the nullspace movement near the limits.
+The first criterion was not used, since in the trajectory example a temporary exceeding of the limits can not and must not occur.
 
-%Generally, different settings were used for 3T2R and 3T3R tasks and
-
-%
-where constant damping coefficients $K_\mathrm{T}=0.7$ for ${\Delta}\bm{q}_{\mathrm{T}}^k$ and $K_\mathrm{N}=0.002$ for ${\Delta}\bm{q}_{\mathrm{N}}^k$ were introduced to avoid overshooting of the solution for the prize of slower convergence.
-
-The results of the inverse kinematics for different settings are given in Fig.\,\ref{fig:serrob_traj_3T2R}, where the representative joint coordinates $q_1$, $q_2$ and $q_5$ as well as the optimization criterion (\ref{equ:criterion2}) are depicted for the trajectory from Fig.\,\ref{tab:mdh_industrialrobot}.
-The positions are normalized to the joint limits from -1 to 1.
+The results of the inverse kinematics for different settings are given in Fig.\,\ref{fig:serrob_traj_3T2R}, where the representative joint coordinates $q_1$ and $q_5$, the redundant coordinate of the end-effector orientation $\beta_3$, as well as the optimization criterion (\ref{equ:criterion2}) are depicted over time for the trajectory from Fig.\,\ref{tab:mdh_industrialrobot}.
+The positions are normalized to the joint limits from -1 to 1 and the time values are not shown since the results focus on the inverse kinematics only.
 The first three lines represent IKP solutions with a given constant end-effector orientation of $-150^\circ$, $-15^\circ$ and $45^\circ$ and the 3T3R algorithm.
 The 3T2R algorithm without nullspace optimization is plotted with dotted lines for the same starting configurations as the 3T3R case with the same colors.
 The 3T2R case with optimization is plotted as the green line with triangle markers.
 %
 \begin{figure}[tb]
 	\includegraphics{serrob_traj_nullspace_optim.pdf}
-	\caption{Results of the inverse kinematics with different settings for the trajectory of Fig.\,\ref{tab:mdh_industrialrobot}.}
+	\caption{Results over time of the inverse kinematics with different settings for the trajectory of Fig.\,\ref{tab:mdh_industrialrobot}.}
 	\label{fig:serrob_traj_3T2R}
-\end{figure} 
+\end{figure}
 %
 It can be observed, that the optimization of the criterion leads to the best solution of the IKP.
-The 3T3R solution with $\beta_3=-150^\circ$ has a lower (i.\,e. better) value for $h_2$, but this represents an invalid solution, as can be seen for the values for $q_5$, where the black line exceeds the upper limit and leaves the domain of the criterion.
-The line for the criterion for $\beta_3=-15^\circ$ exceeds the limits of the plot.
+%The 3T3R solution with $\beta_3=-150^\circ$ has a lower (i.\,e. better) value for $h_2$, but this represents an invalid solution, as can be seen for the values for $q_5$, where the black line exceeds the upper limit and leaves the domain of the criterion.
+The lines for the criterion for $\beta_3=-150^\circ$ and $\beta_3=-15^\circ$ partly exceed the limits of the plot, indicating that the limit is violated, which can also be seen at the plot for $q_5$.
 This exposes the need for keeping the solution always within the limits by the measures described.
-The 3T2R IK without optimization tends to lower changes in the joint positions than the 3T3R IK, since this corresponds to the solution of the matrix pseudo-inverse in (\ref{equ:nullspace}).
+The 3T2R IK without optimization with dotted lines tends to lower changes in the joint positions than the 3T3R IK, since this corresponds to the solution of the matrix pseudo-inverse in (\ref{equ:nullspace}).
 
 
 \subsection{Resolution of Functional Redundancy of a Parallel Robot in 3T2R tasks}
@@ -1425,7 +1428,7 @@ The 3T2R IK without optimization tends to lower changes in the joint positions t
 %\color{black}
 
 As elaborated in Sec.\,\ref{sec:ZB_PKM} and \ref{sec:ZB_Anwendung}, the solution of the IKP for 3T2R and 3T3R tasks is necessary to solve the problem for parallel robots.
-Therefore the evaluation for parallel robots in this section is preceded by the examples for serial link chains in the previous sections.
+Therefore the trajectory evaluation for a 6UPS parallel robot in this section is preceded by the trajectory example for a serial link chain in the previous section.
 The basic concept is shown for parallel robots at the example of the 6UPS structure following a trajectory.
 This robot belongs to the first class presented in Sec.\,\ref{sec:parrob_classification}, which is primarily addressed in this paper.
 
@@ -1470,6 +1473,10 @@ The second approach only shows peaks at $t=1.5\,\mathrm{s}$ in Fig.\,\ref{fig:pa
 
 \subsection{Statistic Results for the Inverse Kinematics of Serial Link Chains}
 \label{sec:Ergebnisse_IK_Statistik}
+
+Generally, different settings prove to be useful for trajectories and point-to-point movements, since the initial value of the continuous trajectory is always very close to the desired pose of the next trajectory sample.
+
+xxx
 
 To emphasize the generality of the presented approach, the inverse kinematics is solved for a set of 309 serial kinematic chains with six joints.
 This set of six-DoF kinematics is generated by permutations of their Denavit-Hartenberg parameters and is reduced with the isomorphism detection of \cite{RamirezKotOrt2015} to a minimal set, representing all possible six-DoF serial kinematics with full mobility.

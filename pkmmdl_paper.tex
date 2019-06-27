@@ -1393,10 +1393,10 @@ The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ an
 % Einstellungen für diesen Versuch, siehe figures/serrob_traj.m
 The IKP is solved with two settings: Setting the tool axis rotation to different constant values $\beta_3$ with the 3T3R algorithm and solving the IKP only for the  desired pointing direction with the 3T2R algorithm.
 The algorithm from (\ref{equ:nullspace}) was used in the extended version of (\ref{equ:IK_damping}) for both cases with different settings caused by their nature.
-For the 3T3R case, $K_\mathrm{T}=0.7$ was set.
+For the 3T3R case, $K_\mathrm{T}=0.7$ and $K_\mathrm{N}=0.7$ were set.
 The terms $K_\mathrm{N}$ and $K_\mathrm{Lim}$ have no effect, since no nullspace movement is possible.
 For the 3T2R case, with $K_{h_1}=0$ and $K_{h_2}=1$ only the hyperbolic limit rejection criterion from (\ref{equ:criterion2}) was used.
-The high values of the gradient of the criterion were reduced with $K_\mathrm{N}=0.002$ to decrease the nullspace movement near the limits.
+%The high values of the gradient of the criterion were reduced with $K_\mathrm{N}=0.002$ to decrease the nullspace movement near the limits.
 The first criterion was not used, since in the trajectory example the limits are not even temporarily exceeded by principle.
 All IKP algorithms had the same initial value from Fig.\,\ref{tab:mdh_industrialrobot}.
 
@@ -1430,7 +1430,7 @@ The 3T2R IK without optimization with dotted lines tends to lower changes in the
 %\color{black}
 
 As elaborated in Sec.\,\ref{sec:ZB_PKM} and \ref{sec:ZB_Anwendung}, the solution of the IKP for 3T2R and 3T3R tasks is necessary to solve the problem for parallel robots.
-Therefore the trajectory evaluation for a 6UPS parallel robot in this section is preceded by the trajectory example for a serial link chain in the previous section.
+Therefore the trajectory evaluation for a 6UPS parallel robot\footnote{For solving the full IKP, the actuation (such as ``6U\underline{P}S'') does not have to be considered.} in this section is preceded by the trajectory example for a serial link chain in the previous section.
 The basic concept is shown for parallel robots at the example of the 6UPS structure following a trajectory.
 This robot belongs to the first class presented in Sec.\,\ref{sec:parrob_classification}, which is primarily addressed in this paper.
 
@@ -1447,13 +1447,13 @@ This robot belongs to the first class presented in Sec.\,\ref{sec:parrob_classif
 %	\label{tab:data_hexapod}
 %\end{figure}
 
-The robot has a 6-6 structure with symmetric alignment of the universal joint base couplings on a circle with radius $\lVert\bm{r}_{0A_i}\rVert=1\,\mathrm{m}$ and the spherical joint platform couplings on a circle with radius $\lVert\bm{r}_{B_iE}\rVert=0.4\,\mathrm{m}$.
-The initial pose was set to $\bm{x}_\mathrm{t}^\transp=[0,0,0.5\,\mathrm{m}]$ and the initial orientation $\bm{x}_\mathrm{r}$ was set to zero, meaning an alignment of base and platform frame.
+The robot has a Gough-structure \cite{Merlet2006} with symmetric alignment of the universal joint base couplings on a circle with radius $\lVert\bm{r}_{0A_i}\rVert=1\,\mathrm{m}$ and the spherical joint platform couplings on a circle with radius $\lVert\bm{r}_{B_iE}\rVert=0.4\,\mathrm{m}$.
+The initial pose was set to a center position $\bm{x}_\mathrm{t}^\transp=[0,0,0.5\,\mathrm{m}]$ and the initial orientation $\bm{x}_\mathrm{r}$ was set to zero, meaning an alignment of base and platform frame.
 The joint positions for each leg were defined to have the initial values $\bm{q}_i^\transp=[30^\circ,-30^\circ,0.583\,\mathrm{m},0^\circ,30^\circ,60^\circ]$ for the given initial platform pose to avoid switching $\pm\pi$ within the trajectory and to avoid gimbal-lock-singularities.
 The joint limits were set around the resulting zero position to $\pm0.5\,\mathrm{m}$ for the prismatic joint and $\pm60^\circ$ for all single revolute joints representing the universal and spherical joints.
-The values are higher than typical values for real robots to emphasize the effect of the nullspace movement in a bigger workspace of the robot.
-The settings for the IK solver are similar as in Sec.\,\ref{sec:Ergebnisse_Seriell}, since both case regard solving the IKP for a trajectory.
-By further manual tuning, the values $K_\mathrm{N}=0.7$ and $K_\mathrm{Rel}=1$ limiting to 25\,\% of the joint limit range were identified for a good solution of the IKP.
+The values are higher than typical values for real robots to emphasize the effect of the nullspace movement in a bigger simulated workspace of the robot.
+The settings for the IK solver are similar as in Sec.\,\ref{sec:Ergebnisse_Seriell}, since both cases regard solving the IKP for a trajectory.
+%The influence of the nullspace movement was increased with $K_\mathrm{N}=0.7$, since the effect is different for parallel robots
 
 The time evolution of platform pose and optimization criteria is depicted in Fig.\,\ref{fig:parrob_traj_3T2R}.
 The reference trajectory can be seen at the platform position in Fig.\,\ref{fig:parrob_traj_3T2R}\,a and the platform orientation expressed in $X$-$Y$-$Z$-Euler angles ($\beta_1$-$\beta_3$) relative to the base frame in Fig.\,\ref{fig:parrob_traj_3T2R}\,b.

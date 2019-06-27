@@ -370,8 +370,8 @@ save(fullfile(respath, 'serrob_traj_data.mat'), 'T', 'Q_ges', 'Q_opt_ges', 'Q_no
 
 %% Bilder für Paper erzeugen
 % Bilder: 
-% * Gelenkwinkel Achse 1,2,5 als einzelne Bilder; Linien für
-% konstante EE-Winkel, mit/ohne Optimierung
+% * Gelenkwinkel Achse 1,5 als einzelne Bilder; Linien für
+% konstante EE-Winkel, mit/ohne Optimierung; Linien für Zielfunktion
 % * Zielfunktion bester, schlechtester, zu den einzelnen Linien aus den
 % Achs-Bildern (mit gleicher Formatierung)
 % Zusätzlich: Roboter-Bild mit Trajektorie (auch wenn es nicht schön ist;
@@ -413,8 +413,8 @@ for i = 1:2
   leglinhdl = line_format_publication(linhdl, format);
   grid on;
   title(sprintf('$q_%d\\ (\\mathrm{scaled})$', k), 'interpreter', 'latex');
-  xlabel('');
-  xticklabels([]);
+  xlabel('Time in s');
+  % xticklabels([]);
 end
 leghdl = legend(leglinhdl([1:3,4,7]), ...
   {sprintf('$\\beta_3=%1.0f^\\circ$', 180/pi*value_axori(ii_Ausw(1))), ...
@@ -436,8 +436,8 @@ linhdl(7) = plot(T, 180/pi*x_opt_ges(:,6,1));
 line_format_publication(linhdl, format);
 grid on
 title('$\beta_3$ in deg', 'interpreter', 'latex');
-xlabel('');
-xticklabels([]);
+xlabel('Time in s');
+% xticklabels([]);
 
 axhdl(1,4) = subplot(1,4,4);hold on;
 linhdl = NaN(7,1);
@@ -458,16 +458,17 @@ ylim([0.5,7])
 grid on;
 line_format_publication(linhdl, format);
 title('$\mathrm{optimization\ criterion}$', 'interpreter', 'latex');
-xlabel('');
-xticklabels([]);
+xlabel('Time in s');
+% xticklabels([]);
 
 figure_format_publication(axhdl)
 
 set_size_plot_subplot(20,...
-  15.5,6,axhdl,...
-  0.05,0.01,0.18,0.05,... % bl,br,hu,hd,
+  15.5,6.5,axhdl,...
+  0.05,0.01,0.16,0.13,... % bl,br,hu,hd,
   0.05,0) % bdx,bdy)
-set(leghdl, 'position', [0.1    0.92    0.8    0.05], 'orientation', 'horizontal', 'interpreter', 'latex');
+set(leghdl, 'position', [0.1    0.93    0.8    0.05], 'orientation', 'horizontal', 'interpreter', 'latex');
+
 export_fig(20, fullfile(respath, 'serrob_traj_nullspace_optim.pdf'));
 
 

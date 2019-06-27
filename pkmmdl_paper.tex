@@ -1401,15 +1401,15 @@ The first criterion was not used, since in the trajectory example the limits are
 All IKP algorithms had the same initial value from Fig.\,\ref{tab:mdh_industrialrobot}.
 
 The results of the inverse kinematics for different settings are given in Fig.\,\ref{fig:serrob_traj_3T2R}, where the representative joint coordinates $q_1$ and $q_5$, the redundant coordinate of the end-effector orientation $\beta_3$, as well as the optimization criterion (\ref{equ:criterion2}) are depicted over time for the trajectory from Fig.\,\ref{tab:mdh_industrialrobot}.
-The positions are normalized to the joint limits from -1 to 1 and the time values are not shown since the results focus on the inverse kinematics only.
-The first three lines represent IKP solutions with a given constant end-effector orientation of $-150^\circ$, $-15^\circ$ and $45^\circ$ and the 3T3R algorithm.
-The 3T2R algorithm without nullspace optimization is plotted with dotted lines for each of the 3T3R cases with the same colors.
-Using these initial values for a 3T2R IK with optimization leads to strong nullspace movements quickly converging to a local minimum.
+The positions are normalized to the joint limits from -1 to 1.
+The first three lines in Fig.\,\ref{fig:serrob_traj_3T2R} represent IKP solutions with a given constant end-effector orientation $\beta_3$ of $-150^\circ$, $-15^\circ$ and $45^\circ$ and the 3T3R algorithm.
+The 3T2R algorithm without nullspace optimization is plotted with dotted lines for each first sample of the 3T3R cases as initial value with the same colors.
+Using these initial values for a 3T2R IK with optimization leads to strong nullspace movements at the beginning, quickly converging to a local minimum.
 Therefore the 3T2R case with optimization, plotted as the green line with triangle markers, is shown only for the initial condition from Fig.\,\ref{tab:mdh_industrialrobot}.
 %
-\begin{figure}[tb]
+\begin{figure}[b]
 	\includegraphics{serrob_traj_nullspace_optim.pdf}
-	\caption{Results over time of the inverse kinematics with different settings for the trajectory of Fig.\,\ref{tab:mdh_industrialrobot}.}
+	\caption{Results of the inverse kinematics with different settings for the trajectory of Fig.\,\ref{tab:mdh_industrialrobot}.}
 	\label{fig:serrob_traj_3T2R}
 \end{figure}
 %
@@ -1466,7 +1466,7 @@ Since the first approach does not regard the limits of the following legs, the o
 The second approach only shows peaks at $t=1.5\,\mathrm{s}$ in Fig.\,\ref{fig:parrob_traj_3T2R}\,d that result from a joint position getting near to the limit, but not exceeding it.
 
 %
-\begin{figure}[tb]
+\begin{figure}[b]
 	\includegraphics{parrob_traj_results1.pdf}
 	\caption{Results of the inverse kinematics of a 6UPS robot in a 3T2R task. (a) platform positions, (b) platform orientation in Euler angles, (c) optimization criterion $h_1(\bm{{q}})$, (d) optimization criterion $h_2(\bm{{q}})$.}
 	\label{fig:parrob_traj_3T2R}

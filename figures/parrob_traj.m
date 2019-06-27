@@ -17,28 +17,29 @@ export_path = fileparts(which('parrob_traj.m'));
 format1 = {'k', '', '-', 5; ...
            'b', 's', '-', 4; ...
            'r', 'd', '-', 3};
-format2 = {'g', 'o', '-', 2; ...
-           'b', 'v', '-', 4; ...
-           'r', 's', '-', 5; ...
-           'k', '',  '--', 1};
-format3 = {'r', 's', '-', 5; ... % gleiche Farben wie Ende von format2
-           'k', '',  '--', 1};
+format2 = {'b', 'o', '--', 5; ...
+           'b', 'v', '-', 7; ...
+           'r', 's', '--', 5; ...
+           'k', '',  '-', 1};
+format3 = {'r', 's', '--', 7; ... % gleiche Farben wie Ende von format2
+           'k', '',  '-', 1};
 
 figure(30);clf;
 axhdl = NaN(2,2);
+ylhdl = NaN(2,2);
 axhdl(1,1) = subplot(2,2,sprc2no(2,2,1,1));
 linhdl11=plot(data.t, data.X1_ist(:,1:3));
 leglinhdl1 = line_format_publication(linhdl11, format1);
 leg1 = legend(leglinhdl1, {'$x$', '$y$', '$z$'}, 'location', 'northoutside', ...
   'orientation', 'horizontal', 'interpreter', 'latex');
-ylabel('Position in m'); grid on;
+ylhdl(1,1) = ylabel('Position in m'); grid on;
 axhdl(1,2) = subplot(2,2,sprc2no(2,2,1,2)); hold on;
 linhdl21=plot(data.t, 180/pi*data.X1_ist(:,4:6));
 linhdl22=plot(data.t, 180/pi*data.X2_ist(:,6));
 leglinhdl2 = line_format_publication([linhdl21;linhdl22], format2);
-leg2 = legend(leglinhdl2, {'$\beta_1$', '$\beta_2$', '$\beta_3 (IK1)$', '$\beta_3  (IK2)$'}, ...
+leg2 = legend(leglinhdl2, {'$\beta_1$', '$\beta_2$', '$\beta_3$ (ser. IK)', '$\beta_3$  (par.  IK)'}, ...
   'location', 'northoutside', 'orientation', 'horizontal', 'interpreter', 'latex');
-ylabel('Angles in deg'); grid on;
+ylhdl(1,2) = ylabel('Angles in deg'); grid on;
 axhdl(2,1) = subplot(2,2,sprc2no(2,2,2,1)); hold on;
 linhdl31=plot(data.t, data.H11_t(:,1));
 linhdl32=plot(data.t, data.H12_t(:,1));
@@ -46,7 +47,7 @@ leglinhdl3 = line_format_publication([linhdl31;linhdl32], format3);
 leg3 = legend(leglinhdl3, {'ser. IK', 'par. IK'}, ...
   'location', 'northoutside', 'orientation', 'horizontal', 'interpreter', 'latex');
 xlabel('Time in s');
-ylabel('opt. crit. 1'); grid on;
+ylhdl(2,1) = ylabel('opt. crit. 1'); grid on;
 axhdl(2,2) = subplot(2,2,sprc2no(2,2,2,2)); hold on;
 linhdl41=plot(data.t, log10(data.H21_t(:,1)));
 linhdl42=plot(data.t, log10(data.H22_t(:,1)));
@@ -54,10 +55,10 @@ leglinhdl4 = line_format_publication([linhdl41;linhdl42], format3);
 leg4 = legend(leglinhdl4, {'ser. IK', 'par. IK'}, ...
   'location', 'northoutside', 'orientation', 'horizontal', 'interpreter', 'latex');
 xlabel('Time in s');
-ylabel('log(opt. crit. 2)'); grid on;
+ylhdl(2,2) = ylabel('log(opt. crit. 2)'); grid on;
 linkxaxes
 xlim(minmax2(data.t'))
-figure_format_publication(axhdl)
+
 remove_inner_labels(axhdl, 1);
 
 set_size_plot_subplot(30,...
@@ -71,22 +72,32 @@ axes(axhdl(1,1));
 text(X_off+X_slope*(-1.25),Y_off+Y_slope*(-1.4),'(a)');
 [X_off, X_slope] = get_relative_position_in_axes(axhdl(1,2), 'x');
 [Y_off, Y_slope] = get_relative_position_in_axes(axhdl(1,2), 'y');
+ylp=get(ylhdl(1,1), 'Position'); set(ylhdl(1,1), 'position', [X_off+X_slope*(-1.2), ylp(2),0]);
+
 axes(axhdl(1,2));
 text(X_off+X_slope*(-1.3),Y_off+Y_slope*(-1.4),'(b)');
 [X_off, X_slope] = get_relative_position_in_axes(axhdl(2,1), 'x');
 [Y_off, Y_slope] = get_relative_position_in_axes(axhdl(2,1), 'y');
+ylp=get(ylhdl(1,2), 'Position'); set(ylhdl(1,2), 'position', [X_off+X_slope*(-1.2), ylp(2),0]);
+
 axes(axhdl(2,1));
 text(X_off+X_slope*(-1.25),Y_off+Y_slope*(-1.4),'(c)');
 [X_off, X_slope] = get_relative_position_in_axes(axhdl(2,2), 'x');
 [Y_off, Y_slope] = get_relative_position_in_axes(axhdl(2,2), 'y');
+ylp=get(ylhdl(2,1), 'Position'); set(ylhdl(2,1), 'position', [X_off+X_slope*(-1.2), ylp(2),0]);
+
 axes(axhdl(2,2));
 text(X_off+X_slope*(-1.3),Y_off+Y_slope*(-1.4),'(d)');
+ylp=get(ylhdl(2,2), 'Position'); set(ylhdl(2,2), 'position', [X_off+X_slope*(-1.2), ylp(2),0]);
 
-set(leg1, 'position', [0.1    0.92    0.3    0.05]);
-set(leg2, 'position', [0.6    0.92    0.3    0.05]);
-set(leg3, 'position', [0.1    0.50    0.3    0.05]);
-set(leg4, 'position', [0.6    0.50    0.3    0.05]);
-export_fig(20, fullfile(export_path, 'parrob_traj_results1.pdf'));
+set(leg1, 'position', [0.1    0.92    0.3    0.06]);
+set(leg2, 'position', [0.51    0.92    0.4    0.06]);
+set(leg3, 'position', [0.1    0.50    0.3    0.06]);
+set(leg4, 'position', [0.6    0.50    0.3    0.06]);
+
+figure_format_publication(axhdl)
+
+export_fig(30, fullfile(export_path, 'parrob_traj_results1.pdf'));
 
 %% Roboter mit Trajektorie
 serroblib_addtopath({'S6RRPRRR14V3'});

@@ -1431,7 +1431,7 @@ The 3T2R IK without optimization with dotted lines tends to lower changes in the
 
 As elaborated in Sec.\,\ref{sec:ZB_PKM} and \ref{sec:ZB_Anwendung}, the solution of the IKP for 3T2R and 3T3R tasks is necessary to solve the problem for parallel robots.
 Therefore the trajectory evaluation for a 6UPS parallel robot\footnote{For solving the full IKP, the actuation (such as ``6U\underline{P}S'') does not have to be considered.} in this section is preceded by the trajectory example for a serial link chain in the previous section.
-The basic concept is shown for parallel robots at the example of the 6UPS structure following a trajectory.
+%The basic concept is shown for parallel robots at the example of the 6UPS structure following a trajectory.
 This robot belongs to the first class presented in Sec.\,\ref{sec:parrob_classification}, which is primarily addressed in this paper.
 
 %\begin{figure}[tb]
@@ -1457,16 +1457,20 @@ The settings for the IK solver are similar as in Sec.\,\ref{sec:Ergebnisse_Serie
 
 The time evolution of platform pose and optimization criteria is depicted in Fig.\,\ref{fig:parrob_traj_3T2R}.
 The reference trajectory can be seen at the platform position in Fig.\,\ref{fig:parrob_traj_3T2R}\,a and the platform orientation expressed in $X$-$Y$-$Z$-Euler angles ($\beta_1$-$\beta_3$) relative to the base frame in Fig.\,\ref{fig:parrob_traj_3T2R}\,b.
-The IKP is solved using two different methods: Only solving the IKP for the legs separately, called ``ser. IK'' and ``IK\,1'' in Fig.\,\ref{fig:parrob_traj_3T2R} and solving the IKP for all legs together, called ``par. IK'' and ``IK\,2'' in Fig.\,\ref{fig:parrob_traj_3T2R}.
-Both methods perform an optimization with $h_2$ of (\ref{equ:criterion2}).
+The IKP is solved using two different methods: Only solving the IKP for the legs separately, called ``ser. IK'' in Fig.\,\ref{fig:parrob_traj_3T2R} and solving the IKP for all legs together, called ``par. IK'' in Fig.\,\ref{fig:parrob_traj_3T2R}.
+Both methods perform an optimization with only $h_2$ of (\ref{equ:criterion2}), as justified in Sec.\,\ref{sec:Ergebnisse_Seriell}.
 The first approach only performs this optimization according to Sec.\,\ref{sec:REW_seriell} for the first leg using the 3T2R method and then solves the IKP for all other legs with the 3T3R method.
 The second approach uses the optimization for all legs together according to the 3T2R method from Sec.\,\ref{sec:ZB_PKM}.
-This results in improved values for the performance criteria depicted in Fig.\,\ref{fig:parrob_traj_3T2R}\,c and Fig.\,\ref{fig:parrob_traj_3T2R}\,d.
+This results in improved values for the performance criteria depicted for $h_1$ in Fig.\,\ref{fig:parrob_traj_3T2R}\,c and for $h_2$ in a logarithmic scale in Fig.\,\ref{fig:parrob_traj_3T2R}\,d.
 Since the first approach does not regard the limits of the following legs, the optimization criterion gives high values indicating many joint limit violations.
 The second approach only shows peaks at $t=1.5\,\mathrm{s}$ in Fig.\,\ref{fig:parrob_traj_3T2R}\,d that result from a joint position getting near to the limit, but not exceeding it.
+For the practical implementation, the computation time is only weakly influenced by the selection of the method, since calculating the pseudo-inverse for $5 \times 6$ or $35 \times 36$ matrices does not present a challenge for current computing hardware.
+Therefore the ``par. IK''-method should be preferred.
+%Reaching the limits at $t=1.5\,\mathrm{s}$ leads to strong nullspace movements which also cause discontinuities in the plot for $\beta_3$, which can be encountered by additional velocity limitations.
 
 %
 \begin{figure}[b]
+	\vspace{-0.5cm} % Näher von unten an Fußnote heranrücken.
 	\includegraphics{parrob_traj_results1.pdf}
 	\caption{Results of the inverse kinematics of a 6UPS robot in a 3T2R task. (a) platform positions, (b) platform orientation in Euler angles, (c) optimization criterion $h_1(\bm{{q}})$, (d) optimization criterion $h_2(\bm{{q}})$.}
 	\label{fig:parrob_traj_3T2R}

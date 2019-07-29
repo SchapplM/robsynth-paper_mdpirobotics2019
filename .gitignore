@@ -25,6 +25,7 @@ pkmmdl_paper_greyscale.pdf
 *.synctex
 *.synctex.gz
 *.toc
+*.soc
 *.idx
 *.pdfsync
 *~

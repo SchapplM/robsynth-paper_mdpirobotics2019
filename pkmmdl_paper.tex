@@ -1372,7 +1372,8 @@ The results are generalized by the statistical analysis of random point-to-point
 
 The first evaluation of the inverse kinematics algorithm from Sec.\,\ref{sec:ZB_Anwendung_IK_grad} is performed with simulations at the basic example of a six-DoF industrial robot with a rectangular trajectory.
 The manipulator Fanuc M-710 iC/50 was taken from the example of \cite{HuoBar2008} with the tabulated kinematics parameters and a sketch of the trajectory in Fig.\,\ref{tab:mdh_industrialrobot}.
-Deviations in the parameters relative to \cite{HuoBar2008} result from the use of the \emph{modified} Denavit-Hartenberg\footnote{The four DH parameters contain the minimal set of kinematic parameters for single joint transformations which correspond to distances and angle offsets between joint axes.} notation for the joint transformation according to \textsc{Khalil} and the use of only positive $\alpha_i$ parameters for axis alignment for consistency with the results of the structural synthesis from \cite{RamirezKotOrt2015}.
+Deviations in the parameters relative to \cite{HuoBar2008} result from the use of the \emph{modified} \todo[color=blue!40]{DH footnote removed} Denavit-Hartenberg notation \replaced[id=Sp]{from \cite{BriotKha2015} for the joint transformations}{for the joint transformation according to \textsc{Khalil}} and the use of only positive \todo[color=green!40]{Language} \replaced[id=Sp]{axis alignment parameters $\alpha_i$}{$\alpha_i$ parameters for axis alignment}
+ for consistency with the results of the structural synthesis from \cite{RamirezKotOrt2015}.
 The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ and a desired alignment of the $z$-axis pointing into the ground plane.
 
 \begin{figure}[tb]

@@ -377,7 +377,7 @@ The coordinates
 \label{equ:x_def}
 \end{equation}
 %
-of the end-effector platform describe the position and orientation of the end-effector frame  $\ks{D}$ with respect to the base frame $\ks{0}$.
+of the end-effector platform describe the position and orientation of the end-effector frame $\ks{D}$ with respect to the base frame $\ks{0}$.
 In the equations, this is marked with left subscript ``$(0)$'' for vectors and left superscript ``$0$'' for rotation matrices.
 The platform-related end-effector frame is the desired frame in the inverse kinematics problem and is therefore abbreviated with ``D''.
 The position 
@@ -388,7 +388,7 @@ The position
 \ortvek{0}{r}{}{D}
 \in {\mathbb{R}}^{3}
 \label{equ:xt_def}
-\end{equation}  
+\end{equation}
 %
 is defined as the origin of the platform frame and the rotation matrix
 %
@@ -405,7 +405,7 @@ of the platform frame is expressed with Euler angles
 \bm{x}_{\mathrm{r}}
 =
 \begin{bmatrix}
-\beta_1  & \beta_2 & \beta_3
+\beta_1 & \beta_2 & \beta_3
 \end{bmatrix}^{\mathrm{T}}
 =:
 \bm{\beta}
@@ -441,7 +441,7 @@ The vector
 \label{equ:vec_AB}
 \end{equation}
 %
-includes the term $\rotmat{0}{D}(\bm{x}_{\mathrm{r}})$ that depends on the full  orientation $\bm{x}_{\mathrm{r}}$ of the end-effector.
+includes the term $\rotmat{0}{D}(\bm{x}_{\mathrm{r}})$ that depends on the full orientation $\bm{x}_{\mathrm{r}}$ of the end-effector.
 % with the rotation about the tool axis in 3T2R tasks.
 %
 For the bigger part of existing parallel robots, the passive joint coordinates can be eliminated analytically from the equations (\ref{equ:kinconstrAB}), e.\,g. by using the Euclidian distance for U\underline{P}S or R\underline{P}R leg chains or via trigonometry for \underline{R}RR-chains.
@@ -470,7 +470,7 @@ The differential kinematics of the PKM is calculated with the time derivative
 \begin{equation}
 \frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\Phi}(\bm{q}_\mathrm{a},\bm{x})
 =
-\bm{\Phi}_{\partial \bm{q}_\mathrm{a}}  \dot{\bm{q}}_\mathrm{a}
+\bm{\Phi}_{\partial \bm{q}_\mathrm{a}} \dot{\bm{q}}_\mathrm{a}
 +
 \bm{\Phi}_{\partial \bm{x}} \dot{\bm{x}}
 =
@@ -487,13 +487,13 @@ The inverse-kinematics matrix\footnote{We follow the argumentation from \cite{Go
 \frac{\partial \bm{\Phi}}{\partial \bm{q}_{\mathrm{a}}}
 =
 \begin{bmatrix}
-\Phi_{1,\partial \bm{q}_{1,\mathrm{a}}}  & 0 & 0 & 0\\
-0 & \Phi_{2,\partial \bm{q}_{2,\mathrm{a}}} & \ddots & 0  \\
-0 & \ddots & \ddots & 0  \\
+\Phi_{1,\partial \bm{q}_{1,\mathrm{a}}} & 0 & 0 & 0\\
+0 & \Phi_{2,\partial \bm{q}_{2,\mathrm{a}}} & \ddots & 0 \\
+0 & \ddots & \ddots & 0 \\
 0 & 0 & 0 & \Phi_{m,\partial \bm{q}_{m,\mathrm{a}}}
 \end{bmatrix}
 \label{equ:PKM_phi_grad_q}
-\end{equation}  
+\end{equation}
 %
 of this model has diagonal form and the direct-kinematics matrix
 %
@@ -518,7 +518,7 @@ This definition of the constraints has the following drawbacks:
     \item If more than three joint coordinates per leg influence the coupling point position $B_i$, the three kinematic constraints per joint in (\ref{equ:kinconstrAB}) are not sufficient to generate enough equations for the matrix of (\ref{equ:PKM_phi_grad_q}) to become invertible.
     % \color{gray}Projection-based methods for the derivation of the dynamics \cite{Merlet2006,BriotKha2015,AbdellatifHei2009,DoThanhKotHeiOrt2009b} underly the same restrictions.\color{black}
     The velocity-based theory of linear transformations used by \cite{Gogu2008} allows to determine the mobility of arbitrary parallel robots.
-    The linear transformation is generalized in \cite{HuangLiuChe2011} to  accuracy and stiffness modeling by means of screw theory resulting in the ``generalized Jacobian''.
+    The linear transformation is generalized in \cite{HuangLiuChe2011} to accuracy and stiffness modeling by means of screw theory resulting in the ``generalized Jacobian''.
     Both concepts do not provide a direct appliance to solve the IKP, since this requires a formulation of the orientation at position level, not velocity level.
     \item Exploiting the reduction of end-effector coordinates for 3T2R tasks is not possible, since all end-effector coordinates are included in (\ref{equ:vec_AB}).
 \end{enumerate}
@@ -562,7 +562,7 @@ To take the rotational symmetry around the tool axis in 3T2R tasks into account,
 \bm{\eta}_{\mathrm{r}}^\transp
 \end{bmatrix}^\transp
 \in {\mathbb{R}}^{5}
-\end{equation}  
+\end{equation}
 %
 has to be defined.
 %
@@ -576,7 +576,7 @@ The translational part
 =
 \ortvek{0}{r}{}{D}
 \in {\mathbb{R}}^{3}
-\end{equation}  
+\end{equation}
 %
 remains unchanged relative to the operational space coordinates $\bm{x}$.
 The rotational part
@@ -585,12 +585,12 @@ The rotational part
 \bm{\eta}_{\mathrm{r}}
 =
 \begin{bmatrix}
-\beta_1  & \beta_2
+\beta_1 & \beta_2
 \end{bmatrix}^\transp
 =
 \underbrace{\begin{bmatrix}
-    1 & 0 & 0  \\ 
-    0 & 1 & 0    \end{bmatrix}}_{=\bm{P}_{\bm{\eta}_\mathrm{r}}}
+    1 & 0 & 0 \\ 
+    0 & 1 & 0 \end{bmatrix}}_{=\bm{P}_{\bm{\eta}_\mathrm{r}}}
 \bm{x}_{\mathrm{r}}
 \in {\mathbb{R}}^{2}
 \label{equ:etar_def}
@@ -649,7 +649,7 @@ have to be considered, including the rotational part
 \bm{\Phi}_{\mathrm{r},i}(\bm{q}_i,\bm{x})
 =
 \begin{bmatrix}
-\alpha_1  & \alpha_2 & \alpha_3
+\alpha_1 & \alpha_2 & \alpha_3
 \end{bmatrix}^\transp
 =
 \bm{\alpha}\left(\rotmat{D}{E}(\bm{x}_{\mathrm{r}},\bm{q}_i)\right)
@@ -666,7 +666,7 @@ For 3T3R tasks, only Fig.\,\ref{fig:pkm_constr_rot_lead}\,(c) represents a valid
 The goal of eliminating the tool rotation $\beta_3$ from the equations is not achieved yet, since all three components of the platform orientation $\bm{x}_\mathrm{r}$ affect the rotation matrix $\rotmat{0}{D}$. This can be addessed by the selection of the Euler angles:
 Similar to the definition of the rotational operational space coordinates $\bm{x}_\mathrm{r}$ in (\ref{equ:xr_def}), the constraints $\bm{\Phi}_{\mathrm{r},i}$ are also expressed with a set of Euler angles $\bm{\alpha}$.
 In the following, ``$\bm{\alpha}$'' will always refer to the rotation error/residual and ``$\bm{\beta}$'' to an orientation relative to the base frame.
-The Euler angle convention of $\bm{\alpha}$ can be chosen independently of the choice for the orientation representation in  $\bm{\beta}$.
+The Euler angle convention of $\bm{\alpha}$ can be chosen independently of the choice for the orientation representation in $\bm{\beta}$.
 The intuitive approach of choosing
 %
 \begin{equation}
@@ -700,11 +700,11 @@ The new, reduced rotational part of the kinematic constraints
 \begin{equation}
 \bm{\Psi}_{\mathrm{r},i}(\bm{q}_i,\bm{\eta}) = 
 \begin{bmatrix}
-\alpha_2  & \alpha_3
+\alpha_2 & \alpha_3
 \end{bmatrix}^\transp
 =
 \overbrace{\begin{bmatrix}
-    0 & 1 & 0  \\ 
+    0 & 1 & 0 \\ 
     0 & 0 & 1
     \end{bmatrix}}^{=\bm{P}_{\bm{\Psi}_\mathrm{r}}}
 \bm{\Phi}_{\mathrm{r},i} (\bm{q}_i,\bm{x})
@@ -839,12 +839,12 @@ For the 6U\underline{P}S structure this would result in a 10-dimensional constra
 %\color{black}
 
 
-To be able to compute the differential kinematics of the constraints $\bm{\Phi}$ (\ref{equ:constr_Phi_PKM}) and  $\bm{\Psi}$ (\ref{equ:constr_Psi_PKM}) to
+To be able to compute the differential kinematics of the constraints $\bm{\Phi}$ (\ref{equ:constr_Phi_PKM}) and $\bm{\Psi}$ (\ref{equ:constr_Psi_PKM}) to
 %
 \begin{equation}
 \frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\Phi}(\bm{q},\bm{x})
 =
-\bm{\Phi}_{\partial \bm{q}}  \dot{\bm{q}}
+\bm{\Phi}_{\partial \bm{q}} \dot{\bm{q}}
 +
 \bm{\Phi}_{\partial \bm{x}} \dot{\bm{x}}
 =
@@ -854,7 +854,7 @@ To be able to compute the differential kinematics of the constraints $\bm{\Phi}$
 \quad
 \frac{\mathrm{d}}{{\mathrm{d}}t} \bm{\Psi}(\bm{q},\bm{\eta})
 =
-\bm{\Psi}_{\partial \bm{q}}  \dot{\bm{q}}
+\bm{\Psi}_{\partial \bm{q}} \dot{\bm{q}}
 +
 \bm{\Psi}_{\partial \bm{\eta}} \dot{\bm{\eta}}
 =
@@ -870,9 +870,9 @@ the full geometric matrices of inverse kinematics
 %\frac{\partial \bm{\Phi}}{\partial \bm{q}}
 =
 \begin{bmatrix}
-\bm{\Phi}_{1,\partial\bm{q}_1}  & \bm{0} & \bm{0} & \bm{0}\\
-\bm{0} & \bm{\Phi}_{2,\partial\bm{q}_2} & \ddots & \bm{0}  \\
-\vdots & \ddots & \ddots & \bm{0}  \\
+\bm{\Phi}_{1,\partial\bm{q}_1} & \bm{0} & \bm{0} & \bm{0}\\
+\bm{0} & \bm{\Phi}_{2,\partial\bm{q}_2} & \ddots & \bm{0} \\
+\vdots & \ddots & \ddots & \bm{0} \\
 \bm{0} & \bm{0} & \bm{0} &\bm{\Phi}_{m,\partial\bm{q}_m}
 \end{bmatrix}
 \quad
@@ -881,9 +881,9 @@ the full geometric matrices of inverse kinematics
 \bm{\Psi}_{\partial \bm{q}}(\bm{q},\bm{\eta})
 =
 \begin{bmatrix}
-\bm{\Psi}_{1,\partial\bm{q}_1}  & \bm{0} & \bm{0} & \bm{0}\\
-\bm{\Phi}_{2,\partial\bm{q}_1} & \bm{\Phi}_{2,\partial\bm{q}_2} & \ddots & \bm{0}  \\
-\vdots & \ddots & \ddots & \bm{0}  \\
+\bm{\Psi}_{1,\partial\bm{q}_1} & \bm{0} & \bm{0} & \bm{0}\\
+\bm{\Phi}_{2,\partial\bm{q}_1} & \bm{\Phi}_{2,\partial\bm{q}_2} & \ddots & \bm{0} \\
+\vdots & \ddots & \ddots & \bm{0} \\
 \bm{\Phi}_{m,\partial\bm{q}_1} & \bm{0} & \bm{0} &\bm{\Phi}_{m,\partial\bm{q}_m}
 \end{bmatrix}
 \label{equ:PhiPsi_grad_q_complete}
@@ -985,7 +985,7 @@ which is then expanded with the chain rule for differentiation and the stack ope
 \end{equation}
 %
 The two first partial derivatives from (\ref{equ:grad_Phi_1_q}) are sparse matrices and can be calculated efficiently as shown in appendix \ref{sec:appendix_gradient_matrix}.
-The factor ``I'' contains (\ref{equ:alpha_xyz_diff_R}) with $\overline{\bm{R}}=\rotmato{D}{E}(\bm{x}_{\mathrm{r}},\bm{q}_1)$  and the factor ``II'' is (\ref{equ:diff_prod_mat2}) with the contents of $\rotmato{0}{D}^\transp(\bm{x}_{\mathrm{r}})$.
+The factor ``I'' contains (\ref{equ:alpha_xyz_diff_R}) with $\overline{\bm{R}}=\rotmato{D}{E}(\bm{x}_{\mathrm{r}},\bm{q}_1)$ and the factor ``II'' is (\ref{equ:diff_prod_mat2}) with the contents of $\rotmato{0}{D}^\transp(\bm{x}_{\mathrm{r}})$.
 The last partial derivative ``III'' can be derived with computer algebra systems from the analytic expression of the rotation matrix $\rotmat{0}{E}(\bm{q}_1)$.
 The leading legs constraint gradient matrix w.\,r\,t. the platform coordinates can be expanded in the same manner into
 %
@@ -1050,7 +1050,7 @@ the permutation matrix for transposition from (\ref{equ:transposition_operator})
 \subsection{Constraint Gradients for the Following Leg in the 3T2R Case}
 
 As explained regarding (\ref{equ:constr_Phi_PKM}), the constraints (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) and their gradients (\ref{equ:grad_Phi_1_q}) and (\ref{equ:grad_Phi_1_x}) are used for all legs in the 3T3R case and the leading leg in the 3T2R case.
-For the following legs in the 3T2R case, the gradients $\bm{\Phi}_{j,\partial\bm{q}_1}$, $\bm{\Phi}_{j,\partial\bm{q}_j}$ and $\bm{\Phi}_{j,\partial\bm{x}}$ with $j=2,...,m$ from the right part of  (\ref{equ:PhiPsi_grad_q_complete}) and (\ref{equ:PhiPsi_grad_x_complete}) have to be calculated in a similar way. 
+For the following legs in the 3T2R case, the gradients $\bm{\Phi}_{j,\partial\bm{q}_1}$, $\bm{\Phi}_{j,\partial\bm{q}_j}$ and $\bm{\Phi}_{j,\partial\bm{x}}$ with $j=2,...,m$ from the right part of (\ref{equ:PhiPsi_grad_q_complete}) and (\ref{equ:PhiPsi_grad_x_complete}) have to be calculated in a similar way. 
 Due to the abscence of the platform orientation in (\ref{equ:Phir_def_j}), (\ref{equ:Phi_1_grad_x}) simplifies for the following leg to 
 %
 \vspace{-0.1cm}
@@ -1070,7 +1070,7 @@ The gradient w.\,r.\,t. the joint coordinates of the following leg contains agai
 &=
 \frac{\partial}{\partial \bm{q}_j} \bm{\alpha}\left(\rotmat{0}{L}^\transp(\bm{q}_1) \rotmat{0}{E}(\bm{q}_j)\right)
 =
-\frac{\partial}{\partial \bm{q}_j} \bm{\alpha}\left(\overline{\prod}\left( \rotmato{0}{L}^\transp(\bm{q}_1), \rotmato{0}{E}(\bm{q}_j)\right)\right)  \label{equ:grad_Phi_j_qj}\\
+\frac{\partial}{\partial \bm{q}_j} \bm{\alpha}\left(\overline{\prod}\left( \rotmato{0}{L}^\transp(\bm{q}_1), \rotmato{0}{E}(\bm{q}_j)\right)\right) \label{equ:grad_Phi_j_qj}\\
 &=
 %underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des rechten Terms
 % Term I
@@ -1103,7 +1103,8 @@ The gradient w.\,r.\,t. the joint coordinates of the leading leg
 &=
 \frac{\partial}{\partial \bm{q}_1} \bm{\alpha}\left(\left(\rotmat{0}{E}^\transp(\bm{q}_j) \rotmat{0}{L}(\bm{q}_1) \right)^\transp \right)
 =
-\frac{\partial}{\partial \bm{q}_1} \bm{\alpha}\left(\bm{P}_{\mathrm{T}}\overline{\prod}\left( \rotmato{0}{E}^\transp(\bm{q}_j) \rotmato{0}{L}(\bm{q}_1)\right)\right)  \label{equ:grad_Phi_j_q1}\\
+\frac{\partial}{\partial \bm{q}_1} \bm{\alpha}\left(\bm{P}_{\mathrm{T}}\overline{\prod}\left( \rotmato{0}{E}^\transp(\bm{q}_j) \rotmato{0}{L}(\bm{q}_1)\right)\right)
+\label{equ:grad_Phi_j_q1}\\
 &=
 %underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des dritten Terms
 % Term I
@@ -1182,7 +1183,7 @@ This redundancy can be exploited by using the nullspace (``N'') projection ${\De
 =
 {\Delta}\bm{q}_{\mathrm{T}}^k + {\Delta}\bm{q}_{\mathrm{N}}^k
 =
--\bm{\Psi}_{\partial\bm{q}}^{\dagger} \bm{\Psi} +  (\bm{1}-\bm{\Psi}_{\partial\bm{q}}^{\dagger}\bm{\Psi}_{\partial\bm{q}}) h_{\partial\bm{q}}
+-\bm{\Psi}_{\partial\bm{q}}^{\dagger} \bm{\Psi} + (\bm{1}-\bm{\Psi}_{\partial\bm{q}}^{\dagger}\bm{\Psi}_{\partial\bm{q}}) h_{\partial\bm{q}}
 \label{equ:nullspace}
 \end{equation}
 %
@@ -1370,15 +1371,15 @@ The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ an
 		\begin{tabular}[t]{|c|c|c|c|c|c|c|}
 			\hline
 %			$i$ & $\mathrm{R}_x(\alpha_i$) & $\mathrm{T}_x(d_i)$ & $\mathrm{R}_z(\theta_i)$ & $\mathrm{T}_z(r_i)$ & $q_{i,\mathrm{min}}$ &  $q_{i,\mathrm{max}}$ \\
-			$i$ & $\alpha_i$ & $d_i$ & $\theta_i$ & $r_i$ & $q_{i,\mathrm{min}}$ &  $q_{i,\mathrm{max}}$ \\
-			& $\mathrm{R}_x$ & $\mathrm{T}_x$ & $\mathrm{R}_z$ & $\mathrm{T}_z$ & &   \\
+			$i$ & $\alpha_i$ & $d_i$ & $\theta_i$ & $r_i$ & $q_{i,\mathrm{min}}$ & $q_{i,\mathrm{max}}$ \\
+			& $\mathrm{R}_x$ & $\mathrm{T}_x$ & $\mathrm{R}_z$ & $\mathrm{T}_z$ & & \\
 			\hline
 			$1$ & $0$ & $0$ & $q_1$ & $0$ & $-180^\circ$ & $180^\circ$ \\
 			$2$ & $90^\circ$ & 150\,mm & $q_2$ & $0$ & $30^\circ$ & $165^\circ$ \\
 			$3$ & $0$ & 870\,mm & $q_3$ & $0$ & $-132^\circ$ & $230^\circ$ \\
 			$4$ & $90^\circ$ & 170\,mm & $q_4$ & 1016\,mm & $-360^\circ$ & $360^\circ$ \\
 			$5$ & $90^\circ$ & $0$ & $q_5$ & $0$ & $-125^\circ$ & $125^\circ$ \\
-			$6$ & $90^\circ$ & $0$ & $q_6$ &  -175\,mm & $-360^\circ$ & $360^\circ$ \\
+			$6$ & $90^\circ$ & $0$ & $q_6$ & -175\,mm & $-360^\circ$ & $360^\circ$ \\
 			\hline
 		\end{tabular}
     \begin{minipage}[t]{7.5cm}
@@ -1392,7 +1393,7 @@ The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ an
 \end{figure}
 
 % Einstellungen für diesen Versuch, siehe figures/serrob_traj.m
-The IKP is solved with two settings: Setting the tool axis rotation to different constant values $\beta_3$ with the 3T3R algorithm and solving the IKP only for the  desired pointing direction with the 3T2R algorithm.
+The IKP is solved with two settings: Setting the tool axis rotation to different constant values $\beta_3$ with the 3T3R algorithm and solving the IKP only for the desired pointing direction with the 3T2R algorithm.
 The algorithm from (\ref{equ:nullspace}) was used in the extended version of (\ref{equ:IK_damping}) for both cases with different settings caused by their nature.
 For the 3T3R case, $K_\mathrm{T}=0.7$ and $K_\mathrm{N}=0.7$ were set.
 The terms $K_\mathrm{N}$ and $K_\mathrm{Lim}$ have no effect, since no nullspace movement is possible.
@@ -1663,7 +1664,7 @@ as introduced in (\ref{equ:def_rmat_xyz}).
 With an additional rotation $-\delta$ around the $z$-axis for the desired orientation, the resulting new Euler angles $\bm{\beta}'$ are
 %
 \begin{equation}
-\beta_1'=\beta_1,  \quad \beta_2'=\beta_2,  \quad \beta_3'=\beta_3-\delta.
+\beta_1'=\beta_1, \quad \beta_2'=\beta_2, \quad \beta_3'=\beta_3-\delta.
 \end{equation}
 %
 The additional rotation corresponds to the tool axis defined in Sec.\,\ref{sec:REW_seriell} % and does not influence 3T2R tasks.
@@ -1701,13 +1702,13 @@ and as a $Z$-$Y$-$X$-Euler angle representation\footnote{Utilizing the sign-awar
 % Quelle: equations/alpha1.txt (aus ikfr_paper_equations.mw)
 \begin{align}
     \bm{\alpha}
-	=
-	\begin{bmatrix}
-	\alpha_1 \\
-	\alpha_2 \\
-	\alpha_3
+    =
+    \begin{bmatrix}
+    \alpha_1 \\
+    \alpha_2 \\
+    \alpha_3
     \end{bmatrix}
-	=
+    =
     \begin{bmatrix}
         \arctantwo \left( {n_y} , { n_x} \right) \\ 
         \arctantwo \left( -{n_z} , \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\ 
@@ -1728,7 +1729,7 @@ The second residual corresponding to $\bm{\beta}'$ only differs regarding the ad
     {n'_z}&{o'_z}&{a'_z} \\ 
     \end{bmatrix}
     = 
-    \left[ \begin {array}{ccc} { C_{\delta}}\,{n_x}-{ S_{\delta}}\,{ n_y}&{ C_{\delta}}\,{o_x}-{ S_{\delta}}\,{o_y}&{ C_{\delta}}\,{ a_x}-{ S_{\delta}}\,{a_y}\\ \noalign{\medskip}{ C_{\delta}}\,{n_y}+ { S_{\delta}}\,{n_x}&{ C_{\delta}}\,{o_y}+{ S_{\delta}}\,{o_x}&{  C_{\delta}}\,{a_y}+{ S_{\delta}}\,{a_x}\\ \noalign{\medskip}{ n_z}&{o_z}&{a_z}\end {array} \right], \nonumber
+    \left[ \begin {array}{ccc} { C_{\delta}}\,{n_x}-{ S_{\delta}}\,{ n_y}&{ C_{\delta}}\,{o_x}-{ S_{\delta}}\,{o_y}&{ C_{\delta}}\,{ a_x}-{ S_{\delta}}\,{a_y}\\ \noalign{\medskip}{ C_{\delta}}\,{n_y}+ { S_{\delta}}\,{n_x}&{ C_{\delta}}\,{o_y}+{ S_{\delta}}\,{o_x}&{ C_{\delta}}\,{a_y}+{ S_{\delta}}\,{a_x}\\ \noalign{\medskip}{ n_z}&{o_z}&{a_z}\end {array} \right], \nonumber
 \end{align}
 %
 where $C_{\delta}=\mathrm{cos}(\delta)$ and $S_{\delta}=\mathrm{sin}(\delta)$.
@@ -1751,13 +1752,13 @@ The $Z$-$Y$-$X$-Euler angles from this rotation matrix are
 \end{bmatrix}
 =
 \begin{bmatrix}
-\arctantwo \left( ({  C_{\delta}}\,{n_y}+{ S_{\delta}}\,{n_x}) , ({ C_{\delta}}\,{n_x}-{  S_{\delta}}\,{n_y}) \right) \\
+\arctantwo \left( ({ C_{\delta}}\,{n_y}+{ S_{\delta}}\,{n_x}) , ({ C_{\delta}}\,{n_x}-{ S_{\delta}}\,{n_y}) \right) \\
 \arctantwo \left( -{n_z} , \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\
 \arctantwo \left( {o_z} , {a_z} \right)
 \end{bmatrix},
 \end{equation}
 %
-where $\delta$  only influences the first component $\alpha_1'$.
+where $\delta$ only influences the first component $\alpha_1'$.
 This allows the conclusion, that $\beta_3$ only influences $\alpha_1$ and results in the dependencies
 %
 \begin{align}
@@ -2019,7 +2020,7 @@ The gradient of the matrix product (\ref{equ:matprod}) w.r.t. the second factor 
 \begin{bmatrix}
 \bm{R}_1 & \bm{0} & \bm{0} \\
 \bm{0} & \bm{R}_1 & \bm{0} \\
-\bm{0} & \bm{0} & \bm{R}_1  \\
+\bm{0} & \bm{0} & \bm{R}_1 \\
 \end{bmatrix}
 \label{equ:diff_prod_mat2}
 \end{equation}

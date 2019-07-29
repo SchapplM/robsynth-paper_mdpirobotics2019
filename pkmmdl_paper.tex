@@ -63,6 +63,15 @@
 %=================================================================
 % Add packages and commands here. The following packages are loaded in our class file: fontenc, calc, indentfirst, fancyhdr, graphicx, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, amsthm, hyphenat, natbib, hyperref, footmisc, geometry, caption, url, mdframed, tabto, soul, multirow, microtype, tikz
 \graphicspath{{./figures/}}
+\usepackage{todonotes}
+% Markup package
+\usepackage[deletedmarkup=xout,authormarkup=none]{changes}
+\setremarkmarkup{\emph{(#1: #2)}}
+\colorlet{sp}{red!80!black}
+%\setremarkmarkup{\emph{\color{lg!70!white}\small(#1: #2)}}
+\definechangesauthor[color=sp]{Sp}
+
+
 \usepackage{calrsfs} % Für Kalligraphie-F 
 \newcommand{\bm}[1]{\boldsymbol{#1}}
 % Latex-Makros für häufig verwendete Formelzeichen
@@ -251,7 +260,7 @@ Nevertheless, each of the classes has inherent disadvantages:
 In tasks like milling with high process forces and requirements on stiffness and precision, robots from class II with one constraining leg have the drawback, that the passive leg takes the complete reaction wrench in the blocked rotational degree of freedom, which strongly affects the mechanisms stiffness in this direction \cite{ZhangGos2001}.
 The same is argued by \cite{LinLiYanZha2013} at the example of the Metrom machine tool, but can be extended to all the members of class III, where most leg chains have six DoF and usually only one leg chain has five DoF.
 This leg chain also has to take the reaction moments in the blocked DoF which affects the overall stiffness.
-Therefore members of the classes I and IV can be expected to reach a higher stiffness.
+\todo[color=green!40]{Language}Therefore\added[id=Sp]{,} members of the classes I and IV can be expected to reach a higher stiffness.
 Mechanisms of the class IV may further suffer from an increased sensitivity of manufacturing tolerances, which may cause a high pretension of the bearings or even reduce the DoF, since the five DoF of all leg chains have to coincide exactly to allow the platform to also have five DoF.
 Additionally, only members of class I provide redundancy which allows to use the additional DoF for performance optimizations e.\,g. to avoid singularities and to compensate the smaller workspace caused by the sixth leg.
 
@@ -663,7 +672,8 @@ The constraints again contain the deviation between the desired end-effector fra
 Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b) and (c) show cases, where the translational constraints are met, but the rotational constraints have different values.
 For 3T3R tasks, only Fig.\,\ref{fig:pkm_constr_rot_lead}\,(c) represents a valid solution of the inverse kinematics. For 3T2R tasks, Fig.\,\ref{fig:pkm_constr_rot_lead}\,(b) and (c) represent valid solutions.
 
-The goal of eliminating the tool rotation $\beta_3$ from the equations is not achieved yet, since all three components of the platform orientation $\bm{x}_\mathrm{r}$ affect the rotation matrix $\rotmat{0}{D}$. This can be addessed by the selection of the Euler angles:
+The goal of eliminating the tool rotation $\beta_3$ from the equations is not achieved yet, since all three components of the platform orientation $\bm{x}_\mathrm{r}$ affect the rotation matrix $\rotmat{0}{D}$.
+This can be \todo[color=green!40]{Language}\replaced[id=Sp]{addressed}{addessed} by the selection of the Euler angles:
 Similar to the definition of the rotational operational space coordinates $\bm{x}_\mathrm{r}$ in (\ref{equ:xr_def}), the constraints $\bm{\Phi}_{\mathrm{r},i}$ are also expressed with a set of Euler angles $\bm{\alpha}$.
 In the following, ``$\bm{\alpha}$'' will always refer to the rotation error/residual and ``$\bm{\beta}$'' to an orientation relative to the base frame.
 The Euler angle convention of $\bm{\alpha}$ can be chosen independently of the choice for the orientation representation in $\bm{\beta}$.
@@ -682,7 +692,7 @@ The intuitive approach of choosing
 %
 %
 the same way as $\bm{\beta}$ leads to a set of transformations depicted in Fig.\,\ref{fig:frames_5dof_6dof}\,(a) where the intermediate steps of the single elementary rotations are omitted since they have no technical meaning.
-The upperscript asterisk in (\ref{equ:alpha_convention_xyz}) demarcates this specific example and the following elaborations on the calculation of $\bm{\alpha}$.
+The \todo[color=green!40]{Language}\replaced[id=Sp]{superscript}{upperscript} asterisk in (\ref{equ:alpha_convention_xyz}) demarcates this specific example and the following elaborations on the calculation of $\bm{\alpha}$.
 
 To be able to remove the redundant coordinate $\beta_3$ from the rotational constraints of (\ref{equ:Phir_def_i}), it is necessary to change the expression of the orientation error $\bm{\alpha}$ to be reciprocal to the expression of the absolute orientation $\bm{\beta}$.
 By using the $Z$-$Y$-$X$-Euler angles with
@@ -925,7 +935,7 @@ The structures of the gradient $\bm{\Psi}_{\partial \bm{q}}$ results from the co
 %Since the 3T2R case can be inferred from the 3T3R case by the definition of reciprocal Euler angles and the selection of the corresponding entries of the coordinates in (\ref{equ:etar_def}) and the constraints in (\ref{equ:Psir_def}), only the 3T3R case ``$\bm{\Phi}$'' is written out in the following elaborations.
 %\color{black} % Stimmt so gar nicht mehr.
 
-The gradient matrices $\bm{\Phi}_{\partial \bm{q}}$ and $\bm{\Phi}_{\partial \bm{x}}$ contain nested nonlinear functions related to the orientation error, therefore the geometric Jacobian of the leg chains can not be exploited for the rotational part, as derived in appendix\,\ref{sec:appendix_gradient_geomjacobian}.
+The gradient matrices $\bm{\Phi}_{\partial \bm{q}}$ and $\bm{\Phi}_{\partial \bm{x}}$ contain nested nonlinear functions related to the orientation error, therefore\todo[color=green!40]{Language}\added[id=Sp]{,} the geometric Jacobian of the leg chains \replaced[id=Sp]{cannot}{can not} be exploited for the rotational part, as derived in appendix\,\ref{sec:appendix_gradient_geomjacobian}.
 The gradients are calculated with the chain rule and a syntax for stacking matrix columns to avoid differentiating matrices or with respect to matrices, which was introduced in \cite{1_SchapplerTapOrt2019}.
 The product operator $\overline{\Pi}$, the stacking operator $\overline{\bm{R}}$ and the transpose operator $\bm{P}_\transp$ used for the implementation in the next section are explained in appendix\,\ref{sec:appendix_gradient_matrix}.
 
@@ -1051,7 +1061,7 @@ the permutation matrix for transposition from (\ref{equ:transposition_operator})
 
 As explained regarding (\ref{equ:constr_Phi_PKM}), the constraints (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) and their gradients (\ref{equ:grad_Phi_1_q}) and (\ref{equ:grad_Phi_1_x}) are used for all legs in the 3T3R case and the leading leg in the 3T2R case.
 For the following legs in the 3T2R case, the gradients $\bm{\Phi}_{j,\partial\bm{q}_1}$, $\bm{\Phi}_{j,\partial\bm{q}_j}$ and $\bm{\Phi}_{j,\partial\bm{x}}$ with $j=2,...,m$ from the right part of (\ref{equ:PhiPsi_grad_q_complete}) and (\ref{equ:PhiPsi_grad_x_complete}) have to be calculated in a similar way. 
-Due to the abscence of the platform orientation in (\ref{equ:Phir_def_j}), (\ref{equ:Phi_1_grad_x}) simplifies for the following leg to 
+Due to the \todo[color=green!40]{Language}\replaced[id=Sp]{absence}{abscence} of the platform orientation in (\ref{equ:Phir_def_j}), (\ref{equ:Phi_1_grad_x}) simplifies for the following leg to 
 %
 \vspace{-0.1cm}
 \begin{equation}
@@ -1266,7 +1276,7 @@ The damping terms are always applied to the full vector and not to single elemen
 \subsection{Differential Kinematics for the Parallel Robot and its Applications}
 \label{sec:ZB_Anwendung_PKM_DiffKin}
 
-The reasonings so far only considered the inverse kinematics of the parallel robot.
+The \todo[color=green!40]{Language}\replaced[id=Sp]{reasoning}{reasonings} so far only considered the inverse kinematics of the parallel robot.
 The kinematic definitions can also be used in the differential kinematics (\ref{equ:constr_diff}) to establish the connection between joint and platform velocity.
 This was already presented in general form in \cite{Merlet2006} and also corresponds to the theory of linear transformation which is the base of the works of Gogu on structural synthesis \cite{Gogu2008}.
 The derivation in this paper is based on the position \emph{and} orientation, but comes to the same result as the already-existing velocity-based approach.
@@ -1309,7 +1319,7 @@ Reordering the equation leads to the full inverse differential kinematics
 \label{equ:full_diff_ik}
 \end{equation}
 %
-which has been adressed in the previous sections, and the full direct differential kinematics
+which has been \todo[color=green!40]{Language}\replaced[id=Sp]{addressed}{adressed} in the previous sections, and the full direct differential kinematics
 %
 \begin{equation}
 \bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} 
@@ -1337,8 +1347,7 @@ which has been adressed in the previous sections, and the full direct differenti
 \label{equ:full_diff_dk}
 \end{equation}
 %
-By only selecting the first rows for $\dot{\bm{q}}_{\mathrm{a}}$ in (\ref{equ:full_diff_ik}) and for $\dot{\bm{x}}$ in (\ref{equ:full_diff_dk}), the well-known analytic Jacobian\footnote{This matrix is related to the time derivatives $\dot{\bm{x}}_{\mathrm{r}}$ of the platform Euler angles and is called ``design Jacobian'' in \cite{Gogu2008} and ``Euler
-angles inverse jacobian matrix'' in \cite{Merlet2006} in contrast to the Jacobian related to angular velocities of the platform.} of the parallel robot \cite{Merlet2006,Gogu2008}, relating actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$ and platform velocities $\dot{\bm{x}}$, can be obtained from both equations.
+By only selecting the first rows for $\dot{\bm{q}}_{\mathrm{a}}$ in (\ref{equ:full_diff_ik}) and for $\dot{\bm{x}}$ in (\ref{equ:full_diff_dk}), the well-known analytic Jacobian\footnote{This matrix is related to the time derivatives $\dot{\bm{x}}_{\mathrm{r}}$ of the platform Euler angles and is called ``design Jacobian'' in \cite{Gogu2008} and ``Euler angles inverse \replaced[id=Sp]{J}{j}acobian matrix'' in \cite{Merlet2006} in contrast to the Jacobian related to angular velocities of the platform.} \todo[color=green!40]{Language in footnote} of the parallel robot \cite{Merlet2006,Gogu2008}, relating actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$ and platform velocities $\dot{\bm{x}}$, can be obtained from both equations.
 For the case of task or kinematic redundancy, the pseudo-inverse can be used for $\bm{\Phi}_{\partial\mathrm{ap}}$ in (\ref{equ:full_diff_ik}) as shown in Sec.\,\ref{sec:ZB_Anwendung_IK_grad}.
 The case of task redundancy does not affect (\ref{equ:full_diff_dk}), since the full platform velocity $\dot{\bm{x}}$ is obtained from given actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$.
 %For meaningful PKM the matrix $\bm{\Phi}_{\partial\bm{x}\mathrm{p}}$ is always square, since otherwise one or more leg chains would contain kinematic redundancy leading to uncontrollable nullspace motion. --> ist so noch falsch/ungeprüft!
@@ -1407,7 +1416,7 @@ The positions are normalized to the joint limits from -1 to 1.
 The first three lines in Fig.\,\ref{fig:serrob_traj_3T2R} represent IKP solutions with a given constant end-effector orientation $\beta_3$ of $-150^\circ$, $-15^\circ$ and $45^\circ$ and the 3T3R algorithm.
 The 3T2R algorithm without nullspace optimization is plotted with dotted lines for each first sample of the 3T3R cases as initial value with the same colors.
 Using these initial values for a 3T2R IK with optimization leads to strong nullspace movements at the beginning, quickly converging to a local minimum.
-Therefore the 3T2R case with optimization, plotted as the green line with triangle markers, is shown only for the initial condition from Fig.\,\ref{tab:mdh_industrialrobot}.
+\todo[color=green!40]{Language}Therefore\added[id=Sp]{,} the 3T2R case with optimization, plotted as the green line with triangle markers, is shown only for the initial condition from Fig.\,\ref{tab:mdh_industrialrobot}.
 %
 \begin{figure}[b]
 	\includegraphics{serrob_traj_nullspace_optim.pdf}
@@ -1432,7 +1441,7 @@ The 3T2R IK without optimization with dotted lines tends to lower changes in the
 %\color{black}
 
 As elaborated in Sec.\,\ref{sec:ZB_PKM} and \ref{sec:ZB_Anwendung}, the solution of the IKP for 3T2R and 3T3R tasks is necessary to solve the problem for parallel robots.
-Therefore the trajectory evaluation for a 6UPS parallel robot\footnote{For solving the full IKP, the actuation (such as ``6U\underline{P}S'') does not have to be considered.} in this section is preceded by the trajectory example for a serial link chain in the previous section.
+\todo[color=green!40]{Language}Therefore\added[id=Sp]{,} the trajectory evaluation for a 6UPS parallel robot\footnote{For solving the full IKP, the actuation (such as ``6U\underline{P}S'') does not have to be considered.} in this section is preceded by the trajectory example for a serial link chain in the previous section.
 %The basic concept is shown for parallel robots at the example of the 6UPS structure following a trajectory.
 This robot belongs to the first class presented in Sec.\,\ref{sec:parrob_classification}, which is primarily addressed in this paper.
 
@@ -1467,7 +1476,7 @@ This results in improved values for the performance criteria depicted for $h_1$ 
 Since the first approach does not regard the limits of the following legs, the optimization criterion gives high values indicating many joint limit violations.
 The second approach only shows peaks at $t=1.5\,\mathrm{s}$ in Fig.\,\ref{fig:parrob_traj_3T2R}\,d that result from a joint position getting near to the limit, but not exceeding it.
 For the practical implementation, the computation time is only weakly influenced by the selection of the method, since calculating the (pseudo)-inverse for six $5 \times 6$ and $6 \times 6$ or one $35 \times 36$ matrices does not present a challenge for current computing hardware.
-Therefore the ``par. IK''-method should be preferred.
+\todo[color=green!40]{Language}Therefore\added[id=Sp]{,} the ``par. IK''-method should be preferred.
 %Reaching the limits at $t=1.5\,\mathrm{s}$ leads to strong nullspace movements which also cause discontinuities in the plot for $\beta_3$, which can be encountered by additional velocity limitations.
 
 %
@@ -1495,9 +1504,9 @@ Further empirically determined values for all different serial chains were the d
 Since these values provide good results for all serial chains with random geometric parameters and for random configurations, they can be regarded as a good choice generally.
 
 To create a general evaluation case, the poses for testing the IK algorithm were generated by the forward kinematics of 50 different joint configurations of the chains uniformly distributed between the joint limits of $\pm \pi$ for rotational joints and $\pm0.5\,\mathrm{m}$ for prismatic joints.
-Additionally, the Denavit Hartenberg parameters were set to 50 different sets of uniformly distributed parameters between $0$ and $1$ meters or radians resulting to 2500 combinations for each of the 309 chains in total.
+\todo[color=green!40]{Language}Additionally, the Denavit\added[id=Sp]{-}Hartenberg parameters were set to 50 different sets of uniformly distributed parameters between $0$ and $1$ meters or radians resulting to 2500 combinations for each of the 309 chains in total.
 %The motivation for this test set is to investigate the IK algorithm in a worst case scenario
-The inital value $\bm{q}^0$ for the solution of the IKP of (\ref{equ:IK_damping}) was set to random values from a uniform distribution within the joint limits.
+The \todo[color=green!40]{Language}\replaced[id=Sp]{initial}{inital} value $\bm{q}^0$ for the solution of the IKP of (\ref{equ:IK_damping}) was set to random values from a uniform distribution within the joint limits.
 The inverse kinematics was calculated for the full pose with the 3T3R algorithm and only using the pointing direction together with the resolution of functional redundancy in the 3T2R algorithm.
 %
 A maximum of 15 tries with random initial values was allowed to search for a solution of the IKP within the limits.
@@ -1780,7 +1789,7 @@ with the consequences for the kinematic modeling of robots in 3T2R tasks describ
 %\end{itemize}
 %\color{black}
 
-As introduced in Sec.\,\ref{sec:ZB_Anwendung}, the rotational part of the gradient matrices can not be derived with the commonly available Jacobian of the serial link kinematics of the legs.
+As introduced in Sec.\,\ref{sec:ZB_Anwendung}, the rotational part of the gradient matrices \todo[color=green!40]{Language}\replaced[id=Sp]{cannot}{can not} be derived with the commonly available Jacobian of the serial link kinematics of the legs.
 Defining the residual of the orientation for the inverse kinematics with Euler angles was first introduced in \cite{GoldenbergBenFen1985}, where the calculation of the partial derivatives was referred to the geometric Jacobian without further clarification.
 The relationship between the gradient matrices from Sec.\,\ref{sec:ZB_Anwendung} and the Jacobian can be obtained by comparing the platform or end-effector velocity 
 %

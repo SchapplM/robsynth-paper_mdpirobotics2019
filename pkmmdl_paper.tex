@@ -64,8 +64,10 @@
 % Add packages and commands here. The following packages are loaded in our class file: fontenc, calc, indentfirst, fancyhdr, graphicx, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, amsthm, hyphenat, natbib, hyperref, footmisc, geometry, caption, url, mdframed, tabto, soul, multirow, microtype, tikz
 \graphicspath{{./figures/}}
 \usepackage{todonotes}
+%\usepackage[disable]{todonotes} % Für finale Version ohne Änderungen
 % Markup package
 \usepackage[deletedmarkup=xout,authormarkup=none]{changes}
+%\usepackage[final]{changes} % Für finale Version ohne Änderungen
 \setremarkmarkup{\emph{(#1: #2)}}
 \colorlet{sp}{red!80!black}
 %\setremarkmarkup{\emph{\color{lg!70!white}\small(#1: #2)}}
@@ -2025,7 +2027,7 @@ The property
 \bm{1} \in {\mathbb{R}}^{3 \times 3}
 \end{equation}
 %
-can be used to test the implementation, if (\ref{equ:alpha_xyz_diff_R}, \ref{equ:rotmat_diff_beta}) are defined for the same \todo[color=green!40]{Hyphenation}Euler\replaced[id=Sp]{ }{-}lock\replaced[id=Sp]{ }{-}angle \todo[color=red!40]{Terminology}\replaced[id=Sp]{convention}{notation}.
+can be used to test the implementation, if (\ref{equ:alpha_xyz_diff_R}, \ref{equ:rotmat_diff_beta}) are defined for the same \todo[color=green!40]{Hyphenation}Euler\replaced[id=Sp]{ }{-}angle\replaced[id=Sp]{ }{-} \todo[color=red!40]{Terminology}\replaced[id=Sp]{convention}{notation}.
 \todo[color=gray!40]{Layout}
 
 The gradient of the matrix product (\ref{equ:matprod}) w.r.t. the second factor used in (\ref{equ:grad_Phi_1_q})/II, (\ref{equ:grad_Phi_1_x})/III, (\ref{equ:grad_Phi_j_qj})/II and (\ref{equ:grad_Phi_j_q1})/III is

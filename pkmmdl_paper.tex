@@ -178,14 +178,14 @@ The functional redundancy of robots with full mobility is exploited using nullsp
 %\end{itemize}
 %\color{black}
 
-Industrial tasks like welding, gluing, milling or drilling represent a major part the of applications of industrial robots, which generally have full mobility, i.\,e. the operational space of their end-effector has three translational and three rotational (``3T3R'') degrees of freedom (``DoF'').
+\todo[color=gray!40]{General Note: The Layout will be restored after removing the tracked old versions}Industrial tasks like welding, gluing, milling or drilling represent a major part the of applications of industrial robots, which generally have full mobility, i.\,e. the operational space of their end-effector has three translational and three rotational (``3T3R'') degrees of freedom (``DoF'').
 Parallel robots like the \todo[color=green!40]{Hyphenation}Stewart\replaced[id=Sp]{ }{-}platform have especially been proposed for milling tasks regarding their high structural stiffness.
 The task space of the named applications can be defined by three translational DoF and only two rotations due to a symmetry around the tool axis (``3T2R'').
 This results in a functional or task redundancy, which is not exploited to full extend yet for \emph{parallel} robots.
 
-\subsection{Inverse Kinematics and Resolution of Task Redundancy for Serial Robots}
+\subsection{Inverse Kinematics and Resolution of Task Redundancy for Serial\added[id=Sp]{-Link} Robots}
 
-Various general gradient-based methods exist to solve the inverse kinematics for \emph{serial} robots; either by augmenting the joint space \cite{Baron2000} or by reducing the task space \cite{HuoBar2005,LegerAng2016,Zlajpah2017,1_SchapplerTapOrt2019}.
+Various general gradient-based methods exist to solve the inverse kinematics for \emph{serial} robots; either by augmenting the joint space \cite{Baron2000} or by reducing the task space \cite{HuoBar2005,Zlajpah2017,LegerAng2016,1_SchapplerTapOrt2019}.
 The different approaches each define a residual vector and a gradient matrix considering the properties of 3T2R tasks, e.\,g. by adding a virtual joint axis \cite{Baron2000}, orthogonal decomposition of the task space \cite{HuoBar2005}, rotation of the residual into a task frame and removing the corresponding component \cite{Zlajpah2017}, defining the tool axis by two points for constructing a nullspace \cite{LegerAng2016} or by defining the absolute orientation and the orientation residual with two reciprocal sets of Euler angles \cite{1_SchapplerTapOrt2019}.
 The gradient matrices corresponding to the different residuals are used for an iterative Newton-Raphson algorithm \cite{Yoshikawa1984,GoldenbergBenFen1985} by exploiting the functional redundancy with a null space projection of additional performance criteria \cite{Yoshikawa1984}.
 Without the definition of a proper gradient, a global optimization has to be performed outside of the inverse kinematics algorithm \cite{ZhuQuCaoYan2013,GuoDonKe2015}.
@@ -263,7 +263,7 @@ The same is argued by \cite{LinLiYanZha2013} at the example of the Metrom machin
 This leg chain also has to take the reaction moments in the blocked DoF which affects the overall stiffness.
 \todo[color=green!40]{Language}Therefore\added[id=Sp]{,} members of the classes I and IV can be expected to reach a higher stiffness.
 Mechanisms of the class IV may further suffer from an increased sensitivity of manufacturing tolerances, which may cause a high pretension of the bearings or even reduce the DoF, since the five DoF of all leg chains have to coincide exactly to allow the platform to also have five DoF.
-Additionally, only members of class I provide redundancy which allows to use the additional DoF for performance optimizations e.\,g. to avoid singularities and to compensate the smaller workspace caused by the sixth leg.
+Additionally, only members of class I provide redundancy which allows to use the additional DoF for performance \todo[color=green!40]{Language}optimizations\added[id=Sp]{,} e.\,g. to avoid singularities and to compensate the smaller workspace caused by the sixth leg.
 
 Therefore, the remainder of the paper focuses on mechanisms of the first class to allow an optimization of their performance criteria using the degree of task redundancy.
 
@@ -277,8 +277,8 @@ Therefore, the remainder of the paper focuses on mechanisms of the first class t
 
 \subsection{Inverse Kinematics of Parallel Robots for 3T2R Tasks}
 
-The parallel robots with five DoF presented previously have a kinematic structure, that allows for an analytic model of the inverse kinematics.
-All references define the end-effector orientation with two consecutive elementary rotations, i.\,e. define two Euler angles to represent the tool axis orientation in minimal coordinates \cite{LiuXuYaoXu2015, WenQinZhaLam2016, ZhengGaoZha2005,GaoSunZha2004, ChengWanZha2008, AlaghebandMahMilBen2015, Tale-MasoulehSaaGosTag2010, BaerWei2006, Tale-MasoulehGos2011}, which is called ``partial pose'' in \cite{MerletPerDan2000}.
+The parallel robots with five DoF presented previously have a kinematic \todo[color=green!40]{Language}structure\deleted[id=Sp]{,} that allows for an analytic model of the inverse kinematics.
+All references define the end-effector orientation with two consecutive elementary rotations, i.\,e. define two Euler angles to represent the tool axis orientation in minimal coordinates \todo[color=blue!40]{Ref \cite{MerletPerDan2000} in list}\cite{LiuXuYaoXu2015, MerletPerDan2000, WenQinZhaLam2016, ZhengGaoZha2005,GaoSunZha2004, ChengWanZha2008, AlaghebandMahMilBen2015, Tale-MasoulehSaaGosTag2010, BaerWei2006, Tale-MasoulehGos2011}, which is called ``partial pose'' in \cite{MerletPerDan2000}.
 The inverse kinematics problem (IKP) is first solved for the first chain, which is called ``leading chain'' in this paper.
 Due to the geometry of the leading chain, this solution can be found algebraically. %  \cite{WangGos1997}
 Then the IKP is solved for the other ``following'' chains with the given orientation from the leading chain and standard methods.
@@ -289,7 +289,7 @@ The reason presumably is that a solution of the 3T3R IKP for these robots is pos
 It is always possible to transfer the 3T2R IKP into 3T3R by adding an arbitrary value for the desired rotation around the tool axis.
 An optimization of additional performance criteria is possible by varying the redundant rotation angle \cite{ZhuQuCaoYan2013,GuoDonKe2015}.
 This approach was chosen in \cite{MerletPerDan2000} by first defining the IKP with the redundant rotation as a parameter and then performing an optimization of this parameter using analytical computation of the dexterity and interval analysis to ensure a minimum determinant of the inverse Jacobian.
-The drawback of this method is the need for a cascaded optimization which is more complex than a gradient-based approach presented in this paper.
+The drawback of this method is the need for a cascaded optimization which is more complex than \todo[color=blue!40]{Clarification}\replaced[id=Sp]{the}{a} gradient-based approach presented in this paper.
 
 %\color{gray}
 %Problembeschreibung, Ansatz des Papers
@@ -301,13 +301,13 @@ The drawback of this method is the need for a cascaded optimization which is mor
 
 \subsection{Motivation and Summary of the State of the Art}
 
-The overview over the literature shows, that no general, \todo[color=green!40]{Language}machine-independent method\deleted[id=Sp]{s} for the resolution of functional redundancy for 3T3R PKM in 3T2R tasks exists.
-The works either focus on a general structural synthesis of machines e.\,g. via screw theory \cite{KongGos2005} or linear transformations \cite{Gogu2006} or the description and improvement of specific, manually selected, machines.
+The overview over the literature \todo[color=green!40]{Language}shows\deleted[id=Sp]{,} that no general, machine-independent method\deleted[id=Sp]{s} for the resolution of functional redundancy for 3T3R PKM in 3T2R tasks exists.
+The works either focus on a general structural synthesis of machines\added[id=Sp]{,} e.\,g. via screw theory \cite{KongGos2005} or linear transformations \cite{Gogu2006} or the description and improvement of specific, manually \todo[color=green!40]{Language}selected\deleted[id=Sp]{,} machines.
 To choose the best machine for given requirements, a structural synthesis is only the first step.
 Additionally, a dimensional synthesis should be performed for all possible structures to select the most suitable mechanism.
 This combined structural and dimensional synthesis \cite{RamirezKotOrt2015} is sketched in Fig.\,\ref{fig:structdimsynth}.
-To be able to perform the dimensional synthesis for all structures, the inverse kinematics has to be implemented in a general form, to calculate the performance criteria over a given trajectory for further optimization of the structures and their comparison.
-For the generation of task redundant parallel robots, the inverse kinematics has to include an optimization of the performance criteria and the restrictions such as joint limits, to ensure a comparability of the results.
+To be able to perform the dimensional synthesis for all structures, the inverse kinematics has to be implemented in a general form\deleted[id=Sp]{,} to calculate the performance criteria over a given trajectory for further optimization of the structures and their comparison.
+For the generation of task redundant parallel robots, the inverse kinematics has to include an optimization of the performance criteria and the restrictions such as joint \todo[color=green!40]{Language}limits\deleted[id=Sp]{,} to ensure a comparability of the results.
 %
 \begin{figure}[tb]
 	\input{./figures/comb_struct_dim_synth.pdf_tex}
@@ -372,7 +372,7 @@ The appendix contains proofs and additional details on the mathematical formulat
 %    \label{fig:pkm_constr_transl}
 %\end{figure} 
 
-Before addressing the specific model for parallel robots in 3T2R tasks in the next section, the standard kinematics model of kinematics of parallel kinematic machines (``PKM'') is repeated in the following, corresponding to the state of the art \cite{Merlet2006,Gogu2008,BriotKha2015} and serving as a reference to highlight its shortcomings for 3T2R tasks.
+Before addressing the specific model for parallel robots in 3T2R tasks in the next section, the standard kinematics model of \todo[color=green!40]{Language}\deleted[id=Sp]{kinematics of} parallel kinematic machines (``PKM'') is repeated in the following, corresponding to the state of the art \cite{Merlet2006,Gogu2008,BriotKha2015} and serving as a reference to highlight its shortcomings for 3T2R tasks.
 The regarded parallel robot consists of $m$ legs, which each have the joint coordinates $\bm{q}_i$.
 All joints are considered as single-DoF and additionally to the active joints $\bm{q}_{i,\mathrm{a}}$ explicitly all passive joints at the base and at the platform $\bm{q}_{i,\mathrm{p}}$ are included in the coordinates $\bm{q}_i$ of leg~$i$.
 The coordinates
@@ -474,7 +474,7 @@ for each leg $i$, which can be assembled to the vector of constraint equations
 \label{equ:constr_qa}
 \end{equation}
 %
-for all $m$ legs of the PKM .
+for all $m$ legs of the PKM.
 The differential kinematics of the PKM is calculated with the time derivative
 %
 \begin{equation}
@@ -527,9 +527,9 @@ This definition of the constraints has the following drawbacks:
     \item For parallel robots with arbitrary leg chains like those generated by a structural synthesis \cite{KongGos2005, Gogu2008, RamirezKotOrt2015}, it is generally not possible to analytically eliminate the passive joint coordinates.
     \item If more than three joint coordinates per leg influence the coupling point position $B_i$, the three kinematic constraints per joint in (\ref{equ:kinconstrAB}) are not sufficient to generate enough equations for the matrix of (\ref{equ:PKM_phi_grad_q}) to become invertible.
     % \color{gray}Projection-based methods for the derivation of the dynamics \cite{Merlet2006,BriotKha2015,AbdellatifHei2009,DoThanhKotHeiOrt2009b} underly the same restrictions.\color{black}
-    The velocity-based theory of linear transformations used by \cite{Gogu2008} allows to determine the mobility of arbitrary parallel robots.
+    \item The velocity-based theory of linear transformations used by \cite{Gogu2008} allows to determine the mobility of arbitrary parallel robots.
     The linear transformation is generalized in \cite{HuangLiuChe2011} to accuracy and stiffness modeling by means of screw theory resulting in the ``generalized Jacobian''.
-    Both concepts do not provide a direct appliance to solve the IKP, since this requires a formulation of the orientation at position level, not velocity level.
+    Both concepts \todo[color=blue!40]{now prev. \#3 as \#3 and \#4; added}\added[id=Sp]{are similar to (\ref{equ:constr_qa_diff})} and do not provide a direct appliance to solve the IKP, since this requires a formulation of the orientation at position level, not velocity level.
     \item Exploiting the reduction of end-effector coordinates for 3T2R tasks is not possible, since all end-effector coordinates are included in (\ref{equ:vec_AB}).
 \end{enumerate}
 %
@@ -563,7 +563,8 @@ An alternative kinematic model to encounter the combination of these points is p
 %\color{black}
 
 To take the rotational symmetry around the tool axis in 3T2R tasks into account, a new set of task space coordinates
-%
+\vspace{-0.5cm} % Damit Fig. 3 auf der Seite bleibt
+
 \begin{equation}
 \bm{\eta}
 =
@@ -692,14 +693,14 @@ The intuitive approach of choosing
 \end{figure} 
 %
 %
-the same way as $\bm{\beta}$ leads to a set of transformations depicted in \todo[color=red!40]{Terminology in caption}Fig.\,\ref{fig:frames_5dof_6dof}\,(a) where the intermediate steps of the single elementary rotations are omitted since they have no technical meaning.
+the same way as $\bm{\beta}$ leads to a set of transformations depicted in \todo[color=red!40]{Terminology in caption}Fig.\,\ref{fig:frames_5dof_6dof}\,(a)\todo[color=green!40]{Language}\added[id=Sp]{,} where the intermediate steps of the single elementary rotations are omitted since they have no technical meaning.
 The \todo[color=green!40]{Language}\replaced[id=Sp]{superscript}{upperscript} asterisk in (\ref{equ:alpha_convention_xyz}) demarcates this specific example and the following elaborations on the calculation of $\bm{\alpha}$.
 
 To be able to remove the redundant coordinate $\beta_3$ from the rotational constraints of (\ref{equ:Phir_def_i}), it is necessary to change the expression of the orientation error $\bm{\alpha}$ to be reciprocal to the expression of the absolute orientation $\bm{\beta}$.
 By using the \todo[color=green!40]{Hyphenation}\replaced[id=Sp]{$ZYX$ }{$Z$-$Y$-$X$-}Euler angles with
 %
 \begin{equation}
-\bm{R}(\bm{\alpha}) := \bm{R}_z(\alpha_1) \bm{R}_y(\alpha_2) \bm{R}_x(\alpha_3) \in \mathrm{SO(3)}
+\bm{R}(\bm{\alpha}) := \bm{R}_z(\alpha_1) \bm{R}_y(\alpha_2) \bm{R}_x(\alpha_3) \in \mathrm{SO(3)}\added[id=Sp]{,}
 \label{equ:def_rmat_zyxr}
 \end{equation}
 %
@@ -763,7 +764,7 @@ The full kinematic constraint equations can only be defined for 3T3R tasks witho
 \bm{\Phi}_1^\transp &
 \bm{\Phi}_2^\transp &
 \cdots &
-\bm{\Phi}_m^\transp &
+\bm{\Phi}_m^\transp
 \end{bmatrix}^\transp.
 \label{equ:constr_Phi_PKM}
 \end{equation}
@@ -781,7 +782,7 @@ Fig.\,\ref{fig:pkm_constr_rot_follow}\,(a) show an open-loop second leg chain fo
 By also closing the \emph{3T2R} kinematic constraints $\bm{\Psi}_2$ for the second loop, as depicted in Fig.\,\ref{fig:pkm_constr_rot_follow}\,(b), the tool axis stays arbitrary and the platform pose demanded from the two legs would be different and therefore would not be a valid solution for the complete mechanism, i.\,e. $\bm{\Phi}_2 \ne \bm{0}$.
 Only if the second leg fulfills the \emph{3T3R} kinematic constraints for all platform coordinates, as shown in Fig.\,\ref{fig:pkm_constr_rot_follow}\,(c), a valid configuration of the mechanism emerges.
 This approach has already be used for many specific robots systems, as introduced in Sec.\,\ref{sec:intro}.
-As a generalization, the first leg of the parallel robot is now termed the ``leading leg chain'' (Index ``$1$'') and the other legs are termed as ``following leg chains'' (Index ``$j$'').
+As a generalization, the first leg of the parallel robot is now termed the ``leading leg chain'' \todo[color=green!40]{Language}(\replaced[id=Sp]{i}{I}ndex ``$1$'') and the other legs are termed as ``following leg chains'' (\replaced[id=Sp]{i}{I}ndex ``$j$'').
 
 The translational part of the constraints is not coupled by the platform orientation and therefore left unchanged relative to (\ref{equ:Phit_def_i}) with
 %
@@ -825,7 +826,7 @@ The full kinematic constraints for the complete parallel robot with $m$ legs for
 \bm{\Psi}_1^\transp &
 \bm{\Phi}_2^\transp &
 \cdots &
-\bm{\Phi}_m^\transp &
+\bm{\Phi}_m^\transp
 \end{bmatrix}^\transp
 \label{equ:constr_Psi_PKM}
 \end{equation}
@@ -873,7 +874,7 @@ To be able to compute the differential kinematics of the constraints $\bm{\Phi}$
 \label{equ:constr_diff}
 \end{equation}
 %
-the full geometric matrices of inverse kinematics
+the full \todo[color=red!40]{Terminology} \replaced[id=Sp]{inverse-kinematics}{geometric} matrices \deleted[id=Sp]{of inverse kinematics}
 %
 \begin{equation}
 \bm{\Phi}_{\partial \bm{q}}(\bm{q},\bm{x})
@@ -900,7 +901,7 @@ the full geometric matrices of inverse kinematics
 \label{equ:PhiPsi_grad_q_complete}
 \end{equation}
 %
-and the full geometric matrices of direct kinematics
+and the full \todo[color=red!40]{Terminology}\replaced[id=Sp]{direct-kinematics}{geometric} matrices \deleted[id=Sp]{of direct kinematics}
 %
 \begin{equation}
 \bm{\Phi}_{\partial \bm{x}}(\bm{q},\bm{x})
@@ -936,11 +937,11 @@ The structures of the gradient $\bm{\Psi}_{\partial \bm{q}}$ results from the co
 %Since the 3T2R case can be inferred from the 3T3R case by the definition of reciprocal Euler angles and the selection of the corresponding entries of the coordinates in (\ref{equ:etar_def}) and the constraints in (\ref{equ:Psir_def}), only the 3T3R case ``$\bm{\Phi}$'' is written out in the following elaborations.
 %\color{black} % Stimmt so gar nicht mehr.
 
-The gradient matrices $\bm{\Phi}_{\partial \bm{q}}$ and $\bm{\Phi}_{\partial \bm{x}}$ contain nested nonlinear functions related to the orientation error, therefore\todo[color=green!40]{Language}\added[id=Sp]{,} the geometric Jacobian of the leg chains \replaced[id=Sp]{cannot}{can not} be exploited for the rotational part, as derived in appendix\,\ref{sec:appendix_gradient_geomjacobian}.
+The gradient matrices $\bm{\Phi}_{\partial \bm{q}}$ and $\bm{\Phi}_{\partial \bm{x}}$ contain nested nonlinear functions related to the orientation error\replaced[id=Sp]{. T}{, t}herefore\todo[color=green!40]{Language}\added[id=Sp]{,} the geometric Jacobian of the leg chains \replaced[id=Sp]{cannot}{can not} be exploited for the rotational part, as derived in appendix\,\ref{sec:appendix_gradient_geomjacobian}.
 The gradients are calculated with the chain rule and a syntax for stacking matrix columns to avoid differentiating matrices or with respect to matrices, which was introduced in \cite{1_SchapplerTapOrt2019}.
 The product operator $\overline{\Pi}$, the stacking operator $\overline{\bm{R}}$ and the transpose operator $\bm{P}_\transp$ used for the implementation in the next section are explained in appendix\,\ref{sec:appendix_gradient_matrix}.
 
-\subsection{Constraint Gradients for the Leading Leg of the 3T2R and all Legs of the 3T3R case}
+\subsection{Constraint Gradients for the Leading Leg of the 3T2R and all Legs of the 3T3R \todo[color=green!40]{Language}\replaced[id=Sp]{C}{c}ase}
 %
 The constraint definition $\bm{\Psi}_1$ for the leading leg of the 3T2R case (\ref{equ:constr_Psi_PKM}) and $\bm{\Phi}_i$ with $i=1,...,m$ for all legs of the 3T3R case (\ref{equ:constr_Phi_PKM}) are subject to the same model of (\ref{equ:Phit_def_i},\ref{equ:Phir_def_i},\ref{equ:Phi_def}).
 In the following, the 3T3R constraints are displayed.
@@ -1278,7 +1279,7 @@ The damping terms are always applied to the full vector and not to single elemen
 \subsection{Differential Kinematics for the Parallel Robot and its Applications}
 \label{sec:ZB_Anwendung_PKM_DiffKin}
 
-The \todo[color=green!40]{Language}\replaced[id=Sp]{reasoning}{reasonings} so far only considered the inverse kinematics of the parallel robot.
+The reasoning\todo[color=green!40]{Language}\deleted[id=Sp]{s} so far only considered the inverse kinematics of the parallel robot.
 The kinematic definitions can also be used in the differential kinematics (\ref{equ:constr_diff}) to establish the connection between joint and platform velocity.
 This was already presented in general form in \cite{Merlet2006} and also corresponds to the theory of linear transformation which is the base of the works of Gogu on structural synthesis \cite{Gogu2008}.
 The derivation in this paper is based on the position \emph{and} orientation, but comes to the same result as the already-existing velocity-based approach.
@@ -1478,7 +1479,7 @@ The second approach uses the optimization for all legs together according to the
 This results in improved values for the performance criteria depicted for $h_1$ in Fig.\,\ref{fig:parrob_traj_3T2R}\,c and for $h_2$ in a logarithmic scale in Fig.\,\ref{fig:parrob_traj_3T2R}\,d.
 Since the first approach does not regard the limits of the following legs, the optimization criterion gives high values indicating many joint limit violations.
 The second approach only shows peaks at $t=1.5\,\mathrm{s}$ in Fig.\,\ref{fig:parrob_traj_3T2R}\,d that result from a joint position getting near to the limit, but not exceeding it.
-For the practical implementation, the computation time is only weakly influenced by the selection of the method, since calculating the (pseudo\todo[color=green!40]{Hyphenation}\replaced[id=Sp]{-)}{)-}inverse for six $5 \times 6$ and $6 \times 6$ or one $35 \times 36$ matrices does not present a challenge for current computing hardware.
+For the practical implementation, the computation time is only weakly influenced by the selection of the method, since calculating the (pseudo\todo[color=green!40]{Hyphenation}\replaced[id=Sp]{-)}{)-}inverse for six $5 \times 6$ and $6 \times 6$ \added[id=Sp]{matrices} or one $35 \times 36$ matrix does not present a challenge for current computing hardware.
 \todo[color=green!40]{Language}Therefore\added[id=Sp]{,} the ``par. IK''\replaced[id=Sp]{ }{-}method should be preferred.
 %Reaching the limits at $t=1.5\,\mathrm{s}$ leads to strong nullspace movements which also cause discontinuities in the plot for $\beta_3$, which can be encountered by additional velocity limitations.
 
@@ -1563,7 +1564,7 @@ The worse performance of the 3T3R algorithm, mostly caused by limit violations, 
 %Authors should discuss the results and how they can be interpreted in perspective of previous studies and of the working hypotheses. The findings and their implications should be discussed in the broadest context possible. Future research directions may also be highlighted.
 
 A general kinematics model for parallel robots is introduced to solve the inverse kinematics problem for any kind of parallel robot in tasks with one redundant rotational DoF (3T2R).
-The prize of the generality of the approach is the increased size of the geometric matrices, which is $10 \times 11$ for robots with a simple UPS structure instead of $6\times6$ for the non-redundant kinematics and grow up to $35 \times 36$ for general task redundant parallel robots with full mobility.
+The prize of the generality of the approach is the increased size of the \todo[color=red!40]{Terminology}\replaced[id=Sp]{inverse-kinematics}{geometric} matrices, which is $10 \times 11$ for robots with a simple UPS structure instead of $6\times6$ for the non-redundant kinematics and grow up to $35 \times 36$ for general task redundant parallel robots with full mobility.
 This makes symbolic calculations of the kinematic matrices impossible, allowing only studies on mobility, singularities and other properties of the Jacobian matrix based on numeric calculations.
 The application of the proposed method can therefore be seen mainly in finding optimal trajectories for task redundant parallel robots in milling or drilling scenarios regarding stiffness, dexterity or joint limits.
 %This allows to exploit the performance of the mechanisms to full extend.

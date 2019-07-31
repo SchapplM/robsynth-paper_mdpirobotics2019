@@ -63,11 +63,11 @@
 %=================================================================
 % Add packages and commands here. The following packages are loaded in our class file: fontenc, calc, indentfirst, fancyhdr, graphicx, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, amsthm, hyphenat, natbib, hyperref, footmisc, geometry, caption, url, mdframed, tabto, soul, multirow, microtype, tikz
 \graphicspath{{./figures/}}
-\usepackage{todonotes}
-%\usepackage[disable]{todonotes} % Für finale Version ohne Änderungen
+%\usepackage{todonotes}
+\usepackage[disable]{todonotes} % Für finale Version ohne Änderungen
 % Markup package
-\usepackage[deletedmarkup=xout,authormarkup=none]{changes}
-%\usepackage[final]{changes} % Für finale Version ohne Änderungen
+%\usepackage[deletedmarkup=xout,authormarkup=none]{changes}
+\usepackage[final]{changes} % Für finale Version ohne Änderungen
 \setremarkmarkup{\emph{(#1: #2)}}
 \colorlet{sp}{red!80!black}
 %\setremarkmarkup{\emph{\color{lg!70!white}\small(#1: #2)}}
@@ -1569,7 +1569,7 @@ The worse performance of the 3T3R algorithm, mostly caused by limit violations, 
 %Authors should discuss the results and how they can be interpreted in perspective of previous studies and of the working hypotheses. The findings and their implications should be discussed in the broadest context possible. Future research directions may also be highlighted.
 
 A general kinematics model for parallel robots is introduced to solve the inverse kinematics problem for any kind of parallel robot in tasks with one redundant rotational DoF (3T2R).
-The prize of the generality of the approach is the increased size of the \todo[color=red!40]{Terminology}\replaced[id=Sp]{inverse-kinematics}{geometric} matrices, which is $10 \times 11$ for robots with a simple UPS  \todo[color=blue!40]{new footnote}structure\footnote{\added[id=Sp]{By using the five 3T2R constraints (\ref{equ:Psi_def}) for the leading leg and the scalar constraints (\ref{equ:constr_scalar}) for the five following legs in (\ref{equ:constr_Psi_PKM}).}} instead of $6\times6$ for the non-redundant kinematics and grow up to $35 \times 36$ for general task redundant parallel robots with full mobility.
+The prize of the generality of the approach is the increased size of the \todo[color=red!40]{Terminology}\replaced[id=Sp]{inverse-kinematics}{geometric} matrices, which is $10 \times 11$ for robots with a simple UPS \todo[color=blue!40]{new footnote}structure\footnote{\added[id=Sp]{By using the five 3T2R constraints (\ref{equ:Psi_def}) for the leading leg and the scalar constraints (\ref{equ:constr_scalar}) for the five following legs in (\ref{equ:constr_Psi_PKM}).}} instead of $6\times6$ for the non-redundant kinematics and grow up to $35 \times 36$ for general task redundant parallel robots with full mobility.
 This makes symbolic calculations of the kinematic matrices impossible, allowing only studies on mobility, singularities and other properties of the Jacobian matrix based on numeric calculations.
 The application of the proposed method can therefore be seen mainly in finding optimal trajectories for task redundant parallel robots in milling or drilling scenarios regarding stiffness, dexterity or joint limits.
 %This allows to exploit the performance of the mechanisms to full extend.
@@ -1660,7 +1660,7 @@ The matrix operations for the partial derivatives are replicated from \cite{1_Sc
 
 This section derives the effect of the reciprocity of Euler\todo[color=green!40]{Hyphenation}\replaced[id=Sp]{ }{-}angles at the example of the kinematics description of Sec.\,\ref{sec:REW_seriell} and the frames of Fig.\,\ref{fig:frames_5dof_6dof}\,(b):
 %
-An end-effector orientation $\bm{\beta}=\bm{x}_{\mathrm{r}}$ gives the rotation matrix\footnote{The matrix rotates vectors from $\ks{E}$ to $\ks{D}$}
+An end-effector orientation $\bm{\beta}=\bm{x}_{\mathrm{r}}$ gives the rotation matrix\footnote{The matrix rotates vectors from $\ks{E}$ to $\ks{D}$.}
 %
 \begin{equation}
 \rotmat{D}{E}(\bm{\beta},\bm{q})

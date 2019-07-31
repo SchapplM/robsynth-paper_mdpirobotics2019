@@ -463,6 +463,7 @@ This is termed ``minimal kinematics set'' in \cite{Merlet2006} and leads to the 
 \Phi_{i}
 =
 \Phi_{i}(\bm{q}_{i,\mathrm{a}},\bm{x})
+\label{equ:constr_scalar}
 \end{equation}
 %
 for each leg $i$, which can be assembled to the vector of constraint equations
@@ -1354,8 +1355,9 @@ which has been \todo[color=green!40]{Language}\replaced[id=Sp]{addressed}{adress
 \label{equ:full_diff_dk}
 \end{equation}
 %
-By only selecting the first rows for $\dot{\bm{q}}_{\mathrm{a}}$ in (\ref{equ:full_diff_ik}) and for $\dot{\bm{x}}$ in (\ref{equ:full_diff_dk}), the well-known analytic Jacobian\footnote{This matrix is related to the time derivatives $\dot{\bm{x}}_{\mathrm{r}}$ of the platform Euler angles and is called ``design Jacobian'' in \cite{Gogu2008} and ``Euler angles inverse \replaced[id=Sp]{J}{j}acobian matrix'' in \cite{Merlet2006} in contrast to the Jacobian related to angular velocities of the platform.} \todo[color=green!40]{Language in footnote} of the parallel robot \cite{Merlet2006,Gogu2008}, relating actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$ and platform velocities $\dot{\bm{x}}$, can be obtained from both equations.
-For the case of task or kinematic redundancy, the pseudo-inverse can be used for $\bm{\Phi}_{\partial\mathrm{ap}}$ in (\ref{equ:full_diff_ik}) as shown in Sec.\,\ref{sec:ZB_Anwendung_IK_grad}.
+By only selecting the first rows for $\dot{\bm{q}}_{\mathrm{a}}$ in (\ref{equ:full_diff_ik}) and for $\dot{\bm{x}}$ in (\ref{equ:full_diff_dk}), the well-known analytic Jacobian\footnote{This matrix is related to the time derivatives $\dot{\bm{x}}_{\mathrm{r}}$ of the platform Euler angles and is called ``design Jacobian'' in \cite{Gogu2008} and ``Euler angles inverse \replaced[id=Sp]{J}{j}acobian matrix'' in \cite{Merlet2006} in contrast to the Jacobian related to angular velocities of the platform.\vspace{-0.9cm}} \todo[color=green!40]{Language in footnote} of the parallel robot \cite{Merlet2006,Gogu2008}, relating actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$ and platform velocities $\dot{\bm{x}}$, can be obtained from both equations.  % TODO: Entfernen von vspace in footnote nach entfernen der alten Textversionen für das Review;
+For the case of task or kinematic redundancy, the pseudo-inverse can be used for $\bm{\Phi}_{\partial\mathrm{ap}}$ in (\ref{equ:full_diff_ik}) \todo[color=blue!40]{Clarification}\added[id=Sp]{together with a nullspace optimization} as shown in Sec.\,\ref{sec:ZB_Anwendung_IK_grad}.
+\added[id=Sp]{This allows to exploit the functional redundancy in 3T2R tasks also for trajectories $\bm{\eta}(t)$, $\dot{\bm{\eta}}(t)$ and not only for single poses $\bm{\eta}$. When solving the IKP for a trajectory, the IK on position level of Sec.\,\ref{sec:ZB_Anwendung_IK_grad} is only needed to correct linearization errors.}
 The case of task redundancy does not affect (\ref{equ:full_diff_dk}), since the full platform velocity $\dot{\bm{x}}$ is obtained from given actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$.
 %For meaningful PKM the matrix $\bm{\Phi}_{\partial\bm{x}\mathrm{p}}$ is always square, since otherwise one or more leg chains would contain kinematic redundancy leading to uncontrollable nullspace motion. --> ist so noch falsch/ungeprüft!
 
@@ -1379,8 +1381,7 @@ The results are generalized by the statistical analysis of random point-to-point
 
 The first evaluation of the inverse kinematics algorithm from Sec.\,\ref{sec:ZB_Anwendung_IK_grad} is performed with simulations at the basic example of a six-DoF industrial robot with a rectangular trajectory.
 The manipulator Fanuc M-710 iC/50 was taken from the example of \cite{HuoBar2008} with the tabulated kinematics parameters and a sketch of the trajectory in Fig.\,\ref{tab:mdh_industrialrobot}.
-Deviations in the parameters relative to \cite{HuoBar2008} result from the use of the \emph{modified} \todo[color=blue!40]{footnote removed, reference} Denavit-Hartenberg notation \replaced[id=Sp]{from \cite{BriotKha2015} for the joint transformations}{for the joint transformation according to \textsc{Khalil}} and the use of only positive \todo[color=green!40]{Language} \replaced[id=Sp]{axis alignment parameters $\alpha_i$}{$\alpha_i$ parameters for axis alignment}
- for consistency with the results of the structural synthesis from \cite{RamirezKotOrt2015}.
+Deviations in the parameters relative to \cite{HuoBar2008} result from the use of the \emph{modified} \todo[color=blue!40]{footnote removed, reference} Denavit-Hartenberg notation \replaced[id=Sp]{from \cite{BriotKha2015} for the joint transformations}{for the joint transformation according to \textsc{Khalil}} and the use of only positive \todo[color=green!40]{Language} \replaced[id=Sp]{axis alignment parameters $\alpha_i$}{$\alpha_i$ parameters for axis alignment} for consistency with the results of the structural synthesis from \cite{RamirezKotOrt2015}.
 The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ and a desired alignment of the $z$-axis pointing into the ground plane.
 
 \begin{figure}[tb]
@@ -1568,7 +1569,7 @@ The worse performance of the 3T3R algorithm, mostly caused by limit violations, 
 %Authors should discuss the results and how they can be interpreted in perspective of previous studies and of the working hypotheses. The findings and their implications should be discussed in the broadest context possible. Future research directions may also be highlighted.
 
 A general kinematics model for parallel robots is introduced to solve the inverse kinematics problem for any kind of parallel robot in tasks with one redundant rotational DoF (3T2R).
-The prize of the generality of the approach is the increased size of the \todo[color=red!40]{Terminology}\replaced[id=Sp]{inverse-kinematics}{geometric} matrices, which is $10 \times 11$ for robots with a simple UPS structure instead of $6\times6$ for the non-redundant kinematics and grow up to $35 \times 36$ for general task redundant parallel robots with full mobility.
+The prize of the generality of the approach is the increased size of the \todo[color=red!40]{Terminology}\replaced[id=Sp]{inverse-kinematics}{geometric} matrices, which is $10 \times 11$ for robots with a simple UPS  \todo[color=blue!40]{new footnote}structure\footnote{\added[id=Sp]{By using the five 3T2R constraints (\ref{equ:Psi_def}) for the leading leg and the scalar constraints (\ref{equ:constr_scalar}) for the five following legs in (\ref{equ:constr_Psi_PKM}).}} instead of $6\times6$ for the non-redundant kinematics and grow up to $35 \times 36$ for general task redundant parallel robots with full mobility.
 This makes symbolic calculations of the kinematic matrices impossible, allowing only studies on mobility, singularities and other properties of the Jacobian matrix based on numeric calculations.
 The application of the proposed method can therefore be seen mainly in finding optimal trajectories for task redundant parallel robots in milling or drilling scenarios regarding stiffness, dexterity or joint limits.
 %This allows to exploit the performance of the mechanisms to full extend.

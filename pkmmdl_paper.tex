@@ -254,11 +254,8 @@ The resulting 5R\underline{P}UR of Figure\,\ref{fig:systems_pictures}\,d and 5\u
 	\input{./figures/systems_pictures.pdf_tex}
 	\caption{Typical mechanisms of the different classes. Taken from \cite{ZhangGos2001} (\textbf{a}), \cite{MbarekNefCor2005} (\textbf{b}), \cite{AlaghebandMahMilBen2015} (\textbf{c}), \cite{Tale-MasoulehGos2011} (\textbf{d}).}
 	\label{fig:systems_pictures}
-	\vspace{-0.4cm}	% Damit Fu√ünote von unten n√§her an das Bild heranr√ºckt
-    \vspace{-0.5cm} % TODO: Remove after removing the text before changes
 \end{figure} 
-\newpage
-%
+
 In a practical application with competing requirements on workspace, stiffness, costs and precision, each of the existing systems has its legitimization.
 Nevertheless, each of the classes has inherent disadvantages:
 In tasks like milling with high process forces and requirements on stiffness and precision, robots from class II with one constraining leg have the drawback that the passive leg takes the complete reaction wrench in the blocked rotational degree of freedom, which strongly affects the mechanisms stiffness in this direction \cite{ZhangGos2001}.
@@ -569,7 +566,7 @@ An alternative kinematic model to encounter the combination of these points is p
 %\color{black}
 
 To take the rotational symmetry around the tool axis in 3T2R tasks into account, a new set of task space coordinates
-%\vspace{-0.5cm} % Damit Fig. 3 auf der Seite bleibt
+%\vspace{-0.5cm} % Use to keep Fig. 3 on this page, if it does not fit.
 
 \begin{equation}
 \bm{\eta}
@@ -584,7 +581,6 @@ To take the rotational symmetry around the tool axis in 3T2R tasks into account,
 has to be defined.
 %
 The translational part
-%\vspace{-0.5em}
 %
 \begin{equation}
 \bm{\eta}_{\mathrm{t}}
@@ -653,7 +649,7 @@ As a drawback of (\ref{equ:Phit_def_i}), all joint angles $\bm{q}_i$ of the leg 
 
 This implies that the platform is now part of the last link of the considered leg chain, as sketched in Figure\,\ref{fig:pkm_constr_rot_lead} by the dashed triangle.
 To account for the increased number of included joints in (\ref{equ:r_0E_i}), the full kinematic constraints
-\vspace{-0.6cm} % TODO: Wieder entfernen nach Entfernen der alten Textstellen
+\vspace{-0.2cm} % necessary to keep Fig. 4 on this page
 
 \begin{equation}
 \bm{\Phi}_i=\begin{bmatrix}
@@ -802,7 +798,6 @@ The translational part of the constraints is not coupled by the platform orienta
 %
 for the following legs $j$.
 
-%\vspace{12pt}  %vertical spacing (enlarge 12pt)
 \begin{figure}[H]
     \input{./figures/pkm_constr_def_rot_follow.pdf_tex}
     \caption{Different cases for the kinematic constraints of the following chain: (\textbf{a}) wrong position and orientation; (\textbf{b}) correct position and wrong orientation; (\textbf{c}) all kinematic constraints are complied.}
@@ -1078,7 +1073,7 @@ As explained regarding (\ref{equ:constr_Phi_PKM}), the constraints (\ref{equ:Phi
 For the following legs in the 3T2R case, the gradients $\bm{\Phi}_{j,\partial\bm{q}_1}$, $\bm{\Phi}_{j,\partial\bm{q}_j}$ and $\bm{\Phi}_{j,\partial\bm{x}}$ with $j=2,...,m$ from the right part of (\ref{equ:PhiPsi_grad_q_complete}) and (\ref{equ:PhiPsi_grad_x_complete}) have to be calculated in a similar way. 
 Due to the \todo[color=green!40]{Language}\replaced[id=Sp]{absence}{abscence} of the platform orientation in (\ref{equ:Phir_def_j}), (\ref{equ:Phi_1_grad_x}) simplifies for the following leg to 
 %
-\vspace{-0.1cm}
+\vspace{-0.3cm} % necessary to keep equ:IKP_maintask (42) on this page
 \begin{equation}
 \bm{\Phi}_{j,\partial\bm{x}}
 =
@@ -1168,6 +1163,7 @@ the term ``III'' from (\ref{equ:grad_Phi_1_q}) in ``IV''.
 The presented kinematic constraints and their gradient matrices can be used to solve the inverse kinematics problem (IKP) of single leg chains and complete parallel robots.
 Since all active and passive joint angles are involved for the case of parallel robots, solving their IKP results in solving the IKP for all leg chains.
 As first introduced in \cite{GoldenbergBenFen1985} for Euler angle residuals in the IKP, the Taylor series expansion of $\bm{\Phi}(\bm{q},\bm{x})$ leads to the definition of
+\vspace{-0.4cm} % necessary to keep equ:IKP_maintask (42) on this page
 %
 \begin{equation}
 \bm{\Phi}(\bm{q}^{k+1},\bm{x}) = 
@@ -1178,15 +1174,18 @@ As first introduced in \cite{GoldenbergBenFen1985} for Euler angle residuals in 
 \end{equation}
 %
 in an iterative algorithm at the step $k+1$, which can be used to solve the IKP using a given initial value $\bm{q}^{0}$ and the condition
+\vspace{-0.6cm} % necessary to keep equ:IKP_maintask (42) on this page
+
 \begin{equation}
 \bm{\Phi}(\bm{q}^{k+1},\bm{x})=\bm{0}.
 \label{equ:taylor_phi_nextstepzero}
 \end{equation}
 %
-
+%
 %The variable $\bm{q}$ contains all active and passive joint coordinates for all legs of the robot.
 Defining the solution of the IKP as the main task (``T''), the \todo[color=green!40]{Hyphenation}step\deleted[id=Sp]{-}wise solution for the joint coordinates results to
-%
+\vspace{-0.5cm} % necessary to keep equ:IKP_maintask (42) on this page
+
 \begin{equation}
 {\Delta}\bm{q}^{k}
 =
@@ -1468,18 +1467,6 @@ in this section is preceded by the trajectory example for a serial link chain in
 %The basic concept is shown for parallel robots at the example of the 6UPS structure following a trajectory.
 This robot belongs to the first class presented in Section\,\ref{sec:parrob_classification}, which is primarily addressed in this paper.
 
-%\begin{figure}[tb]
-%	\begin{tabular}[t]{l r}
-%		$\bm{x}_\mathrm{t}^0=\begin{bmatrix}0&0&0.5\,m\end{bmatrix}^\transp$
-%		\begin{minipage}[t]{7.5cm}
-%			\vspace{0.001cm} % wird f√ºr bounding box des Bilds ben√∂tigt
-%			\hspace{1cm}
-%			\includegraphics[trim=50 50 50 50, clip, scale=0.7]{parrob_traj_zero_pose.png} % left bottom right top
-%		\end{minipage}
-%	\end{tabular}
-%	\caption{Left: Kinematic parameters of the 6UPS robot. Right: sketch of the robot scenario.}
-%	\label{tab:data_hexapod}
-%\end{figure}
 
 The robot has a \todo[color=green!40]{Hyphenation}Gough\replaced[id=Sp]{ }{-}structure \cite{Merlet2006} with symmetric alignment of the universal joint base couplings on a circle with radius $\lVert\bm{r}_{0A_i}\rVert=1\,\mathrm{m}$ and the spherical joint platform couplings on a circle with radius $\lVert\bm{r}_{B_iE}\rVert=0.4\,\mathrm{m}$.
 The initial pose was set to a center position $\bm{x}_\mathrm{t}^\transp=[0,0,0.5\,\mathrm{m}]$ and the initial orientation $\bm{x}_\mathrm{r}$ was set to zero, meaning an alignment of base and platform frame.

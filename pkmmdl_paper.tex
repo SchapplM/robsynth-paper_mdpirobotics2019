@@ -180,7 +180,7 @@ The functional redundancy of robots with full mobility is exploited using nullsp
 %\end{itemize}
 %\color{black}
 
-\todo[color=gray!40]{General Note: The Layout will be restored after removing the tracked old versions}Industrial tasks like welding, gluing, milling or drilling represent a major part of applications of industrial robots, which generally have full mobility, i.e., the operational space of their end-effector has three translational and three rotational (``3T3R'') degrees of freedom (``DoF'').
+\todo[color=gray!40]{General Note: The Layout will be restored after removing the tracked old versions}Industrial tasks like welding, gluing, milling or drilling represent a major part of the applications of industrial robots, which generally have full mobility, i.e., the operational space of their end-effector has three translational and three rotational (``3T3R'') degrees of freedom (``DoF'').
 Parallel robots like the \todo[color=green!40]{Hyphenation}Stewart\replaced[id=Sp]{ }{-}platform have especially been proposed for milling tasks regarding their high structural stiffness.
 The task space of the named applications can be defined by three translational DoF and only two rotations due to a symmetry around the tool axis (``3T2R'').
 This results in a functional or task redundancy, which is not exploited to full extend yet for \emph{parallel} robots. % Emphasizing "parallel" in contrast to "serial" in the next sentence.
@@ -223,7 +223,7 @@ Other classifications are provided e.g., by \cite{HuangLiuChe2011}, where IV and
 
 Examples for the first class are hexapods (6U\underline{P}S) \cite{MerletPerDan2000} or the Eclipse \cite{HongKim2000} machine tool (2\underline{PPR}S-\underline{PP}RS).
 (The joint structure of the parallel robots is denoted by the number of the legs and the order of universal (``U''), prismatic (``P''), spherical (``S''), helical (``H'') and revolute (``R'') joints in the leg chains. Different actuated legs are connected by hyphens (``-''), passive constraint legs are connected by a slash (``/''). Actuated joints are underlined.)
-Any other parallel robot with full mobility (see e.g. \cite{Merlet2006,Gogu2008,Zhang2009}) may be used as well.
+Any other parallel robot with full mobility (see e.g., \cite{Merlet2006,Gogu2008,Zhang2009}) may be used as~ well.
 
 The second class allows for more variety, since the six-DoF mechanism and the five-DoF constraining leg can manifest in different kinematic structures:
 The U\underline{{P}}S structure is used for the six-DoF part of the mechanism 
@@ -277,7 +277,7 @@ Therefore, the remainder of the paper focuses on mechanisms of the first class t
 
 \subsection{Inverse Kinematics of Parallel Robots for 3T2R Tasks}
 
-The parallel robots with five DoF presented above have a kinematic \todo[color=green!40]{Language}structure\deleted[id=Sp]{,} that allows for an analytic model of the inverse kinematics.
+The parallel robots with five DoF presented above have a kinematic \todo[color=green!40]{Language}structure\deleted[id=Sp]{,} which allows for an analytic model of the inverse kinematics.
 All references define the end-effector orientation with two consecutive elementary rotations, i.e., define two Euler angles to represent the tool axis orientation in minimal coordinates \todo[color=blue!40]{Ref \cite{MerletPerDan2000} in list}\cite{LiuXuYaoXu2015, MerletPerDan2000, WenQinZhaLam2016, ZhengGaoZha2005,GaoSunZha2004, ChengWanZha2008, AlaghebandMahMilBen2015, Tale-MasoulehSaaGosTag2010, BaerWei2006, Tale-MasoulehGos2011}, which is called ``partial pose'' in \cite{MerletPerDan2000}.
 The inverse kinematics problem (IKP) is first solved for the first chain, which is called ``leading chain'' in this paper.
 Due to the geometry of the leading chain, this solution can be found algebraically. %  \cite{WangGos1997}
@@ -530,7 +530,7 @@ This definition of the constraints has the following drawbacks:
     \item If more than three joint coordinates per leg influence the coupling point position $B_i$, the three kinematic constraints per joint in (\ref{equ:kinconstrAB}) are not sufficient to generate enough equations for the matrix of (\ref{equ:PKM_phi_grad_q}) to become invertible.
     % \color{gray}Projection-based methods for the derivation of the dynamics \cite{Merlet2006,BriotKha2015,AbdellatifHei2009,DoThanhKotHeiOrt2009b} underly the same restrictions.\color{black}
     \item The velocity-based theory of linear transformations used by \cite{Gogu2008} allows determining the mobility of arbitrary parallel robots.
-    The linear transformation is generalized in \cite{HuangLiuChe2011} to accuracy and stiffness modeling by means of screw theory resulting in the ``generalized Jacobian''.\\
+    The linear transformation is generalized in \cite{HuangLiuChe2011} to accuracy and stiffness modeling by means of screw theory resulting in the ``generalized Jacobian''.
     Both concepts \todo[color=blue!40]{now prev. \#3 as \#3 and \#4; added}\added[id=Sp]{are similar to (\ref{equ:constr_qa_diff})} and do not provide a direct appliance to solve the IKP, since this requires a formulation of the orientation at position level, not velocity level.
     \item Exploiting the reduction of end-effector coordinates for 3T2R tasks is not possible, since all end-effector coordinates are included in (\ref{equ:vec_AB}).
 \end{enumerate}
@@ -705,7 +705,7 @@ only the error component $\alpha_1$ is affected by rotations around the tool axi
 
 \begin{figure}[H]
     \input{./figures/frame_comparison_combined_5dof_6dof.pdf_tex}
-    \caption{Overview of the different frames (a) for six-DoF tasks with standard Euler angle \replaced[id=Sp]{convention}{notation} and (b) for five-DoF tasks with reciprocal Euler angle \replaced[id=Sp]{convention}{notation}; taken from \cite{1_SchapplerTapOrt2019}.}
+    \caption{Overview of the different frames (\textbf{a}) for six-DoF tasks with standard Euler angle \replaced[id=Sp]{convention}{notation} and (\textbf{b}) for five-DoF tasks with reciprocal Euler angle \replaced[id=Sp]{convention}{notation}; taken from \cite{1_SchapplerTapOrt2019}.}
     \label{fig:frames_5dof_6dof}
 \end{figure} 
 
@@ -1439,7 +1439,7 @@ The 3T2R algorithm without nullspace optimization is plotted with dotted lines f
 Using these initial values for a 3T2R IK with optimization leads to strong nullspace movements at the beginning, quickly converging to a local minimum.
 \todo[color=green!40]{Language}Therefore\added[id=Sp]{,} the 3T2R case with optimization, plotted as the green line with triangle markers, is shown only for the initial condition from Figure\,\ref{tab:mdh_industrialrobot}.
 %
-It can be observed, that the optimization of the criterion leads to the best solution of the IKP.
+It can be observed that the optimization of the criterion leads to the best solution of the IKP.
 %The 3T3R solution with $\beta_3=-150^\circ$ has a lower (i.\,e. better) value for $h_2$, but this represents an invalid solution, as can be seen for the values for $q_5$, where the black line exceeds the upper limit and leaves the domain of the criterion.
 The lines for the criterion for $\beta_3=-150^\circ$ and $\beta_3=-15^\circ$ partly exceed the limits of the plot, indicating that the limit is violated, which can also be seen at the plot for $q_5$.
 This exposes the need for keeping the solution always within the limits by the measures described.
@@ -2338,7 +2338,7 @@ Ramirez, D.; Kotlarski, J.; Ortmaier, T.
   combined structural - geometrical synthesis.
 \newblock  Proc. of the 14th IFToMM World Congress, Taipeh, Taiwan, conference 25--30 Oct 2015; .
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.6567/IFToMM.14TH.WC.OS13.047}{\detokenize{10.6567/IFToMM.14TH.WC.OS13.047}}}.% Is it a conference paper? if so, please add the information of conference, if not, it's better to modify as an online resource. Please provide the URL address and the accessed date (day month year)
+  doi:{\changeurlcolor{black}\href{https://doi.org/10.6567/IFToMM.14TH.WC.OS13.047}{\detokenize{10.6567/IFToMM.14TH.WC.OS13.047}}}.
 
 \bibitem[Briot and Khalil(2015)]{BriotKha2015}
 Briot, S.; Khalil, W.

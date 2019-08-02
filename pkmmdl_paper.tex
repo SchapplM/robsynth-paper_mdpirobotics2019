@@ -183,7 +183,7 @@ The functional redundancy of robots with full mobility is exploited using nullsp
 \todo[color=gray!40]{General Note: The Layout will be restored after removing the tracked old versions}Industrial tasks like welding, gluing, milling or drilling represent a major part of applications of industrial robots, which generally have full mobility, i.e., the operational space of their end-effector has three translational and three rotational (``3T3R'') degrees of freedom (``DoF'').
 Parallel robots like the \todo[color=green!40]{Hyphenation}Stewart\replaced[id=Sp]{ }{-}platform have especially been proposed for milling tasks regarding their high structural stiffness.
 The task space of the named applications can be defined by three translational DoF and only two rotations due to a symmetry around the tool axis (``3T2R'').
-This results in a functional or task redundancy, which is not exploited to full extend yet for \emph{parallel} robots.
+This results in a functional or task redundancy, which is not exploited to full extend yet for \emph{parallel} robots. % Emphasizing "parallel" in contrast to "serial" in the next sentence.
 
 \subsection{Inverse Kinematics and Resolution of Task Redundancy for Serial\added[id=Sp]{-Link} Robots}
 
@@ -280,7 +280,7 @@ Therefore, the remainder of the paper focuses on mechanisms of the first class t
 
 \subsection{Inverse Kinematics of Parallel Robots for 3T2R Tasks}
 
-The parallel robots with five DoF presented previously have a kinematic \todo[color=green!40]{Language}structure\deleted[id=Sp]{,} that allows for an analytic model of the inverse kinematics.
+The parallel robots with five DoF presented above have a kinematic \todo[color=green!40]{Language}structure\deleted[id=Sp]{,} that allows for an analytic model of the inverse kinematics.
 All references define the end-effector orientation with two consecutive elementary rotations, i.e., define two Euler angles to represent the tool axis orientation in minimal coordinates \todo[color=blue!40]{Ref \cite{MerletPerDan2000} in list}\cite{LiuXuYaoXu2015, MerletPerDan2000, WenQinZhaLam2016, ZhengGaoZha2005,GaoSunZha2004, ChengWanZha2008, AlaghebandMahMilBen2015, Tale-MasoulehSaaGosTag2010, BaerWei2006, Tale-MasoulehGos2011}, which is called ``partial pose'' in \cite{MerletPerDan2000}.
 The inverse kinematics problem (IKP) is first solved for the first chain, which is called ``leading chain'' in this paper.
 Due to the geometry of the leading chain, this solution can be found algebraically. %  \cite{WangGos1997}
@@ -1447,7 +1447,7 @@ Using these initial values for a 3T2R IK with optimization leads to strong nulls
 \end{figure}
 %
 It can be observed, that the optimization of the criterion leads to the best solution of the IKP.
-%The 3T3R solution with $\beta_3=-150^\circ$ has a lower (i.e. better) value for $h_2$, but this represents an invalid solution, as can be seen for the values for $q_5$, where the black line exceeds the upper limit and leaves the domain of the criterion.
+%The 3T3R solution with $\beta_3=-150^\circ$ has a lower (i.\,e. better) value for $h_2$, but this represents an invalid solution, as can be seen for the values for $q_5$, where the black line exceeds the upper limit and leaves the domain of the criterion.
 The lines for the criterion for $\beta_3=-150^\circ$ and $\beta_3=-15^\circ$ partly exceed the limits of the plot, indicating that the limit is violated, which can also be seen at the plot for $q_5$.
 This exposes the need for keeping the solution always within the limits by the measures described.
 The 3T2R IK without optimization with dotted lines tends to lower changes in the joint positions than the 3T3R IK, since this corresponds to the solution of the matrix \linebreak pseudo-inverse in (\ref{equ:nullspace}).
@@ -1952,6 +1952,7 @@ such that
 \label{equ:matprod}
 \end{equation}
 %
+
 The transposition operator $\bm{P}_\transp$ is a $9 \times 9$ permutation matrix such that
 %
 \begin{equation}
@@ -1978,6 +1979,7 @@ The transposition operator $\bm{P}_\transp$ is a $9 \times 9$ permutation matrix
 \label{equ:transposition_operator}
 \end{equation}
 %
+
 Writing $\rotmato{1}{2}^\transp$ instead of $\bm{P}_\transp \rotmato{1}{2}$ serves for the clarity of the expressions (\ref{equ:grad_Phi_1_q},\ref{equ:grad_Phi_1_x},\ref{equ:grad_Phi_j_qj},\ref{equ:grad_Phi_j_q1}) and overloads the transposition operator for ${\mathbb{R}}^{9}$ noted with the bar.
 %\color{gray}
 %The Euler angles can be calculated from the general rotation matrix $\bm{R}$ of (\ref{equ:def_rotmat}) in the same way as before using these operators with the notation

@@ -64,19 +64,19 @@
 % Add packages and commands here. The following packages are loaded in our class file: fontenc, calc, indentfirst, fancyhdr, graphicx, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, amsthm, hyphenat, natbib, hyperref, footmisc, geometry, caption, url, mdframed, tabto, soul, multirow, microtype, tikz
 \graphicspath{{./figures/}}
 %\usepackage{todonotes}
-\usepackage[disable]{todonotes} % Für finale Version ohne Änderungen
+\usepackage[disable]{todonotes} % F√ºr finale Version ohne √Ñnderungen
 % Markup package
 %\usepackage[deletedmarkup=xout,authormarkup=none]{changes}
-\usepackage[final]{changes} % Für finale Version ohne Änderungen
+\usepackage[final]{changes} % F√ºr finale Version ohne √Ñnderungen
 \setremarkmarkup{\emph{(#1: #2)}}
 \colorlet{sp}{red!80!black}
 %\setremarkmarkup{\emph{\color{lg!70!white}\small(#1: #2)}}
 \definechangesauthor[color=sp]{Sp}
 
 
-\usepackage{calrsfs} % Für Kalligraphie-F 
+\usepackage{calrsfs} % F√ºr Kalligraphie-F 
 \newcommand{\bm}[1]{\boldsymbol{#1}}
-% Latex-Makros für häufig verwendete Formelzeichen
+% Latex-Makros f√ºr h√§ufig verwendete Formelzeichen
 \DeclareMathOperator{\arctantwo}{arctan2}
 \newcommand{\ortvek}[4]{{ }_{(#1)}{\boldsymbol{#2}}^{#3}_{#4} }
 \newcommand{\vek}[3]{\boldsymbol{#1}^{#2}_{#3}}
@@ -172,11 +172,11 @@ The functional redundancy of robots with full mobility is exploited using nullsp
 %\color{gray}
 %Einleitung ins Thema, Aufgabenredundanz, serielle Roboter
 %\begin{itemize}
-%	\item Parallele Roboter werden aufgrund ihrer hohen Steifigkeit in großem Ausmaß für Zerspanungsaufgaben verwendet, die mit 5 FG beschrieben werden können: 3T2R Task Space.
-%	\item Dazu werden hauptsächlich Strukturen mit 6 EE-FG eingesetzt (3T3R Operational Space). Dadurch liegt eine Aufgabenredundanz vor, für deren gradientenbasierte Lösung es noch keine allgemeingültige Lösung für PKM gibt.
-%	\item Für serielle Industrieroboter in 3T2R-Aufgaben gibt es bereits verschiedene allgemeingültige Verfahren zur Lösung der inversen Kinematik und der resultierenden Aufgabenredundanz \cite{Baron2000,HuoBar2005,Zlajpah2017,LegerAng2016,ZhuQuCaoYan2013,GuoDonKe2015,MousaviGagBouRay2018,1_SchapplerTapOrt2019}
-%	\item Die gradientenbasierten Verfahren \cite{Baron2000,HuoBar2005,Zlajpah2017,LegerAng2016,1_SchapplerTapOrt2019} ermöglichen die Projektion zusätzlicher Optimierungskriterien in den Nullraum des Gradienten und somit auch die Ausnutzung der Aufgabenredundanz durch gleichzeitige Optimierung der Nebenbedingungen mit der Lösung des IK-Problems.
-%	\item Die Bildung eines an 3T2R-Aufgaben angepassten Residuumsvektors und des dazu passenden Gradienten erfolgt dabei auf unterschiedliche Weise, wie bspw. Hinzufügen einer virtuellen Achse \cite{Baron2000}, Zerlegung des Task Space \cite{HuoBar2005}, Rotation in Task Frame und weglassen einer Komponente \cite{Zlajpah2017}, Definition der Werkzeugachse durch zwei Punkte und daraus Konstruktion eines Nullraums \cite{LegerAng2016}, Definition von absoluter Orientierung und Orientierungsfehler mit reziproken Euler-Winkeln \cite{1_SchapplerTapOrt2019}.
+%	\item Parallele Roboter werden aufgrund ihrer hohen Steifigkeit in gro√üem Ausma√ü f√ºr Zerspanungsaufgaben verwendet, die mit 5 FG beschrieben werden k√∂nnen: 3T2R Task Space.
+%	\item Dazu werden haupts√§chlich Strukturen mit 6 EE-FG eingesetzt (3T3R Operational Space). Dadurch liegt eine Aufgabenredundanz vor, f√ºr deren gradientenbasierte L√∂sung es noch keine allgemeing√ºltige L√∂sung f√ºr PKM gibt.
+%	\item F√ºr serielle Industrieroboter in 3T2R-Aufgaben gibt es bereits verschiedene allgemeing√ºltige Verfahren zur L√∂sung der inversen Kinematik und der resultierenden Aufgabenredundanz \cite{Baron2000,HuoBar2005,Zlajpah2017,LegerAng2016,ZhuQuCaoYan2013,GuoDonKe2015,MousaviGagBouRay2018,1_SchapplerTapOrt2019}
+%	\item Die gradientenbasierten Verfahren \cite{Baron2000,HuoBar2005,Zlajpah2017,LegerAng2016,1_SchapplerTapOrt2019} erm√∂glichen die Projektion zus√§tzlicher Optimierungskriterien in den Nullraum des Gradienten und somit auch die Ausnutzung der Aufgabenredundanz durch gleichzeitige Optimierung der Nebenbedingungen mit der L√∂sung des IK-Problems.
+%	\item Die Bildung eines an 3T2R-Aufgaben angepassten Residuumsvektors und des dazu passenden Gradienten erfolgt dabei auf unterschiedliche Weise, wie bspw. Hinzuf√ºgen einer virtuellen Achse \cite{Baron2000}, Zerlegung des Task Space \cite{HuoBar2005}, Rotation in Task Frame und weglassen einer Komponente \cite{Zlajpah2017}, Definition der Werkzeugachse durch zwei Punkte und daraus Konstruktion eines Nullraums \cite{LegerAng2016}, Definition von absoluter Orientierung und Orientierungsfehler mit reziproken Euler-Winkeln \cite{1_SchapplerTapOrt2019}.
 %\end{itemize}
 %\color{black}
 
@@ -193,15 +193,15 @@ The gradient matrices corresponding to the different residuals are used for an i
 Without the definition of a proper gradient, a global optimization has to be performed outside of the inverse kinematics algorithm \cite{ZhuQuCaoYan2013,GuoDonKe2015}.
 
 %\color{gray}
-%Beschreibung des aktuellen Stands von PKM für 3T2R.
+%Beschreibung des aktuellen Stands von PKM f√ºr 3T2R.
 %\begin{itemize}
-%	\item Für den Einsatz von PKM in 3T2R-Aufgaben gibt es unterschiedliche Ansätze \cite{Tale-MasoulehGos2011}: Asymmetrische 5FG (1), Symmetrische 5FG (2), 6FG-Mechanismen, die als 5FG redundant geregelt werden (3).
-%	\item Die Nutzung einer aktiven Beinkette mit 3T2R-FG oder einer passiven Führungsstrebe mit 3T2R-FG setzt bei der Mobilität an. Dadurch hat die Plattform auch 3T2R-FG.
+%	\item F√ºr den Einsatz von PKM in 3T2R-Aufgaben gibt es unterschiedliche Ans√§tze \cite{Tale-MasoulehGos2011}: Asymmetrische 5FG (1), Symmetrische 5FG (2), 6FG-Mechanismen, die als 5FG redundant geregelt werden (3).
+%	\item Die Nutzung einer aktiven Beinkette mit 3T2R-FG oder einer passiven F√ºhrungsstrebe mit 3T2R-FG setzt bei der Mobilit√§t an. Dadurch hat die Plattform auch 3T2R-FG.
 %	\item Dieses Konzept wird in der Literatur an verschiedenen Maschinentypen gezeigt:
-%	\cite{WangGos1997} für 5UPS/US, \cite{ZhangGos2001} für 5UPS/RUU, \cite{LiuXuYaoXu2015,WenQinZhaLam2016} für 6PUS/UPU, \cite{ZhengGaoZha2005,GaoSunZha2004} für 5UPS/PRPU, \cite{Gogu2006} mit Isoglide5-A1 (3PRRRRR-2PRRRR), \cite{SchreiberGos2003} mit 4URS-1URU, \cite{MbarekNefCor2005,LinLiYanZha2013} mit 4UPS-1UPU oder \cite{GaoPenZhaLi2006} mit 4PSU-1PU*U. Durch die kinematische Struktur hat der EE immer nur 3T2R FG und eine Aufgabenredundanz liegt nicht vor. Die 5UPS-PRPU Maschine aus \cite{ChengWanZha2008} weist zusätzlich eine Antriebsredundanz auf.
-%	\item In \cite{HuangLi2002} wurde mit Hilfe der Schraubentheorie am Bsp der 5UPU gezeigt, dass die Maschine nur lokale, und keine globale Mobilität aufweist, wenn die 5FG der Beinketten nicht übereinstimmen. Am Beispiel der Metrom-Maschine \cite{BaerWei2006}, der dazu ähnlichen 4SPRR-1PSPR-Maschine von \cite{AlaghebandMahMilBen2015} oder der Isoglide5 \cite{Gogu2006} wird deutlich, dass bei mehreren Beinketten mit 5FG der nicht durch die Aufgabe vorgegebene Rotations-FG um die Werkzeugachse bei allen Beinketten vorliegen muss. Das führt zu einer letzten Drehachse jeder Beinkette in der Werkzeugachse. Bei der konstruktiven Umsetzung wird das letzte Gelenk als rotierender Ring um die Werkzeugachse gewählt \cite{BaerWei2006,AlaghebandMahMilBen2015}.
-%	\item Davon abweichend werden in \cite{KongGos2005} 5FG-PKM synthetisiert, die symmetrische Beinketten aufweisen. Diese werden in \cite{Tale-MasoulehGos2011} für 5RPUR und in \cite{Tale-MasoulehSaaGosTag2010} für 5PRUR genauer analysiert.
-%	\item Bei Maschinen mit 3T3R EE-FG wie der Eclipse-Maschine (3PPRS) \cite{HongKim2000} oder Hexapod-Maschinen mit 6UPS-Struktur \cite{MerletPerDan2000}, die für 3T2R eingesetzt werden, kann der Drehwinkel des Endeffektors um die Symmetrieachse des Werkzeugs frei gewählt werden.
+%	\cite{WangGos1997} f√ºr 5UPS/US, \cite{ZhangGos2001} f√ºr 5UPS/RUU, \cite{LiuXuYaoXu2015,WenQinZhaLam2016} f√ºr 6PUS/UPU, \cite{ZhengGaoZha2005,GaoSunZha2004} f√ºr 5UPS/PRPU, \cite{Gogu2006} mit Isoglide5-A1 (3PRRRRR-2PRRRR), \cite{SchreiberGos2003} mit 4URS-1URU, \cite{MbarekNefCor2005,LinLiYanZha2013} mit 4UPS-1UPU oder \cite{GaoPenZhaLi2006} mit 4PSU-1PU*U. Durch die kinematische Struktur hat der EE immer nur 3T2R FG und eine Aufgabenredundanz liegt nicht vor. Die 5UPS-PRPU Maschine aus \cite{ChengWanZha2008} weist zus√§tzlich eine Antriebsredundanz auf.
+%	\item In \cite{HuangLi2002} wurde mit Hilfe der Schraubentheorie am Bsp der 5UPU gezeigt, dass die Maschine nur lokale, und keine globale Mobilit√§t aufweist, wenn die 5FG der Beinketten nicht √ºbereinstimmen. Am Beispiel der Metrom-Maschine \cite{BaerWei2006}, der dazu √§hnlichen 4SPRR-1PSPR-Maschine von \cite{AlaghebandMahMilBen2015} oder der Isoglide5 \cite{Gogu2006} wird deutlich, dass bei mehreren Beinketten mit 5FG der nicht durch die Aufgabe vorgegebene Rotations-FG um die Werkzeugachse bei allen Beinketten vorliegen muss. Das f√ºhrt zu einer letzten Drehachse jeder Beinkette in der Werkzeugachse. Bei der konstruktiven Umsetzung wird das letzte Gelenk als rotierender Ring um die Werkzeugachse gew√§hlt \cite{BaerWei2006,AlaghebandMahMilBen2015}.
+%	\item Davon abweichend werden in \cite{KongGos2005} 5FG-PKM synthetisiert, die symmetrische Beinketten aufweisen. Diese werden in \cite{Tale-MasoulehGos2011} f√ºr 5RPUR und in \cite{Tale-MasoulehSaaGosTag2010} f√ºr 5PRUR genauer analysiert.
+%	\item Bei Maschinen mit 3T3R EE-FG wie der Eclipse-Maschine (3PPRS) \cite{HongKim2000} oder Hexapod-Maschinen mit 6UPS-Struktur \cite{MerletPerDan2000}, die f√ºr 3T2R eingesetzt werden, kann der Drehwinkel des Endeffektors um die Symmetrieachse des Werkzeugs frei gew√§hlt werden.
 %\end{itemize}
 %\color{black}
 
@@ -253,7 +253,7 @@ The resulting 5R\underline{P}UR of Fig.\,\ref{fig:systems_pictures}\,d and 5\und
 	\input{./figures/systems_pictures.pdf_tex}
 	\caption{Typical mechanisms of the different classes. Taken from \cite{ZhangGos2001} (a), \cite{MbarekNefCor2005} (b), \cite{AlaghebandMahMilBen2015} (c), \cite{Tale-MasoulehGos2011} (d).}
 	\label{fig:systems_pictures}
-	\vspace{-0.4cm}	% Damit Fußnote von unten näher an das Bild heranrückt
+	\vspace{-0.4cm}	% Damit Fu√ünote von unten n√§her an das Bild heranr√ºckt
     \vspace{-0.5cm} % TODO: Remove after removing the text before changes
 \end{figure} 
 \newpage
@@ -270,10 +270,10 @@ Additionally, only members of class I provide redundancy which allows to use the
 Therefore, the remainder of the paper focuses on mechanisms of the first class to allow an optimization of their performance criteria using the degree of task redundancy.
 
 %\color{gray}
-%Methoden zur Lösung der IK. Methoden durchnummerieren und Tabelle mit allen Systemen machen. Dann verschiedene Paper und Roboter den nummerierten Methoden zuordnen.
+%Methoden zur L√∂sung der IK. Methoden durchnummerieren und Tabelle mit allen Systemen machen. Dann verschiedene Paper und Roboter den nummerierten Methoden zuordnen.
 %\begin{itemize}
-%	\item Für die vorgestellten Maschinen mit 5 EE-FG \cite{LiuXuYaoXu2015,WenQinZhaLam2016,ZhengGaoZha2005,GaoSunZha2004,ChengWanZha2008,AlaghebandMahMilBen2015,BaerWei2006,Tale-MasoulehSaaGosTag2010,Tale-MasoulehGos2011} ist die inverse Kinematik analytisch einfach zu erhalten. Die Berechnung erfolgt durch die Definition der EE-Orientierung mit zwei mitgedrehten Winkeln für die Führungskette, die 3T2R-FG aufweist. Für die restlichen Ketten wird die IK dann analytisch mit Standard-Verfahren berechnet, da die Beinketten eine einfache Struktur aufweisen.
-%	\item In \cite{MerletPerDan2000} wird die IK für eine 3T3R PKM (6UPS) in Abhängigkeit des Drehwinkels um die Werkzeugachse bestimmt. Der Drehwinkel wird dann mit einer Optimierung und Intervallanalyse gewählt. Mit dem Verfahren ist allerdings keine gradientenbasierte Optimierung der Nebenbedingungen möglich. Da hierbei ähnlich wie in \cite{ZhuQuCaoYan2013,GuoDonKe2015} für serielle Roboter kein Gradient definiert wird, muss eine aufwändigere globale Optimierung durchgeführt werden, bei der der redundante Winkel als Parameter variiert wird.
+%	\item F√ºr die vorgestellten Maschinen mit 5 EE-FG \cite{LiuXuYaoXu2015,WenQinZhaLam2016,ZhengGaoZha2005,GaoSunZha2004,ChengWanZha2008,AlaghebandMahMilBen2015,BaerWei2006,Tale-MasoulehSaaGosTag2010,Tale-MasoulehGos2011} ist die inverse Kinematik analytisch einfach zu erhalten. Die Berechnung erfolgt durch die Definition der EE-Orientierung mit zwei mitgedrehten Winkeln f√ºr die F√ºhrungskette, die 3T2R-FG aufweist. F√ºr die restlichen Ketten wird die IK dann analytisch mit Standard-Verfahren berechnet, da die Beinketten eine einfache Struktur aufweisen.
+%	\item In \cite{MerletPerDan2000} wird die IK f√ºr eine 3T3R PKM (6UPS) in Abh√§ngigkeit des Drehwinkels um die Werkzeugachse bestimmt. Der Drehwinkel wird dann mit einer Optimierung und Intervallanalyse gew√§hlt. Mit dem Verfahren ist allerdings keine gradientenbasierte Optimierung der Nebenbedingungen m√∂glich. Da hierbei √§hnlich wie in \cite{ZhuQuCaoYan2013,GuoDonKe2015} f√ºr serielle Roboter kein Gradient definiert wird, muss eine aufw√§ndigere globale Optimierung durchgef√ºhrt werden, bei der der redundante Winkel als Parameter variiert wird.
 %\end{itemize}
 %\color{black}
 
@@ -296,8 +296,8 @@ The drawback of this method is the need for a cascaded optimization which is mor
 %\color{gray}
 %Problembeschreibung, Ansatz des Papers
 %\begin{itemize}
-%	\item Die Übersicht zeigt, dass bisher keine allgemeinen Ansätze zur Redundanzauflösung von PKM für 3T2R-Aufgaben bekannt sind.
-%	\item Die Arbeiten konzentrieren sich entweder auf eine allgemeine Struktursynthese dieser Maschinenstruktur basierend z.B. auf Schraubentheorie \cite{KongGos2005} oder der Theorie der linearen Transformation \cite{Gogu2006}. Für die Auswahl der Maschine für eine gegebene Aufgabe ist allerdings nicht nur die kinematische Struktursynthese, sondern auch die Maßsynthese entscheidend. Diese kombinierte Struktur- und Maßsynthese folgt dem Schema aus Bild \ref{fig:structdimsynth} und benötigt auch eine allgemeingültige Berechnung der IK, was aufgrund der Vielzahl der Systeme mit manuellen, analytischen Verfahren nicht umsetzbar ist.
+%	\item Die √úbersicht zeigt, dass bisher keine allgemeinen Ans√§tze zur Redundanzaufl√∂sung von PKM f√ºr 3T2R-Aufgaben bekannt sind.
+%	\item Die Arbeiten konzentrieren sich entweder auf eine allgemeine Struktursynthese dieser Maschinenstruktur basierend z.B. auf Schraubentheorie \cite{KongGos2005} oder der Theorie der linearen Transformation \cite{Gogu2006}. F√ºr die Auswahl der Maschine f√ºr eine gegebene Aufgabe ist allerdings nicht nur die kinematische Struktursynthese, sondern auch die Ma√üsynthese entscheidend. Diese kombinierte Struktur- und Ma√üsynthese folgt dem Schema aus Bild \ref{fig:structdimsynth} und ben√∂tigt auch eine allgemeing√ºltige Berechnung der IK, was aufgrund der Vielzahl der Systeme mit manuellen, analytischen Verfahren nicht umsetzbar ist.
 %\end{itemize}
 %\color{black}
 
@@ -320,9 +320,9 @@ For the generation of task redundant parallel robots, the inverse kinematics has
 %\color{gray}
 %Beitrag des Papers:
 %\begin{itemize}
-%	\item Aufbauend auf der Beschreibung der Kinematik mit reziproken Euler-Winkeln \cite{1_SchapplerTapOrt2019} wird ein allgemeines, gradientenbasiertes Verfahren für die IK von PKM vorgestellt
-%	\item Damit ist es möglich, sowohl PKM mit strukturell 3T2R-FG und Aufgabenredundante PKM mit 3T3R-PKM zu berücksichtigen.
-%	\item Durch das gradientenbasierte Verfahren, in dem die redundante task space Koordinate komplett eliminiert wird, ist eine effiziente Umsetzung gegeben, die in der Bahnplanung und für Nullraum-Bewegungen der Maschinen eingesetzt werden kann.
+%	\item Aufbauend auf der Beschreibung der Kinematik mit reziproken Euler-Winkeln \cite{1_SchapplerTapOrt2019} wird ein allgemeines, gradientenbasiertes Verfahren f√ºr die IK von PKM vorgestellt
+%	\item Damit ist es m√∂glich, sowohl PKM mit strukturell 3T2R-FG und Aufgabenredundante PKM mit 3T3R-PKM zu ber√ºcksichtigen.
+%	\item Durch das gradientenbasierte Verfahren, in dem die redundante task space Koordinate komplett eliminiert wird, ist eine effiziente Umsetzung gegeben, die in der Bahnplanung und f√ºr Nullraum-Bewegungen der Maschinen eingesetzt werden kann.
 %\end{itemize}
 %\color{black}
 %
@@ -338,8 +338,8 @@ To address this, the contributions of this paper are
 %\begin{itemize}
 %    \item Problembeschreibung: Inverse Kinematik von PKM bzw. Kinematik-Modellierung Kap \ref{sec:PKM_general}
 %	\item Vorstellung des REW-Verfahrens aus \cite{1_SchapplerTapOrt2019} zur Modellierung serieller kinematischer Ketten Kap \ref{sec:REW_seriell}
-%	\item Aufstellung der vollständigen kinematischen Zwangsbedingungen für allgemeine PKM mit dem Verfahren, Kap. \ref{sec:ZB_PKM}
-%	\item Lösung des IK-Problems mit Redundanzauflösung und weitere Anwendungen der Modellierung Kap. \ref{sec:ZB_Anwendung}
+%	\item Aufstellung der vollst√§ndigen kinematischen Zwangsbedingungen f√ºr allgemeine PKM mit dem Verfahren, Kap. \ref{sec:ZB_PKM}
+%	\item L√∂sung des IK-Problems mit Redundanzaufl√∂sung und weitere Anwendungen der Modellierung Kap. \ref{sec:ZB_Anwendung}
 %	\item Darstellung der Ergebnisse an Beispielsystemen, Kap. \ref{sec:Ergebnisse}
 %\end{itemize}
 %\color{black}
@@ -357,13 +357,13 @@ The appendix contains proofs and additional details on the mathematical formulat
 %\color{gray}
 %\begin{itemize}
 %    \item Beschreibung des Systems und der Nomenklatur mit Bild (3RRR und 3RPR, eingezeichnete Vektoren)
-%    \item Darstellung der kinematischen Zwangsbedingungen als Vektoren und für Betrag der Beinlänge. Vektor rAB und r0E einzeichnen
+%    \item Darstellung der kinematischen Zwangsbedingungen als Vektoren und f√ºr Betrag der Beinl√§nge. Vektor rAB und r0E einzeichnen
 %    \item Eigenschaft nennen: Methode nicht allgemein, sondern Voraussetzung, dass nur die ersten Gelenkwinkel die Zwangsbedingungen beeinflussen
-%    \item Hinweis Dynamik-Modellierung basiert auch auf diesen Zwangsbedingungen \cite{Merlet2006,BriotKha2015,AbdellatifHei2009,DoThanhKotHeiOrt2009b} und funktioniert auch nur für Roboter, mit diesen Eigenschaften
-%    \item \cite{Gogu2008} nimmt allgemeine lineare Transformation für Position und Orientierung, aber auf Geschwindigkeitsebene. Damit die inverse Kinematik nicht direkt lösbar und nur für 3T3R.
-%    \item Formeln: Kinematik der Beinkette und der Plattform, Kinematische Zwangsbedingungen in allgemeiner Form, Einfluss der Beingelenke anhand der Einträge in der Gradientenmatrix
-%    \item Einschränkung schreiben: Methode nicht für allgemeine PKM anwendbar, die automatisch generiert werden, da immer analytisch die Systeme speziell gelöst werden
-%    \item Skizzierung des Problems für 3T2R: Unterschiedliche Modellierung für Führungskette und Folgekette, Führungskette in Kap. \ref{sec:REW_seriell}, Folgekette und Zusammenschluss in Kap. \ref{sec:ZB_PKM}.
+%    \item Hinweis Dynamik-Modellierung basiert auch auf diesen Zwangsbedingungen \cite{Merlet2006,BriotKha2015,AbdellatifHei2009,DoThanhKotHeiOrt2009b} und funktioniert auch nur f√ºr Roboter, mit diesen Eigenschaften
+%    \item \cite{Gogu2008} nimmt allgemeine lineare Transformation f√ºr Position und Orientierung, aber auf Geschwindigkeitsebene. Damit die inverse Kinematik nicht direkt l√∂sbar und nur f√ºr 3T3R.
+%    \item Formeln: Kinematik der Beinkette und der Plattform, Kinematische Zwangsbedingungen in allgemeiner Form, Einfluss der Beingelenke anhand der Eintr√§ge in der Gradientenmatrix
+%    \item Einschr√§nkung schreiben: Methode nicht f√ºr allgemeine PKM anwendbar, die automatisch generiert werden, da immer analytisch die Systeme speziell gel√∂st werden
+%    \item Skizzierung des Problems f√ºr 3T2R: Unterschiedliche Modellierung f√ºr F√ºhrungskette und Folgekette, F√ºhrungskette in Kap. \ref{sec:REW_seriell}, Folgekette und Zusammenschluss in Kap. \ref{sec:ZB_PKM}.
 %    \item Bis hier noch keine rotatorischen Zwangsbedingungen hinschreiben. Die kommen erst in den folgenden Kapiteln
 %\end{itemize}
 %\color{black}
@@ -559,8 +559,8 @@ An alternative kinematic model to encounter the combination of these points is p
 
 %\color{gray}
 %\begin{itemize}
-%    \item Modellierung serieller Ketten für 3T3R und 3T2R. Anwendung direkt auf PKM-Beinkette
-%    \item Bild: Stilisierte PKM (Planar 3RRR) mit Hervorhebung Beinkette 1 und Plattform, restliche Beinketten nur ausgegraut. Zwei Teilbilder: Ketten geöffnet und geschlossen. Darstellung der Orientierung des Endeffektors durch Plattform-Dreieck. Darstellung beliebiger Verdrehung der Plattform durch mehrere gestrichelte Plattformen.
+%    \item Modellierung serieller Ketten f√ºr 3T3R und 3T2R. Anwendung direkt auf PKM-Beinkette
+%    \item Bild: Stilisierte PKM (Planar 3RRR) mit Hervorhebung Beinkette 1 und Plattform, restliche Beinketten nur ausgegraut. Zwei Teilbilder: Ketten ge√∂ffnet und geschlossen. Darstellung der Orientierung des Endeffektors durch Plattform-Dreieck. Darstellung beliebiger Verdrehung der Plattform durch mehrere gestrichelte Plattformen.
 %    \item Formeln aus WC-Paper, aber Nomenklatur anpassen an PKM Beinkette 1
 %\end{itemize}
 %\color{black}
@@ -748,10 +748,10 @@ In the following, ``$\bm{\Phi}$'' is always used for 3T3R\footnote{By omitting t
 \label{sec:ZB_PKM}
 %\color{gray}
 %\begin{itemize}
-%    \item Kinematische Zwangsbedingungen der Folge-Ketten: Begründung für Vorgehensweise Führungskette/Folgekette (es kann nur für eine Kette die Orientierung der Plattform frei sein. Für die anderen gilt dann diese Orientierung)
-%    \item Bild: 3RRR mit Führungs- und Folgekette; geöffnet und geschlossen. Getrichelte Plattform für Orientierung aus Folge-Kette. KS-Definition der Plattform: y-Achse zeigt auf gegenüberliegenden Eckpunkt.
+%    \item Kinematische Zwangsbedingungen der Folge-Ketten: Begr√ºndung f√ºr Vorgehensweise F√ºhrungskette/Folgekette (es kann nur f√ºr eine Kette die Orientierung der Plattform frei sein. F√ºr die anderen gilt dann diese Orientierung)
+%    \item Bild: 3RRR mit F√ºhrungs- und Folgekette; ge√∂ffnet und geschlossen. Getrichelte Plattform f√ºr Orientierung aus Folge-Kette. KS-Definition der Plattform: y-Achse zeigt auf gegen√ºberliegenden Eckpunkt.
 %    \item Darstellung der Gradientenmatrizen aus Kettenregel
-%    \item Vollständige Jacobi-Matrix für 3T3R und 3T2R
+%    \item Vollst√§ndige Jacobi-Matrix f√ºr 3T3R und 3T2R
 %\end{itemize}
 %\color{black}
 
@@ -778,7 +778,7 @@ The constraints $\bm{\Psi}_i$ from (\ref{equ:Psi_def}) for the reduced coordinat
 Fig.\,\ref{fig:pkm_constr_rot_follow}\,(a) show an open-loop second leg chain for a given first leg chain from Fig.\,\ref{fig:pkm_constr_rot_lead}.
 %
 \begin{figure}[b]
-    \vspace{-0.5cm} % Bild näher von unten an Fußnote heranbringen
+    \vspace{-0.5cm} % Bild n√§her von unten an Fu√ünote heranbringen
     \input{./figures/pkm_constr_def_rot_follow.pdf_tex}
     \caption{Different cases for the kinematic constraints of the following chain: (a) wrong position and orientation; (b) correct position and wrong orientation; (c) all kinematic constraints are complied.}
     \label{fig:pkm_constr_rot_follow}
@@ -849,9 +849,9 @@ For the 6U\underline{P}S structure this would result in a 10-dimensional constra
 
 %\color{gray}
 %\begin{itemize}
-%    \item Gradientenbasierte Lösung der inversen Kinematik mit Nullraum (benötigt nur die geometrische Matrix der inversen Kinematik). Folge der Benennung aus \cite{Gogu2008}, dass es die geometrische Matrix und nicht die Jacobi-Matrix ist.
+%    \item Gradientenbasierte L√∂sung der inversen Kinematik mit Nullraum (ben√∂tigt nur die geometrische Matrix der inversen Kinematik). Folge der Benennung aus \cite{Gogu2008}, dass es die geometrische Matrix und nicht die Jacobi-Matrix ist.
 %    \item Geschwindigkeits-Zusammenhang: Geometrische Matrix der DK ist notwendig. Zusammenhang beschreiben
-%    \item Gradientenbasierte Lösung der inversen Kinematik 3T3R/3T2R für serielle Roboter als Anwendung.
+%    \item Gradientenbasierte L√∂sung der inversen Kinematik 3T3R/3T2R f√ºr serielle Roboter als Anwendung.
 %\end{itemize}
 %\color{black}
 
@@ -982,7 +982,7 @@ which is then expanded with the chain rule for differentiation and the stack ope
 \begin{equation}
 \bm{\Phi}_{\mathrm{r},1,\partial\bm{q}_1}
 =
-%underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des mittleren Terms
+%underbrace f√ºr Geschweifte Klammern drunter, vphantom nur f√ºr vertikale Gr√∂√üe des mittleren Terms
 % Term I
 \underbrace{
 	\vphantom{\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}}
@@ -1035,7 +1035,7 @@ where the definitions from (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) onl
 \bm{P}_{\mathrm{T}}
 \overline{\prod}\left( \rotmato{0}{E}^\transp(\bm{q}_1), \rotmato{0}{D}(\bm{x}_{\mathrm{r}})\right)\right) \\
 &=
-%underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des dritten Terms
+%underbrace f√ºr Geschweifte Klammern drunter, vphantom nur f√ºr vertikale Gr√∂√üe des dritten Terms
 % Term I
 \underbrace{
 	\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
@@ -1089,7 +1089,7 @@ The gradient w.\,r.\,t. the joint coordinates of the following leg contains agai
 =
 \frac{\partial}{\partial \bm{q}_j} \bm{\alpha}\left(\overline{\prod}\left( \rotmato{0}{L}^\transp(\bm{q}_1), \rotmato{0}{E}(\bm{q}_j)\right)\right) \label{equ:grad_Phi_j_qj}\\
 &=
-%underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des rechten Terms
+%underbrace f√ºr Geschweifte Klammern drunter, vphantom nur f√ºr vertikale Gr√∂√üe des rechten Terms
 % Term I
 \underbrace{
 	\vphantom{\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j}}
@@ -1123,7 +1123,7 @@ The gradient w.\,r.\,t. the joint coordinates of the leading leg
 \frac{\partial}{\partial \bm{q}_1} \bm{\alpha}\left(\bm{P}_{\mathrm{T}}\overline{\prod}\left( \rotmato{0}{E}^\transp(\bm{q}_j) \rotmato{0}{L}(\bm{q}_1)\right)\right)
 \label{equ:grad_Phi_j_q1}\\
 &=
-%underbrace für Geschweifte Klammern drunter, vphantom nur für vertikale Größe des dritten Terms
+%underbrace f√ºr Geschweifte Klammern drunter, vphantom nur f√ºr vertikale Gr√∂√üe des dritten Terms
 % Term I
 \underbrace{
 	\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
@@ -1355,11 +1355,11 @@ which has been \todo[color=green!40]{Language}\replaced[id=Sp]{addressed}{adress
 \label{equ:full_diff_dk}
 \end{equation}
 %
-By only selecting the first rows for $\dot{\bm{q}}_{\mathrm{a}}$ in (\ref{equ:full_diff_ik}) and for $\dot{\bm{x}}$ in (\ref{equ:full_diff_dk}), the well-known analytic Jacobian\footnote{This matrix is related to the time derivatives $\dot{\bm{x}}_{\mathrm{r}}$ of the platform Euler angles and is called ``design Jacobian'' in \cite{Gogu2008} and ``Euler angles inverse \replaced[id=Sp]{J}{j}acobian matrix'' in \cite{Merlet2006} in contrast to the Jacobian related to angular velocities of the platform.\vspace{-0.9cm}} \todo[color=green!40]{Language in footnote} of the parallel robot \cite{Merlet2006,Gogu2008}, relating actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$ and platform velocities $\dot{\bm{x}}$, can be obtained from both equations.  % TODO: Entfernen von vspace in footnote nach entfernen der alten Textversionen für das Review;
+By only selecting the first rows for $\dot{\bm{q}}_{\mathrm{a}}$ in (\ref{equ:full_diff_ik}) and for $\dot{\bm{x}}$ in (\ref{equ:full_diff_dk}), the well-known analytic Jacobian\footnote{This matrix is related to the time derivatives $\dot{\bm{x}}_{\mathrm{r}}$ of the platform Euler angles and is called ``design Jacobian'' in \cite{Gogu2008} and ``Euler angles inverse \replaced[id=Sp]{J}{j}acobian matrix'' in \cite{Merlet2006} in contrast to the Jacobian related to angular velocities of the platform.\vspace{-0.9cm}} \todo[color=green!40]{Language in footnote} of the parallel robot \cite{Merlet2006,Gogu2008}, relating actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$ and platform velocities $\dot{\bm{x}}$, can be obtained from both equations.  % TODO: Entfernen von vspace in footnote nach entfernen der alten Textversionen f√ºr das Review;
 For the case of task or kinematic redundancy, the pseudo-inverse can be used for $\bm{\Phi}_{\partial\mathrm{ap}}$ in (\ref{equ:full_diff_ik}) \todo[color=blue!40]{Clarification}\added[id=Sp]{together with a nullspace optimization} as shown in Sec.\,\ref{sec:ZB_Anwendung_IK_grad}.
 \added[id=Sp]{This allows to exploit the functional redundancy in 3T2R tasks also for trajectories $\bm{\eta}(t)$, $\dot{\bm{\eta}}(t)$ and not only for single poses $\bm{\eta}$. When solving the IKP for a trajectory, the IK on position level of Sec.\,\ref{sec:ZB_Anwendung_IK_grad} is only needed to correct linearization errors.}
 The case of task redundancy does not affect (\ref{equ:full_diff_dk}), since the full platform velocity $\dot{\bm{x}}$ is obtained from given actuator velocities $\dot{\bm{q}}_{\mathrm{a}}$.
-%For meaningful PKM the matrix $\bm{\Phi}_{\partial\bm{x}\mathrm{p}}$ is always square, since otherwise one or more leg chains would contain kinematic redundancy leading to uncontrollable nullspace motion. --> ist so noch falsch/ungeprüft!
+%For meaningful PKM the matrix $\bm{\Phi}_{\partial\bm{x}\mathrm{p}}$ is always square, since otherwise one or more leg chains would contain kinematic redundancy leading to uncontrollable nullspace motion. --> ist so noch falsch/ungepr√ºft!
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
@@ -1374,8 +1374,8 @@ The results are generalized by the statistical analysis of random point-to-point
 
 %\color{gray}
 %\begin{itemize}
-%    \item Beispiel IK-Optimierung über Trajektorie (Industrieroboter in 3T2R-Traj., Bsp. aus \cite{HuoBar2008})
-%    \item Histogramm IK-Optimierung für verschiedene Roboter und zufällige Start- und End-Posen (Balken aufgegliedert nach 1., 2., ... Versuch)
+%    \item Beispiel IK-Optimierung √ºber Trajektorie (Industrieroboter in 3T2R-Traj., Bsp. aus \cite{HuoBar2008})
+%    \item Histogramm IK-Optimierung f√ºr verschiedene Roboter und zuf√§llige Start- und End-Posen (Balken aufgegliedert nach 1., 2., ... Versuch)
 %\end{itemize}
 %\color{black}
 
@@ -1401,7 +1401,7 @@ The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ an
 			\hline
 		\end{tabular}
     \begin{minipage}[t]{7.5cm}
-    	\vspace{0.001cm} % wird für bounding box des Bilds benötigt
+    	\vspace{0.001cm} % wird f√ºr bounding box des Bilds ben√∂tigt
     	\hspace{1cm}
 		\includegraphics[trim=30 30 0 30, clip, scale=0.7]{serrob_traj_zero_pose.png} % left bottom right top
     \end{minipage}
@@ -1410,7 +1410,7 @@ The trajectory is a rectangle with $500\,\mathrm{mm} \times 800\,\mathrm{mm}$ an
 \label{tab:mdh_industrialrobot}
 \end{figure}
 
-% Einstellungen für diesen Versuch, siehe figures/serrob_traj.m
+% Einstellungen f√ºr diesen Versuch, siehe figures/serrob_traj.m
 The IKP is solved with two settings: Setting the tool axis rotation to different constant values $\beta_3$ with the 3T3R algorithm and solving the IKP only for the desired pointing direction with the 3T2R algorithm.
 The algorithm from (\ref{equ:nullspace}) was used in the extended version of (\ref{equ:IK_damping}) for both cases with different settings caused by their nature.
 For the 3T3R case, $K_\mathrm{T}=0.7$ and $K_\mathrm{N}=0.7$ were set.
@@ -1445,7 +1445,7 @@ The 3T2R IK without optimization with dotted lines tends to lower changes in the
 
 %\color{gray}
 %\begin{itemize}
-%    \item Beispiel IK-Optimierung über Trajektorie (Parameter ähnlich wählen wie in \cite{MerletPerDan2000}).
+%    \item Beispiel IK-Optimierung √ºber Trajektorie (Parameter √§hnlich w√§hlen wie in \cite{MerletPerDan2000}).
 %\end{itemize}
 %\color{black}
 
@@ -1458,7 +1458,7 @@ This robot belongs to the first class presented in Sec.\,\ref{sec:parrob_classif
 %	\begin{tabular}[t]{l r}
 %		$\bm{x}_\mathrm{t}^0=\begin{bmatrix}0&0&0.5\,m\end{bmatrix}^\transp$
 %		\begin{minipage}[t]{7.5cm}
-%			\vspace{0.001cm} % wird für bounding box des Bilds benötigt
+%			\vspace{0.001cm} % wird f√ºr bounding box des Bilds ben√∂tigt
 %			\hspace{1cm}
 %			\includegraphics[trim=50 50 50 50, clip, scale=0.7]{parrob_traj_zero_pose.png} % left bottom right top
 %		\end{minipage}
@@ -1490,7 +1490,7 @@ For the practical implementation, the computation time is only weakly influenced
 
 %
 \begin{figure}[b]
-	\vspace{-0.5cm} % Näher von unten an Fußnote heranrücken.
+	\vspace{-0.5cm} % N√§her von unten an Fu√ünote heranr√ºcken.
 	\includegraphics{parrob_traj_results1.pdf}
 	\caption{Results of the inverse kinematics of a 6UPS robot in a 3T2R task. (a) platform positions, (b) platform orientation in Euler angles, (c) optimization criterion $h_1(\bm{{q}})$, (d) optimization criterion $h_2(\bm{{q}})$.}
 	\label{fig:parrob_traj_3T2R}
@@ -1645,7 +1645,7 @@ $x$T$y$R & $x$ translational and $y$ rotational degrees of freedom
 %\begin{itemize}
 %	\item Details zu den Partiellen Ableitungen in den verschiedenen Gleichungen
 %	\item Genauer Inhalt der Spalten-Operatoren und der Euler-Winkel-Ableitungen
-%	\item Herleitung für Zusammenhang Rotationsmatrix-Winkelgeschwindigkeit (Gradienten)
+%	\item Herleitung f√ºr Zusammenhang Rotationsmatrix-Winkelgeschwindigkeit (Gradienten)
 %\end{itemize}
 %\color{black}
 
@@ -1792,9 +1792,9 @@ with the consequences for the kinematic modeling of robots in 3T2R tasks describ
 
 %\color{gray}
 %\begin{itemize}
-%	\item Methode mit Orientierungs-Residuum basierend auf Euler-Winkeln wurde in \cite{GoldenbergBenFen1985} eingeführt. Dort wurde der Gradient mit der geometrischen Jacobi-Matrix erklärt, ohne genauere Rechnung.
-%	\item Mathematischer Beweis hier, dass das nicht möglich ist, da sich der Gradient auf den Orientierungsfehler bezieht und die Jacobi auf die absolute Orientierung
-%	\item Nur für den Fall, dass die ZB=0 sind, sind die Darstellungen überführbar.
+%	\item Methode mit Orientierungs-Residuum basierend auf Euler-Winkeln wurde in \cite{GoldenbergBenFen1985} eingef√ºhrt. Dort wurde der Gradient mit der geometrischen Jacobi-Matrix erkl√§rt, ohne genauere Rechnung.
+%	\item Mathematischer Beweis hier, dass das nicht m√∂glich ist, da sich der Gradient auf den Orientierungsfehler bezieht und die Jacobi auf die absolute Orientierung
+%	\item Nur f√ºr den Fall, dass die ZB=0 sind, sind die Darstellungen √ºberf√ºhrbar.
 %\end{itemize}
 %\color{black}
 

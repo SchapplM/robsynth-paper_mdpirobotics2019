@@ -101,17 +101,17 @@
 %\newcommand{\orcidauthorB}{0000-0000-000-000X} % Add \orcidB{} behind the author's name
 
 % Authors, for the paper (add full first names)
-\Author{Moritz Schappler $^{1,*}$, Svenja Tappe $^{1}$ and Tobias Ortmaier $^{1}$}
+\Author{Moritz Schappler *, Svenja Tappe  and Tobias Ortmaier}
 
 % Authors, for metadata in PDF
 \AuthorNames{Moritz Schappler, Svenja Tappe and Tobias Ortmaier}
 
 % Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
 \address{%
-$^{1}$ \quad Institut für Mechatronische Systeme, Leibniz Universität Hannover; firstname.lastname@imes.uni-hannover.de}
+ \quad Institute of Mechatronic Systems, Leibniz University Hannover, 30167 Hannover, Germany}%Please check if the writing of the adress is ok.
 
 % Contact information of the corresponding author
-\corres{Correspondence: moritz.schappler@imes.uni-hannover.de;}
+\corres{Correspondence: moritz.schappler@imes.uni-hannover.de}
 
 % Current address and/or shared authorship
 %\firstnote{Current address: Affiliation 3} 
@@ -180,7 +180,7 @@ The functional redundancy of robots with full mobility is exploited using nullsp
 %\end{itemize}
 %\color{black}
 
-\todo[color=gray!40]{General Note: The Layout will be restored after removing the tracked old versions}Industrial tasks like welding, gluing, milling or drilling represent a major part the of applications of industrial robots, which generally have full mobility, i.e. the operational space of their end-effector has three translational and three rotational (``3T3R'') degrees of freedom (``DoF'').
+\todo[color=gray!40]{General Note: The Layout will be restored after removing the tracked old versions}Industrial tasks like welding, gluing, milling or drilling represent a major part the of applications of industrial robots, which generally have full mobility, i.e., the operational space of their end-effector has three translational and three rotational (``3T3R'') degrees of freedom (``DoF'').
 Parallel robots like the \todo[color=green!40]{Hyphenation}Stewart\replaced[id=Sp]{ }{-}platform have especially been proposed for milling tasks regarding their high structural stiffness.
 The task space of the named applications can be defined by three translational DoF and only two rotations due to a symmetry around the tool axis (``3T2R'').
 This results in a functional or task redundancy, which is not exploited to full extend yet for \emph{parallel} robots.
@@ -280,7 +280,7 @@ Therefore, the remainder of the paper focuses on mechanisms of the first class t
 \subsection{Inverse Kinematics of Parallel Robots for 3T2R Tasks}
 
 The parallel robots with five DoF presented previously have a kinematic \todo[color=green!40]{Language}structure\deleted[id=Sp]{,} that allows for an analytic model of the inverse kinematics.
-All references define the end-effector orientation with two consecutive elementary rotations, i.e. define two Euler angles to represent the tool axis orientation in minimal coordinates \todo[color=blue!40]{Ref \cite{MerletPerDan2000} in list}\cite{LiuXuYaoXu2015, MerletPerDan2000, WenQinZhaLam2016, ZhengGaoZha2005,GaoSunZha2004, ChengWanZha2008, AlaghebandMahMilBen2015, Tale-MasoulehSaaGosTag2010, BaerWei2006, Tale-MasoulehGos2011}, which is called ``partial pose'' in \cite{MerletPerDan2000}.
+All references define the end-effector orientation with two consecutive elementary rotations, i.e., define two Euler angles to represent the tool axis orientation in minimal coordinates \todo[color=blue!40]{Ref \cite{MerletPerDan2000} in list}\cite{LiuXuYaoXu2015, MerletPerDan2000, WenQinZhaLam2016, ZhengGaoZha2005,GaoSunZha2004, ChengWanZha2008, AlaghebandMahMilBen2015, Tale-MasoulehSaaGosTag2010, BaerWei2006, Tale-MasoulehGos2011}, which is called ``partial pose'' in \cite{MerletPerDan2000}.
 The inverse kinematics problem (IKP) is first solved for the first chain, which is called ``leading chain'' in this paper.
 Due to the geometry of the leading chain, this solution can be found algebraically. %  \cite{WangGos1997}
 Then the IKP is solved for the other ``following'' chains with the given orientation from the leading chain and standard methods.
@@ -635,7 +635,7 @@ The triangle represents the end-effector platform and only one leg chain is draw
 %
 \begin{figure}[b]
 	\input{./figures/pkm_constr_def_rot_lead.pdf_tex}
-	\caption{Different cases for the kinematic constraints of the leading chain for the 3RRR example:\\(a) no constraints complied; (b) position and tool axis rotation complied; (c) all constraints complied.}
+	\caption{Different cases for the kinematic constraints of the leading chain for the 3RRR example:\\(\textbf{a}) no constraints complied; (\textbf{b}) position and tool axis rotation complied; (\textbf{c}) all constraints complied.}
 	\label{fig:pkm_constr_rot_lead}
 \end{figure} 
 
@@ -648,7 +648,8 @@ As a drawback of (\ref{equ:Phit_def_i}), all joint angles $\bm{q}_i$ of the leg 
 \label{equ:r_0E_i}
 \end{equation}
 %
-This implies, that the platform is now part of the last link of the considered leg chain, as sketched in Figure\,\ref{fig:pkm_constr_rot_lead} by the dashed triangle.
+
+This implies that the platform is now part of the last link of the considered leg chain, as sketched in Figure\,\ref{fig:pkm_constr_rot_lead} by the dashed triangle.
 To account for the increased number of included joints in (\ref{equ:r_0E_i}), the full kinematic constraints
 \vspace{-0.6cm} % TODO: Wieder entfernen nach Entfernen der alten Textstellen
 
@@ -1784,7 +1785,7 @@ The \todo[color=green!40]{Hyphenation}\replaced[id=Sp]{$ZYX$ }{$Z$-$Y$-$X$-}Eule
 \end{equation}
 %
 where $\delta$ only influences the first component $\alpha_1'$.
-This allows the conclusion, that $\beta_3$ only influences $\alpha_1$ and results in the dependencies
+This allows the conclusion that $\beta_3$ only influences $\alpha_1$ and results in the dependencies
 %
 \begin{align}
     \alpha_1'&=\alpha_1'(\bm{q},\beta_1,\beta_2,\beta_3)\\

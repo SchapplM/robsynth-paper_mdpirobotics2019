@@ -503,6 +503,8 @@ set_size_plot_subplot(21,...
 % export_fig(21, fullfile(respath, 'serrob_traj_zero_pose.pdf'));
 export_fig serrob_traj_zero_pose.png -r864
 
+fprintf('Mittelpunkt der Trajektorie: %1.0f/%1.0f/%1.0f\n', ...
+  1e3*mean(minmax2(X(:,1)')), 1e3*mean(minmax2(X(:,2)')), 1e3*mean(minmax2(X(:,3)')));
 %% Verlauf des EE-Winkels für Präsentation
 % X_opt_ges = NaN(length(T), 6);
 % Q_opt_ii = Q_opt_ges(:,:,1); % Gleiche Auswahl wie für Bild im Paper

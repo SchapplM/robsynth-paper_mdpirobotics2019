@@ -7,6 +7,8 @@
 % Quelle:
 % [GoldenbergBenFen1985] "A complete generalized solution to the inverse
 % kinematics of robots, IEEE Journal on Robotics and Automation, 1985
+% [Angeles1985] On the numerical solution of the inverse kinematic problem,
+% The International Journal of Robotics Research, 1985
 
 % Moritz Schappler, moritz.schappler@imes.uni-hannover.de
 % (C) Institut für Mechatronische Systeme, Universität Hannover
@@ -48,6 +50,7 @@ r_psi = atan2(n_a'*a_t*sin(r_phi)-o_a'*a_t*cos(r_phi), ...
 r_Gold6 = [r_phi;r_theta;r_psi];
 
 % Residuum mit xyz rotation axes: [GoldenbergBenFen1985] (7)
+% Entspricht "vect"-Operator angewendet auf R_at ([Angeles1985])
 r_phi =   1/2 * (a_a'*o_t - a_t'*o_a);
 r_theta = 1/2 * (n_a'*a_t - n_t'*a_a);
 r_psi =   1/2 * (o_a'*n_t - o_t'*n_a);

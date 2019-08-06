@@ -1,10 +1,10 @@
 % !TEX encoding = UTF-8 Unicode
 % !TEX spellcheck = en_US
-%  LaTeX support: latex@mdpi.com 
+%  LaTeX support: latex@mdpi.com
 %  In case you need support, please attach all files that are necessary for compiling as well as the log file, and specify the details of your LaTeX setup (which operating system and LaTeX version / tools you are using).
 
 %=================================================================
-\documentclass[robotics,article,accept,moreauthors,pdftex]{Definitions/mdpi} 
+\documentclass[robotics,article,accept,moreauthors,pdftex]{Definitions/mdpi}
 
 % If you would like to post an early version of this manuscript as a preprint, you may use preprint as the journal and change 'submit' to 'accept'. The document class line would be, e.g., \documentclass[preprints,article,accept,moreauthors,pdftex]{mdpi}. This is especially recommended for submission to arXiv, where line numbers should be removed before posting. For preprints.org, the editorial staff will make this change immediately prior to posting.
 
@@ -20,7 +20,7 @@
 %---------
 % article
 %---------
-% The default type of manuscript is "article", but can be replaced by: 
+% The default type of manuscript is "article", but can be replaced by:
 % abstract, addendum, article, benchmark, book, bookreview, briefreport, casereport, changes, comment, commentary, communication, conceptpaper, conferenceproceedings, correction, conferencereport, expressionofconcern, extendedabstract, meetingreport, creative, datadescriptor, discussion, editorial, essay, erratum, hypothesis, interestingimages, letter, meetingreport, newbookreceived, obituary, opinion, projectreport, reply, retraction, review, perspective, protocol, shortnote, supfile, technicalnote, viewpoint
 % supfile = supplementary materials
 
@@ -40,9 +40,9 @@
 % The option pdftex is for use with pdfLaTeX. If eps figures are used, remove the option pdftex and use LaTeX and dvi2pdf.
 
 %=================================================================
-\firstpage{1} 
-\makeatletter 
-\setcounter{page}{\@firstpage} 
+\firstpage{1}
+\makeatletter
+\setcounter{page}{\@firstpage}
 \makeatother
 \pubvolume{xx}
 \issuenum{1}
@@ -53,7 +53,7 @@
 \history{Received: 27 June 2019; Accepted: 1 August 2019; Published: date}
 %\updates{yes} % If there is an update available, un-comment this line
 
-%% MDPI internal command: uncomment if new journal that already uses continuous page numbers 
+%% MDPI internal command: uncomment if new journal that already uses continuous page numbers
 %\continuouspages{yes}
 
 %------------------------------------------------------------------
@@ -74,7 +74,7 @@
 \definechangesauthor[color=sp]{Sp}
 
 
-\usepackage{calrsfs} % F√ºr Kalligraphie-F 
+\usepackage{calrsfs} % F√ºr Kalligraphie-F
 \newcommand{\bm}[1]{\boldsymbol{#1}}
 % Latex-Makros f√ºr h√§ufig verwendete Formelzeichen
 \DeclareMathOperator{\arctantwo}{arctan2}
@@ -108,13 +108,13 @@
 
 % Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
 \address{%
- \quad Institute of Mechatronic Systems, Leibniz University Hannover, 30167 Hannover, Germany}%Please check if the writing of the adress is ok.
+\quad Institute of Mechatronic Systems, Leibniz University Hannover, 30167 Hannover, Germany}%Please check if the writing of the adress is ok.
 
 % Contact information of the corresponding author
 \corres{Correspondence: moritz.schappler@imes.uni-hannover.de}
 
 % Current address and/or shared authorship
-%\firstnote{Current address: Affiliation 3} 
+%\firstnote{Current address: Affiliation 3}
 %\secondnote{These authors contributed equally to this work.}
 % The commands \thirdnote{} till \eighthnote{} are available for further notes
 
@@ -122,7 +122,7 @@
 
 %\conference{} % An extended version of a conference paper
 
-% Abstract (Do not insert blank lines, i.e., \\) 
+% Abstract (Do not insert blank lines, i.e., \\)
 \abstract{
 Industrial manipulators and parallel robots are often used for tasks, such as drilling or milling, that require three translational, but only two rotational degrees of freedom (``3T2R'').
 While kinematic models for specific mechanisms for these tasks exist, a general kinematic model for parallel robots is still missing.
@@ -210,10 +210,10 @@ Without the definition of a proper gradient, a global optimization has to be per
 
 Parallel robots in 3T2R tasks can be ordered in classes according to their kinematic structure into
 \begin{itemize}
-	\item[I] mechanisms with full platform mobility (3T3R) that are redundantly controlled to five DoF,
-	\item[II] mechanisms with 3T2R platform mobility enforced with a passive five-DoF constraining leg and five other legs with six DoF each,
-	\item[III] mechanisms with 3T2R platform mobility resulting from the mobility of five actuated legs with five or six DoF each,
-	\item[IV] mechanisms with 3T2R platform mobility and five legs with only five DoF each.
+\item[I] mechanisms with full platform mobility (3T3R) that are redundantly controlled to five DoF,
+\item[II] mechanisms with 3T2R platform mobility enforced with a passive five-DoF constraining leg and five other legs with six DoF each,
+\item[III] mechanisms with 3T2R platform mobility resulting from the mobility of five actuated legs with five or six DoF each,
+\item[IV] mechanisms with 3T2R platform mobility and five legs with only five DoF each.
 \end{itemize}
 
 The classes I and II were introduced in \cite{Tale-MasoulehGos2011}, where class IV is analyzed regarding leg symmetry and singularities.
@@ -226,23 +226,23 @@ Examples for the first class are hexapods (6U\underline{P}S) \cite{MerletPerDan2
 Any other parallel robot with full mobility (see e.g., \cite{Merlet2006,Gogu2008,Zhang2009}) may be used as~ well.
 
 The second class allows for more variety, since the six-DoF mechanism and the five-DoF constraining leg can manifest in different kinematic structures:
-The U\underline{{P}}S structure is used for the six-DoF part of the mechanism 
-  by \cite{WangGos1997} with a focus on kinematic analysis of 5U\underline{P}S/US, 
-  by \cite{ZhangGos2001} with a focus on kinetostatic modeling at the example of 5U\underline{P}S/RUU (see Figure\ \ref{fig:systems_pictures}\,a), 
-  by \cite{ZhengGaoZha2005} with focus on trajectory control of 5U\underline{P}S/PRPU and 
-  by \cite{GaoSunZha2004} for pose measurement with the passive leg of 5U\underline{P}S/PRPU.
+The U\underline{{P}}S structure is used for the six-DoF part of the mechanism
+by \cite{WangGos1997} with a focus on kinematic analysis of 5U\underline{P}S/US,
+by \cite{ZhangGos2001} with a focus on kinetostatic modeling at the example of 5U\underline{P}S/RUU (see Figure\ \ref{fig:systems_pictures}\,a),
+by \cite{ZhengGaoZha2005} with focus on trajectory control of 5U\underline{P}S/PRPU and
+by \cite{GaoSunZha2004} for pose measurement with the passive leg of 5U\underline{P}S/PRPU.
 Other possible general base structures are \underline{R}US at the 5\underline{R}US/US example in \cite{WangGos1997}, \underline{P}US, which has been investigated for the control of a redundantly actuated 6\underline{P}US/UPU regarding the \todo[color=blue!40]{ref. description} \replaced[id=Sp]{force control of the redundant leg with inverse dynamics compensation \cite{LiuXuYaoXu2015} or force optimization \cite{WenQinZhaLam2016}}{control of the redundant leg with inverse-dynamics control \cite{LiuXuYaoXu2015} or force control \cite{WenQinZhaLam2016}}.
 %The redundantly actuated 5U\underline{P}S-\underline{P}RPU from \cite{ChengWanZha2008} is based on the machine from \cite{ZhengGaoZha2005}, but does not fall in any of the classes I-IV.
 
 The \todo[color=green!40]{Language}most\replaced[id=Sp]{-}{ }straightforward member of the third class is the 4U\underline{P}S-U\underline{P}U of Figure\,\ref{fig:systems_pictures}\,b, which is investigated in \cite{MbarekNefCor2005} for a simulation and feasibility study together with a survey on possible architectures for a technical realization of this class.
-Other possible structures are 
-  the 4U\underline{R}S-U\underline{R}U, which is analyzed kinematically in \cite{SchreiberGos2003} and
-  the 4\underline{P}SU-\underline{P}U*U, which has a special parallelogram structure in one leg (termed ``U*'') and is presented in \cite{GaoPenZhaLi2006}.
+Other possible structures are
+the 4U\underline{R}S-U\underline{R}U, which is analyzed kinematically in \cite{SchreiberGos2003} and
+the 4\underline{P}SU-\underline{P}U*U, which has a special parallelogram structure in one leg (termed ``U*'') and is presented in \cite{GaoPenZhaLi2006}.
 A \todo[color=green!40]{Hyphenation}sub\replaced[id=Sp]{}{-}class of III consists of mechanisms~\cite{BaerWei2006,LinLiYanZha2013,AlaghebandMahMilBen2015}, where the last joint axis of the legs is coaxial with the tool axis and is constructed as rotating ring.
 It contains the
-  Metrom machine tool (4S\underline{P}RR-S\underline{P}R), depicted in Figure\,\ref{fig:systems_pictures}\,c, which is analyzed regarding inverse and forward kinematics in \cite{BaerWei2006} or its variants, 
-  the redundant 4S\underline{P}RR-\underline{P}S\underline{P}R from \cite{AlaghebandMahMilBen2015} or 
-  the hybrid 4UR\underline{H}U-UR\underline{H}R with an additional linear actuator at the platform \cite{LinLiYanZha2013}.
+Metrom machine tool (4S\underline{P}RR-S\underline{P}R), depicted in Figure\,\ref{fig:systems_pictures}\,c, which is analyzed regarding inverse and forward kinematics in \cite{BaerWei2006} or its variants,
+the redundant 4S\underline{P}RR-\underline{P}S\underline{P}R from \cite{AlaghebandMahMilBen2015} or
+the hybrid 4UR\underline{H}U-UR\underline{H}R with an additional linear actuator at the platform \cite{LinLiYanZha2013}.
 %The last joint axis of the legs of this sub-class \cite{BaerWei2006,LinLiYanZha2013,AlaghebandMahMilBen2015} is coaxial with the tool axis and is constructed as rotating ring.
 A structural synthesis based on linear transformations and evolutionary morphology \cite{Gogu2008} led e.g., to the Isoglide5 mechanisms (3\underline{P}RRRRR-2\underline{P}RRRR), which are analyzed and optimized regarding the isotropy of the Jacobian in \cite{Gogu2006}.
 
@@ -251,11 +251,11 @@ Members of class IV have been found by systematic structural synthesis with scre
 The resulting 5R\underline{P}UR of Figure\,\ref{fig:systems_pictures}\,d and 5\underline{P}RUR are analyzed in \cite{Tale-MasoulehGos2011,Tale-MasoulehSaaGosTag2010}.
 %
 \begin{figure}[H]
-	\input{./figures/systems_pictures.pdf_tex}
-	\vspace{0.3cm} % to account for captions in the pdf_tex file, which are outside the lower border of the image
-	\caption{Typical mechanisms of the different classes. Adapted from \cite{ZhangGos2001} (a), \cite{MbarekNefCor2005} (b), \cite{AlaghebandMahMilBen2015} (c), \cite{Tale-MasoulehGos2011} (d).}
-	\label{fig:systems_pictures}
-\end{figure} 
+\input{./figures/systems_pictures.pdf_tex}
+\vspace{0.3cm} % to account for captions in the pdf_tex file, which are outside the lower border of the image
+\caption{Typical mechanisms of the different classes. Adapted from \cite{ZhangGos2001} (a), \cite{MbarekNefCor2005} (b), \cite{AlaghebandMahMilBen2015} (c), \cite{Tale-MasoulehGos2011} (d).}
+\label{fig:systems_pictures}
+\end{figure}
 
 In a practical application with competing requirements on workspace, stiffness, costs and precision, each of the existing systems has its legitimization.
 Nevertheless, each of the classes has inherent disadvantages:
@@ -311,10 +311,10 @@ To be able to perform the dimensional synthesis for all structures, the inverse 
 For the generation of task redundant parallel robots, the inverse kinematics has to include an optimization of the performance criteria and the restrictions such as joint \todo[color=green!40]{Language}limits\deleted[id=Sp]{,} to ensure a comparability of the results.
 %
 \begin{figure}[H]
-	\input{./figures/comb_struct_dim_synth.pdf_tex}
-	\caption{Overview of the procedure for combined structural and dimensional synthesis.}
-	\label{fig:structdimsynth}
-\end{figure} 
+\input{./figures/comb_struct_dim_synth.pdf_tex}
+\caption{Overview of the procedure for combined structural and dimensional synthesis.}
+\label{fig:structdimsynth}
+\end{figure}
 %
 %\color{gray}
 %Beitrag des Papers:
@@ -371,7 +371,7 @@ The appendix contains proofs and additional details on the mathematical formulat
 %    \input{./figures/pkm_constr_def_transl.pdf_tex}
 %    \caption{Kinematic Description of Parallel Robots.}
 %    \label{fig:pkm_constr_transl}
-%\end{figure} 
+%\end{figure}
 
 Before addressing the specific model for parallel robots in 3T2R tasks in the next section, the standard kinematics model of \todo[color=green!40]{Language}\deleted[id=Sp]{kinematics of}parallel kinematic machines (``PKM'') is repeated in the following, corresponding to the state of the art \cite{Merlet2006,Gogu2008,BriotKha2015} and serving as a reference to highlight its shortcomings for 3T2R tasks.
 The regarded parallel robot consists of $m$ legs, which each have the joint coordinates $\bm{q}_i$.
@@ -391,7 +391,7 @@ The coordinates
 of the end-effector platform describe the position and orientation of the end-effector frame $\ks{D}$ with respect to the base frame $\ks{0}$.
 In the equations, this is marked with left subscript ``$(0)$'' for vectors and left superscript ``$0$'' for rotation matrices.
 The platform-related end-effector frame is the desired frame in the inverse kinematics problem and is therefore abbreviated with ``D''.
-The position 
+The position
 %
 \begin{equation}
 \bm{x}_{\mathrm{t}}
@@ -422,7 +422,7 @@ of the platform frame is expressed with Euler angles
 \bm{\beta}
 \in {\mathbb{R}}^{3}
 \label{equ:xr_def}
-\end{equation} 
+\end{equation}
 %
 as a minimal representation of the orientation coordinates.
 The symbol ``$\bm{\beta}$'' will be used to denote orientations relative to the base frame throughout this paper.
@@ -438,15 +438,15 @@ is used for the Euler angles without loss of generality.
 The relation between joint coordinates $\bm{q}$ and platform coordinates $\bm{x}$ is established with the kinematic constraint equations, for which most commonly the vector loop
 %
 \begin{equation}
-\bm{\Phi}_{\mathrm{t},i}(\bm{q}_i,\bm{x}) = - \ortvek{0}{r}{}{A_iB_i}(\bm{x}) + \ortvek{0}{r}{}{A_iB_i}(\bm{q}_i) 
+\bm{\Phi}_{\mathrm{t},i}(\bm{q}_i,\bm{x}) = - \ortvek{0}{r}{}{A_iB_i}(\bm{x}) + \ortvek{0}{r}{}{A_iB_i}(\bm{q}_i)
 \label{equ:kinconstrAB}
 \end{equation}
 %
 between the position of the platform coupling point $B_i$ relative to the base coupling point $A_i$ is used for each leg chain $i$ \cite{Merlet2006}.
-The second term $\ortvek{0}{r}{}{A_iB_i}(\bm{q}_i)$ corresponds to the forward kinematics of the serial leg chain. 
+The second term $\ortvek{0}{r}{}{A_iB_i}(\bm{q}_i)$ corresponds to the forward kinematics of the serial leg chain.
 The vector
 \begin{equation}
-\ortvek{0}{r}{}{A_iB_i}(\bm{x}) = 
+\ortvek{0}{r}{}{A_iB_i}(\bm{x}) =
 - \ortvek{0}{r}{}{A_i}
 + \bm{x}_{\mathrm{t}} + \rotmat{0}{D}(\bm{x}_{\mathrm{r}}) \ortvek{D}{r}{}{B_i}
 \label{equ:vec_AB}
@@ -527,13 +527,13 @@ of this model has diagonal form and the direct-kinematics matrix
 is fully populated.
 This definition of the constraints has the following drawbacks:
 \begin{enumerate}
-    \item For parallel robots with arbitrary leg chains like those generated by a structural \linebreak synthesis \cite{KongGos2005, Gogu2008, RamirezKotOrt2015}, it is generally not possible to analytically eliminate the passive joint~ coordinates.
-    \item If more than three joint coordinates per leg influence the coupling point position $B_i$, the three kinematic constraints per joint in (\ref{equ:kinconstrAB}) are not sufficient to generate enough equations for the matrix of (\ref{equ:PKM_phi_grad_q}) to become invertible.
-    % \color{gray}Projection-based methods for the derivation of the dynamics \cite{Merlet2006,BriotKha2015,AbdellatifHei2009,DoThanhKotHeiOrt2009b} underly the same restrictions.\color{black}
-    \item The velocity-based theory of linear transformations used by \cite{Gogu2008} allows determining the mobility of arbitrary parallel robots.
-    The linear transformation is generalized in \cite{HuangLiuChe2011} to accuracy and stiffness modeling by means of screw theory resulting in the ``generalized Jacobian''.
-    Both concepts \todo[color=blue!40]{now prev. \#3 as \#3 and \#4; added}\added[id=Sp]{are similar to (\ref{equ:constr_qa_diff})} and do not provide a direct appliance to solve the IKP, since this requires a formulation of the orientation at position level, not velocity level.
-    \item Exploiting the reduction of end-effector coordinates for 3T2R tasks is not possible, since all end-effector coordinates are included in (\ref{equ:vec_AB}).
+\item For parallel robots with arbitrary leg chains like those generated by a structural \linebreak synthesis \cite{KongGos2005, Gogu2008, RamirezKotOrt2015}, it is generally not possible to analytically eliminate the passive joint~ coordinates.
+\item If more than three joint coordinates per leg influence the coupling point position $B_i$, the three kinematic constraints per joint in (\ref{equ:kinconstrAB}) are not sufficient to generate enough equations for the matrix of (\ref{equ:PKM_phi_grad_q}) to become invertible.
+% \color{gray}Projection-based methods for the derivation of the dynamics \cite{Merlet2006,BriotKha2015,AbdellatifHei2009,DoThanhKotHeiOrt2009b} underly the same restrictions.\color{black}
+\item The velocity-based theory of linear transformations used by \cite{Gogu2008} allows determining the mobility of arbitrary parallel robots.
+The linear transformation is generalized in \cite{HuangLiuChe2011} to accuracy and stiffness modeling by means of screw theory resulting in the ``generalized Jacobian''.
+Both concepts \todo[color=blue!40]{now prev. \#3 as \#3 and \#4; added}\added[id=Sp]{are similar to (\ref{equ:constr_qa_diff})} and do not provide a direct appliance to solve the IKP, since this requires a formulation of the orientation at position level, not velocity level.
+\item Exploiting the reduction of end-effector coordinates for 3T2R tasks is not possible, since all end-effector coordinates are included in (\ref{equ:vec_AB}).
 \end{enumerate}
 %
 
@@ -573,7 +573,7 @@ To take the rotational symmetry around the tool axis in 3T2R tasks into account,
 \bm{\eta}
 =
 \begin{bmatrix}
-\bm{\eta}_{\mathrm{t}}^\transp & 
+\bm{\eta}_{\mathrm{t}}^\transp &
 \bm{\eta}_{\mathrm{r}}^\transp
 \end{bmatrix}^\transp
 \in {\mathbb{R}}^{5}
@@ -603,8 +603,8 @@ The rotational part
 \end{bmatrix}^\transp
 =
 \underbrace{\begin{bmatrix}
-    1 & 0 & 0 \\ 
-    0 & 1 & 0 \end{bmatrix}}_{=\bm{P}_{\bm{\eta}_\mathrm{r}}}
+1 & 0 & 0 \\
+0 & 1 & 0 \end{bmatrix}}_{=\bm{P}_{\bm{\eta}_\mathrm{r}}}
 \bm{x}_{\mathrm{r}}
 \in {\mathbb{R}}^{2}
 \label{equ:etar_def}
@@ -621,7 +621,7 @@ For a formulation without the tool axis rotation, a different constraint definit
 %
 \begin{equation}
 \bm{\Phi}_{\mathrm{t},i}(\bm{q}_i,\bm{x})
-= 
+=
 - \ortvek{0}{r}{}{D} + \ortvek{0}{r}{}{E}(\bm{q}_i)
 =
 - \bm{x}_{\mathrm{t}} + \ortvek{0}{r}{}{E}(\bm{q}_i) \in {\mathbb{R}}^{3}
@@ -633,15 +633,15 @@ The vector loop is depicted in Figure\,\ref{fig:pkm_constr_rot_lead} for a plana
 The triangle represents the end-effector platform and only one leg chain is drawn in the figure.
 
 \begin{figure}[H]
-	\input{./figures/pkm_constr_def_rot_lead.pdf_tex}
-	\caption{Different cases for the kinematic constraints of the leading chain for the 3RRR example:\\(\textbf{a}) no constraints complied; (\textbf{b}) position and tool axis rotation complied; (\textbf{c}) all constraints complied.}
-	\label{fig:pkm_constr_rot_lead}
-\end{figure} 
+\input{./figures/pkm_constr_def_rot_lead.pdf_tex}
+\caption{Different cases for the kinematic constraints of the leading chain for the 3RRR example:\\(\textbf{a}) no constraints complied; (\textbf{b}) position and tool axis rotation complied; (\textbf{c}) all constraints complied.}
+\label{fig:pkm_constr_rot_lead}
+\end{figure}
 
 As a drawback of (\ref{equ:Phit_def_i}), all joint angles $\bm{q}_i$ of the leg $i$ and not only the coordinates of the first joints counted from the base are now included in the vector
 %
 \begin{equation}
-\ortvek{0}{r}{}{E}(\bm{q}_i) = 
+\ortvek{0}{r}{}{E}(\bm{q}_i) =
 \ortvek{0}{r}{}{A_i}
 + \ortvek{0}{r}{}{A_iB_i}(\bm{q}_i) + \rotmat{0}{B_i}(\bm{q}_i) \ortvek{B_i}{r}{}{E}.
 \label{equ:r_0E_i}
@@ -705,25 +705,25 @@ By using the \todo[color=green!40]{Hyphenation}\replaced[id=Sp]{$ZYX$ }{$Z$-$Y$-
 only the error component $\alpha_1$ is affected by rotations around the tool axis, which is the $z$-axis of the intermediate frames $\ks{A1}$, $\ks{A2}$ and the platform frame $\ks{D}$ in Figure\,\ref{fig:frames_5dof_6dof}\,b, where the frame rotations with the reciprocal set of Euler angles are sketched.
 
 \begin{figure}[H]
-    \input{./figures/frame_comparison_combined_5dof_6dof.pdf_tex}
-    \caption{Overview of the different frames (\textbf{a}) for six-DoF tasks with standard Euler angle \replaced[id=Sp]{convention}{notation} and (\textbf{b}) for five-DoF tasks with reciprocal Euler angle \replaced[id=Sp]{convention}{notation}; taken from \cite{1_SchapplerTapOrt2019}.}
-    \label{fig:frames_5dof_6dof}
-\end{figure} 
+\input{./figures/frame_comparison_combined_5dof_6dof.pdf_tex}
+\caption{Overview of the different frames (\textbf{a}) for six-DoF tasks with standard Euler angle \replaced[id=Sp]{convention}{notation} and (\textbf{b}) for five-DoF tasks with reciprocal Euler angle \replaced[id=Sp]{convention}{notation}; taken from \cite{1_SchapplerTapOrt2019}.}
+\label{fig:frames_5dof_6dof}
+\end{figure}
 
 The mathematical proof is given in appendix\,\ref{sec:appendix_eulerreciproc} and in \cite{1_SchapplerTapOrt2019}.
 %
 The new, reduced rotational part of the kinematic constraints
 %
 \begin{equation}
-\bm{\Psi}_{\mathrm{r},i}(\bm{q}_i,\bm{\eta}) = 
+\bm{\Psi}_{\mathrm{r},i}(\bm{q}_i,\bm{\eta}) =
 \begin{bmatrix}
 \alpha_2 & \alpha_3
 \end{bmatrix}^\transp
 =
 \overbrace{\begin{bmatrix}
-    0 & 1 & 0 \\ 
-    0 & 0 & 1
-    \end{bmatrix}}^{=\bm{P}_{\bm{\Psi}_\mathrm{r}}}
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}}^{=\bm{P}_{\bm{\Psi}_\mathrm{r}}}
 \bm{\Phi}_{\mathrm{r},i} (\bm{q}_i,\bm{x})
 \in {\mathbb{R}}^{2}
 \label{equ:Psir_def}
@@ -790,7 +790,7 @@ The translational part of the constraints is not coupled by the platform orienta
 %
 \begin{equation}
 \bm{\Phi}_{\mathrm{t},j}(\bm{q}_j,\bm{x})
-= 
+=
 - \ortvek{0}{r}{}{D} + \ortvek{0}{r}{}{E}(\bm{q}_j)
 =
 - \bm{x}_{\mathrm{t}} + \ortvek{0}{r}{}{E}(\bm{q}_j) \in {\mathbb{R}}^{3}
@@ -800,16 +800,16 @@ The translational part of the constraints is not coupled by the platform orienta
 for the following legs $j$.
 
 \begin{figure}[H]
-    \input{./figures/pkm_constr_def_rot_follow.pdf_tex}
-    \caption{Different cases for the kinematic constraints of the following chain: (\textbf{a}) wrong position and orientation; (\textbf{b}) correct position and wrong orientation; (\textbf{c}) all kinematic constraints are complied.}
-    \label{fig:pkm_constr_rot_follow}
-\end{figure} 
+\input{./figures/pkm_constr_def_rot_follow.pdf_tex}
+\caption{Different cases for the kinematic constraints of the following chain: (\textbf{a}) wrong position and orientation; (\textbf{b}) correct position and wrong orientation; (\textbf{c}) all kinematic constraints are complied.}
+\label{fig:pkm_constr_rot_follow}
+\end{figure}
 
 The orientation for the platform is given with the rotation matrix
 %
 \begin{equation}
 \rotmat{0}{L}(\bm{q}_1)
-:= 
+:=
 \rotmat{0}{E}(\bm{q}_1)
 \end{equation}
 %
@@ -988,18 +988,18 @@ which is then expanded with the chain rule for differentiation and the stack ope
 %underbrace f√ºr Geschweifte Klammern drunter, vphantom nur f√ºr vertikale Gr√∂√üe des mittleren Terms
 % Term I
 \underbrace{
-	\vphantom{\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}}
-	\frac{\partial \bm{\alpha}}{\partial \overline{\bm{R}}}
-	}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
+\vphantom{\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}}
+\frac{\partial \bm{\alpha}}{\partial \overline{\bm{R}}}
+}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
 % Term II
 \underbrace{
-	\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}
-	}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
+\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}
+}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
 % Term III
 \underbrace{
-	\vphantom{\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}}
-	\frac{\partial \rotmato{0}{E}(\bm{q}_1)}{\partial \bm{q}_1}
-	}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}}
+\vphantom{\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}}
+\frac{\partial \rotmato{0}{E}(\bm{q}_1)}{\partial \bm{q}_1}
+}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}}
 \in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_1)}.
 \label{equ:grad_Phi_1_q}
 \end{equation}
@@ -1033,7 +1033,7 @@ where the definitions from (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) onl
 \begin{align}
 \bm{\Phi}_{\mathrm{r},1,\partial\bm{x}_\mathrm{r}}
 &=
-\frac{\partial}{\partial \bm{x}_{\mathrm{r}}} \bm{\alpha}\left(\left(\rotmat{0}{E}^\transp(\bm{q}_1) \rotmat{0}{D}(\bm{x}_{\mathrm{r}})\right)^\transp\right) \label{equ:grad_Phi_1_x} 
+\frac{\partial}{\partial \bm{x}_{\mathrm{r}}} \bm{\alpha}\left(\left(\rotmat{0}{E}^\transp(\bm{q}_1) \rotmat{0}{D}(\bm{x}_{\mathrm{r}})\right)^\transp\right) \label{equ:grad_Phi_1_x}
 =
 \frac{\partial}{\partial \bm{x}_{\mathrm{r}}} \overline{\bm{\alpha}}\left(
 \bm{P}_{\mathrm{T}}
@@ -1042,22 +1042,22 @@ where the definitions from (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) onl
 %underbrace f√ºr Geschweifte Klammern drunter, vphantom nur f√ºr vertikale Gr√∂√üe des dritten Terms
 % Term I
 \underbrace{
-	\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
-    \frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}
-	}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
+\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
+\frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}
+}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
 % Term II
 \underbrace{
-	\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
-    \bm{P}_{\mathrm{T}}
-	}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
+\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
+\bm{P}_{\mathrm{T}}
+}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
 % Term III
 \underbrace{
-	\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}
-	}_{\mathrm{III} \in {\mathbb{R}}^{9 \times 9}}
+\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}
+}_{\mathrm{III} \in {\mathbb{R}}^{9 \times 9}}
 % Term IV
 \underbrace{
-	\frac{\partial \rotmato{0}{D}(\bm{x}_{\mathrm{r}})}{\partial \bm{x}_{\mathrm{r}}}
-	}_{\mathrm{IV} \in {\mathbb{R}}^{9 \times 3}}
+\frac{\partial \rotmato{0}{D}(\bm{x}_{\mathrm{r}})}{\partial \bm{x}_{\mathrm{r}}}
+}_{\mathrm{IV} \in {\mathbb{R}}^{9 \times 3}}
 \in {\mathbb{R}}^{3 \times 3}, \nonumber
 \end{align}
 %
@@ -1071,8 +1071,8 @@ the permutation matrix for transposition from (\ref{equ:transposition_operator})
 \subsection{Constraint Gradients for the Following Leg in the 3T2R Case}
 
 As explained regarding (\ref{equ:constr_Phi_PKM}), the constraints (\ref{equ:Phit_def_i}) and (\ref{equ:Phir_def_i}) and their gradients (\ref{equ:grad_Phi_1_q}) and (\ref{equ:grad_Phi_1_x}) are used for all legs in the 3T3R case and the leading leg in the 3T2R case.
-For the following legs in the 3T2R case, the gradients $\bm{\Phi}_{j,\partial\bm{q}_1}$, $\bm{\Phi}_{j,\partial\bm{q}_j}$ and $\bm{\Phi}_{j,\partial\bm{x}}$ with $j=2,...,m$ from the right part of (\ref{equ:PhiPsi_grad_q_complete}) and (\ref{equ:PhiPsi_grad_x_complete}) have to be calculated in a similar way. 
-Due to the \todo[color=green!40]{Language}\replaced[id=Sp]{absence}{abscence} of the platform orientation in (\ref{equ:Phir_def_j}), (\ref{equ:Phi_1_grad_x}) simplifies for the following leg to 
+For the following legs in the 3T2R case, the gradients $\bm{\Phi}_{j,\partial\bm{q}_1}$, $\bm{\Phi}_{j,\partial\bm{q}_j}$ and $\bm{\Phi}_{j,\partial\bm{x}}$ with $j=2,...,m$ from the right part of (\ref{equ:PhiPsi_grad_q_complete}) and (\ref{equ:PhiPsi_grad_x_complete}) have to be calculated in a similar way.
+Due to the \todo[color=green!40]{Language}\replaced[id=Sp]{absence}{abscence} of the platform orientation in (\ref{equ:Phir_def_j}), (\ref{equ:Phi_1_grad_x}) simplifies for the following leg to
 %
 \vspace{-0.3cm} % necessary to keep equ:IKP_maintask (42) on this page
 \begin{equation}
@@ -1097,18 +1097,18 @@ The gradient w.\,r.\,t. the joint coordinates of the following leg contains agai
 %underbrace f√ºr Geschweifte Klammern drunter, vphantom nur f√ºr vertikale Gr√∂√üe des rechten Terms
 % Term I
 \underbrace{
-	\vphantom{\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j}}
-	\frac{\partial \bm{\alpha}}{\partial \overline{\bm{R}}}
-	}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
+\vphantom{\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j}}
+\frac{\partial \bm{\alpha}}{\partial \overline{\bm{R}}}
+}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
 % Term II
 \underbrace{
-	\vphantom{\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j}}
-	\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}
-	}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
+\vphantom{\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j}}
+\frac{\partial \overline{\prod}\left(\rotmato{0}{D}^\transp, \rotmato{0}{E}\right)}{\partial \rotmato{0}{E}}
+}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
 % Term III
 \underbrace{
-	\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j}
-	}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_j)}}
+\frac{\partial \rotmato{0}{E}(\bm{q}_j)}{\partial \bm{q}_j}
+}_{\mathrm{III} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_j)}}
 \in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_j)}, \nonumber
 \end{align}
 %
@@ -1131,22 +1131,22 @@ The gradient w.\,r.\,t. the joint coordinates of the leading leg
 %underbrace f√ºr Geschweifte Klammern drunter, vphantom nur f√ºr vertikale Gr√∂√üe des dritten Terms
 % Term I
 \underbrace{
-	\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
-	\frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}
-	}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
+\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
+\frac{\partial \overline{\bm{\alpha}}}{\partial \overline{\bm{R}}}
+}_{\mathrm{I} \in {\mathbb{R}}^{3 \times 9}}
 % Term II
 \underbrace{
-	\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
-	\bm{P}_{\mathrm{T}}
-	}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
+\vphantom{\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{D}\right)}{\partial \rotmato{0}{D}}}
+\bm{P}_{\mathrm{T}}
+}_{\mathrm{II} \in {\mathbb{R}}^{9 \times 9}}
 % Term III
 \underbrace{
-	\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{L}\right)}{\partial \rotmato{0}{L}}
-	}_{\mathrm{III} \in {\mathbb{R}}^{9 \times 9}}
+\frac{\partial \overline{\prod}\left( \rotmato{0}{E}^\transp, \rotmato{0}{L}\right)}{\partial \rotmato{0}{L}}
+}_{\mathrm{III} \in {\mathbb{R}}^{9 \times 9}}
 % Term IV
 \underbrace{
-	\frac{\partial \rotmato{0}{L}(\bm{q}_1)}{\partial \bm{q}_1}
-	}_{\mathrm{IV} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}}
+\frac{\partial \rotmato{0}{L}(\bm{q}_1)}{\partial \bm{q}_1}
+}_{\mathrm{IV} \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}}
 \in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_1)}. \nonumber
 \end{align}
 %
@@ -1167,7 +1167,7 @@ As first introduced in \cite{GoldenbergBenFen1985} for Euler angle residuals in 
 \vspace{-0.4cm} % necessary to keep equ:IKP_maintask (42) on this page
 %
 \begin{equation}
-\bm{\Phi}(\bm{q}^{k+1},\bm{x}) = 
+\bm{\Phi}(\bm{q}^{k+1},\bm{x}) =
 \bm{\Phi}(\bm{q}^{k},\bm{x})
 +
 \frac{\partial}{\partial \bm{q}} \bm{\Phi}(\bm{q},\bm{x}) \biggr\rvert_{\bm{q}^k} (\bm{q}^{k+1} - \bm{q}^k)
@@ -1270,7 +1270,7 @@ The method can be used for \todo[color=red!40]{Terminology}serial\replaced[id=Sp
 The platform pose $\bm{x}$/$\bm{\eta}$ corresponds to the desired pose for the serial robots end-effector and the kinematic constraints $\bm{\Phi}$/$\bm{\Psi}$ correspond to the residual of the IKP.
 
 In the practical implementation, it has proven to be useful to extend the basic principle of (\ref{equ:nullspace}) to
-%Equ. 
+%Equ.
 %Since the method presented above is based on the linear approximation (\ref{equ:taylor_phi}), high step sizes have to be omitted to stay within the validity of the approximation.
 %Therefore, (\ref{equ:nullspace}) is extended in the practical implementation by additional damping coefficients, leading to
 %
@@ -1300,11 +1300,11 @@ The kinematic definitions can also be used in the differential kinematics (\ref{
 This was already presented in general form in \cite{Merlet2006} and also corresponds to the theory of linear transformation which is the base of the works of Gogu on structural synthesis \cite{Gogu2008}.
 The derivation in this paper is based on the position \emph{and} orientation, but comes to the same result as the already-existing velocity-based approach.
 Furthermore, using $\bm{\Psi}$/$\bm{\eta}$ as elaborated before allows for the first time defining differential kinematics specifically for 3T2R tasks in a general form.
-The differential equation of (\ref{equ:constr_diff}) is expanded to 
+The differential equation of (\ref{equ:constr_diff}) is expanded to
 \begin{equation}
 \frac{\mathrm{d}}{\mathrm{d}t} \bm{\Phi}(\bm{q}_{\mathrm{a}}, \bm{q}_{\mathrm{p}},\bm{x})
 =
-\bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} + \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}} \dot{\bm{q}}_{\mathrm{p}} + \bm{\Phi}_{\partial\bm{x}} \dot{\bm{x}} 
+\bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} + \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}} \dot{\bm{q}}_{\mathrm{p}} + \bm{\Phi}_{\partial\bm{x}} \dot{\bm{x}}
 =
 \bm{0}
 \label{equ:constr_diff_qap}
@@ -1315,7 +1315,7 @@ Reordering the equation leads to the full inverse differential kinematics
 \begin{equation}
 \bm{\Phi}_{\partial\bm{x}} \dot{\bm{x}}
 =
-- 
+-
 \begin{bmatrix} \bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} & \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}}\end{bmatrix}
 \begin{bmatrix}
 \dot{\bm{q}}_{\mathrm{a}} \\
@@ -1341,9 +1341,9 @@ Reordering the equation leads to the full inverse differential kinematics
 which has been \todo[color=green!40]{Language}\replaced[id=Sp]{addressed}{adressed} in the previous sections, and the full direct differential kinematics
 %
 \begin{equation}
-\bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}} 
+\bm{\Phi}_{\partial\bm{q}_{\mathrm{a}}} \dot{\bm{q}}_{\mathrm{a}}
 =
-- 
+-
 \begin{bmatrix} \bm{\Phi}_{\partial\bm{x}} & \bm{\Phi}_{\partial\bm{q}_{\mathrm{p}}} \end{bmatrix}
 \begin{bmatrix}
 \dot{\bm{x}} \\
@@ -1399,25 +1399,25 @@ Deviations in the parameters relative to \cite{HuoBar2008} result from the use o
 
 \begin{figure}[H]
 \begin{tabular}[t]{l r}
-		\begin{tabular}[t]{|c|c|c|c|c|c|c|}
-			\hline
+\begin{tabular}[t]{|c|c|c|c|c|c|c|}
+\hline
 %			$i$ & $\mathrm{R}_x(\alpha_i$) & $\mathrm{T}_x(d_i)$ & $\mathrm{R}_z(\theta_i)$ & $\mathrm{T}_z(r_i)$ & $q_{i,\mathrm{min}}$ &  $q_{i,\mathrm{max}}$ \\
-			$i$ & $\alpha_i$ & $d_i$ & $\theta_i$ & $r_i$ & $q_{i,\mathrm{min}}$ & $q_{i,\mathrm{max}}$ \\
-			& $\mathrm{R}_x$ & $\mathrm{T}_x$ & $\mathrm{R}_z$ & $\mathrm{T}_z$ & & \\
-			\hline
-			$1$ & $0$ & $0$ & $q_1$ & $0$ & $-180^\circ$ & $180^\circ$ \\
-			$2$ & $90^\circ$ & 150\,mm & $q_2$ & $0$ & $30^\circ$ & $165^\circ$ \\
-			$3$ & $0$ & 870\,mm & $q_3$ & $0$ & $-132^\circ$ & $230^\circ$ \\
-			$4$ & $90^\circ$ & 170\,mm & $q_4$ & 1016\,mm & $-360^\circ$ & $360^\circ$ \\
-			$5$ & $90^\circ$ & $0$ & $q_5$ & $0$ & $-125^\circ$ & $125^\circ$ \\
-			$6$ & $90^\circ$ & $0$ & $q_6$ & -175\,mm & $-360^\circ$ & $360^\circ$ \\
-			\hline
-		\end{tabular}
-    \begin{minipage}[t]{7.5cm}
-    	\vspace{0.001cm} % for bounding box
-    	\hspace{1cm} % move robot image to the right
-		\includegraphics[trim=30 30 0 30, clip, scale=0.7]{serrob_traj_zero_pose.png} % left bottom right top
-    \end{minipage}
+$i$ & $\alpha_i$ & $d_i$ & $\theta_i$ & $r_i$ & $q_{i,\mathrm{min}}$ & $q_{i,\mathrm{max}}$ \\
+& $\mathrm{R}_x$ & $\mathrm{T}_x$ & $\mathrm{R}_z$ & $\mathrm{T}_z$ & & \\
+\hline
+$1$ & $0$ & $0$ & $q_1$ & $0$ & $-180^\circ$ & $180^\circ$ \\
+$2$ & $90^\circ$ & 150\,mm & $q_2$ & $0$ & $30^\circ$ & $165^\circ$ \\
+$3$ & $0$ & 870\,mm & $q_3$ & $0$ & $-132^\circ$ & $230^\circ$ \\
+$4$ & $90^\circ$ & 170\,mm & $q_4$ & 1016\,mm & $-360^\circ$ & $360^\circ$ \\
+$5$ & $90^\circ$ & $0$ & $q_5$ & $0$ & $-125^\circ$ & $125^\circ$ \\
+$6$ & $90^\circ$ & $0$ & $q_6$ & -175\,mm & $-360^\circ$ & $360^\circ$ \\
+\hline
+\end{tabular}
+\begin{minipage}[t]{7.5cm}
+\vspace{0.001cm} % for bounding box
+\hspace{1cm} % move robot image to the right
+\includegraphics[trim=30 30 0 30, clip, scale=0.7]{serrob_traj_zero_pose.png} % left bottom right top
+\end{minipage}
 \end{tabular}
 \caption{\textbf{Left}: Table with the kinematic parameters of the industrial manipulator Fanuc M-710 iC/50. \textbf{Right}: sketch of the robot scenario.}
 \label{tab:mdh_industrialrobot}
@@ -1447,9 +1447,9 @@ This exposes the need for keeping the solution always within the limits by the m
 The 3T2R IK without optimization with dotted lines tends to lower changes in the joint positions than the 3T3R IK, since this corresponds to the solution of the matrix \linebreak pseudo-inverse in (\ref{equ:nullspace}).
 
 \begin{figure}[H]
-    \includegraphics{serrob_traj_nullspace_optim.pdf}
-    \caption{Results of the inverse kinematics with different settings for the trajectory of Figure\,\ref{tab:mdh_industrialrobot}.}
-    \label{fig:serrob_traj_3T2R}
+\includegraphics{serrob_traj_nullspace_optim.pdf}
+\caption{Results of the inverse kinematics with different settings for the trajectory of Figure\,\ref{tab:mdh_industrialrobot}.}
+\label{fig:serrob_traj_3T2R}
 \end{figure}
 
 \subsection{Resolution of Functional Redundancy of a Parallel Robot in 3T2R Tasks}
@@ -1492,10 +1492,10 @@ For the practical implementation, the computation time is only weakly influenced
 
 %
 \begin{figure}[H]
-	\includegraphics{parrob_traj_results1.pdf}
-	\caption{Results of the inverse kinematics of a 6UPS robot in a 3T2R task. (\textbf{a}) platform positions, (\textbf{b})~ platform orientation in Euler angles, (\textbf{c}, \textbf{d}) optimization criteria $h_1(\bm{{q}})$ and $h_2(\bm{{q}})$.}
-	\label{fig:parrob_traj_3T2R}
-\end{figure} 
+\includegraphics{parrob_traj_results1.pdf}
+\caption{Results of the inverse kinematics of a 6UPS robot in a 3T2R task. (\textbf{a}) platform positions, (\textbf{b})~ platform orientation in Euler angles, (\textbf{c}, \textbf{d}) optimization criteria $h_1(\bm{{q}})$ and $h_2(\bm{{q}})$.}
+\label{fig:parrob_traj_3T2R}
+\end{figure}
 
 
 \subsection{Statistic Results for the Inverse Kinematics of Serial Link Chains}
@@ -1531,19 +1531,19 @@ This improves the worst success rate of all kinematic chains to 98\,\% for 3T2R 
 
 %
 \begin{figure}[H]
-    \includegraphics{serrob_ik_hist_cdf_all.pdf}
-    \caption{Histograms with cumulated frequency of the IK success for all kinematic chains with different settings: 3T2R tasks (\textbf{a}--\textbf{b}) vs. 3T3R tasks (\textbf{c}--\textbf{d}) and arbitrary initial value (\textbf{a},\textbf{c}) vs. initial near goal pose.}
-    \label{fig:serrob_ik_hist_cdf}
-\end{figure} 
+\includegraphics{serrob_ik_hist_cdf_all.pdf}
+\caption{Histograms with cumulated frequency of the IK success for all kinematic chains with different settings: 3T2R tasks (\textbf{a}--\textbf{b}) vs. 3T3R tasks (\textbf{c}--\textbf{d}) and arbitrary initial value (\textbf{a},\textbf{c}) vs. initial near goal pose.}
+\label{fig:serrob_ik_hist_cdf}
+\end{figure}
 %
 
 A detailed investigation on the success rates of all possible serial chains is performed in Figure\,\ref{fig:serrob_ik_hist}.
 
 \begin{figure}[H]
-    \includegraphics{serrob_ik_hist_all.pdf}
-    \caption{Detailed Statistics of the success of the inverse kinematics algorithm for 3T2R tasks (\textbf{a}--\textbf{b}) and 3T3R tasks (\textbf{c}--\textbf{d}). The Success of the IK solver is shown in different shades of green for increasing numbers of required tries. Different initial values $\bm{q}^0$ are distinguished in (\textbf{a},\textbf{c}) and (\textbf{b},\textbf{d}).}
-    \label{fig:serrob_ik_hist}
-\end{figure} 
+\includegraphics{serrob_ik_hist_all.pdf}
+\caption{Detailed Statistics of the success of the inverse kinematics algorithm for 3T2R tasks (\textbf{a}--\textbf{b}) and 3T3R tasks (\textbf{c}--\textbf{d}). The Success of the IK solver is shown in different shades of green for increasing numbers of required tries. Different initial values $\bm{q}^0$ are distinguished in (\textbf{a},\textbf{c}) and (\textbf{b},\textbf{d}).}
+\label{fig:serrob_ik_hist}
+\end{figure}
 
 The 309 serial kinematics are sorted according to their number of \todo[color=red!40]{Terminology}\replaced[id=Sp]{revolute}{rotational} joints and are listed on the horizontal axis of the figure: They contain three \todo[color=red!40]{Terminology}\replaced[id=Sp]{revolute}{rotational} joints up to no.\,98, four R\todo[color=green!40]{Hyphenation}\replaced[id=Sp]{ }{-}joints up to no.\,240, and five R\replaced[id=Sp]{ }{-}joints up to no.\,301.
 The eight structures from 302 to 309 with six R\replaced[id=Sp]{ }{-}joints differ in the parallelism of their joint axes.
@@ -1558,8 +1558,8 @@ Only cases with a violation of the limits (bright red) or wrong position (dark r
 % The general kinematics 266 can be transformed into the UPS chain by setting all of the 14 parameters to specific values.
 The subfigures a--d of Figure\,\ref{fig:serrob_ik_hist} correspond to the ones in Figure\,\ref{fig:serrob_ik_hist_cdf}.
 It can be observed that the quality of the results is clustered according to the kinematic groups.
-Structures with at most one \todo[color=green!40]{Hyphenation}P\replaced[id=Sp]{ }{-}joint show a considerably better performance of the algorithm with a worst success rate of 97.16\,\% for five R\replaced[id=Sp]{ }{-}joints %(at no.\,xx) 
-and 99.36\,\% for six R\replaced[id=Sp]{ }{-}joints %(at no.\,306) 
+Structures with at most one \todo[color=green!40]{Hyphenation}P\replaced[id=Sp]{ }{-}joint show a considerably better performance of the algorithm with a worst success rate of 97.16\,\% for five R\replaced[id=Sp]{ }{-}joints %(at no.\,xx)
+and 99.36\,\% for six R\replaced[id=Sp]{ }{-}joints %(at no.\,306)
 for the 3T2R case (a), which can be seen at the very small red top parts of the bars in the corresponding range of the diagram.
 The worse performance of the 3T3R algorithm, mostly caused by limit violations, can be explained by joints changing their configuration, i.e., from ``elbow up'' to ``elbow down'', which causes limit violations but does not affect the 3T3R IK.
 
@@ -1578,7 +1578,7 @@ The application of the proposed method can therefore be seen mainly in finding o
 %This allows to exploit the performance of the mechanisms to full extend.
 %
 %The complete formulation on the other hand allows a gradient-based analysis of the joint limits of active and passive joints.
-%It is 
+%It is
 %The method can be applied to find optimal trajectories for task redundant parallel robots in milling or drilling scenarios regarding stiffness, dexterity or joint limits.
 %This allows exploiting the performance of the mechanisms to full extend.
 Due to the performance of the method demonstrated at exemplary cases, an online implementation is possible but has to be proved in future works to converge in real-time conditions for specific machines.
@@ -1591,7 +1591,7 @@ The generality of the approach allows using it in a combined structural and dime
 %
 %Research manuscripts reporting large datasets that are deposited in a publicly available database should specify where the data have been deposited and provide the relevant accession numbers. If the accession numbers have not yet been obtained at the time of submission, please state that they will be provided during review. They must be provided prior to publication.
 %
-%Interventionary studies involving animals or humans, and other studies require ethical approval must list the authority that provided approval and the corresponding ethical approval code. 
+%Interventionary studies involving animals or humans, and other studies require ethical approval must list the authority that provided approval and the corresponding ethical approval code.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{Conclusions}
@@ -1600,7 +1600,7 @@ The generality of the approach allows using it in a combined structural and dime
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{6pt} 
+\vspace{6pt}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% optional
@@ -1621,13 +1621,13 @@ The generality of the approach allows using it in a combined structural and dime
 %\acknowledgments{In this section, you can acknowledge any support given which is not covered by the author contribution or funding sections. This may include administrative and technical support, or donations in kind (e.g., materials used for experiments).}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\conflictsofinterest{The authors declare no conflict of interest.} 
+\conflictsofinterest{The authors declare no conflict of interest.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% optional
 \abbreviations{The following abbreviations are used in this manuscript:\\
 
-\noindent 
+\noindent
 \begin{tabular}{@{}ll}
 PKM & parallel kinematic machine (parallel robot) \\
 IKP & inverse kinematics problem \\
@@ -1667,7 +1667,7 @@ An end-effector orientation $\bm{\beta}=\bm{x}_{\mathrm{r}}$ gives the rotation 
 %
 \begin{equation}
 \rotmat{D}{E}(\bm{\beta},\bm{q})
-= 
+=
 \rotmat{0}{D}^\transp (\bm{\beta})\rotmat{0}{E}(\bm{q}),
 \label{equ:orierr_1_rotmat}
 \end{equation}
@@ -1693,50 +1693,50 @@ The additional rotation corresponds to the tool axis defined in Section\,\ref{se
 and leads to a new residual orientation error expressed as a rotation matrix
 %
 \begin{align}
-    \rotmat{D}{E}(\bm{\beta}',\bm{q})
-    &=
-    \rotmat{0}{D}^\transp (\bm{\beta}') \rotmat{0}{E}(\bm{q}) \nonumber\\
-    &=
-    \left(\rotmat{0}{D}(\bm{\beta})\bm{R}_z(-\delta)\right)^\transp \rotmat{0}{E}(\bm{q}) \nonumber \\
-    &=
-    \bm{R}_z(\delta) \rotmat{0}{D}^\transp (\bm{\beta}) \rotmat{0}{E}(\bm{q}) \nonumber \\
-    &=
-    \bm{R}_z(\delta) \rotmat{D}{E}(\bm{\beta},\bm{q}).
-    \label{equ:orierr_2_rotmat}
+\rotmat{D}{E}(\bm{\beta}',\bm{q})
+&=
+\rotmat{0}{D}^\transp (\bm{\beta}') \rotmat{0}{E}(\bm{q}) \nonumber\\
+&=
+\left(\rotmat{0}{D}(\bm{\beta})\bm{R}_z(-\delta)\right)^\transp \rotmat{0}{E}(\bm{q}) \nonumber \\
+&=
+\bm{R}_z(\delta) \rotmat{0}{D}^\transp (\bm{\beta}) \rotmat{0}{E}(\bm{q}) \nonumber \\
+&=
+\bm{R}_z(\delta) \rotmat{D}{E}(\bm{\beta},\bm{q}).
+\label{equ:orierr_2_rotmat}
 \end{align}
 %
 The first residual orientation error from (\ref{equ:orierr_1_rotmat}) corresponding to $\bm{\beta}$ is defined as a rotation matrix
 %
 % Quelle: equations/R1.txt (aus ikfr_paper_equations.mw)
 \begin{align}
-    \rotmat{D}{E}(\bm{\beta},\bm{q})
-    =
-    \begin{bmatrix}
-        {n_x}&{o_x}&{a_x} \\
-        {n_y}&{o_y}&{a_y} \\ 
-        {n_z}&{o_z}&{a_z} \\ 
-    \end{bmatrix}
-    \label{equ:orierr_1_rotmat_def}
+\rotmat{D}{E}(\bm{\beta},\bm{q})
+=
+\begin{bmatrix}
+{n_x}&{o_x}&{a_x} \\
+{n_y}&{o_y}&{a_y} \\
+{n_z}&{o_z}&{a_z} \\
+\end{bmatrix}
+\label{equ:orierr_1_rotmat_def}
 \end{align}
 %
 and as a \todo[color=green!40]{Hyphenation}\replaced[id=Sp]{$ZYX$ }{$Z$-$Y$-$X$-}Euler angle representation
 %
 % Quelle: equations/alpha1.txt (aus ikfr_paper_equations.mw)
 \begin{align}
-    \bm{\alpha}
-    =
-    \begin{bmatrix}
-    \alpha_1 \\
-    \alpha_2 \\
-    \alpha_3
-    \end{bmatrix}
-    =
-    \begin{bmatrix}
-        \arctantwo \left( {n_y} , { n_x} \right) \\ 
-        \arctantwo \left( -{n_z} , \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\ 
-        \arctantwo \left( {o_z} , {a_z} \right)
-    \end{bmatrix}.
-    \label{equ:alpha_zyx}
+\bm{\alpha}
+=
+\begin{bmatrix}
+\alpha_1 \\
+\alpha_2 \\
+\alpha_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+\arctantwo \left( {n_y} , { n_x} \right) \\
+\arctantwo \left( -{n_z} , \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\
+\arctantwo \left( {o_z} , {a_z} \right)
+\end{bmatrix}.
+\label{equ:alpha_zyx}
 \end{align}
 %
 Using the sign-aware operator $\arctantwo(y,x)$ instead of $\arctan(y/x)$ allows angles to be in $(-\pi,+\pi]$, removes ambiguities and provides global differentiability.
@@ -1744,15 +1744,15 @@ The second residual corresponding to $\bm{\beta}'$ only differs regarding the ad
 %
 % Quelle: equations/R2.txt (aus ikfr_paper_equations.mw)
 \begin{align}
-    \rotmat{D}{E}(\bm{\beta}',\bm{q})
-    =
-    \begin{bmatrix}
-    {n'_x}&{o'_x}&{a'_x} \\
-    {n'_y}&{o'_y}&{a'_y} \\ 
-    {n'_z}&{o'_z}&{a'_z} \\ 
-    \end{bmatrix}
-    = 
-    \left[ \begin {array}{ccc} { C_{\delta}}\,{n_x}-{ S_{\delta}}\,{ n_y}&{ C_{\delta}}\,{o_x}-{ S_{\delta}}\,{o_y}&{ C_{\delta}}\,{ a_x}-{ S_{\delta}}\,{a_y}\\ \noalign{\medskip}{ C_{\delta}}\,{n_y}+ { S_{\delta}}\,{n_x}&{ C_{\delta}}\,{o_y}+{ S_{\delta}}\,{o_x}&{ C_{\delta}}\,{a_y}+{ S_{\delta}}\,{a_x}\\ \noalign{\medskip}{ n_z}&{o_z}&{a_z}\end {array} \right], \nonumber
+\rotmat{D}{E}(\bm{\beta}',\bm{q})
+=
+\begin{bmatrix}
+{n'_x}&{o'_x}&{a'_x} \\
+{n'_y}&{o'_y}&{a'_y} \\
+{n'_z}&{o'_z}&{a'_z} \\
+\end{bmatrix}
+=
+\left[ \begin {array}{ccc} { C_{\delta}}\,{n_x}-{ S_{\delta}}\,{ n_y}&{ C_{\delta}}\,{o_x}-{ S_{\delta}}\,{o_y}&{ C_{\delta}}\,{ a_x}-{ S_{\delta}}\,{a_y}\\ \noalign{\medskip}{ C_{\delta}}\,{n_y}+ { S_{\delta}}\,{n_x}&{ C_{\delta}}\,{o_y}+{ S_{\delta}}\,{o_x}&{ C_{\delta}}\,{a_y}+{ S_{\delta}}\,{a_x}\\ \noalign{\medskip}{ n_z}&{o_z}&{a_z}\end {array} \right], \nonumber
 \end{align}
 %
 where $C_{\delta}=\mathrm{cos}(\delta)$ and $S_{\delta}=\mathrm{sin}(\delta)$.
@@ -1769,8 +1769,8 @@ The \todo[color=green!40]{Hyphenation}\replaced[id=Sp]{$ZYX$ }{$Z$-$Y$-$X$-}Eule
 \end{bmatrix}
 =
 \begin{bmatrix}
-\arctantwo \left( {n'_y} , { n'_x} \right) \\ 
-\arctantwo \left( -{n'_z} , \sqrt {{{a'_z}}^{2}+{{ o'_z}}^{2}} \right) \\ 
+\arctantwo \left( {n'_y} , { n'_x} \right) \\
+\arctantwo \left( -{n'_z} , \sqrt {{{a'_z}}^{2}+{{ o'_z}}^{2}} \right) \\
 \arctantwo \left( {o'_z} , {a'_z} \right)
 \end{bmatrix}
 =
@@ -1785,9 +1785,9 @@ where $\delta$ only influences the first component $\alpha_1'$.
 This allows the conclusion that $\beta_3$ only influences $\alpha_1$ and results in the dependencies
 %
 \begin{align}
-    \alpha_1'&=\alpha_1'(\bm{q},\beta_1,\beta_2,\beta_3)\\
-    \alpha_2'&=\alpha_2'(\bm{q},\beta_1,\beta_2) =\alpha_2\\
-    \alpha_3'&=\alpha_3'(\bm{q},\beta_1,\beta_2) =\alpha_3
+\alpha_1'&=\alpha_1'(\bm{q},\beta_1,\beta_2,\beta_3)\\
+\alpha_2'&=\alpha_2'(\bm{q},\beta_1,\beta_2) =\alpha_2\\
+\alpha_3'&=\alpha_3'(\bm{q},\beta_1,\beta_2) =\alpha_3
 \end{align}
 %
 with the consequences for the kinematic modeling of robots in 3T2R tasks described in Section\,\ref{sec:REW_seriell}.
@@ -1843,7 +1843,7 @@ It is used as the argument of the cross product matrix operator in stacked form
 (\bm{\omega})=
 \begin{pmatrix} 0 &  \omega_z& -\omega_y &
 -\omega_z&0& \omega_x &
- \omega_y&- \omega_x&0
+\omega_y&- \omega_x&0
 \end{pmatrix}^\transp
 \quad
 \mathrm{with}
@@ -1865,18 +1865,18 @@ Applying again the chain rule for differentiation of the function composition of
 %underbrace f√ºr Geschweifte Klammern drunter, vphantom nur f√ºr vertikale Gr√∂√üe des rechten Terms
 % Term I
 \underbrace{
-	\vphantom{\frac{\partial}{\partial \overline{\bm{S}}}}
-	\frac{\partial}{\partial \overline{\bm{S}}}\overline{\prod}\left( \overline{\bm{S}}, \rotmato{0}{E}\right)
+\vphantom{\frac{\partial}{\partial \overline{\bm{S}}}}
+\frac{\partial}{\partial \overline{\bm{S}}}\overline{\prod}\left( \overline{\bm{S}}, \rotmato{0}{E}\right)
 }_{\mathrm{I} \in {\mathbb{R}}^{9 \times 9}\vphantom{\mathrm{III} \in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_1)}}}
 % Term II
 \underbrace{
-	\vphantom{\frac{\partial}{\partial \overline{\bm{S}}}}
-	\frac{\partial}{\partial \bm{\omega}} \overline{\bm{S}}(\bm{\omega})
+\vphantom{\frac{\partial}{\partial \overline{\bm{S}}}}
+\frac{\partial}{\partial \bm{\omega}} \overline{\bm{S}}(\bm{\omega})
 }_{\mathrm{II} \in {\mathbb{R}}^{9 \times 3}\vphantom{\mathrm{III} \in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_1)}}}
 % Term III
 \underbrace{
-	\vphantom{\frac{\partial}{\partial \overline{\bm{S}}}}
-	\bm{J}_{\omega,1}(\bm{q}_1)
+\vphantom{\frac{\partial}{\partial \overline{\bm{S}}}}
+\bm{J}_{\omega,1}(\bm{q}_1)
 }_{\mathrm{III} \in {\mathbb{R}}^{3 \times \mathrm{dim}(\bm{q}_1)}}
 \in {\mathbb{R}}^{9 \times \mathrm{dim}(\bm{q}_1)}.
 \label{equ:diff_rotmat_q}
@@ -1891,7 +1891,7 @@ This completes the calculation of the gradient matrix (\ref{equ:grad_Phi_1_q}) f
 \subsection{Relation of the Inverse- and Direct-Kinematics Matrices to the Analytic Jacobian}
 \label{sec:appendix_gradient_geomjacobian}
 
-The properties of the gradient matrices from Section\,\ref{sec:ZB_Anwendung} can be illustrated further by comparing them to the analytic Jacobian of one kinematic chain, which gives the platform or end-effector velocity 
+The properties of the gradient matrices from Section\,\ref{sec:ZB_Anwendung} can be illustrated further by comparing them to the analytic Jacobian of one kinematic chain, which gives the platform or end-effector velocity
 %
 \begin{equation}
 \dot{\bm{x}} = \bm{J}_1 \dot{\bm{q}}_1,
@@ -1900,10 +1900,10 @@ The properties of the gradient matrices from Section\,\ref{sec:ZB_Anwendung} can
 \dot{\bm{x}}_\mathrm{t}\\
 \dot{\bm{x}}_\mathrm{r}
 \end{bmatrix}
-= 
+=
 \begin{bmatrix}
 \bm{J}_{\mathrm{t},1}(\bm{q}_1)\\
-\bm{J}_{\mathrm{r},1}(\bm{q}_1) 
+\bm{J}_{\mathrm{r},1}(\bm{q}_1)
 \end{bmatrix}
 \dot{\bm{q}}_1.
 \label{equ:diffkin1_jacobi}
@@ -1914,7 +1914,7 @@ Also using the differential form (\ref{equ:constr_diff}) for the first kinematic
 \begin{equation}
 \frac{\mathrm{d}}{\mathrm{d}t} \bm{\Phi}_1(\bm{q}_1,\bm{x})
 =
-\bm{\Phi}_{1,\partial\bm{q}_1}(\bm{q}_1,\bm{x}) \dot{\bm{q}}_1 + \bm{\Phi}_{1,\partial\bm{x}}(\bm{q}_1,\bm{x}) \dot{\bm{x}} 
+\bm{\Phi}_{1,\partial\bm{q}_1}(\bm{q}_1,\bm{x}) \dot{\bm{q}}_1 + \bm{\Phi}_{1,\partial\bm{x}}(\bm{q}_1,\bm{x}) \dot{\bm{x}}
 =
 \bm{0}
 \label{equ:constr_diff1}
@@ -1993,8 +1993,8 @@ The column operator $\overline{\bm{R}}$ for rotation matrices $\bm{R}$ to stack 
 =
 \begin{bmatrix}
 {n_x}&{o_x}&{a_x} \\
-{n_y}&{o_y}&{a_y} \\ 
-{n_z}&{o_z}&{a_z} \\ 
+{n_y}&{o_y}&{a_y} \\
+{n_z}&{o_z}&{a_z} \\
 \end{bmatrix}
 \in \mathrm{SO}(3)
 \label{equ:def_rotmat}
@@ -2060,8 +2060,8 @@ Writing $\rotmato{1}{2}^\transp$ instead of $\bm{P}_\transp \rotmato{1}{2}$ serv
 %\bm{\beta}(\bm{R})
 %=
 %\begin{bmatrix}
-%xxx \arctantwo \left( {n_y} , { n_x} \right) \\ 
-%xxx \arctantwo \left( -{n_z} , \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\ 
+%xxx \arctantwo \left( {n_y} , { n_x} \right) \\
+%xxx \arctantwo \left( -{n_z} , \sqrt {{{a_z}}^{2}+{{ o_z}}^{2}} \right) \\
 %xxx \arctantwo \left( {o_z} , {a_z} \right)
 %\end{bmatrix}
 %\label{equ:beta_def_rotmat_xyz}
@@ -2080,7 +2080,7 @@ With $\overline{\bm{R}}=[n_x,n_y,n_z ,o_x,o_y,o_z,a_x,a_y,a_z]^\transp$ the grad
 \begin{equation}
 \frac{\partial \bm{\alpha}(\overline{\bm{R}})}{\partial \overline{\bm{R}}}
 =
-\left[ \begin {array}{ccccccccc} -{\frac {{n_y}}{{{n_x}}^{2}+{{ n_y}}^{2}}}&{\frac {{n_x}}{{{n_x}}^{2}+{{n_y}}^{2}}}&0&0&0 &0&0&0&0\\ \noalign{\medskip}0&0&-\sqrt {{{a_z}}^{2}+{{o_z}}^{2} }&0&0&{\frac {{n_z}\,{o_z}}{\sqrt {{{a_z}}^{2}+{{o_z}}^{2} }}}&0&0&{\frac {{n_z}\,{a_z}}{\sqrt {{{a_z}}^{2}+{{o_z}}^{ 2}}}}\\ \noalign{\medskip}0&0&0&0&0&{\frac {{a_z}}{{{a_z}}^{2}+{ {o_z}}^{2}}}&0&0&-{\frac {{o_z}}{{{a_z}}^{2}+{{o_z}}^{2}}} \end {array} \right] 
+\left[ \begin {array}{ccccccccc} -{\frac {{n_y}}{{{n_x}}^{2}+{{ n_y}}^{2}}}&{\frac {{n_x}}{{{n_x}}^{2}+{{n_y}}^{2}}}&0&0&0 &0&0&0&0\\ \noalign{\medskip}0&0&-\sqrt {{{a_z}}^{2}+{{o_z}}^{2} }&0&0&{\frac {{n_z}\,{o_z}}{\sqrt {{{a_z}}^{2}+{{o_z}}^{2} }}}&0&0&{\frac {{n_z}\,{a_z}}{\sqrt {{{a_z}}^{2}+{{o_z}}^{ 2}}}}\\ \noalign{\medskip}0&0&0&0&0&{\frac {{a_z}}{{{a_z}}^{2}+{ {o_z}}^{2}}}&0&0&-{\frac {{o_z}}{{{a_z}}^{2}+{{o_z}}^{2}}} \end {array} \right]
 \label{equ:alpha_xyz_diff_R}
 \end{equation}
 %
@@ -2092,20 +2092,20 @@ and the \todo[color=red!40]{Terminology} \replaced[id=Sp]{reciprocal}{inverse} g
 =
 \small
 \begin{bmatrix}
-    0&-{ S_2}\,{ C_3}&-{ C_2}\,{ S_3}
-    \\ { C_1}\,{ S_2}\,{ C_3}-{ S_1}\,{ S_3}&{
-        S_1}\,{ C_2}\,{ C_3}&-{ S_1}\,{ S_2}\,{ S_3}+{ C_1}\,{
-        C_3}\\ { S_1}\,{ S_2}\,{ C_3}+{ C_1}\,{
-        S_3}&-{ C_1}\,{ C_2}\,{ C_3}&{ C_1}\,{ S_2}\,{ S_3}+{
-        S_1}\,{ C_3}\\ 0&{ S_2}\,{ S_3}&-{ C_2}\,
-    { C_3}\\ -{ C_1}\,{ S_2}\,{ S_3}-{ S_1}\,{
-        C_3}&-{ S_1}\,{ C_2}\,{ S_3}&-{ S_1}\,{ S_2}\,{ C_3}-{
-        C_1}\,{ S_3}\\ -{ S_1}\,{ S_2}\,{ S_3}+{
-        C_1}\,{ C_3}&{ C_1}\,{ C_2}\,{ S_3}&{ C_1}\,{ S_2}\,{
-        C_3}-{ S_1}\,{ S_3}\\ 0&{ C_2}&0
-    \\ -{ C_1}\,{ C_2}&{ S_1}\,{ S_2}&0
-    \\ -{ S_1}\,{ C_2}&-{ C_1}\,{ S_2}&0
-    \end {bmatrix}
+0&-{ S_2}\,{ C_3}&-{ C_2}\,{ S_3}
+\\ { C_1}\,{ S_2}\,{ C_3}-{ S_1}\,{ S_3}&{
+S_1}\,{ C_2}\,{ C_3}&-{ S_1}\,{ S_2}\,{ S_3}+{ C_1}\,{
+C_3}\\ { S_1}\,{ S_2}\,{ C_3}+{ C_1}\,{
+S_3}&-{ C_1}\,{ C_2}\,{ C_3}&{ C_1}\,{ S_2}\,{ S_3}+{
+S_1}\,{ C_3}\\ 0&{ S_2}\,{ S_3}&-{ C_2}\,
+{ C_3}\\ -{ C_1}\,{ S_2}\,{ S_3}-{ S_1}\,{
+C_3}&-{ S_1}\,{ C_2}\,{ S_3}&-{ S_1}\,{ S_2}\,{ C_3}-{
+C_1}\,{ S_3}\\ -{ S_1}\,{ S_2}\,{ S_3}+{
+C_1}\,{ C_3}&{ C_1}\,{ C_2}\,{ S_3}&{ C_1}\,{ S_2}\,{
+C_3}-{ S_1}\,{ S_3}\\ 0&{ C_2}&0
+\\ -{ C_1}\,{ C_2}&{ S_1}\,{ S_2}&0
+\\ -{ S_1}\,{ C_2}&-{ C_1}\,{ S_2}&0
+\end {bmatrix}
 \label{equ:rotmat_diff_beta}
 \end{align}
 %
@@ -2152,7 +2152,7 @@ where $n_x,n_y,...$ are the entries of $\bm{R}_2$ and the \todo[color=green!40]{
 By transposing the elements of the matrix product (\ref{equ:matprod}), only the first form (\ref{equ:diff_prod_mat2}) had to be used in  Section\,\ref{sec:ZB_Anwendung}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Citations and References in Supplementary files are permitted provided that they also appear in the reference list here. 
+% Citations and References in Supplementary files are permitted provided that they also appear in the reference list here.
 
 %=====================================
 % References, variant A: internal bibliography
@@ -2177,35 +2177,35 @@ By transposing the elements of the matrix product (\ref{equ:matprod}), only the 
 \bibitem[Huo and Baron(2005)]{HuoBar2005}
 Huo, L.; Baron, L.
 \newblock Kinematic inversion of functionally-redundant serial manipulators:
-  application to arc-welding.
+application to arc-welding.
 \newblock {\em Trans. Can. Soc. Mec. Eng.}
-  {\bf 2005}, {\em 29},~679--690.
+{\bf 2005}, {\em 29},~679--690.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1139/tcsme-2005-0045}{\detokenize{10.1139/tcsme-2005-0045}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1139/tcsme-2005-0045}{\detokenize{10.1139/tcsme-2005-0045}}}.
 
 \bibitem[Žlajpah(2017)]{Zlajpah2017}
 Žlajpah, L.
 \newblock On orientation control of functional redundant robots.
 \newblock  In Proceedings of the IEEE International Conference on Robotics and Automation (ICRA), Singapore, Singapore, 29 May--3 June 2017; pp. 2475--2482.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1109/ICRA.2017.7989288}{\detokenize{10.1109/ICRA.2017.7989288}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1109/ICRA.2017.7989288}{\detokenize{10.1109/ICRA.2017.7989288}}}.
 
 \bibitem[Léger and Angeles(2016)]{LegerAng2016}
 Léger, J.; Angeles, J.
 \newblock Off-line programming of six-axis robots for optimum five-dimensional
-  tasks.
+tasks.
 \newblock {\em Mech. Mach. Theory} {\bf 2016}, {\em 100},~155--169.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1016/j.mechmachtheory.2016.01.015}{\detokenize{10.1016/j.mechmachtheory.2016.01.015}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1016/j.mechmachtheory.2016.01.015}{\detokenize{10.1016/j.mechmachtheory.2016.01.015}}}.
 
 \bibitem[Schappler \em{et~al.}(2019)Schappler, Tappe, and
-  Ortmaier]{1_SchapplerTapOrt2019}
+Ortmaier]{1_SchapplerTapOrt2019}
 Schappler, M.; Tappe, S.; Ortmaier, T.
 \newblock Resolution of Functional Redundancy for 3T2R Robot Tasks using Two
-  Sets of Reciprocal Euler Angles.
+Sets of Reciprocal Euler Angles.
 \newblock  In \emph{Advances in Mechanism and Machine Science, Proceedings of  the 15th IFToMM World Congress on Mechanism and Machine Science, Kraków, Poland, 30 Jun--4 July 2019;} Springer: Berlin, Germany; Volume 73, pp.1701--1710,
-\newblock 
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1007/978-3-030-20131-9_168}{\detokenize{10.1007/978-3-030-20131-9_168}}}.
+\newblock
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1007/978-3-030-20131-9_168}{\detokenize{10.1007/978-3-030-20131-9_168}}}.
 
 \bibitem[Yoshikawa(1984)]{Yoshikawa1984}
 Yoshikawa, T.
@@ -2213,39 +2213,39 @@ Yoshikawa, T.
 \newblock  In Proceedings of the Robotics research: the first international symposium, Cambridge, MA, USA, 1984; pp. 735--747; ISBN 0262022079; symposium held at Bretton Woods, N.H., Aug. 25--Sept. 2, 1983.
 
 \bibitem[Goldenberg \em{et~al.}(1985)Goldenberg, Benhabib, and
-  Fenton]{GoldenbergBenFen1985}
+Fenton]{GoldenbergBenFen1985}
 Goldenberg, A.; Benhabib, B.; Fenton, R.
 \newblock A complete generalized solution to the inverse kinematics of robots.
 \newblock {\em IEEE J. Rob. Autom.} {\bf 1985}, {\em
-  1},~14--20.
+1},~14--20.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1109/JRA.1985.1086995}{\detokenize{10.1109/JRA.1985.1086995}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1109/JRA.1985.1086995}{\detokenize{10.1109/JRA.1985.1086995}}}.
 
 \bibitem[Zhu \em{et~al.}(2013)Zhu, Qu, Cao, Yang, and Ke]{ZhuQuCaoYan2013}
 Zhu, W.; Qu, W.; Cao, L.; Yang, D.; Ke, Y.
 \newblock An off-line programming system for robotic drilling in aerospace
-  manufacturing.
+manufacturing.
 \newblock {\em Int. J. Adv. Manuf. Technol.}
-  {\bf 2013}, {\em 68},~2535--2545.
+{\bf 2013}, {\em 68},~2535--2545.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1007/s00170-013-4873-5}{\detokenize{10.1007/s00170-013-4873-5}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1007/s00170-013-4873-5}{\detokenize{10.1007/s00170-013-4873-5}}}.
 
 \bibitem[Guo \em{et~al.}(2015)Guo, Dong, and Ke]{GuoDonKe2015}
 Guo, Y.; Dong, H.; Ke, Y.
 \newblock Stiffness-oriented posture optimization in robotic machining
-  applications.
+applications.
 \newblock {\em Rob. Comput. Integr. Manuf.} {\bf
-  2015}, {\em 27},~367--376.
+2015}, {\em 27},~367--376.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1016/j.rcim.2015.02.006}{\detokenize{10.1016/j.rcim.2015.02.006}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1016/j.rcim.2015.02.006}{\detokenize{10.1016/j.rcim.2015.02.006}}}.
 
 \bibitem[Tale-Masouleh and Gosselin(2011)]{Tale-MasoulehGos2011}
 Tale-Masouleh, M.; Gosselin, C.
 \newblock Singularity analysis of 5-RPUR parallel mechanisms (3T2R).
 \newblock {\em Int. J. Adv. Manuf. Technol.}
-  {\bf 2011}, {\em 57},~1107--1121.
+{\bf 2011}, {\em 57},~1107--1121.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1007/s00170-011-3349-8}{\detokenize{10.1007/s00170-011-3349-8}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1007/s00170-011-3349-8}{\detokenize{10.1007/s00170-011-3349-8}}}.
 
 \bibitem[Gogu(2008)]{Gogu2008}
 Gogu, G.
@@ -2256,19 +2256,19 @@ Huang, T.; Liu, H.; Chetwynd, D.
 \newblock Generalized Jacobian analysis of lower mobility manipulators.
 \newblock {\em Mech. Mach. Theory} {\bf 2011}, {\em 46},~831--844.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1016/j.mechmachtheory.2011.01.009}{\detokenize{10.1016/j.mechmachtheory.2011.01.009}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1016/j.mechmachtheory.2011.01.009}{\detokenize{10.1016/j.mechmachtheory.2011.01.009}}}.
 
 \bibitem[Merlet \em{et~al.}(2000)Merlet, Perng, and Daney]{MerletPerDan2000}
 Merlet, J.P.; Perng, M.W.; Daney, D.
 \newblock Optimal trajectory planning of a 5-axis machine-tool based on a
-  6-axis parallel manipulator. In {\em Advances in Robot Kinematics}; Springer: Berlin, Germany, 2000; pp. 315--322.
+6-axis parallel manipulator. In {\em Advances in Robot Kinematics}; Springer: Berlin, Germany, 2000; pp. 315--322.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1007/978-94-011-4120-8_33}{\detokenize{10.1007/978-94-011-4120-8_33}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1007/978-94-011-4120-8_33}{\detokenize{10.1007/978-94-011-4120-8_33}}}.
 
 \bibitem[Hong and Kim(2000)]{HongKim2000}
 Hong, K.S.; Kim, J.G.
 \newblock Manipulability analysis of a parallel machine tool: application to
-  optimal link length design.
+optimal link length design.
 \newblock {\em J. Rob. Syst.} {\bf 2000}, {\em 17},~403--415.
 
 \bibitem[Merlet(2006)]{Merlet2006}
@@ -2282,120 +2282,120 @@ Zhang, D.
 \bibitem[Wang and Gosselin(1997)]{WangGos1997}
 Wang, J.; Gosselin, C.M.
 \newblock Kinematic analysis and singularity representation of spatial
-  five-degree-of-freedom parallel mechanisms.
+five-degree-of-freedom parallel mechanisms.
 \newblock {\em J. Rob. Syst.} {\bf 1997}, {\em 14},~851--869.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1002/(SICI)1097-4563(199712)14:12<851::AID-ROB3>3.0.CO;2-T}{\detokenize{10.1002/(SICI)1097-4563(199712)14:12<851::AID-ROB3>3.0.CO;2-T}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1002/(SICI)1097-4563(199712)14:12<851::AID-ROB3>3.0.CO;2-T}{\detokenize{10.1002/(SICI)1097-4563(199712)14:12<851::AID-ROB3>3.0.CO;2-T}}}.
 
 \bibitem[Zhang and Gosselin(2001)]{ZhangGos2001}
 Zhang, D.; Gosselin, C.M.
 \newblock Kinetostatic modeling of N-DOF parallel mechanisms with a passive
-  constraining leg and prismatic actuators.
+constraining leg and prismatic actuators.
 \newblock {\em J. Mech. Des.} {\bf 2001}, {\em 123},~375--381.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1115/1.1370976}{\detokenize{10.1115/1.1370976}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1115/1.1370976}{\detokenize{10.1115/1.1370976}}}.
 
 \bibitem[Zheng \em{et~al.}(2005)Zheng, Gao, and Zhao]{ZhengGaoZha2005}
 Zheng, K.J.; Gao, J.S.; Zhao, Y.S.
 \newblock Path control algorithms of a novel 5-DOF parallel machine tool.
 \newblock  In Proceedins of the IEEE International Conference on Mechatronics and Automation, Niagara Falls, Ont., Canada, 29 July--1 August 2005; Volume 3, pp. 1381--1385.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1109/ICMA.2005.1626755}{\detokenize{10.1109/ICMA.2005.1626755}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1109/ICMA.2005.1626755}{\detokenize{10.1109/ICMA.2005.1626755}}}.
 
 \bibitem[Gao \em{et~al.}(2004)Gao, Sun, and Zhao]{GaoSunZha2004}
 Gao, J.S.; Sun, H.; Zhao, Y.S.
 \newblock The primary calibration research of a measuring limb in 5-UPS/PRPU
-  parallel machine tool.
+parallel machine tool.
 \newblock  In Proceedings of the IEEE International Conference on Intelligent Mechatronics and Automation, Chengdu, China, 26--31 August 2004; pp. 304--308.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1109/ICIMA.2004.1384209}{\detokenize{10.1109/ICIMA.2004.1384209}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1109/ICIMA.2004.1384209}{\detokenize{10.1109/ICIMA.2004.1384209}}}.
 
 \bibitem[Liu \em{et~al.}(2015)Liu, Xu, Yao, Xu, Wen, and Zhao]{LiuXuYaoXu2015}
 Liu, X.; Xu, Y.; Yao, J.; Xu, J.; Wen, S.; Zhao, Y.
 \newblock Control-faced dynamics with deformation compatibility for a 5-DOF
-  active over-constrained spatial parallel manipulator 6PUS--UPU.
+active over-constrained spatial parallel manipulator 6PUS--UPU.
 \newblock {\em Mechatron.} {\bf 2015}, {\em 30},~107--115.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1016/j.mechatronics.2015.06.014}{\detokenize{10.1016/j.mechatronics.2015.06.014}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1016/j.mechatronics.2015.06.014}{\detokenize{10.1016/j.mechatronics.2015.06.014}}}.
 
 \bibitem[Wen \em{et~al.}(2016)Wen, Qin, Zhang, Lam, Zhao, and
-  Wang]{WenQinZhaLam2016}
+Wang]{WenQinZhaLam2016}
 Wen, S.; Qin, G.; Zhang, B.; Lam, H.K.; Zhao, Y.; Wang, H.
 \newblock The study of model predictive control algorithm based on the
-  force/position control scheme of the 5-DOF redundant actuation parallel
-  robot.
+force/position control scheme of the 5-DOF redundant actuation parallel
+robot.
 \newblock {\em Rob. Auto. Syst.} {\bf 2016}, {\em 79},~12--25.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1016/j.robot.2016.02.002}{\detokenize{10.1016/j.robot.2016.02.002}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1016/j.robot.2016.02.002}{\detokenize{10.1016/j.robot.2016.02.002}}}.
 
 \bibitem[Mbarek \em{et~al.}(2005)Mbarek, Nefzi, and Corves]{MbarekNefCor2005}
 Mbarek, T.; Nefzi, M.; Corves, B.
 \newblock Prototypische Entwicklung und Konstruktion eines neuartigen
-  Parallelmanipulators mit dem Freiheitsgrad fünf.
+Parallelmanipulators mit dem Freiheitsgrad fünf.
 \newblock {\em VDI-Berichte} {\bf 2005}.
 \newblock In German. Available online:
-  https://www.igmr.rwth-aachen.de/index.php/en/rob-en/rob-pentapod-en (accessed
-  June 20th 2019).
+https://www.igmr.rwth-aachen.de/index.php/en/rob-en/rob-pentapod-en (accessed
+June 20th 2019).
 \bibitem[Schreiber and Gosselin(2003)]{SchreiberGos2003}
 Schreiber, H.; Gosselin, C.
 \newblock Analyse et conception d’un manipulateur parallèle spatial à cinq   degrés de liberté. In French.
 \newblock {\em Mech. Mach. Theory} {\bf 2003}, {\em 38},~535--548.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1016/S0094-114X(03)00007-7}{\detokenize{10.1016/S0094-114X(03)00007-7}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1016/S0094-114X(03)00007-7}{\detokenize{10.1016/S0094-114X(03)00007-7}}}.
 
 \bibitem[Gao \em{et~al.}(2006)Gao, Peng, Zhao, and Li]{GaoPenZhaLi2006}
 Gao, F.; Peng, B.; Zhao, H.; Li, W.
 \newblock A novel 5-DOF fully parallel kinematic machine tool.
 \newblock {\em Int. J. Adv. Manuf. Technol.}
-  {\bf 2006}, {\em 31},~201.
+{\bf 2006}, {\em 31},~201.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1007/s00170-005-0171-1}{\detokenize{10.1007/s00170-005-0171-1}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1007/s00170-005-0171-1}{\detokenize{10.1007/s00170-005-0171-1}}}.
 
 \bibitem[Bär and Weiß(2006)]{BaerWei2006}
 Bär, G.F.; Weiß, G.
 \newblock Kinematic Analysis of a Pentapod Robot.
 \newblock {\em Journal for Geometry and Graphics} {\bf 2006}, {\em
-    10},~173--182.
+10},~173--182.
 
 \bibitem[Lin \em{et~al.}(2013)Lin, Li, Yang, and Zhang]{LinLiYanZha2013}
 Lin, W.; Li, B.; Yang, X.; Zhang, D.
 \newblock Modelling and control of inverse dynamics for a 5-DOF parallel
-  kinematic polishing machine.
+kinematic polishing machine.
 \newblock {\em Int. J. Adv. Rob. Syst.} {\bf 2013},
-  {\em 10},~314.
+{\em 10},~314.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.5772/54966}{\detokenize{10.5772/54966}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.5772/54966}{\detokenize{10.5772/54966}}}.
 
 \bibitem[Alagheband \em{et~al.}(2015)Alagheband, Mahmoodi, Mills, and
-  Benhabib]{AlaghebandMahMilBen2015}
+Benhabib]{AlaghebandMahMilBen2015}
 Alagheband, A.; Mahmoodi, M.; Mills, J.K.; Benhabib, B.
 \newblock Comparative analysis of a redundant pentapod parallel kinematic
-  machine.
+machine.
 \newblock {\em J. Mech. Rob.} {\bf 2015}, {\em 7},~034502.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1115/1.4028933}{\detokenize{10.1115/1.4028933}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1115/1.4028933}{\detokenize{10.1115/1.4028933}}}.
 
 \bibitem[Gogu(2006)]{Gogu2006}
 Gogu, G.
 \newblock Fully-isotropic parallel manipulators with five degrees of freedom.
 \newblock {\em Proceedings 2006 IEEE International Conference on Robotics and Automation, Orlando, FL, USA, 15--19 May 2006;} IEEE: Piscataway, NJ, USA, pp. 1141--1146.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1109/ROBOT.2006.1641863}{\detokenize{10.1109/ROBOT.2006.1641863}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1109/ROBOT.2006.1641863}{\detokenize{10.1109/ROBOT.2006.1641863}}}.
 
 \bibitem[Huang and Li(2002)]{HuangLi2002}
 Huang, Z.; Li, Q.C.
 \newblock General Methodology for Type Synthesis of Symmetrical Lower-Mobility
-  Parallel Manipulators and Several Novel Manipulators
+Parallel Manipulators and Several Novel Manipulators
 \newblock  {\em Int. J. Rob. Res.} {\bf 2002}, {\em 21},~131--145.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1177/027836402760475342}{\detokenize{10.1177/027836402760475342}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1177/027836402760475342}{\detokenize{10.1177/027836402760475342}}}.
 
 \bibitem[Kong and Gosselin(2005)]{KongGos2005}
 Kong, X.; Gosselin, C.M.
 \newblock Type synthesis of 5-DOF parallel manipulators based on screw theory.
 \newblock {\em J. Rob. Syst.} {\bf 2005}, {\em 22},~535--547.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1002/rob.20084}{\detokenize{10.1002/rob.20084}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1002/rob.20084}{\detokenize{10.1002/rob.20084}}}.
 
 \bibitem[Tale-Masouleh \em{et~al.}(2010)Tale-Masouleh, Saadatzi, Gosselin, and
 Taghirad]{Tale-MasoulehSaaGosTag2010}
@@ -2410,19 +2410,19 @@ doi:{\changeurlcolor{black}\href{https://doi.org/10.1115/DETC2010-28509}{\detoke
 \bibitem[Cheng \em{et~al.}(2008)Cheng, Wang, and Zhao]{ChengWanZha2008}
 Cheng, L.; Wang, H.; Zhao, Y.
 \newblock Analysis and experimental investigation of parallel machine tool with
-  redundant actuation.
+redundant actuation.
 \newblock  In {\em Intelligent Robotics and Applications, Proceedings of the International Conference on Intelligent Robotics and Applications, Wuhan, China, 15--17 October, 2008;} Springer: Berin, Germany, 2008; pp. 179--188.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1007/978-3-540-88513-9_20}{\detokenize{10.1007/978-3-540-88513-9_20}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1007/978-3-540-88513-9_20}{\detokenize{10.1007/978-3-540-88513-9_20}}}.
 
 \bibitem[Ramirez \em{et~al.}(2015)Ramirez, Kotlarski, and
-  Ortmaier]{RamirezKotOrt2015}
+Ortmaier]{RamirezKotOrt2015}
 Ramirez, D.; Kotlarski, J.; Ortmaier, T.
 \newblock Automatic generation of a minimal set of serial mechanisms for a
-  combined structural - geometrical synthesis.
+combined structural - geometrical synthesis.
 \newblock  Proc. of the 14th IFToMM World Congress, Taipeh, Taiwan, conference 25--30 Oct 2015; .
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.6567/IFToMM.14TH.WC.OS13.047}{\detokenize{10.6567/IFToMM.14TH.WC.OS13.047}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.6567/IFToMM.14TH.WC.OS13.047}{\detokenize{10.6567/IFToMM.14TH.WC.OS13.047}}}.
 
 \bibitem[Briot and Khalil(2015)]{BriotKha2015}
 Briot, S.; Khalil, W.
@@ -2432,9 +2432,9 @@ Briot, S.; Khalil, W.
 Huo, L.; Baron, L.
 \newblock The joint-limits and singularity avoidance in robotic welding.
 \newblock {\em Ind. Rob.} {\bf 2008}, {\em
-  35},~456--464.
+35},~456--464.
 \newblock
-  doi:{\changeurlcolor{black}\href{https://doi.org/10.1108/01439910810893626}{\detokenize{10.1108/01439910810893626}}}.
+doi:{\changeurlcolor{black}\href{https://doi.org/10.1108/01439910810893626}{\detokenize{10.1108/01439910810893626}}}.
 
 \end{thebibliography}
 % The following MDPI journals use author-date citation: Arts, Econometrics, Economies, Genealogy, Humanities, IJFS, JRFM, Laws, Religions, Risks, Social Sciences. For those journals, please follow the formatting guidelines on http://www.mdpi.com/authors/references

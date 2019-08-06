@@ -475,16 +475,27 @@ export_fig(20, fullfile(respath, 'serrob_traj_nullspace_optim.pdf'));
 
 %% 3D-Bild des Roboters
 figure(21);clf;
-s_plot = struct( 'ks', [], 'straight', 0);
+s_plot = struct( 'ks', [1, RS.NJ+2], 'straight', 0);
 hold on;
 grid on;
-xlabel('$x$ in m', 'interpreter', 'latex');
-ylabel('$y$ in m', 'interpreter', 'latex');
-zlabel('$z$ in m', 'interpreter', 'latex');
+% xlabel('$x$ in m', 'interpreter', 'latex');
+% ylabel('$y$ in m', 'interpreter', 'latex');
+% zlabel('$z$ in m', 'interpreter', 'latex');
+set(gca, 'XTICKLABEL', {});
+set(gca, 'YTICKLABEL', {});
+set(gca, 'ZTICKLABEL', {});
 view(3);
 RS.plot( q0_ik_fix, s_plot );
 plot3(X(:,1), X(:,2), X(:,3), 'k-', 'LineWidth', 2);
 figure_format_publication()
+set(gca, 'Box', 'off');
+ax = get(gca, 'XAXIS'); set(ax, 'Visible', 'off');
+ax = get(gca, 'YAXIS'); set(ax, 'Visible', 'off');
+ax = get(gca, 'ZAXIS'); set(ax, 'Visible', 'off');
+
+% set(gca, 'XColor', [1 1 1]);
+% set(gca, 'YColor', [1 1 1]);
+% set(gca, 'ZColor', [1 1 1]);
 set_size_plot_subplot(21,...
   8,8,gca,...
   0.01,0.01,0.0,0.01,... % bl,br,hu,hd,

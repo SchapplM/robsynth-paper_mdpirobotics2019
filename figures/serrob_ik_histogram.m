@@ -1,6 +1,6 @@
 % Untersuche die Statistik des Erfolgs der inversen Kinematik für alle
 % seriellen Roboter
-% Das Skript kann von aißen aufgerufen werden
+% Das Skript kann von außen aufgerufen werden
 % Einstellungen für die Untersuchungen:
 % 
 

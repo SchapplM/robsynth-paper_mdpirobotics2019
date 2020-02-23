@@ -49,8 +49,8 @@ RS.I_EE = logical([1 1 0 0 0 1]); % Für IK der Beinketten mit invkin_ser
 
 %% Klasse für PKM erstellen
 RP = ParRob('P3RRR1');
-RP = RP.create_symmetric_robot(3, RS, dB, dP);
-RP = RP.initialize();
+RP.create_symmetric_robot(3, RS, dB, dP);
+RP.initialize();
 RP.update_EE_FG(logical([1 1 0 0 0 1])); % Für IK der PKM
 RP.update_base([0;0;0], [0;0;-30]*pi/180);
 %% Startpose bestimmen

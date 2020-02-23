@@ -1,0 +1,9 @@
+# This file has to be copied to a file with the same name and without extension ("reci_euler_paper_path")
+# The content is a Maple variable that points to the location of the IFToMM-WC-2019 paper repo on the local file system
+# The repo can be obtained from https://github.com/SchapplM/robsynth-paper_iftommwc2019_invkinfuncred
+# Unter Linux:
+# reci_euler_paper_path := "/home/schappler/IMES_REPO/paper_invkinfuncred":
+# Unter Windows: Zwei mal Backslash wegen Zeichen-Maskierung im String
+# gilt auch für Nutzung der Toolbox mit Windows-Linux-Subsystem oder Git Bash
+# reci_euler_paper_path := "X:\\Pfad\\Paper\\Repo": # Alternative 1
+# reci_euler_paper_path := "X:/Pfad/Paper/Repo": # Alternative 2

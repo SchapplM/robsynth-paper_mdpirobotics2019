@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Worksheet>
-<Version major="2018" minor="2"/>
+<Version major="2019" minor="2"/>
 <Label-Scheme value="2" prefix=""/>
 <View-Properties presentation="true" autoexpanding_sections="true" UserProfileName="Maple Default Profile" NumericFormat-ApplyInteger="true" NumericFormat-ApplyRational="true" NumericFormat-ApplyExponent="false" editable="true">
 </View-Properties>
-<MapleNet-Properties prettyprint="3" warnlevel="3" preplot="" helpbrowser="standard" displayprecision="-1" echo="1" unitattributes="&quot;fontweight&quot; = &quot;bold&quot;" imaginaryunit="I" longdelim="true" elisiontermsthreshold="10000" elisiondigitsafter="100" elisiondigitsbefore="100" plotdevice="inline" errorbreak="1" plotoptions="" plotdriver="opengl" quiet="false" elisiontermsbefore="100" elisiontermsafter="100" screenwidth="79" indentamount="4" plotoutput="terminal" screenpixelheight="1050" rtablesize="10" useclientjvm="true" labelwidth="20" postplot="" typesetting="extended" ansi="false" ansicolor="[]" elisiondigitsthreshold="10000" showassumed="1" ansilprint="false" errorcursor="false" labelling="true" screenheight="25" prompt="&gt; " verboseproc="1" latexwidth="8.0" ShowLabels="true"/>
+<MapleNet-Properties prettyprint="3" warnlevel="3" compactdisplay="false" preplot="" helpbrowser="standard" displayprecision="-1" echo="1" unitattributes="&quot;fontweight&quot; = &quot;bold&quot;" imaginaryunit="I" longdelim="true" elisiontermsthreshold="10000" elisiondigitsafter="100" elisiondigitsbefore="100" plotdevice="inline" errorbreak="1" plotoptions="" plotdriver="opengl" quiet="false" elisiontermsbefore="100" elisiontermsafter="100" historytimestamp="false" screenwidth="79" indentamount="4" plotoutput="terminal" screenpixelheight="1050" rtablesize="[10, 10]" useclientjvm="true" labelwidth="20" postplot="" typesetting="extended" ansi="false" ansicolor="[]" elisiondigitsthreshold="10000" showassumed="1" ansilprint="false" trailingsemicolon="true" errorcursor="false" labelling="true" screenheight="25" prompt="&gt; " verboseproc="1" latexwidth="8.0" ShowLabels="true"/>
 <Styles>
 <Font name="Heading 1" background="[255,255,255]" bold="true" executable="false" family="Times New Roman" foreground="[0,0,0]" italic="false" opaque="false" readonly="false" size="18" subscript="false" superscript="false" underline="false" placeholder="false"/>
 <Font name="Warning" background="[255,255,255]" bold="false" executable="false" family="Courier New" foreground="[0,0,255]" italic="false" opaque="false" readonly="true" size="12" subscript="false" superscript="false" underline="false" placeholder="false"/>
@@ -89,50 +89,70 @@
 </Task-table>
 <Task/><Presentation-Block>
 <Group view="presentation" inline-output="false" labelreference="L1" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Title" layout="Title"><Font encoding="UTF-8">Formeln f\303\274r Ver\303\266ffentlichung
-</Font></Text-field>
+<Input><Text-field style="Title" layout="Title">Create Latex Equations used in the Paper
+</Text-field>
 </Input>
-</Group>
-<Group view="code" labelreference="L2132" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal"><Font encoding="UTF-8">Vorher ausf\303\274hren: euler_angle_calculations.mw aus Robotik-Repo, </Font></Text-field>
+</Group></Presentation-Block><Presentation-Block>
+<Group labelreference="L2186" drawlabel="true">
+<Input><Text-field style="Heading 2" layout="Heading 2">Introduction</Text-field><Text-field style="Normal" layout="Normal">This maple worksheet has to be run with eulstr := &quot;xyz&quot; and &quot;zyx&quot; to calculate all necessary terms for further calculations (enter below the initialization).</Text-field><Text-field style="Normal" layout="Normal"></Text-field><Text-field style="Normal" layout="Normal">Content:</Text-field><Text-field style="Normal" layout="Normal" bullet="dot">initialization (load dependencies)</Text-field><Text-field style="Normal" layout="Normal" bullet="dot">create latex equations from the appendix
+
+</Text-field><Text-field style="Heading 2" layout="Heading 2">Prerequisites</Text-field><Text-field style="Normal" layout="Normal" bullet="dot">From the repo robotics-toolbox, run transformation/maple/euler_angle_calculations.mw (https://github.com/SchapplM/robotics-toolbox)</Text-field><Text-field style="Normal" layout="Normal" bullet="dot">From the repo for the paper to IFToMM World Congress, run calculations/reciprocal_euler_angles.mw (https://github.com/SchapplM/robsynth-paper_iftommwc2019_invkinfuncred)</Text-field><Text-field style="Normal" layout="Normal" bullet="dot">Link the paths to these repos with the files robotics_toolbox_path, reci_euler_paper_path
+<Font style="Heading 2">
+Post-Processing of the Results</Font></Text-field><Text-field style="Normal" layout="Normal" bullet="dot">Run equations_postprocess.sh to convert the latex code to the form used in the paper
+</Text-field><Text-field style="Normal" layout="Normal"><Font style="Heading 2">Author</Font></Text-field><Text-field style="Normal" layout="Normal">Moritz Schappler, moritz.schappler@imes.uni-hannover.de, 2019-07</Text-field><Text-field style="Normal" layout="Normal">(C) Institut fuer Mechatronische Systeme, Leibniz Universitaet Hannover
+</Text-field><Text-field style="Heading 2" layout="Heading 2">Sources</Text-field><Text-field style="Normal" layout="Normal"><Font style="Text">[SchapplerTapOrt2019a] Schappler, M. et al.: Resolution of Functional Redundancy for 3T2R Robot Tasks using Two Sets of Reciprocal Euler Angles, Proc. of the 15th IFToMM World Congress, 2019</Font>
+</Text-field>
 </Input>
-</Group>
-<Group view="code" labelreference="L4" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+</Group></Presentation-Block><Presentation-Block></Presentation-Block>
+<Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1">Initialisierung</Text-field></Title><Presentation-Block>
+<Group view="presentation" inline-output="false" labelreference="L2188" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal"></Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="code" labelreference="L2193" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">restart:</Text-field>
 </Input>
 </Group>
-<Group view="code" labelreference="L2128" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Group view="code" labelreference="L2192" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">with(LinearAlgebra):</Text-field>
 </Input>
-</Group>
-<Group view="code" labelreference="L2" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">read &quot;robotics_repo_path&quot;:
-read &quot;maple_repo_path&quot;:</Text-field>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="code" labelreference="L2195" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Hilfsfunktionen laden (aus Robotik-Toolbox)</Text-field>
 </Input>
 </Group>
-<Group view="code" labelreference="L2135" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">read &quot;struktsynth_bsp_path&quot;:</Text-field>
+<Group view="code" labelreference="L2194" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">read(&quot;robotics_toolbox_path&quot;):</Text-field>
+</Input>
+</Group></Presentation-Block><Presentation-Block>
+<Group view="code" labelreference="L2191" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">read sprintf(&quot;%s/transformation/maple/proc_r2eulzyx&quot;, robotics_toolbox_path):</Text-field>
 </Input>
 </Group>
-<Group view="code" labelreference="L2091" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">read sprintf(&quot;%s/transformation/maple/proc_r2eulzyx&quot;, robotics_repo_path):</Text-field>
+<Group view="code" labelreference="L2199" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">read(sprintf(&quot;%s/transformation/maple/proc_rotz&quot;, robotics_toolbox_path)):</Text-field>
 </Input>
 </Group>
-<Group view="code" labelreference="L2092" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">read sprintf(&quot;%s/transformation/proc_rotz&quot;, maple_repo_path):</Text-field>
+<Group view="code" labelreference="L2196" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal"><Font encoding="UTF-8">Pfad laden f\303\274r Paper f\303\274r IFToMM World Congress</Font></Text-field>
+</Input>
+</Group>
+<Group view="code" labelreference="L2197" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">read(&quot;reci_euler_paper_path&quot;):</Text-field>
 </Input>
 </Group></Presentation-Block>
+</Section>
 <Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1">Ableitung der Rotationsmatrix nach den Winkeln beta (Euler-XYZ)</Text-field></Title><Presentation-Block>
 <Group view="presentation" inline-output="false" labelreference="L3" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal"></Text-field>
+<Input><Text-field style="Text" layout="Normal">Erstellt Equ. (A25) im Paper.</Text-field>
 </Input>
 </Group>
 <Group view="code" labelreference="L2136" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field style="Text" layout="Normal"><Font encoding="UTF-8">Arbeitsblatt struktsynth_bsp/robotics/ZB_rot.mw ausf\303\274hren mit `</Font>eulstr := &quot;zyx&quot;` und xyz</Text-field>
+<Input><Text-field style="Text" layout="Normal">Arbeitsblatt calculations/reciprocal_euler_angles.mw<Font encoding="UTF-8"> ausf\303\274hren mit `</Font>eulstr := &quot;zyx&quot;` und xyz</Text-field>
 </Input>
 </Group>
 <Group view="code" labelreference="L6" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">read sprintf(&quot;%s/codeexport/rmatvec_diff_eulxyz_maple.m&quot;,struktsynth_bsp_path);</Text-field>
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">read sprintf(&quot;%s/calculations/codeexport/rmatvec_diff_eulxyz_maple.m&quot;,reci_euler_paper_path);</Text-field>
 </Input>
 </Group>
 <Group view="code" labelreference="L7" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
@@ -161,7 +181,8 @@ R2b_dphi := subs({sin(gama)=S3}, R2b_dphi):</Text-field>
 </Input>
 </Group></Presentation-Block>
 </Section>
-<Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1"><Font encoding="UTF-8">\303\234berpr\303\274fung des Einflusses von alpha3 und beta3</Font></Text-field></Title><Presentation-Block>
+<Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1"><Font encoding="UTF-8">\303\234berpr\303\274fung des Einflusses von alpha3 und beta3
+</Font><Font mathvariant="normal" mathbackground="[255,255,255]" mathsize="12" fontfamily="Times New Roman" style="Text" mathcolor="[0,0,0]">Erstellt die Gleichungen in Appendix A.1 im Paper</Font></Text-field></Title><Presentation-Block>
 <Group view="code" labelreference="L2082" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field style="Text" layout="Normal"><Font encoding="UTF-8">Beliebige Matrix als Platzhalter f\303\274r R_Ex_Eq, mit der der Winkelfehler alpha berechnet wird</Font></Text-field>
 </Input>
@@ -230,16 +251,32 @@ alpha2_latex := subs({sin(delta)=Sdelta}, alpha2_latex):</Text-field>
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">alpha1;R1;</Text-field>
 </Input>
 </Group>
+<Group view="code" labelreference="L2202" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Erstellt Equ. (A6) im Paper</Text-field>
+</Input>
+</Group>
 <Group view="code" labelreference="L2095" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">latex(alpha1, &quot;alpha1.txt&quot;); </Text-field>
+</Input>
+</Group>
+<Group view="code" labelreference="L2204" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Erstellt Equ. (A7) im Paper</Text-field>
 </Input>
 </Group>
 <Group view="code" labelreference="L2098" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">latex(alpha2_latex, &quot;alpha2.txt&quot;); </Text-field>
 </Input>
 </Group></Presentation-Block><Presentation-Block>
+<Group view="code" labelreference="L2203" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Erstellt Equ. (A5) bzw. (A21) im Paper</Text-field>
+</Input>
+</Group>
 <Group view="code" labelreference="L2100" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">latex(R1, &quot;R1.txt&quot;); </Text-field>
+</Input>
+</Group>
+<Group view="code" labelreference="L2205" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
+<Input><Text-field style="Text" layout="Normal">Erstellt Gl. zwischen (A6) und (A7)</Text-field>
 </Input>
 </Group>
 <Group view="code" labelreference="L2101" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
@@ -255,9 +292,10 @@ alpha2_latex := subs({sin(delta)=Sdelta}, alpha2_latex):</Text-field>
 <Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal"></Text-field>
 </Input>
 </Group></Presentation-Block>
-<Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1">Umgedrehte Euler-ZYX</Text-field></Title><Presentation-Block>
+<Section collapsed="false" isCollapsible="true" drawButton="true" MultipleChoiceAnswerIndex="-1" MultipleChoiceRandomizeChoices="false" TrueFalseAnswerIndex="-1" EssayAnswerRows="5" EssayAnswerColumns="60"><Title><Text-field style="Heading 1" layout="Heading 1">Umgedrehte Euler-ZYX
+<Font mathvariant="normal" mathbackground="[255,255,255]" mathsize="12" fontfamily="Times New Roman" style="Text" mathcolor="[0,0,0]">Erstellt Equ. (A24) im Paper</Font></Text-field></Title><Presentation-Block>
 <Group view="code" hide-input="false" labelreference="L2118" drawlabel="true" applyint="true" applyrational="true" applyexponent="false">
-<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">read sprintf(&quot;%s/codeexport/eulzyx_diff_rmatvec_maple.m&quot;,struktsynth_bsp_path):
+<Input><Text-field prompt="&gt; " style="Maple Input" layout="Normal">read sprintf(&quot;%s/calculations/codeexport/eulzyx_diff_rmatvec_maple.m&quot;,reci_euler_paper_path):
 GradMat := GradMat;</Text-field>
 </Input>
 </Group>

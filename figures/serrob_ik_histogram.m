@@ -113,7 +113,7 @@ parfor ii = 1:length(II)
   IKerg_ii = zeros(ntest_Par, ntest_Kon); % Status für IK: 0=kein Erfolg, 1=Erfolg, 2=Grenzen verletzt
   
   Name = Names_Ndof{iFK};
-  
+  err = false;
 
   % Zufällige Parameter
 %   try
@@ -154,9 +154,10 @@ parfor ii = 1:length(II)
         end
         err = true;
         if mextry ~= 2
-          for fcnname = {'convert_par2_MPV_fixb', 'invkin_eulangresidual', ...
-              'fkine_fixb_rotmat_mdh_sym_varpar', 'jacobig_mdh_num'}
-            matlabfcn2mex({sprintf('%s_%s', Name, fcnname{1})});
+          fcnnames = {'convert_par2_MPV_fixb', 'invkin_eulangresidual', ...
+              'fkine_fixb_rotmat_mdh_sym_varpar', 'jacobig_mdh_num'};
+          for kk = 1:length(fcnnames)
+            matlabfcn2mex({sprintf('%s_%s', Name, fcnnames{kk})});
             % matlabfcn2mex({sprintf('%s_%s', Name, fcnname{1})}, false, true, true);
           end
         end

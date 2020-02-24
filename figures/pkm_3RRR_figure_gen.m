@@ -17,6 +17,7 @@ respath = fullfile(fileparts(which('pkm_3RRR_figure_gen.m')));
 if isempty(respath)
   error('Ordner des Skripts muss im Pfad sein');
 end
+cd(respath);
 %% Benutzereingaben
 l1 = 15;
 l2 = 15;

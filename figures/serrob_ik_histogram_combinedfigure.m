@@ -165,6 +165,6 @@ for i = 1:4
     II_Ausw = erg_i.II(erg_i.I_RobAusw);
     Name_worst = erg_i.l.Names_Ndof{II_Ausw(iii_worst)};
     fprintf('i=%d: Schlechteste Erfolgsquote %dR: %1.2f%% bei %d (%s)\n', ...
-      i, jj, 100*(1-p_worst), NaN*iii_worst, Name_worst);
+      i, jj, 100*(1-p_worst), iii_worst, Name_worst);
   end
 end

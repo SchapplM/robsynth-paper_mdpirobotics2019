@@ -500,6 +500,7 @@ set_size_plot_subplot(21,...
   8,8,gca,...
   0.01,0.01,0.0,0.01,... % bl,br,hu,hd,
   0,0) % bdx,bdy)
+cd(respath);
 % export_fig(21, fullfile(respath, 'serrob_traj_zero_pose.pdf'));
 export_fig serrob_traj_zero_pose.png -r864
 
@@ -552,6 +553,7 @@ end
 set(leghdl, 'FontSize', 8);
 set(leghdl, 'position', [0.1    0.94    0.8    0.05]);
 export_fig(20, fullfile(respath, 'serrob_traj_nullspace_optim_powerpoint.pdf'));
+cd(respath);
 export_fig serrob_traj_nullspace_optim_powerpoint.png -r864
 %% Animation für Präsentation
 % Benutze AVI-Video, da bei GIF das gesamte Video vorab gespeichert werden

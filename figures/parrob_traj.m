@@ -116,6 +116,7 @@ set_size_plot_subplot(40,...
   8,8,gca,...
   0.01,0.01,0.0,0.01,... % bl,br,hu,hd,
   0,0) % bdx,bdy)
+cd(export_path);
 export_fig parrob_traj_zero_pose.png -r864
-%% Ausgabe der Trajektorien-Eckwerte
+%% Ausgabe der Trajektorien-Eckwerte (für Text im Paper)
 data.XL

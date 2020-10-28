@@ -174,7 +174,7 @@ for ii = 1:N_axori
     fprintf('%d: IK für 3T2R-Startpose (mit Opt.) berechnet. Dauer: %1.1fs\n', ii, toc());
     [Q_opt_ii, QD_opt_ii, QDD_opt_ii, Phi_opt_ii] = RS.invkin2_traj(X_ii,XD,XDD,T,q0_ik_fix2,...
       struct('n_min', 50, 'n_max', 1500, 'Phit_tol', 1e-7, 'Phir_tol', 1e-7, ...
-      'I_EE', I_EE_3T2R, 'reci', true, 'wn', [0;1], 'K', 0.7*ones(RS.NQJ,1), ...
+      'I_EE', I_EE_3T2R, 'reci', true, 'wn', [0;1;0;0], 'K', 0.7*ones(RS.NQJ,1), ...
       'Kn', 0.7*ones(RS.NQJ,1)));
     if max(abs(Phi_opt_ii(:))) > 1e-3
       warning('Trajektorie %d konnte nicht für 3T2R berechnet werden. Max Error %1.1f', ii, max(abs(Phi_opt_ii(:))));
@@ -189,7 +189,7 @@ for ii = 1:N_axori
   tic();
   [Q_nopt_ii, QD_nopt_ii, QDD_nopt_ii, Phi_nopt_ii] = RS.invkin2_traj(X_ii,XD,XDD,T,Q_ii(1,:)',...
     struct('n_min', 20, 'n_max', 100, 'Phit_tol', 1e-7, 'Phir_tol', 1e-7, ...
-    'I_EE', I_EE_3T2R, 'reci', true, 'wn', zeros(2,1), 'K', 0.7*ones(RS.NQJ,1), ...
+    'I_EE', I_EE_3T2R, 'reci', true, 'wn', zeros(4,1), 'K', 0.7*ones(RS.NQJ,1), ...
     'Kn', zeros(RS.NQJ,1), 'scale_lim', 0));
   if max(abs(Phi_nopt_ii(:))) > 1e-3
     warning('Trajektorie %d konnte nicht für 3T2R (ohne Optimierung) berechnet werden. Max Error %1.1f', ii, max(abs(Phi_nopt_ii(:))));
@@ -364,6 +364,9 @@ end
 
 %% Ergebnisse speichern
 respath = fileparts(which('serrob_traj.m'));
+if isempty(respath)
+  error('Dieses Skript muss in den Matlab-Pfad hinzugefügt werden oder im aktuellen Ordner liegen');
+end
 save(fullfile(respath, 'serrob_traj_data_all.mat'));
 save(fullfile(respath, 'serrob_traj_data.mat'), 'T', 'Q_ges', 'Q_opt_ges', 'Q_nopt_ges', ...
   'h_ges', 'h_opt_ges', 'h_nopt_ges', 'hminmax');
@@ -573,4 +576,4 @@ view(3);
 plot3(X(:,1), X(:,2), X(:,3), 'k-', 'LineWidth', 2);
 figure_format_publication()
 set(200, 'units','normalized','outerposition',[0 0 1 1])
-RS.anim( Q_anim(1:5:end,:), s_anim, s_plot);
+RS.anim( Q_anim(1:5:end,:), [], s_anim, s_plot);

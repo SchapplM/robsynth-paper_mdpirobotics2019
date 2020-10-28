@@ -13,6 +13,9 @@ robrepo = fileparts(which('robotics_toolbox_test_repo.m'));
 resfile = fullfile(robrepo, 'examples_tests', 'results', 'ParRob_class_example_6UPS_3T2R_results.mat');
 data = load(resfile);
 export_path = fileparts(which('parrob_traj.m'));
+if isempty(export_path)
+  error('Dieses Skript muss in den Matlab-Pfad hinzugefügt werden oder im aktuellen Ordner liegen');
+end
 %% Ergebnis-Bild zusammenstellen
 format1 = {'k', '', '-', 5; ...
            'b', 's', '-', 4; ...

@@ -26,23 +26,19 @@ ntryIK = 20;
 %   sowieso keine Richtungsänderung bringt
 % * normalize auf 1, da das Endergebnis zur Grenzbeurteilung im
 %   Normal-Bereich liegen muss
-
-% IK-Einstellungen für alte Version
-% s_3T3R = struct('retry_limit', 0, ...
-%   'K', 0.6*ones(6,1), 'n_max', 1e3, ...
-%   'I_EE', logical([1 1 1 1 1 1]));
-% s_3T2R = struct('retry_limit', 0, ...
-%   'K', 0.6*ones(6,1), 'n_max', 1e3, ...
-%   'I_EE', logical([1 1 1 1 1 0]), ...
-%   'Kn', 0.1*ones(6,1), 'wn', 1);
-% IK-Einstellungen für neue Version
-s_3T3R = struct('retry_limit', 0, 'scale_lim', 0.0, 'normalize', true, ...
-  'K', 0.6*ones(6,1), 'n_max', 1e3, 'maxrelstep', 0.05, ...
-  'I_EE', logical([1 1 1 1 1 1]));
-s_3T2R = struct('retry_limit', 0, 'scale_lim', 0.0, 'normalize', true, ...
-  'K', 0.6*ones(6,1), 'n_max', 1e3, 'maxrelstep', 0.05, ...
-  'I_EE', logical([1 1 1 1 1 0]), ...
-  'Kn', 0.01*ones(6,1), 'wn', [0.99;0.01]);
+% IK-Einstellungen: Nehme ansonsten Standard-Einstellungen
+s_IK = struct('retry_limit', 0, 'scale_lim', 0.0, 'normalize', true, ...
+  'n_max', 2e3, 'maxrelstep', 0.05, 'I_EE', logical([1 1 1 1 1 1]));
+if strcmp(usr_DoF, '3T3R')
+  s_IK.scale_lim = 0.0;
+  s_IK.I_EE = logical([1 1 1 1 1 1]);
+elseif strcmp(usr_DoF, '3T2R')
+  s_IK.scale_lim = 0.0;
+  s_IK.I_EE = logical([1 1 1 1 1 0]);
+  s_IK.wn = [0.99;0.01;0.0]; % Keine Konditionszahl-NB
+else
+  error('EE-FG %s noch nicht implementiert', usr_DoF);
+end
 if ~exist('usr_DoF', 'var')
   usr_DoF = '3T3R'; % EE-FG für die IK-Auswertung
 end
@@ -55,6 +51,9 @@ end
 if ~exist('usr_load_data', 'var')
   usr_load_data = false; % Generiere die IK-Statistik neu, ohne nur die Ergebnisse zu laden
 end
+if ~exist('usr_whitelist_robots', 'var')
+  usr_whitelist_robots = {}; % Alle Roboter, falls nichts anderes vorgegeben
+end
 % Wiederhole versuche bei Grenzverletzung. Ziel: Nur Lösungen innerhalb der
 % Grenzen werden gewertet
 usr_repeat_limvioluntil = ntryIK-5; % Versuche bis 5 Versuche vor Ende ohne Grenzverletzung. Dann nehme GV in Kauf
@@ -66,12 +65,6 @@ usr_parcomp = true; % Parallele Berechnung (ca. Faktor 2 schneller)
 usr_forcerecompilecheck = true;
 respath = fileparts(which('serrob_ik_histogram.m'));
 
-%% Vorbereitung
-if strcmp(usr_DoF, '3T3R')
-  s_IK = s_3T3R;
-else
-  s_IK = s_3T2R;
-end
 %% Init: Datenbank laden
 N = 6;
 EE_FG = logical([1 1 1 1 1 1]);
@@ -81,20 +74,29 @@ l = load(mdllistfile_Ndof, 'Names_Ndof', 'AdditionalInfo');
 Names_Ndof = l.Names_Ndof;
 [~,I] = serroblib_filter_robots(N, EE_FG, true(1,6));
 I_novar = l.AdditionalInfo(:,2) == 0;
-I_ges = I&I_novar;
+
+if isempty(usr_whitelist_robots)
+  % Standard: Alle Roboter auswählen (dauert sehr lange)
+  I_select = true(length(l.Names_Ndof),1);
+else
+  % Debug: Roboter auswählen für schnelle Generierung des Bildes.
+  I_select = false(length(l.Names_Ndof),1);
+  for i = 1:length(usr_whitelist_robots)
+    I_select = I_select | strcmp(l.Names_Ndof(:), usr_whitelist_robots{i});
+  end
+  if sum(I_select) ~= length(usr_whitelist_robots)
+    error('Eine der gesuchten Kinematiken ist nicht verfügbar');
+  end
+end
+I_ges = I & I_novar & I_select;
 II = find(I_ges);
 II_orig = II;
-% II = II([4, 50, 200, 329]);
-% II = II([1, 50, 80, 200, 329]);
-% II = II([5, 60, 90, 120, 250, 280, 325, 327]);
-% II = 90;
 nRob = length(II);
 fprintf('Berechne die IK-Statistik für %d Roboter\n', length(II));
 %% Alle Roboter durchgehen
-% Kugelgelenke enden und kinematisch unterschiedlich sind
 % Zeilen: Laufende Nummer des Roboters
 % Spalten: Kein Erfolg; Aufsteigende Anzahl Versuche bis Erfolg
-% Einträge: Anzahl versuche
+% Einträge: Anzahl Versuche
 IK_hist_Anz_ges = NaN(length(II), 3+usr_num_classes);
 IK_hist_Anz_mG_ges = NaN(length(II), 3); % Zähle, bei wie vielen die Grenzen verletzt wurden
 % ii1 = find(II == 455); II = II(1:244);
@@ -177,6 +179,7 @@ parfor ii = 1:length(II)
   end
   % Rang-Prüfung. Durch Fehler sind eventuell Roboter mit Rang < 6 enthalten
   maxrank = 0;
+  J_test = NaN(6, RS.NJ); % Initialize to avoid parfor warning.
   for i_rt = 1:10
     RS.gen_testsettings(true, true);
     J_test = RS.jacobig(rand(RS.NQJ,1));
@@ -225,7 +228,7 @@ parfor ii = 1:length(II)
         q0_max = min(q+usr_range_q0*delta_qlim, RS.qlim(:,2));
         % Gleichverteilte Zufallszahlen zwischen q0_min und q0_max
         q0 = q0_min + rand(RS.NQJ,1).*(q0_max-q0_min);
-        [q_ik,Phi] = RS.invkin2(xE, q0, s_IK);
+        [q_ik,Phi,~,Stats] = RS.invkin2(xE, q0, s_IK);
         if max(abs(Phi)) < 1e-7 && all(~isnan(Phi))
           % IK erfolgreich
           IKtry_ii(kkpar, i) = j;
@@ -260,8 +263,53 @@ parfor ii = 1:length(II)
         else
           % Beim Nicht-letzten Versuch kein Erfolg
           if usr_debug_nosuccess
-            warning on;
-            warning('IK nicht erfolgreich\n');
+            warning('IK nicht erfolgreich');
+            % Debuggen der inversen Kinematik. Hier Algorithmus verändern.
+            % Dafür auf nicht kompilierte Funktion wechseln:
+            RS.fill_fcn_handles(false);
+            [q_ik,Phi,~,Stats] = RS.invkin2(xE, q0, s_IK);
+            disp(Phi');
+            disp(cond(RS.jacobig(q0)))
+            figure(1000);clf;
+            subplot(3,3,1); hold on;
+            plot(Stats.Q);
+            set(gca, 'ColorOrderIndex', 1);
+            plot([1;size(Stats.Q,1)], repmat(q',2,1), '--');
+            ylabel('q'); xlabel('iter');grid on;
+            subplot(3,3,2);
+            plot(diff(Stats.Q));
+            ylabel('delta q'); xlabel('iter');grid on;
+            subplot(3,3,3);
+            plot(Stats.PHI);
+            ylabel('Phi'); xlabel('iter');grid on;
+            subplot(3,3,4);
+            plot(diff(Stats.PHI));
+            ylabel('Delta Phi'); xlabel('iter');grid on;
+            subplot(3,3,5);
+            plot(diff(sum(Stats.PHI.^2,2).^0.5))
+            ylabel('Delta norm(Phi)'); xlabel('iter');grid on;
+            subplot(3,3,6); hold on;
+            cond_groundtruth = cond(q);
+            plot(Stats.condJ);
+            plot([1;size(Stats.condJ,1)], [1;1]*cond_groundtruth, '--');
+            ylabel('cond(J_IK)'); xlabel('iter');grid on;
+            subplot(3,3,7); hold on;
+            plot(Stats.lambda);
+            legend({'lambda', 'lambda_mult'}, 'interpreter', 'none');
+            ylabel('lambda'); xlabel('iter');grid on;
+            subplot(3,3,8); hold on;
+            manip_all = NaN(size(Stats.Q,1),1);
+            for iii = 1:size(Stats.Q,1)
+              J_iii = RS.jacobig(Stats.Q(iii,:)');
+              manip_all(iii) = det(J_iii*J_iii');
+            end
+            plot(manip_all);
+            ylabel('manip'); xlabel('iter');grid on;
+            subplot(3,3,9);
+            stairs(Stats.rejcount);
+            ylabel('rejcount');
+            linkxaxes
+            error('Halte hier');
             % s_3T3R.K = [ones(3,1)*0.1; ones(3,1)*0.3]
             % return; % geht nicht in parfor
           else
@@ -272,8 +320,11 @@ parfor ii = 1:length(II)
     end % Über verschiedene Konfigurationen
     t_act = toc(t2);
     T_per_par = t_act/kkpar;
-    fprintf('[%d/%d] %d Parametersatz in %1.1fs gerechnet. Voraussichtlich noch %1.1fs für die restlichen %d für %s\n', ...
-      ii, nRob, kkpar, t_act, T_per_par*(ntest_Par-kkpar), ntest_Par-kkpar, Name);
+    if kkpar==1, ps_str = 'Parametersatz'; else, ps_str = 'Parametersätze'; end
+    fprintf(['[%d/%d] %d %s in %1.1fs gerechnet. Hier %d/%d erfolgreich. ', ...
+      'Voraussichtlich noch %1.1fs für die restlichen %d für %s\n'], ...
+      ii, nRob, kkpar, ps_str, t_act, sum(IKerg_ii(kkpar,:)==1), ntest_Kon, ...
+      T_per_par*(ntest_Par-kkpar), ntest_Par-kkpar, Name);
   end % Über verschiedene Kinematikparameter
   % Zähle die Ergebnisse der inversen Kinematik und bilde Histogrammdaten
   % Erfolg beim 1.-x. Versuch
@@ -358,6 +409,16 @@ if usr_sort_numrotjoints
   IK_hist_Anz_mG_ges = IK_hist_Anz_mG_ges(I_sortrotJ,:);
   II = II(I_sortrotJ);
 end
+
+%% Erzeuge Ergebnis-Tabelle
+ResCell = [l.Names_Ndof(II)', cell(length(II),3)];
+ResTab = cell2table(ResCell);
+ResTab.Properties.VariableNames = {'Name', 'Anteil_Erfolgreich', ...
+  'Anteil_Grenzverletzung', 'Anteil_Fehler'};
+ResTab.Anteil_Erfolgreich = sum(IK_hist_Ant_ges(:,1:end-2),2);
+ResTab.Anteil_Grenzverletzung = IK_hist_Ant_ges(:,end-1);
+ResTab.Anteil_Fehler = IK_hist_Ant_ges(:,end);
+
 if ~usr_load_data
   save(fullfile(respath, sprintf('serrob_ik_histogramm_%s_startoff%1.0f_filt.mat', usr_DoF, 100*usr_range_q0)));
 end

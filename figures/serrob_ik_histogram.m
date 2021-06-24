@@ -145,8 +145,8 @@ parfor ii = 1:length(II)
         if usr_forcerecompilecheck && mextry == 1
           error('Dummy Error to enforce rechecking');
         end
-        RS.invkin2(rand(6,1), rand(RS.NQJ,1), s_3T3R);
-        RS.invkin2(rand(6,1), rand(RS.NQJ,1), s_3T2R);
+        RS.invkin2(RS.x2tr(rand(6,1)), rand(RS.NQJ,1), s_3T3R);
+        RS.invkin2(RS.x2tr(rand(6,1)), rand(RS.NQJ,1), s_3T2R);
         RS.fkine(rand(RS.NQJ,1));
         RS.jacobig(rand(RS.NQJ,1));        
       catch
@@ -228,7 +228,7 @@ parfor ii = 1:length(II)
         q0_max = min(q+usr_range_q0*delta_qlim, RS.qlim(:,2));
         % Gleichverteilte Zufallszahlen zwischen q0_min und q0_max
         q0 = q0_min + rand(RS.NQJ,1).*(q0_max-q0_min);
-        [q_ik,Phi,~,Stats] = RS.invkin2(xE, q0, s_IK);
+        [q_ik,Phi,~,Stats] = RS.invkin2(RS.x2tr(xE), q0, s_IK);
         if max(abs(Phi)) < 1e-7 && all(~isnan(Phi))
           % IK erfolgreich
           IKtry_ii(kkpar, i) = j;
@@ -267,7 +267,7 @@ parfor ii = 1:length(II)
             % Debuggen der inversen Kinematik. Hier Algorithmus verändern.
             % Dafür auf nicht kompilierte Funktion wechseln:
             RS.fill_fcn_handles(false);
-            [q_ik,Phi,~,Stats] = RS.invkin2(xE, q0, s_IK);
+            [q_ik,Phi,~,Stats] = RS.invkin2(RS.x2tr(xE), q0, s_IK);
             disp(Phi');
             disp(cond(RS.jacobig(q0)))
             figure(1000);clf;

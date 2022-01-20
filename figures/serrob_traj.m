@@ -163,17 +163,19 @@ for ii = 1:N_axori
     % Ergebnisse aus vorheriger Iteration speichern
     Q_opt_ges(:,:,ii) = Q_opt_ii;
   else
-    
     tic();
-    s_start = struct('n_min', 1000, 'n_max', 2500, 'Phit_tol', 1e-7, 'Phir_tol', 1e-7, ...
-      'I_EE', I_EE_3T2R, 'reci', true, 'wn', [0;1], 'K', 0.7*ones(RS.NQJ,1), ...
+    s_start = struct('n_min', 1000, 'n_max', 2500, 'Phit_tol', 1e-7, ...
+      'Phir_tol', 1e-7, 'I_EE', I_EE_3T2R, 'reci', true, ...
+      'wn', zeros(RS.idx_ik_length.wnpos,1), 'K', 0.7*ones(RS.NQJ,1), ...
       'Kn', 0.7*ones(RS.NQJ,1));
+    s_start.wn(RS.idx_ikpos_wn.qlim_hyp) = 1;
     q0_ik_fix2 = RS.invkin2(RS.x2tr(X_ii(1,:)'),q0_ik_fix,s_start);
     invkin_optimcrit_limits2(q0_ik_fix2, RS.qlim);
     fprintf('%d: IK für 3T2R-Startpose (mit Opt.) berechnet. Dauer: %1.1fs\n', ii, toc());
-    [Q_opt_ii, QD_opt_ii, QDD_opt_ii, Phi_opt_ii] = RS.invkin2_traj(X_ii,XD,XDD,T,q0_ik_fix2,...
-      struct('n_min', 50, 'n_max', 1500, 'Phit_tol', 1e-7, 'Phir_tol', 1e-7, ...
-      'I_EE', I_EE_3T2R, 'reci', true, 'wn', [0;1;0;0], 'K', 0.7*ones(RS.NQJ,1)));
+    s_ii = struct('n_min', 50, 'n_max', 1500, 'Phit_tol', 1e-7, 'Phir_tol', 1e-7, ...
+      'I_EE', I_EE_3T2R, 'reci', true, 'wn', zeros(RS.idx_ik_length.wntraj,1), 'K', 0.7*ones(RS.NQJ,1));
+    s_ii.wn(RS.idx_ikpos_wn.qlim_hyp) = 1;
+    [Q_opt_ii, QD_opt_ii, QDD_opt_ii, Phi_opt_ii] = RS.invkin2_traj(X_ii,XD,XDD,T,q0_ik_fix2,s_ii);
     if max(abs(Phi_opt_ii(:))) > 1e-3
       warning('Trajektorie %d konnte nicht für 3T2R berechnet werden. Max Error %1.1f', ii, max(abs(Phi_opt_ii(:))));
     else
@@ -187,7 +189,7 @@ for ii = 1:N_axori
   tic();
   [Q_nopt_ii, QD_nopt_ii, QDD_nopt_ii, Phi_nopt_ii] = RS.invkin2_traj(X_ii,XD,XDD,T,Q_ii(1,:)',...
     struct('n_min', 20, 'n_max', 100, 'Phit_tol', 1e-7, 'Phir_tol', 1e-7, ...
-    'I_EE', I_EE_3T2R, 'reci', true, 'wn', zeros(4,1), 'K', 0.7*ones(RS.NQJ,1)));
+    'I_EE', I_EE_3T2R, 'reci', true, 'wn', zeros(RS.idx_ik_length.wntraj,1), 'K', 0.7*ones(RS.NQJ,1)));
   if max(abs(Phi_nopt_ii(:))) > 1e-3
     warning('Trajektorie %d konnte nicht für 3T2R (ohne Optimierung) berechnet werden. Max Error %1.1f', ii, max(abs(Phi_nopt_ii(:))));
   else

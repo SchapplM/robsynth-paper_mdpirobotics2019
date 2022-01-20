@@ -29,13 +29,16 @@ ntryIK = 20;
 % IK-Einstellungen: Nehme ansonsten Standard-Einstellungen
 s_IK = struct('retry_limit', 0, 'scale_lim', 0.0, 'normalize', true, ...
   'n_max', 2e3, 'maxrelstep', 0.05, 'I_EE', logical([1 1 1 1 1 1]));
+[idx_ikpos_wn, ~, ~, ~, ~, idx_ik_length] = ik_optimcrit_index(0);
 if strcmp(usr_DoF, '3T3R')
   s_IK.scale_lim = 0.0;
   s_IK.I_EE = logical([1 1 1 1 1 1]);
 elseif strcmp(usr_DoF, '3T2R')
   s_IK.scale_lim = 0.0;
   s_IK.I_EE = logical([1 1 1 1 1 0]);
-  s_IK.wn = [0.99;0.01;0.0]; % Keine Konditionszahl-NB
+  s_IK.wn = zeros(idx_ik_length.wnpos,1); % Keine Konditionszahl-NB
+  s_IK.wn(idx_ikpos_wn.qlim_par) = 0.99;
+  s_IK.wn(idx_ikpos_wn.qlim_hyp) = 0.01;
 else
   error('EE-FG %s noch nicht implementiert', usr_DoF);
 end
@@ -113,10 +116,9 @@ parfor ii = 1:length(II)
   % Statistik für inverse Kinematik
   IKtry_ii = NaN(ntest_Par, ntest_Kon); % Anzahl der Versuche für IK
   IKerg_ii = zeros(ntest_Par, ntest_Kon); % Status für IK: 0=kein Erfolg, 1=Erfolg, 2=Grenzen verletzt
-  
   Name = Names_Ndof{iFK};
   err = false;
-
+  serroblib_update_template_functions({Name});
   % Zufällige Parameter
 %   try
     RS = serroblib_create_robot_class(Name);
